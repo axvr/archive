@@ -27,19 +27,18 @@ Alternatively, if you are looking to test out Arch or just to experiment with it
 **ALIS and Arch Linux both require a stable internet connection, this is best done using an Ethernet connection directly into the machine (virtual machines have internet by default if the host machine has an internet connection of some kind).**
 
 First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command.
-<!--
-``wget https://gitlab.com/umbra/alis/repository/archive.tar.gz?ref=master``
+
+``wget https://gitlab.com/umbra/alis/repository/archive.tar.gz?ref=master -O alis-master.tar.gz``
 
 Extract the downloaded gzip (tar.gz) file.
 
-``tar -zxvf alis-arch-installer.tar.gz``
+``tar -zxvf alis-master.tar.gz``
 
-You will then need to Move into the new ALIS directory.
+You will then need to Move into the new ALIS directory (the ``...`` will be randomly generated so use tab auto-complete to automatically complete the directory name).
 
-``cd alis-arch-installer/``
+``cd alis-master-.../``
 
 Start ALIS using
 
 ``perl start.pl --start``
 
--->
