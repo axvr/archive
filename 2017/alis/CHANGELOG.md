@@ -5,4 +5,4 @@ History of all of the changes made to ALIS
 ### Changed
 * Uploaded project to GitLab
 * Edited README.md to include download and run instructions
-
+* Edited main-menu.pl and added a few more menu options
