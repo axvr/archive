@@ -28,7 +28,7 @@ Alternatively, if you are looking to test out Arch or just to experiment with it
 
 First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command.
 
-``wget https://gitlab.com/umbra/alis/repository/archive.tar.gz?ref=master -O alis-master.tar.gz``
+``wget https://gitlab.com/axvr/alis/repository/archive.tar.gz?ref=master -O alis-master.tar.gz``
 
 Extract the downloaded gzip (tar.gz) file.
 
