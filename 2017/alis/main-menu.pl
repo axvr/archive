@@ -119,6 +119,7 @@ sub pre_install {
 
 	$whiptail = qq{whiptail --menu --title "Pre-Installation" }.
 		qq{--backtitle "$backtitle" }.
+		qq{--cancel-button "Back" }.
 		qq{"\nThis is the Pre-installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
 		qq{"Partition the disks" "temp_placeholder" }.
 		qq{"Format the partitions" "temp_placeholder" }.
@@ -159,9 +160,10 @@ sub install {
 
 	$whiptail = qq{whiptail --menu --title "Installation" }.
 		qq{--backtitle "$backtitle" }.
+		qq{--cancel-button "Back" }.
 		qq{"\nThis is the Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
 		qq{"Configure mirrors" "temp_placeholder" }.
-		qq{"Edit pacman.conf" "Edit /etc/pacman.conf (advanced users)" }.
+		qq{"Edit pacman.conf" "Configure pacman (advanced)" }.
 		qq{"Install base packages" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
@@ -200,6 +202,7 @@ sub config {
 
 	$whiptail = qq{whiptail --menu --title "Configuration" }.
 		qq{--backtitle "$backtitle" }.
+		qq{--cancel-button "Back" }.
 		qq{"\nThis is the Configuration menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
 		qq{"fstab" "temp_placeholder" }.
 		qq{"chroot" "temp_placeholder" }.
@@ -245,9 +248,10 @@ sub post_install {
 
 	$whiptail = qq{whiptail --menu --title "Post-Installation" }.
 		qq{--backtitle "$backtitle" }.
+		qq{--cancel-button "Back" }.
 		qq{"\nThis is the Post-Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
 		qq{"temp" "temp_placeholder" }.
-		qq{"temp" "Edit /etc/pacman.conf (advanced users)" }.
+		qq{"temp" "temp_placeholder" }.
 		qq{"temp" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
@@ -283,9 +287,10 @@ sub about {
 
 	# display the project about page
 
-	my $about = qq{ALIS - Arch Linux Installation Script\n\n}.
-				qq{ALIS is the successor of the AIF\n\n}.
-				qq{Made by Alex Vear (axvr - GitLab)\n\n}.
+	my $about = qq{ALIS - Arch Linux Installation Script\n}.
+				qq{-------------------------------------\n\n}.
+				qq{ALIS is the successor of Architect Linux's AIF\n\n}.
+				qq{Made by Alex Vear (axvr - GitLab)\n}.
 				qq{Licenced under the GPL3 Copyleft Licence};
 
 	$whiptail = qq{whiptail --msgbox --title "About ALIS" }.

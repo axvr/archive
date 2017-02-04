@@ -17,6 +17,20 @@ If you find any bugs or errors, please feel free to submit an issue as i cannot 
 
 ---
 
+## Screenshots
+
+![Welcome Screen](screenshots/001-alis-welcome-screen.png)
+
+![Network Check](screenshots/003-alis-network-check.png)
+
+![Keys1](screenshots/005-alis-keys1.png)
+
+![Keys2](screenshots/006-alis-keys2.png)
+
+![Main](screenshots/007-alis-main-main.png)
+
+---
+
 ## How to use ALIS
 
 In order to use ALIS, you will need an Arch Linux live CD, and the machine you wish to install Arch onto.
