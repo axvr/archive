@@ -15,6 +15,8 @@ This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/ax
 
 If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see this document: [https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md](https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md).
 
+---
+
 ## How to use ALIS
 
 In order to use ALIS, you will need an Arch Linux live CD, and the machine you wish to install Arch onto.
