@@ -45,7 +45,7 @@
 
 
 # MODULES SETUP
-use v5.24.0;
+use v5.22.1;
 use strict;
 use warnings;
 use Getopt::Long;
@@ -109,6 +109,7 @@ sub main {
 		# invalid option selected
 		print $fh "Unexpected error ALIS is exiting\n";
 		exit 1;
+	}
 }
 
 # Pre-install
@@ -131,12 +132,15 @@ sub pre_install {
 	if ($temp_val eq "Partition the disks") {
 		print $fh "running conf_files/pre_install/partition.pl\n";
 		system("perl", "conf_files/pre_install/partition.pl");
+		pre_install();
 	} elsif ($temp_val eq "Format the partitions") {
 		print $fh "running conf_files/pre_install/format.pl\n";
 		system("perl", "conf_files/pre_install/format.pl");
+		pre_install();
 	} elsif ($temp_val eq "Mount the file systems") {
 		print $fh "running conf_files/pre_install/mount.pl\n";
 		system("perl", "conf_files/pre_install/mount.pl");
+		pre_install();
 	} elsif ($? == 256) {
 		# cancel/back button
 		print $fh "Load main() subroutine\n";
@@ -168,12 +172,15 @@ sub install {
 	if ($temp_val eq "Configure mirrors") {
 		print $fh "running conf_files/install/mirrors.pl\n";
 		system("perl", "conf_files/install/mirrors.pl");
+		install();
 	} elsif ($temp_val eq "Edit pacman.conf") {
 		print $fh "running conf_files/install/edit_pacmanconf.pl\n";
 		system("perl", "conf_files/install/edit_pacmanconf.pl");
+		install();
 	} elsif ($temp_val eq "Install base packages") {
 		print $fh "running conf_files/install/basepkg.pl\n";
 		system("perl", "conf_files/install/basepkg.pl");
+		install();
 	} elsif ($? == 256) {
 		# back / cancel button
 		print $fh "Load main() subroutine\n";
@@ -207,15 +214,19 @@ sub config {
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/fstab.pl\n";
 		system("perl", "conf_files/config/fstab.pl");
+		config();	
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/chroot.pl\n";
 		system("perl", "conf_files/config/chroot.pl");
+		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/time_zone.pl\n";
 		system("perl", "conf_files/config/time_zone.pl");
+		config();
 	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/config/locale.pl");
+		print $fh "running conf_files/config/locale.pl\n";
 		system("perl", "conf_files/config/locale.pl");
+		config();
 	} elsif ($? == 256) {
 		# cancel/back button
 		print $fh "Load main() subroutine\n";
@@ -247,12 +258,15 @@ sub post_install {
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		system("perl", "conf_files/post_install/.pl");
+		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		system("perl", "conf_files/post_install/.pl");
+		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		system("perl", "conf_files/post_install/.pl");
+		post_install();
 	} elsif ($? == 256) {
 		# cancel/back button
 		print $fh "Load main() subroutine\n";
