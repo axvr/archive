@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# ALIS - Arch Linux Installation Script
+# =====================================
+#
+# The successor to Architect Linux
+#
+# This is the ``network-check.sh`` file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+#
+# This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
+
+
 #error_msg=ping: archlinux.org: Temporary failure in name resolution
 #check=`echo \`ping -c 1 archlinux.org\``
 

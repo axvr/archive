@@ -4,10 +4,10 @@
 # =====================================
 #
 # The successor to Architect Linux
-
-# Things to do next in this file:
-# * comment code
-# * bug fixes
+#
+# This is the start.pl file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+#
+# This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
 
 # MODULES SETUP
 use v5.24.1;
@@ -19,7 +19,7 @@ use Getopt::Long;
 my $log_file = "alis.log";
 
 # PARAMETERS SETUP
-my $current_version = "0.0.4";
+my $current_version = "0.0.5";
 my $usage_message = "perl start.pl --start [--version] [--help] [--force]\n";
 my $start = "";
 my $force = 0;
@@ -35,21 +35,25 @@ GetOptions (
 	
 my $operation = shift @ARGV;
 
+# if any paramters have not  been given display the usage info
 if ($usage) {
 	print STDERR "$usage_message";
 	exit 1;
 }
 
+# display the ALIS version info
 if ($version) {
 	print STDERR "ALIS $current_version\n";
 	exit 1;
 }
 
+# display the help menu (README.md)
 if ($help_menu) {
 	print STDERR "\n", `cat README.md`, "\n";
 	exit 1;
 }
 
+# check if --start was used, if not display the usage info
 if (!$start) {
 	print STDERR "$usage_message";
 	exit 1;
@@ -65,7 +69,7 @@ if (!$force) {
 	exec("bash", "network-check.sh");
 }
 
-# wipe the log file via truncating it
+# wipe the log file by truncating it
 open (my $cl, ">", $log_file) or die "Could not open '$log_file'. $!";
 print $cl "ALIS is starting\n";
 close $cl;
@@ -74,7 +78,7 @@ close $cl;
 open (my $fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
 print $fh "Network connected or was forced\n";
 
-# collect hardware information
+# collect system hardware information
 my $hardware_version = `uname -m`;
 my $uefi_or_bios = `[ -d /sys/firmware/efi ] && echo UEFI || echo BIOS`;
 chomp($hardware_version);
@@ -85,18 +89,18 @@ if (($uefi_or_bios ne "BIOS") && ($uefi_or_bios ne "UEFI")) {
 	print "Installation canceled. Incompatible system boot mode.\n";
 	print $fh "INCOMPATIBLE SYSTEM BOOT MODE\n";
 	print $fh "You are running: $uefi_or_bios\n";
-	print $fh "ALIS will only work with (UEFI or BIOS) and (i686 or x86_64)\n";
+	print $fh "ALIS will only work with (UEFI or BIOS) and x86_64\n";
 	print $fh "Installation Cancelled\n";
-	close $fh or die "Could not open '$log_file'. $!";
+	close $fh or die "Could not close '$log_file'. $!";
 	exit 0;
-} elsif (($hardware_version ne "x86_64") && ($hardware_version ne "i686")) {
+} elsif ($hardware_version ne "x86_64") {
 	print "Installation canceled. Incompatible system architecture.\n";
 	open (my $fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
 	print $fh "INCOMPATIBLE HARDWARE ARCHITECTURE\n";
 	print $fh "You are using: $hardware_version\n";
-	print $fh "ALIS will only work with (UEFI or BIOS) and (i686 or x86_64)\n";
+	print $fh "ALIS will only work with (UEFI or BIOS) and x86_64\n";
 	print $fh "Installation Cancelled\n";
-	close $fh or die "Could not open '$log_file'. $!";
+	close $fh or die "Could not close '$log_file'. $!";
 	exit 0;
 }
 
@@ -116,6 +120,8 @@ my $utc = substr($universal_time[1], 2);
 my $whiptail;
 my $keyboard_layout;
 
+# subroutine to display the keyboard type selection
+# and capture the output
 sub keys1 {
 	$whiptail = qq{whiptail --title "Select keyboard layout" --radiolist --nocancel }.
 		qq{--backtitle "ARCH LINUX INSTALLATION SCRIPT $hardware_version $uefi_or_bios" }.
@@ -129,20 +135,24 @@ sub keys1 {
 	$keyboard_layout = `$whiptail`;
 	$keyboard_layout =~ tr/A-Z/a-z/;
 	
+	# other keymap selection menu
 	if ($keyboard_layout eq "other") {
 		$whiptail = qq{whiptail --title "Select keyboard layout" }.
 			qq{--backtitle "ARCH LINUX INSTALLATION SCRIPT $hardware_version $uefi_or_bios" }.
 			qq{--inputbox "\nInput a different keymap" 7 45 "" 3>&1 1>&2 2>&3};
 		my $keymap = `$whiptail`;
-		
+
+		# check the keymap selection was not null
 		if ($keymap eq "") {
 			keys1();
 		} else {
+			# load the selected keymap
 			my @values = split(' ', $keymap);
 			$keymap = $values[0];
 			my $run_loadkeys = system("loadkeys", "$keymap");
 			print $fh "Loading keymap: $keymap\n";
 			
+			# check if the keymap loading failed
 			if ($run_loadkeys != 0) {
 				system("whiptail", "--title", "Invalid keymap", "--msgbox",
 					"--backtitle", "ARCH LINUX INSTALLATION SCRIPT $hardware_version $uefi_or_bios",
@@ -161,12 +171,15 @@ sub keys1 {
 		}
 	} elsif ($keyboard_layout ne "other") {
 		keys2();
+		# load the second section of the keymap selection if it was not custom set
 	}
 
 }
 
 # choose keymap part 2
 sub keys2 {
+
+	# fetch and format the keymap config selection form the system
 	my @keymaps = `ls /usr/share/kbd/keymaps/i386/$keyboard_layout/`;
 	my $layouts_for_whiptail = "";
 
@@ -180,6 +193,7 @@ sub keys2 {
 		}
 	}
 
+	# select the second section of the keyamp and store the result
 	$whiptail = qq{whiptail --title "Select keyboard layout" }.
 		qq{--radiolist --noitem --cancel-button "Back" }.
 		qq{--backtitle "ARCH LINUX INSTALLATION SCRIPT $hardware_version $uefi_or_bios" }.
@@ -190,6 +204,8 @@ sub keys2 {
 	if ($keymap eq "") {
 		keys1();
 	} else {
+
+		# load the new keymap and the main-menu.pl file with paramters
 		print $fh "Loading keymap: $keyboard_layout/$keymap\n";
 		system("loadkeys", "$keyboard_layout/$keymap");
 		# run the menu script (parameters to send the architecture, boot mode, and keyboard layout)

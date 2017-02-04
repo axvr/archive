@@ -3,17 +3,39 @@
 The successor of Architect Linux (currently still in development)
 
 **NOTE:**
-**It is recommended that you do not use this program at this current moment in time, this is because it could potentially result in major problems with partitions, wipe existing data or brick the hard drive. This is because ALIS is currently still being developed and has not yet even got anywhere near the pre-alpha development stage.**
+**It is recommended that you do not use this program at this current time. The reasoning behind this is that currently it may result in major problems with partitions or wipe existing data, etc. This is because ALIS is currently still being developed and is still not at the experimental stage of development.**
 
-This is ALIS - Arch Linux Installation Script. ALIS has been built from the ground up using the Perl scripting language and Bash. The aim of ALIS is help guide users through the process of building their very own Arch Linux system from the ground up. Designed for both beginners and advanced users, ALIS will let the user customise everything to their liking.
+This is ALIS - Arch Linux Installation Script. ALIS has been built from the ground up, using the Perl scripting language and Bash. The aim of ALIS is to help guide beginner Arch Linux users through the Arch installation process. ALIS has many advanced configuration options, these make ALIS well suited for use by both advanced users and beginners. ALIS will create a base plain and simple Arch system, with zero bloat.
 
-The inspiration for this project was Architect Linux, which sadly ceased development on 2016-04-05. ALIS is it's (hopefully successful successor).
+The inspiration for this project was Architect Linux, which sadly ceased development on 2016-04-05. ALIS is it's (hopefully successful) successor.
 
-If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time.
+This is the ``README.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+
+This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
+
+If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see this document: [https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md](https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md).
 
 ## How to use ALIS
 
 In order to use ALIS, you will need an Arch Linux live CD, and the machine you wish to install Arch onto.
+
+### Compatible System Architecture and Boot Modes
+
+Please ensure that your system meets these system types:
+
+#### Architecture
+
+* x86_64
+* i686 - Depreciated
+
+#### Boot Mode
+
+* BIOS
+* UEFI
+
+#### To be Supported
+
+* Apple Machines
 
 ### Make an Arch Linux live Disk/CD
 
@@ -42,3 +64,31 @@ Start ALIS using
 
 ``perl start.pl --start``
 
+Follow the on screen instructions to install Arch Linux.
+
+### All ALIS Options
+
+#### start.pl
+
+* The ALIS start command: ``--start``. This command must be given for ALIS to start, some other commands may follow (e.g. ``--force``).
+* Force ALIS to skip the network check ``--force``. Should be given after the ``--start`` command (**Not recommended under any circumstance**).
+* Display this document: ``--help`` or ``-h``. (May be replaced with a simplified help menu stating options and how to view this file using: ``less README.md``).
+* Display ALIS version information: ``--version`` or ``-v``. (May be replaced with an independent version file).
+* To display usage information add no or invalid optons to ``start.pl`` (this includes ``--start``).
+
+#### main-menu.pl
+
+``main-menu.pl`` currently takes in 3 options as ``main-menu.pl $ARGV[0] $ARGV[1] $ARGV[2]`` these are as follows:
+
+* ``$ARGV[0]`` => System hardware version (e.g. ``x86_64``).
+* ``$ARGV[1]`` => System boot mode (e.g. ``BIOS``).
+* ``$ARGV[2]`` => Selected keymap (e.g. ``de-latin1``).
+
+The ``main-menu.pl`` argument system may be advanced in the future to be similar to that on ``start.pl``.
+
+**More ALIS options will be added in the future**
+
+### Other Useful Information
+
+* To view this entire file with the ability to scroll, run this command: ``less README.me``.
+* There is currently an i686 phase out being undertaken in Arch Linux (in a nutshell: 32 bit Arch Linux will become fully unsupported in November 2017). The most common way to upgrade your system to 64 bit is to ensure that it has at least 4GB of RAM and that 64 bit is supported by the system BIOS. For info on the phase out see this page: [https://www.archlinux.org/news/phasing-out-i686-support/](https://www.archlinux.org/news/phasing-out-i686-support/).
