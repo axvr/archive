@@ -9,3 +9,15 @@
 #
 # This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
 
+# Setup modules
+use v5.24.1;
+use strict;
+use warnings;
+
+# setup log file access
+my $log_file = "../../alis.log"; # may need to go up once more
+open (my $fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
+
+
+
+close $fh or die "Could not close '$log_file'. $!";

@@ -209,7 +209,7 @@ sub keys2 {
 		print $fh "Loading keymap: $keyboard_layout/$keymap\n";
 		system("loadkeys", "$keyboard_layout/$keymap");
 		# run the menu script (parameters to send the architecture, boot mode, and keyboard layout)
-		print $fh "Running main-menu.pl using perl\n";
+		print $fh "\nRunning main-menu.pl using perl\n";
 		close $fh or die "Could not close '$log_file'. $!";
 		exec("perl", "main-menu.pl", "$hardware_version", "$uefi_or_bios", "$keymap");
 	}

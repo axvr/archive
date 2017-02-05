@@ -45,7 +45,7 @@
 
 
 # MODULES SETUP
-use v5.22.1;
+use v5.24.1;
 use strict;
 use warnings;
 use Getopt::Long;
@@ -55,10 +55,15 @@ my $hardware_version = $ARGV[0];
 my $uefi_or_bios = $ARGV[1];
 my $keymap = $ARGV[2];
 
-# Log file setup
+my $fh;
 my $log_file = "alis.log";
-open (my $fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
 
+# Log file setup sub routine
+sub open_log {
+	open ($fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
+}
+
+open_log();
 print $fh "\nmain-menu.pl started successfully\n";
 
 # define required variables
@@ -108,6 +113,7 @@ sub main {
 	} else {
 		# invalid option selected
 		print $fh "Unexpected error ALIS is exiting\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 1;
 	}
 }
@@ -132,15 +138,21 @@ sub pre_install {
 	# validate selected item
 	if ($temp_val eq "Partition the disks") {
 		print $fh "running conf_files/pre_install/partition.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/pre_install/partition.pl");
+		open_log();
 		pre_install();
 	} elsif ($temp_val eq "Format the partitions") {
 		print $fh "running conf_files/pre_install/format.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/pre_install/format.pl");
+		open_log();
 		pre_install();
 	} elsif ($temp_val eq "Mount the file systems") {
 		print $fh "running conf_files/pre_install/mount.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/pre_install/mount.pl");
+		open_log();
 		pre_install();
 	} elsif ($? == 256) {
 		# cancel/back button
@@ -149,6 +161,7 @@ sub pre_install {
 	} else {
 		# invalid option selected
 		print $fh "Invalid option selected\nALIS is exiting\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 1;
 	}
 }
@@ -173,15 +186,21 @@ sub install {
 	# validate selected item
 	if ($temp_val eq "Configure mirrors") {
 		print $fh "running conf_files/install/mirrors.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/install/mirrors.pl");
+		open_log();
 		install();
 	} elsif ($temp_val eq "Edit pacman.conf") {
 		print $fh "running conf_files/install/edit_pacmanconf.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/install/edit_pacmanconf.pl");
+		open_log();
 		install();
 	} elsif ($temp_val eq "Install base packages") {
 		print $fh "running conf_files/install/basepkg.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/install/basepkg.pl");
+		open_log();
 		install();
 	} elsif ($? == 256) {
 		# back / cancel button
@@ -190,6 +209,7 @@ sub install {
 	} else {
 		# invalid option / total failure
 		print $fh "Invalid option selected\nALIS is exiting\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 1;
 	}
 }
@@ -216,19 +236,26 @@ sub config {
 	# validate selected item
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/fstab.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/config/fstab.pl");
+		open_log();
 		config();	
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/chroot.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/config/chroot.pl");
 		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/time_zone.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/config/time_zone.pl");
+		open_log();
 		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/locale.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/config/locale.pl");
+		open_log();
 		config();
 	} elsif ($? == 256) {
 		# cancel/back button
@@ -237,6 +264,7 @@ sub config {
 	} else {
 		# invalid option / total failure
 		print $fh "Invalid option selected\nALIS is exiting\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 1;
 	}
 }
@@ -261,15 +289,21 @@ sub post_install {
 	# vaidate selected item
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/post_install/.pl");
+		open_log();
 		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/post_install/.pl");
+		open_log();
 		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/post_install/.pl");
+		open_log();
 		post_install();
 	} elsif ($? == 256) {
 		# cancel/back button
@@ -278,6 +312,7 @@ sub post_install {
 	} else {
 		# invalid option / total fail
 		print $fh "Invalid option selected\nALIS is exiting\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 1;
 	}
 }
@@ -307,6 +342,8 @@ sub quit {
 		qq{"Are you sure you want to exit ALIS?" 7 45 };
 	system($whiptail);
 	if ($? == 0) {
+		print $fh "ALIS was closed\n";
+		close $fh or die "Could not close '$log_file'. $!";
 		exit 0;
 	} else {
 		main();
