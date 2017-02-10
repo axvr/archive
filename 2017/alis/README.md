@@ -9,9 +9,9 @@ This is ALIS - Arch Linux Installation Script. ALIS has been built from the grou
 
 The inspiration for this project was Architect Linux, which sadly ceased development on 2016-04-05. ALIS is it's (hopefully successful) successor.
 
-This is the ``README.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+This is the ``README.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by [Alex Vear - axvr](https://gitlab.com/axvr).
 
-This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
+This project is licenced under the [MIT Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
 
 If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see this document: [https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md](https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md).
 

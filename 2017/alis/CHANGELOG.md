@@ -2,13 +2,16 @@
 
 History of all of the changes made to ALIS
 
-This is the ``CHANGELOG.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+This is the ``CHANGELOG.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by [Alex Vear - axvr](https://gitlab.com/axvr).
 
-This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
+This project is licenced under the [MIT Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
 
 ## [Unreleased -> 0.0.6] - PENDING
 ### Added
 * The beginnings of the paritioning script (unstable)
+* New Licence - MIT
+### Fixed
+* Replaced all of the file headers with the new version; including the new Licence
 
 ## [Unreleased -> 0.0.5] - 2017-02-04
 ### Fixed

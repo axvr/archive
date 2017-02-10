@@ -1,8 +1,8 @@
 # Contributing to ALIS
 
-This is the ``CONTRIBUTING.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by Alex Vear [axvr](https://gitlab.com/axvr).
+This is the ``CONTRIBUTING.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by [Alex Vear - axvr](https://gitlab.com/axvr).
 
-This project is licenced under the [GPL3 Copyleft Licence](https://gitlab.com/axvr/alis/blob/master/LICENSE).
+This project is licenced under the [MIT Licence](https://gitlab.com/axvr/alis/blob/master/LICENSE).
 
 ## Contributor Code of Conduct
 
@@ -40,7 +40,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ### Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at axvr@bitmessage.ch (axvr[at]bitmessage[dot]ch). All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at axvr[at]bitmessage[dot]ch. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 Attribution
@@ -85,7 +85,7 @@ For this artwork to be submitted you must own it and it must also be released (a
 
 Please submit a GitLab Merge Request following the the template provided.
 
-All code submissions **must** be either your own work or previously distributed under a Copyleft Licence.
+All code submissions **must** be either your own work or previously/currently distributed under a Copyleft Licence or in the Public Domain.
 
 **Follow the rules below**.
 
