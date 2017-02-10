@@ -19,7 +19,7 @@ use Getopt::Long;
 my $log_file = "alis.log";
 
 # PARAMETERS SETUP
-my $current_version = "0.0.5";
+my $current_version = "0.0.6";
 my $usage_message = "perl start.pl --start [--version] [--help] [--force]\n";
 my $start = "";
 my $force = 0;

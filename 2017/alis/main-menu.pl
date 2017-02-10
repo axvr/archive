@@ -139,19 +139,19 @@ sub pre_install {
 	if ($temp_val eq "Partition the disks") {
 		print $fh "running conf_files/pre_install/partition.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/partition.pl");
+		system("perl", "conf_files/pre_install/partition.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		pre_install();
 	} elsif ($temp_val eq "Format the partitions") {
 		print $fh "running conf_files/pre_install/format.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/format.pl");
+		system("perl", "conf_files/pre_install/format.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		pre_install();
 	} elsif ($temp_val eq "Mount the file systems") {
 		print $fh "running conf_files/pre_install/mount.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/mount.pl");
+		system("perl", "conf_files/pre_install/mount.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		pre_install();
 	} elsif ($? == 256) {
@@ -187,19 +187,19 @@ sub install {
 	if ($temp_val eq "Configure mirrors") {
 		print $fh "running conf_files/install/mirrors.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/mirrors.pl");
+		system("perl", "conf_files/install/mirrors.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		install();
 	} elsif ($temp_val eq "Edit pacman.conf") {
 		print $fh "running conf_files/install/edit_pacmanconf.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/edit_pacmanconf.pl");
+		system("perl", "conf_files/install/edit_pacmanconf.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		install();
 	} elsif ($temp_val eq "Install base packages") {
 		print $fh "running conf_files/install/basepkg.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/basepkg.pl");
+		system("perl", "conf_files/install/basepkg.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		install();
 	} elsif ($? == 256) {
@@ -237,24 +237,24 @@ sub config {
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/fstab.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/fstab.pl");
+		system("perl", "conf_files/config/fstab.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		config();	
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/chroot.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/chroot.pl");
+		system("perl", "conf_files/config/chroot.pl", "$hardware_version", "$uefi_or_bios");
 		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/time_zone.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/time_zone.pl");
+		system("perl", "conf_files/config/time_zone.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/locale.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/locale.pl");
+		system("perl", "conf_files/config/locale.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		config();
 	} elsif ($? == 256) {
@@ -290,19 +290,19 @@ sub post_install {
 	if ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl");
+		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl");
+		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		post_install();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/post_install/.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl");
+		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
 		post_install();
 	} elsif ($? == 256) {
