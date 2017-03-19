@@ -1,7 +1,7 @@
 # ALIS - Arch Linux Installation Script
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.1.0-brightgreen.svg)](https://github.com/axvr/alis/)
+[![Version Badge](https://img.shields.io/badge/Version-v0.1-brightgreen.svg)](https://github.com/axvr/alis/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/alis/blob/master/LICENCE)
 
 The successor of Architect Linux (currently still in development)
@@ -70,17 +70,17 @@ Alternatively, if you are looking to test out Arch or just to experiment with it
 
 **NOTE: ALIS and Arch Linux both require a stable internet connection, this is best done using an Ethernet connection directly into the machine (virtual machines have internet by default if the host machine has an internet connection of some kind).**
 
-First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command (these will be changed when the full alpha version is released).
+First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command replace the ``<version>`` with the [latest version number](https://github.com/axvr/alis/releases).
 
-``wget https://gitlab.com/axvr/alis/repository/archive.tar.gz``
+``wget https://github.com/axvr/alis/archive/v<version>.tar.gz``
 
-Extract the downloaded gzip (tar.gz) file.
+Extract the downloaded gzip (tar.gz) file (the ``<version>`` will be version number from before).
 
-``tar -zxvf archive.tar.gz``
+``tar -zxvf v<version>.tar.gz``
 
-You will then need to Move into the new ALIS directory (the ``...`` will be randomly generated so use tab auto-complete to automatically complete the directory name).
+You will then need to Move into the new ALIS directory (the ``<version>`` will be version number from before).
 
-``cd alis-master-.../``
+``cd alis-<version>/``
 
 Start ALIS using
 

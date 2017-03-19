@@ -40,9 +40,15 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
+## [Unreleased -> 0.1.1] - 2017-03-19
+
+### Fixed
+* Code for Whiptail not working
+* Version labels and CHANGELOG updated
 
 
-## [Unreleased -> 0.1.0] - 2017-03-
+
+## [Unreleased -> 0.1.0] - 2017-03-19
 
 ### Added
 * Improved partition selection screen
