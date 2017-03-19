@@ -141,9 +141,12 @@ sub central_ctrl {
 		# * set to zero then random
 
 		$whiptail = qq{whiptail --title "Select a level of secure disk wipe" --menu }.
+					qq{--backtitle "$backtitle" }.
+					qq{"\nSelect the level of secure wipe to use. Further down the list = slower wipe" 15 55 7 }.
 					qq{"Zero" "Set each bit of the partitions to zero" }.
 					qq{"Random" "Set each bit of the partitions to random data" }.
-					qq{"Zero then random" "Zero partitions then randomise bits" };
+					qq{"Zero then random" "Zero partitions then randomise bits" }.
+					qq{3>&1 1>&2 2>&3};
 		$temp_val = `$whiptail`;
 
 		if ($? == 256) {
