@@ -5,9 +5,11 @@
 #
 # The successor to Architect Linux
 #
-# This is the network-check.sh file for ALIS (https://gitlab.com/axvr/alis). Created by Alex Vear - axvr (https://gitlab.com/axvr).
+# This is the network-check.sh file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence (https://gitlab.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
 
 
 #error_msg=ping: archlinux.org: Temporary failure in name resolution
@@ -18,13 +20,13 @@ fail="0"
 {
 	i="0"
 	((count = 100))
-	
+
 	#if [[ $check -eq $error_msg ]] ; then
 	#	((count = 0))
 	#	i="100"
 	#	fail=$(expr $fail + 1)
 	#fi
-	
+
 	while [[ $count -ge 0 ]] ; do
 
 		ping -c 1 archlinux.org

@@ -1,5 +1,9 @@
 # ALIS - Arch Linux Installation Script
 
+<!-- Badges made using https://shields.io/ -->
+[![Version Badge](https://img.shields.io/badge/Version-v0.1.0-brightgreen.svg)](https://github.com/axvr/alis/)
+[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/alis/blob/master/LICENCE)
+
 The successor of Architect Linux (currently still in development)
 
 **NOTE:**
@@ -9,11 +13,11 @@ This is ALIS - Arch Linux Installation Script. ALIS has been built from the grou
 
 The inspiration for this project was Architect Linux, which sadly ceased development on 2016-04-05. ALIS is it's (hopefully successful) successor.
 
-This is the ``README.md`` file for [ALIS](https://gitlab.com/axvr/alis). Created by [Alex Vear - axvr](https://gitlab.com/axvr).
+This is the ``README.md`` file for [ALIS](https://github.com/axvr/alis). Created by [Alex Vear - axvr](https://github.com/axvr).
 
-This project is licenced under the [MIT Licence](https://gitlab.com/axvr/alis/blob/master/LICENCE).
+This project is licenced under the [MIT Licence](https://github.com/axvr/alis/blob/master/LICENCE).
 
-If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see this document: [https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md](https://gitlab.com/axvr/alis/blob/master/CONTRIBUTING.md).
+If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see the [contributing document](https://github.com/axvr/alis/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/alis/blob/master/CODE_OF_CONDUCT.md).
 
 ---
 
@@ -42,29 +46,31 @@ Please ensure that your system meets these system types:
 #### Architecture
 
 * x86_64
-* i686 - Depreciated
 
 #### Boot Mode
 
 * BIOS
 * UEFI
 
-#### To be Supported
+#### Still to be Supported
 
 * Apple Machines
 
+#### Depreciated
+
+* i686 - Depreciated by Arch Linux
+
 ### Make an Arch Linux live Disk/CD
 
-Follow these instructions from the Arch Wiki on how to make and verify your own Arch live disk: [https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch](https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch). This will be reqired for ALIS to work correctly. Once this has been done then insert the medium into the machine you wish to install Arch Linux to, then boot up the system, to that disk.
+Follow the instructions from the Arch Wiki on how to [make and verify your own Arch live disk](https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch). This will be reqired for ALIS to work correctly. Once this has been done then insert the medium into the machine you wish to install Arch Linux to, then boot up the system, to that disk.
 
-Alternatively, if you are looking to test out Arch or just to experiment with it, there is also the option of using a Virtual Machine (A computer running on a computer). To do this follow these instructions and download the Arch ISO from here: [https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch](https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch), and optionally (recommended) verify your download. Follow these instructions to setup a virtual machine in your current OS using Oracle's VirtualBox: [https://www.virtualbox.org/manual/ch01.html](https://www.virtualbox.org/manual/ch01.html).
+Alternatively, if you are looking to test out Arch or just to experiment with it, there is also the option of using a Virtual Machine (A computer running on a computer). To do this follow these instructions and download the Arch ISO from [here](https://wiki.archlinux.org/index.php/Category:Getting_and_installing_Arch), and optionally (recommended) verify your download. Follow these [instructions](https://www.virtualbox.org/manual/ch01.html) to setup a virtual machine in your current OS using Oracle's VirtualBox.
 
 ### Setup and Start ALIS
 
-**NOTE:**
-**ALIS and Arch Linux both require a stable internet connection, this is best done using an Ethernet connection directly into the machine (virtual machines have internet by default if the host machine has an internet connection of some kind).**
+**NOTE: ALIS and Arch Linux both require a stable internet connection, this is best done using an Ethernet connection directly into the machine (virtual machines have internet by default if the host machine has an internet connection of some kind).**
 
-First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command.
+First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command (these will be changed when the full alpha version is released).
 
 ``wget https://gitlab.com/axvr/alis/repository/archive.tar.gz``
 
@@ -107,4 +113,4 @@ The ``main-menu.pl`` argument system may be advanced in the future to be similar
 ### Other Useful Information
 
 * To view this entire file with the ability to scroll, run this command: ``less README.me``.
-* There is currently an i686 phase out being undertaken in Arch Linux (in a nutshell: 32 bit Arch Linux will become fully unsupported in November 2017). The most common way to upgrade your system to 64 bit is to ensure that it has at least 4GB of RAM and that 64 bit is supported by the system BIOS. For info on the phase out see this page: [https://www.archlinux.org/news/phasing-out-i686-support/](https://www.archlinux.org/news/phasing-out-i686-support/).
+* There is currently an [i686 phase out being undertaken in Arch Linux](https://www.archlinux.org/news/phasing-out-i686-support/) (in a nutshell: 32 bit Arch Linux will become fully unsupported in November 2017). The most common way to upgrade your system to 64 bit is to ensure that it has at least 4GB of RAM and that 64 bit is supported by the system BIOS.

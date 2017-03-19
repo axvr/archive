@@ -5,9 +5,11 @@
 #
 # The successor to Architect Linux
 #
-# This is the start.pl file for ALIS (https://gitlab.com/axvr/alis). Created by Alex Vear - axvr (https://gitlab.com/axvr).
+# This is the start.pl file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence (https://gitlab.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
 
 # MODULES SETUP
 use v5.24.1;
@@ -19,7 +21,7 @@ use Getopt::Long;
 my $log_file = "alis.log";
 
 # PARAMETERS SETUP
-my $current_version = "0.0.6";
+my $current_version = "0.1.0";
 my $usage_message = "perl start.pl --start [--version] [--help] [--force]\n";
 my $start = "";
 my $force = 0;
@@ -28,11 +30,11 @@ my $version = "";
 my $usage = !scalar(@ARGV);
 
 GetOptions (
-	"start+"	=> \$start,
-	"force+"   	=> \$force,
-	"h|help+"  	=> \$help_menu,
-	"v|version+"=> \$version);
-	
+	"start+"			=> \$start,
+	"force+"   		=> \$force,
+	"h|help+"  		=> \$help_menu,
+	"v|version+"	=> \$version);
+
 my $operation = shift @ARGV;
 
 # if any paramters have not  been given display the usage info
@@ -116,7 +118,7 @@ print $fh "\nTime has been NTP synced\n";
 print $fh "@universal_time\n";
 my $utc = substr($universal_time[1], 2);
 
-# choose keymap part 1
+# choose keymap part 1 setup
 my $whiptail;
 my $keyboard_layout;
 
@@ -134,7 +136,7 @@ sub keys1 {
 		qq{"Other" "Select a different keymap here" "OFF" 3>&1 1>&2 2>&3 };
 	$keyboard_layout = `$whiptail`;
 	$keyboard_layout =~ tr/A-Z/a-z/;
-	
+
 	# other keymap selection menu
 	if ($keyboard_layout eq "other") {
 		$whiptail = qq{whiptail --title "Select keyboard layout" }.
@@ -151,7 +153,7 @@ sub keys1 {
 			$keymap = $values[0];
 			my $run_loadkeys = system("loadkeys", "$keymap");
 			print $fh "Loading keymap: $keymap\n";
-			
+
 			# check if the keymap loading failed
 			if ($run_loadkeys != 0) {
 				system("whiptail", "--title", "Invalid keymap", "--msgbox",
@@ -216,4 +218,3 @@ sub keys2 {
 }
 
 keys1();
-

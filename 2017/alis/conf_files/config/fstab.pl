@@ -5,7 +5,9 @@
 #
 # The successor to Architect Linux
 #
-# This is the conf_files/config/fstab.pl file for ALIS (https://gitlab.com/axvr/alis). Created by Alex Vear - axvr (https://gitlab.com/axvr).
+# This is the conf_files/config/fstab.pl file for ALIS
+# (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence (https://gitlab.com/axvr/alis/blob/master/LICENCE).
-
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).

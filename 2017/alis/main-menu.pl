@@ -5,9 +5,11 @@
 #
 # The successor to Architect Linux
 #
-# This is the main-menu.pl file for ALIS (https://gitlab.com/axvr/alis). Created by Alex Vear - axvr (https://gitlab.com/axvr).
+# This is the main-menu.pl file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence (https://gitlab.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
 
 
 # THE BELOW MAY BE SUBJECT TO CHANGE
@@ -74,9 +76,9 @@ my $whiptail;
 
 # Main Menu
 sub main {
-	
+
 	print $fh "main() loaded\n";
-	
+
 	$whiptail = qq{whiptail --menu --title "Main-menu" --nocancel }.
 		qq{--backtitle "$backtitle" }.
 		qq{"\nThis is the ALIS main menu. Please pick an item from the list below." 15 55 7 }.
@@ -90,7 +92,7 @@ sub main {
 	$temp_val = `$whiptail`;
 
 	print $fh "selected: $temp_val\n";
-	
+
 	# validate selected item
 	if ($temp_val eq "Pre-installation") {
 		print $fh "Load pre_install() subroutine\n";
@@ -132,7 +134,7 @@ sub pre_install {
 		qq{"Mount the file systems" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
-	
+
 	print $fh "selected: $temp_val\n";
 
 	# validate selected item
@@ -180,7 +182,7 @@ sub install {
 		qq{"Install base packages" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
-	
+
 	print $fh "selected: $temp_val\n";
 
 	# validate selected item
@@ -215,7 +217,7 @@ sub install {
 }
 
 
-# Configuration 
+# Configuration
 sub config {
 
 	print $fh "config() loaded\n";
@@ -230,7 +232,7 @@ sub config {
 		qq{"locale" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
-	
+
 	print $fh "selected: $temp_val\n";
 
 	# validate selected item
@@ -239,7 +241,7 @@ sub config {
 		close $fh or die "Could not close '$log_file'. $!";
 		system("perl", "conf_files/config/fstab.pl", "$hardware_version", "$uefi_or_bios");
 		open_log();
-		config();	
+		config();
 	} elsif ($temp_val eq "tempary") {
 		print $fh "running conf_files/config/chroot.pl\n";
 		close $fh or die "Could not close '$log_file'. $!";
@@ -283,7 +285,7 @@ sub post_install {
 		qq{"temp" "temp_placeholder" }.
 		qq{3>&1 1>&2 2>&3};
 	$temp_val = `$whiptail`;
-	
+
 	print $fh "selected: $temp_val\n";
 
 	# vaidate selected item
@@ -325,8 +327,8 @@ sub about {
 	my $about = qq{ALIS - Arch Linux Installation Script\n}.
 				qq{-------------------------------------\n\n}.
 				qq{ALIS is the successor of Architect Linux's AIF\n\n}.
-				qq{Made by Alex Vear (axvr - GitLab)\n}.
-				qq{Licenced under the GPL3 Copyleft Licence};
+				qq{Made by Alex Vear (axvr - GitHub)\n}.
+				qq{Licenced under the MIT Licence};
 
 	$whiptail = qq{whiptail --msgbox --title "About ALIS" }.
 		qq{--backtitle "$backtitle" }.
@@ -352,4 +354,3 @@ sub quit {
 
 # initial start of subroutine main()
 main();
-
