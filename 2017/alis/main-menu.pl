@@ -16,27 +16,27 @@
 #
 # MENU LAYOUT			 	SUBROUTINE/FILE NAMES
 #
-# Main-Menu					- main()
-# > Pre-installation		- pre_install()
-# >> Partiton the disks		- partition.pl
-# >> Format the partions	- format.pl
-# >> Mount the file systems	- mount.pl
-# > Installation			- install()
-# >> Mirrors /etc/pacman.d/mirrorlist	- mirrors.pl
-#		^split into another menu
-# >> Edit /etc/pacman.conf	- edit_pacmanconf.pl
-# >> Base					- basepkg.pl
-# >> ...					- ...
-# > Configuration			- config()
-# >> fstab					- fstab.pl
-# >> chroot					- chroot.pl
-# >> time zone				- time_zone.pl
-# >> locale					- locale.pl
-# >> ...					- ...
-# > Post-installation		- post_install()
-# >> ...					- ...
-# > About ALIS				- about()
-# > Quit ALIS/cancel installation - quit()
+# Main-Menu                           - main()
+# > Pre-installation                  - pre_install()
+# >> Partiton the disks               - partition.pl
+# >> Format the partions              - format.pl
+# >> Mount the file systems           - mount.pl
+# > Installation                      - install()
+# >> Mirrors /etc/pacman.d/mirrorlist - mirrors.pl
+#         ^split into another menu
+# >> Edit /etc/pacman.conf            - edit_pacmanconf.pl
+# >> Base                             - basepkg.pl
+# >> ...                              - ...
+# > Configuration                     - config()
+# >> fstab                            - fstab.pl
+# >> chroot                           - chroot.pl
+# >> time zone                        - time_zone.pl
+# >> locale                           - locale.pl
+# >> ...                              - ...
+# > Post-installation                 - post_install()
+# >> ...                              - ...
+# > About ALIS                        - about()
+# > Quit ALIS/cancel installation     - quit()
 # >> Are you sure message
 
 
@@ -62,7 +62,7 @@ my $log_file = "alis.log";
 
 # Log file setup sub routine
 sub open_log {
-	open ($fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
+  open ($fh, ">>", $log_file) or die "Could not open '$log_file'. $!";
 }
 
 open_log();
@@ -77,279 +77,279 @@ my $whiptail;
 # Main Menu
 sub main {
 
-	print $fh "main() loaded\n";
+  print $fh "main() loaded\n";
 
-	$whiptail = qq{whiptail --menu --title "Main-menu" --nocancel }.
-		qq{--backtitle "$backtitle" }.
-		qq{"\nThis is the ALIS main menu. Please pick an item from the list below." 15 55 7 }.
-		qq{"Pre-installation" "Setup prior to installation" }.
-		qq{"Installation" "Install Arch to your system" }.
-		qq{"Configuration" "Configure your Arch install" }.
-		qq{"Post-installation" "Post-install setup" }.
-		qq{"About ALIS" "Page about ALIS" }.
-		qq{"Quit / Cancel" "Close ALIS" }.
-		qq{3>&1 1>&2 2>&3};
-	$temp_val = `$whiptail`;
+  $whiptail = qq{whiptail --menu --title "Main-menu" --nocancel }.
+    qq{--backtitle "$backtitle" }.
+    qq{"\nThis is the ALIS main menu. Please pick an item from the list below." 15 55 7 }.
+    qq{"Pre-installation" "Setup prior to installation" }.
+    qq{"Installation" "Install Arch to your system" }.
+    qq{"Configuration" "Configure your Arch install" }.
+    qq{"Post-installation" "Post-install setup" }.
+    qq{"About ALIS" "Page about ALIS" }.
+    qq{"Quit / Cancel" "Close ALIS" }.
+    qq{3>&1 1>&2 2>&3};
+  $temp_val = `$whiptail`;
 
-	print $fh "selected: $temp_val\n";
+  print $fh "selected: $temp_val\n";
 
-	# validate selected item
-	if ($temp_val eq "Pre-installation") {
-		print $fh "Load pre_install() subroutine\n";
-		pre_install();
-	} elsif ($temp_val eq "Installation") {
-		print $fh "Load install() subroutine\n";
-		install();
-	} elsif ($temp_val eq "Configuration") {
-		print $fh "Load config() subroutine\n";
-		config();
-	} elsif ($temp_val eq "Post-installation") {
-		print $fh "Load post_install() subroutine\n";
-		post_install();
-	} elsif ($temp_val eq "About ALIS") {
-		print $fh "Load about() subroutine\n";
-		about();
-	} elsif ($temp_val eq "Quit / Cancel" ) {
-		print $fh "Load quit() subroutine\n";
-		quit();
-	} else {
-		# invalid option selected
-		print $fh "Unexpected error ALIS is exiting\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 1;
-	}
+  # validate selected item
+  if ($temp_val eq "Pre-installation") {
+    print $fh "Load pre_install() subroutine\n";
+    pre_install();
+  } elsif ($temp_val eq "Installation") {
+    print $fh "Load install() subroutine\n";
+    install();
+  } elsif ($temp_val eq "Configuration") {
+    print $fh "Load config() subroutine\n";
+    config();
+  } elsif ($temp_val eq "Post-installation") {
+    print $fh "Load post_install() subroutine\n";
+    post_install();
+  } elsif ($temp_val eq "About ALIS") {
+    print $fh "Load about() subroutine\n";
+    about();
+  } elsif ($temp_val eq "Quit / Cancel" ) {
+    print $fh "Load quit() subroutine\n";
+    quit();
+  } else {
+    # invalid option selected
+    print $fh "Unexpected error ALIS is exiting\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 1;
+  }
 }
 
 # Pre-install
 sub pre_install {
 
-	print $fh "pre_install() loaded\n";
+  print $fh "pre_install() loaded\n";
 
-	$whiptail = qq{whiptail --menu --title "Pre-Installation" }.
-		qq{--backtitle "$backtitle" }.
-		qq{--cancel-button "Back" }.
-		qq{"\nThis is the Pre-installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
-		qq{"Partition the disks" "temp_placeholder" }.
-		qq{"Format the partitions" "temp_placeholder" }.
-		qq{"Mount the file systems" "temp_placeholder" }.
-		qq{3>&1 1>&2 2>&3};
-	$temp_val = `$whiptail`;
+  $whiptail = qq{whiptail --menu --title "Pre-Installation" }.
+    qq{--backtitle "$backtitle" }.
+    qq{--cancel-button "Back" }.
+    qq{"\nThis is the Pre-installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
+    qq{"Partition the disks" "temp_placeholder" }.
+    qq{"Format the partitions" "temp_placeholder" }.
+    qq{"Mount the file systems" "temp_placeholder" }.
+    qq{3>&1 1>&2 2>&3};
+  $temp_val = `$whiptail`;
 
-	print $fh "selected: $temp_val\n";
+  print $fh "selected: $temp_val\n";
 
-	# validate selected item
-	if ($temp_val eq "Partition the disks") {
-		print $fh "running conf_files/pre_install/partition.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/partition.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		pre_install();
-	} elsif ($temp_val eq "Format the partitions") {
-		print $fh "running conf_files/pre_install/format.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/format.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		pre_install();
-	} elsif ($temp_val eq "Mount the file systems") {
-		print $fh "running conf_files/pre_install/mount.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/pre_install/mount.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		pre_install();
-	} elsif ($? == 256) {
-		# cancel/back button
-		print $fh "Load main() subroutine\n";
-		main();
-	} else {
-		# invalid option selected
-		print $fh "Invalid option selected\nALIS is exiting\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 1;
-	}
+  # validate selected item
+  if ($temp_val eq "Partition the disks") {
+    print $fh "running conf_files/pre_install/partition.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/pre_install/partition.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    pre_install();
+  } elsif ($temp_val eq "Format the partitions") {
+    print $fh "running conf_files/pre_install/format.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/pre_install/format.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    pre_install();
+  } elsif ($temp_val eq "Mount the file systems") {
+    print $fh "running conf_files/pre_install/mount.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/pre_install/mount.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    pre_install();
+  } elsif ($? == 256) {
+    # cancel/back button
+    print $fh "Load main() subroutine\n";
+    main();
+  } else {
+    # invalid option selected
+    print $fh "Invalid option selected\nALIS is exiting\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 1;
+  }
 }
 
 # Installation
 sub install {
 
-	print $fh "install() loaded\n";
+  print $fh "install() loaded\n";
 
-	$whiptail = qq{whiptail --menu --title "Installation" }.
-		qq{--backtitle "$backtitle" }.
-		qq{--cancel-button "Back" }.
-		qq{"\nThis is the Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
-		qq{"Configure mirrors" "temp_placeholder" }.
-		qq{"Edit pacman.conf" "Configure pacman (advanced)" }.
-		qq{"Install base packages" "temp_placeholder" }.
-		qq{3>&1 1>&2 2>&3};
-	$temp_val = `$whiptail`;
+  $whiptail = qq{whiptail --menu --title "Installation" }.
+    qq{--backtitle "$backtitle" }.
+    qq{--cancel-button "Back" }.
+    qq{"\nThis is the Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
+    qq{"Configure mirrors" "temp_placeholder" }.
+    qq{"Edit pacman.conf" "Configure pacman (advanced)" }.
+    qq{"Install base packages" "temp_placeholder" }.
+    qq{3>&1 1>&2 2>&3};
+  $temp_val = `$whiptail`;
 
-	print $fh "selected: $temp_val\n";
+  print $fh "selected: $temp_val\n";
 
-	# validate selected item
-	if ($temp_val eq "Configure mirrors") {
-		print $fh "running conf_files/install/mirrors.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/mirrors.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		install();
-	} elsif ($temp_val eq "Edit pacman.conf") {
-		print $fh "running conf_files/install/edit_pacmanconf.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/edit_pacmanconf.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		install();
-	} elsif ($temp_val eq "Install base packages") {
-		print $fh "running conf_files/install/basepkg.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/install/basepkg.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		install();
-	} elsif ($? == 256) {
-		# back / cancel button
-		print $fh "Load main() subroutine\n";
-		main();
-	} else {
-		# invalid option / total failure
-		print $fh "Invalid option selected\nALIS is exiting\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 1;
-	}
+  # validate selected item
+  if ($temp_val eq "Configure mirrors") {
+    print $fh "running conf_files/install/mirrors.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/install/mirrors.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    install();
+  } elsif ($temp_val eq "Edit pacman.conf") {
+    print $fh "running conf_files/install/edit_pacmanconf.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/install/edit_pacmanconf.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    install();
+  } elsif ($temp_val eq "Install base packages") {
+    print $fh "running conf_files/install/basepkg.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/install/basepkg.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    install();
+  } elsif ($? == 256) {
+    # back / cancel button
+    print $fh "Load main() subroutine\n";
+    main();
+  } else {
+    # invalid option / total failure
+    print $fh "Invalid option selected\nALIS is exiting\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 1;
+  }
 }
 
 
 # Configuration
 sub config {
 
-	print $fh "config() loaded\n";
+  print $fh "config() loaded\n";
 
-	$whiptail = qq{whiptail --menu --title "Configuration" }.
-		qq{--backtitle "$backtitle" }.
-		qq{--cancel-button "Back" }.
-		qq{"\nThis is the Configuration menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
-		qq{"fstab" "temp_placeholder" }.
-		qq{"chroot" "temp_placeholder" }.
-		qq{"time_zone" "temp_placeholder" }.
-		qq{"locale" "temp_placeholder" }.
-		qq{3>&1 1>&2 2>&3};
-	$temp_val = `$whiptail`;
+  $whiptail = qq{whiptail --menu --title "Configuration" }.
+    qq{--backtitle "$backtitle" }.
+    qq{--cancel-button "Back" }.
+    qq{"\nThis is the Configuration menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
+    qq{"fstab" "temp_placeholder" }.
+    qq{"chroot" "temp_placeholder" }.
+    qq{"time_zone" "temp_placeholder" }.
+    qq{"locale" "temp_placeholder" }.
+    qq{3>&1 1>&2 2>&3};
+  $temp_val = `$whiptail`;
 
-	print $fh "selected: $temp_val\n";
+  print $fh "selected: $temp_val\n";
 
-	# validate selected item
-	if ($temp_val eq "tempary") {
-		print $fh "running conf_files/config/fstab.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/fstab.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		config();
-	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/config/chroot.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/chroot.pl", "$hardware_version", "$uefi_or_bios");
-		config();
-	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/config/time_zone.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/time_zone.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		config();
-	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/config/locale.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/config/locale.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		config();
-	} elsif ($? == 256) {
-		# cancel/back button
-		print $fh "Load main() subroutine\n";
-		main();
-	} else {
-		# invalid option / total failure
-		print $fh "Invalid option selected\nALIS is exiting\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 1;
-	}
+  # validate selected item
+  if ($temp_val eq "tempary") {
+    print $fh "running conf_files/config/fstab.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/config/fstab.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    config();
+  } elsif ($temp_val eq "tempary") {
+    print $fh "running conf_files/config/chroot.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/config/chroot.pl", "$hardware_version", "$uefi_or_bios");
+    config();
+  } elsif ($temp_val eq "tempary") {
+    print $fh "running conf_files/config/time_zone.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/config/time_zone.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    config();
+  } elsif ($temp_val eq "tempary") {
+    print $fh "running conf_files/config/locale.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/config/locale.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    config();
+  } elsif ($? == 256) {
+    # cancel/back button
+    print $fh "Load main() subroutine\n";
+    main();
+  } else {
+    # invalid option / total failure
+    print $fh "Invalid option selected\nALIS is exiting\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 1;
+  }
 }
 
 # Post-Installation
 sub post_install {
 
-	print $fh "post_install() loaded\n";
+  print $fh "post_install() loaded\n";
 
-	$whiptail = qq{whiptail --menu --title "Post-Installation" }.
-		qq{--backtitle "$backtitle" }.
-		qq{--cancel-button "Back" }.
-		qq{"\nThis is the Post-Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
-		qq{"temp" "temp_placeholder" }.
-		qq{"temp" "temp_placeholder" }.
-		qq{"temp" "temp_placeholder" }.
-		qq{3>&1 1>&2 2>&3};
-	$temp_val = `$whiptail`;
+  $whiptail = qq{whiptail --menu --title "Post-Installation" }.
+    qq{--backtitle "$backtitle" }.
+    qq{--cancel-button "Back" }.
+    qq{"\nThis is the Post-Installation menu. Select items working your way downwards if you are a beginner." 15 55 7 }.
+    qq{"temp" "temp_placeholder" }.
+    qq{"temp" "temp_placeholder" }.
+    qq{"temp" "temp_placeholder" }.
+    qq{3>&1 1>&2 2>&3};
+  $temp_val = `$whiptail`;
 
-	print $fh "selected: $temp_val\n";
+  print $fh "selected: $temp_val\n";
 
-	# vaidate selected item
-	if ($temp_val eq "tempary") {
-		print $fh "running conf_files/post_install/.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		post_install();
-	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/post_install/.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		post_install();
-	} elsif ($temp_val eq "tempary") {
-		print $fh "running conf_files/post_install/.pl\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
-		open_log();
-		post_install();
-	} elsif ($? == 256) {
-		# cancel/back button
-		print $fh "Load main() subroutine\n";
-		main();
-	} else {
-		# invalid option / total fail
-		print $fh "Invalid option selected\nALIS is exiting\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 1;
-	}
+  # vaidate selected item
+  if ($temp_val eq "tempary") {
+    print $fh "running conf_files/post_install/.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    post_install();
+  } elsif ($temp_val eq "tempary") {
+    print $fh "running conf_files/post_install/.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    post_install();
+  } elsif ($temp_val eq "tempary") {
+    print $fh "running conf_files/post_install/.pl\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    system("perl", "conf_files/post_install/.pl", "$hardware_version", "$uefi_or_bios");
+    open_log();
+    post_install();
+  } elsif ($? == 256) {
+    # cancel/back button
+    print $fh "Load main() subroutine\n";
+    main();
+  } else {
+    # invalid option / total fail
+    print $fh "Invalid option selected\nALIS is exiting\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 1;
+  }
 }
 
 # About ALIS
 sub about {
 
-	# display the project about page
+  # display the project about page
 
-	my $about = qq{ALIS - Arch Linux Installation Script\n}.
-				qq{-------------------------------------\n\n}.
-				qq{ALIS is the successor of Architect Linux's AIF\n\n}.
-				qq{Made by Alex Vear (axvr - GitHub)\n}.
-				qq{Licenced under the MIT Licence};
+  my $about = qq{ALIS - Arch Linux Installation Script\n}.
+    qq{-------------------------------------\n\n}.
+    qq{ALIS is the successor of Architect Linux's AIF\n\n}.
+    qq{Made by Alex Vear (axvr - GitHub)\n}.
+    qq{Licenced under the MIT Licence};
 
-	$whiptail = qq{whiptail --msgbox --title "About ALIS" }.
-		qq{--backtitle "$backtitle" }.
-		qq{"\n$about" 15 55 };
-	system($whiptail);
-	main();
+  $whiptail = qq{whiptail --msgbox --title "About ALIS" }.
+    qq{--backtitle "$backtitle" }.
+    qq{"\n$about" 15 55 };
+  system($whiptail);
+  main();
 }
 
 # Quit ALIS/Cancel Installation
 sub quit {
-	$whiptail = qq{whiptail --yesno --title "Quit ALIS" }.
-		qq{--backtitle "$backtitle" }.
-		qq{"Are you sure you want to exit ALIS?" 7 45 };
-	system($whiptail);
-	if ($? == 0) {
-		print $fh "ALIS was closed\n";
-		close $fh or die "Could not close '$log_file'. $!";
-		exit 0;
-	} else {
-		main();
-	}
+  $whiptail = qq{whiptail --yesno --title "Quit ALIS" }.
+    qq{--backtitle "$backtitle" }.
+    qq{"Are you sure you want to exit ALIS?" 7 45 };
+    system($whiptail);
+  if ($? == 0) {
+    print $fh "ALIS was closed\n";
+    close $fh or die "Could not close '$log_file'. $!";
+    exit 0;
+  } else {
+    main();
+  }
 }
 
 # initial start of subroutine main()
