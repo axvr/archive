@@ -70,7 +70,7 @@ Alternatively, if you are looking to test out Arch or just to experiment with it
 
 **NOTE: ALIS and Arch Linux both require a stable internet connection, this is best done using an Ethernet connection directly into the machine (virtual machines have internet by default if the host machine has an internet connection of some kind).**
 
-First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command replace the ``<version>`` with the [latest version number](https://github.com/axvr/alis/releases).
+First ALIS will need to be downloaded to the live Arch distro. The ALIS download contains all of the files needed for ALIS to run without any problems. This can be done by typing **exactly** this command (replace the ``<version>`` with the [latest version number](https://github.com/axvr/alis/releases)).
 
 ``wget https://github.com/axvr/alis/archive/v<version>.tar.gz``
 
