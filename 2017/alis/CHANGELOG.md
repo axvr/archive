@@ -36,6 +36,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and it als
 * don't bother to include it within
 * the ``CHANGELOG.md`` file
 
+### Translations
+* List all sections translated here
+* If this section contains nothing
+* don't bother to include it within
+* the ``CHANGELOG.md`` file
+
 Leave 3 spaces between previous change log item -->
 
 ---

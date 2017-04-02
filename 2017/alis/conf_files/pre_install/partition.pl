@@ -14,8 +14,7 @@
 
 
 # NOTES:
-# give option between fdisk and parted for custom
-
+# give option between fdisk and parted for custom?
 
 # Setup modules
 use v5.24.1;
@@ -38,13 +37,13 @@ sub main {
 
   print $fh "main() loaded\n";
 
-  # redesign this menu with options which are as follows:
+  # redesign this menu and others with options which are as follows:
   # [x] securely wipe disk
   # [x] wipe disk menu
   # [ ] auto partition - auto switch between bios and uefi mode
   # [ ] gpt vs mbr - windows dual boot
   # [ ] https://wiki.archlinux.org/index.php/Partitioning#Choosing_between_GPT_and_MBR
-  # [ ] manual partition
+  # [x] manual partition
   # [ ] LVM
   # [ ] LUKS
   # [ ] swapfile (maybe option for a swap partition)
@@ -190,19 +189,19 @@ sub central_ctrl {
   }
 
   $operation = "";
-    if ($temp_val eq "Zero") {
-      $operation = "zero";
-      wipeparts($operation, @partitions);
-    } elsif ($temp_val eq "Random") {
-      $operation = "urandom";
-      wipeparts($operation, @partitions);
-    } elsif ($temp_val eq "Zero then random") {
-      $operation = "zero";
-      wipeparts($operation, @partitions);
-      $operation = "urandom";
-      wipeparts($operation, @partitions);
-    }
+  if ($temp_val eq "Zero") {
+    $operation = "zero";
+    wipeparts($operation, @partitions);
+  } elsif ($temp_val eq "Random") {
+    $operation = "urandom";
+    wipeparts($operation, @partitions);
+  } elsif ($temp_val eq "Zero then random") {
+    $operation = "zero";
+    wipeparts($operation, @partitions);
+    $operation = "urandom";
+    wipeparts($operation, @partitions);
   }
+}
 
 
   sub man {
