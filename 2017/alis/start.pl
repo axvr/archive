@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 
-# ALIS - Arch Linux Installation Script
+# alis - arch linux installation script
 # =====================================
 #
-# The successor to Architect Linux
+# the successor to architect linux
 #
-# This is the start.pl file for ALIS (https://github.com/axvr/alis).
-# Created by Alex Vear - axvr (https://github.com/axvr).
+# this is the start.pl file for alis (https://github.com/axvr/alis).
+# created by alex vear - axvr (https://github.com/axvr).
 #
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
