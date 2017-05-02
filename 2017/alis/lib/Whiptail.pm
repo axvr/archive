@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-package Wt;
+package Whiptail;
 
 use strict;
 use warnings;
@@ -8,6 +8,7 @@ use warnings;
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(splash);
+
 
 sub splash {
     # Splash screen using Whiptail
@@ -19,5 +20,16 @@ sub splash {
            qq{8}, qq{55} );
     return 0;
 }
+
+
+sub menu {
+    continue;
+}
+
+
+sub list {
+    continue;
+}
+
 
 1;

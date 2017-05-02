@@ -21,7 +21,7 @@ sub log {
 }
 
 sub wipe {
-    # wipe and set up the log file
+    # wipe and set up the log file by truncating it
     open (my $cl, ">", $log_file) or die qq{Could not open '$log_file'. $!};
     print $cl qq{ALIS Log File\n};
     print $cl qq{=============\n\n};

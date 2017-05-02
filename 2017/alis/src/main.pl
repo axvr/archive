@@ -13,14 +13,6 @@
 
 
 
-##########################
-### Critical variables ###
-##########################
-
-my $version_number = "v0.2.0";
-
-
-
 ######################
 ### Modules set up ###
 ######################
@@ -38,8 +30,16 @@ use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
 use Log qw(log wipe);
-#use Hardware_check qw(check);
-use Wt qw(splash);
+use Whiptail qw(splash);
+use Hardware qw(hw_check sync_time get_arch get_boot);
+
+
+
+##########################
+### Critical variables ###
+##########################
+
+my $version_number = "v0.2.0";
 
 
 
@@ -54,11 +54,16 @@ GetOptions (
     "v|version+" => \$param_version
     );
 
-my $operation = shift @ARGV;
-
 if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
 
 if ($start) { main(); exit 1; }
+
+
+
+#################
+### Functions ###
+#################
+
 
 
 #################
@@ -71,8 +76,15 @@ sub main {
     wipe();
     log("ALIS is starting");
 
+    # Check system hardware
+    hw_check();
+
     splash("ALIS - Arch Linux Installation Script",
            "Welcome to ALIS - Arch Linux Installation Script. Press OK to continue.");
+
+    # Run network check script and sync time
+    system("bash", "src/network_check.sh");
+    sync_time();
 
 }
 
