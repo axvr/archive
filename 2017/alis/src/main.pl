@@ -11,6 +11,11 @@
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
 
+# TODO add multi-language support (via param to link to lang file)
+# TODO add main menu
+# TODO add keyboard map selection
+# TODO move the network check script into a perl module
+
 
 
 ######################
@@ -32,6 +37,7 @@ use lib dirname(dirname abs_path $0) . '/lib';
 use Log qw(log wipe);
 use Whiptail qw(splash);
 use Hardware qw(hw_check sync_time get_arch get_boot);
+use Language qw(%language check_language);
 
 
 
@@ -49,12 +55,20 @@ my $version_number = "v0.2.0";
 
 my $param_version = "";
 my $start = !scalar(@ARGV);
+our $language_selected = "english";
 
 GetOptions (
-    "v|version+" => \$param_version
+    "v|version+"   => \$param_version,
+    "l|language=s"  => \$language_selected,
     );
 
 if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
+
+if ($language_selected) {
+    if (check_language($language_selected) == 1) {
+        $start = 1;
+    } else { print STDERR "Invalid language selected\n"; }
+}
 
 if ($start) { main(); exit 1; }
 
@@ -63,6 +77,8 @@ if ($start) { main(); exit 1; }
 #################
 ### Functions ###
 #################
+
+sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
 
@@ -79,8 +95,7 @@ sub main {
     # Check system hardware
     hw_check();
 
-    splash("ALIS - Arch Linux Installation Script",
-           "Welcome to ALIS - Arch Linux Installation Script. Press OK to continue.");
+    splash(type("welcome_message_title"), type("welcome_message"));
 
     # Run network check script and sync time
     system("bash", "src/network_check.sh");
