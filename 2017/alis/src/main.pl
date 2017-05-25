@@ -36,7 +36,8 @@ use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
 use Log qw(log wipe);
-use Whiptail qw(splash);
+use Whiptail qw(msgbox yesno inputbox passwordbox
+    textbox menu checklist radiolist);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
 
@@ -56,7 +57,7 @@ my $version_number = "v0.2.0";
 
 my $param_version = "";
 my $start = !scalar(@ARGV);
-our $language_selected = "en";
+my $language_selected = "en";
 
 GetOptions (
     "v|version+"   => \$param_version,
@@ -100,7 +101,7 @@ sub main {
     hw_check();
 
     # Display welcome message
-    splash(type("welcome_message_title"), type("welcome_message"));
+    msgbox(type("welcome_message_title"), type("welcome_message"));
 
     # Run network check script and sync time
     system("bash", "src/network_check.sh");
