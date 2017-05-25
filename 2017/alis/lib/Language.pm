@@ -10,7 +10,8 @@ our @EXPORT_OK = qw(%language check_language);
 
 
 sub check_language {
-    my @language_list = ("english", "example");
+    # Check that the language pack has been added
+    my @language_list = ("en", "fr", "es", "meme");
     my $language_selected = $_[0];
     my $pass = 0;
     foreach my $lang (@language_list) {
@@ -21,19 +22,38 @@ sub check_language {
 }
 
 
+# Language dictionary
 our %language = (
 
-    english => {
+    # English language pack
+    en => {
 
         welcome_message_title => "ALIS - Arch Linux Installation Script",
-        welcome_message => "Welcome to ALIS - Arch Linux Installation Script. Press OK to continue.",
+        welcome_message => "Welcome to ALIS - Arch Linux Installation Script. Press Ok to continue.",
 
     },
 
-    example => {
+    # French language pack
+    fr => {
 
-        welcome_message_title => "Hello World!",
-        welcome_message => "Hello World!",
+        welcome_message_title => "ALIS - Arch Linux Script d'installation",
+        welcome_message => "Bienvenue dans ALIS - Arch Linux Script d'installation. Appuyez sur Ok pour continuer.",
+
+    },
+
+    # Spanish language pack
+    es => {
+
+        welcome_message_title => "ALIS - Arch Linux Script de Instalacion",
+        welcome_message => "Bienvenido a ALIS - Arch Linux Script de Instalacion. Presione Ok para continuar.",
+
+    },
+
+    # Meme easter egg language pack
+    meme => {
+
+        welcome_message_title => "The Tragedy of Darth Plagueis the Wise",
+        welcome_message => "Did you ever hear the tragedy of Darth Plagueis the wise?",
 
     },
 

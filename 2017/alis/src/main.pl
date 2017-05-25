@@ -11,10 +11,11 @@
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
 
-# TODO add multi-language support (via param to link to lang file)
-# TODO add main menu
-# TODO add keyboard map selection
-# TODO move the network check script into a perl module
+# [x] TODO add multi-language support
+# [x] TODO comment code
+# [ ] TODO add main menu
+# [ ] TODO add keyboard map selection
+# [ ] TODO move the network check script into a perl module
 
 
 
@@ -55,15 +56,17 @@ my $version_number = "v0.2.0";
 
 my $param_version = "";
 my $start = !scalar(@ARGV);
-our $language_selected = "english";
+our $language_selected = "en";
 
 GetOptions (
     "v|version+"   => \$param_version,
     "l|language=s"  => \$language_selected,
     );
 
+# Display version information
 if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
 
+# Check then set language pack
 if ($language_selected) {
     if (check_language($language_selected) == 1) {
         $start = 1;
@@ -78,6 +81,7 @@ if ($start) { main(); exit 1; }
 ### Functions ###
 #################
 
+# Fetch language data from the dictionary
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
@@ -95,6 +99,7 @@ sub main {
     # Check system hardware
     hw_check();
 
+    # Display welcome message
     splash(type("welcome_message_title"), type("welcome_message"));
 
     # Run network check script and sync time

@@ -55,14 +55,8 @@ sub sync_time {
 }
 
 
-sub get_arch {
-    return $architecture;
-}
+sub get_arch { return $architecture; }
 
-
-sub get_boot {
-    return $bootstrap
-}
-
+sub get_boot { return $bootstrap; }
 
 1;
