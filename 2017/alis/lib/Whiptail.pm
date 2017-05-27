@@ -72,6 +72,7 @@ sub menu {
     # TODO Menu selection screens
     my $title = $_[0];
     my $message = $_[1];
+    my @temp;
     my $whiptail = qq{ whiptail --nocancel }.
         qq{ --title "$title" }.
         qq{ --menu "$message" }.
