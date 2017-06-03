@@ -82,7 +82,8 @@ Follow the on screen instructions to install Arch Linux.
 ### All ALIS Options
 
 * Set language for ALIS to use: ```--language``` or ```-l``` followed by language code (see below for codes).
-* Display help document: ```--help``` or ```-h```.
+* Display help message: ```--help``` or ```-h```.
+* Display usage information: ```--usage``` or ```-u```.
 * Display ALIS version information: ```--version``` or ```-v```.
 
 
@@ -103,8 +104,9 @@ Follow the on screen instructions to install Arch Linux.
 * [x] Multi-language support
 * [x] Language selection and changing
 * [x] Log file functioning (and reduce chance of data corruption)
-* [ ] Create a new help menu
-* [ ] Split sections into individual modules
+* [x] Create a new help menu
+* [x] Create a usage menu
+* [x] Split sections into individual modules
 * [x] Create Whiptail module
 * [ ] Design and create a new menu page using the new modules
 

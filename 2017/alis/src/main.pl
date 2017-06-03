@@ -48,7 +48,21 @@ use Language qw(%language check_language);
 ##########################
 
 my $version_number = "v0.2.0";
+my $usage_message = "usage: alis [-v | --version] [-l | --language <code>]
+    [-h | --help] [-u | --usage] \n";
+my $help_message = "$usage_message
+This is a list of the ALIS commands that can be used
 
+Parameters
+    -h, --help                Display help message.
+    -u, --usage               Display ALIS usage information.
+    -v, --version             Display version information.
+    -l, --language <code>     Set language for ALIS to use; followed by a language code.
+
+ALIS Language Codes
+    en => English
+    fr => French
+    es => Spanish \n";
 
 
 #########################
@@ -59,15 +73,20 @@ my $param_version = "";
 my $start = !scalar(@ARGV);
 my $language_selected = "en";
 my $display_help = "";
+my $display_usage = "";
 
 GetOptions (
     "v|version+"   => \$param_version,
     "l|language=s"  => \$language_selected,
     "h|help+" => \$display_help,
+    "u|usage+" => \$display_usage,
     );
 
+# Display usage menu
+if ($display_usage) { print STDERR "$usage_message"; exit 1; }
+
 # Display help menu
-if ($display_help) { print STDERR ""; exit 1; }
+if ($display_help) { print STDERR "$help_message"; exit 1; }
 
 # Display version information
 if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
