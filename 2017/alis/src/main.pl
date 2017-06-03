@@ -58,11 +58,16 @@ my $version_number = "v0.2.0";
 my $param_version = "";
 my $start = !scalar(@ARGV);
 my $language_selected = "en";
+my $display_help = "";
 
 GetOptions (
     "v|version+"   => \$param_version,
     "l|language=s"  => \$language_selected,
+    "h|help+" => \$display_help,
     );
+
+# Display help menu
+if ($display_help) { print STDERR ""; exit 1; }
 
 # Display version information
 if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }

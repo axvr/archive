@@ -91,3 +91,55 @@ Follow the on screen instructions to install Arch Linux.
 * ```en``` => English
 * ```fr``` => French
 * ```es``` => Spanish
+
+
+---
+
+
+## To do
+
+### Core components
+
+* [x] Multi-language support
+* [x] Language selection and changing
+* [x] Log file functioning (and reduce chance of data corruption)
+* [ ] Create a new help menu
+* [ ] Split sections into individual modules
+* [x] Create Whiptail module
+* [ ] Design and create a new menu page using the new modules
+
+### Documentation
+
+* [x] Include all current commands in the README.md file
+* [x] Comment code and increase readability
+* [x] Expand Documentation to include contribution page
+* [x] Change project Licence to the MIT Licence from the GPL v3
+* [ ] Create a "Hacking ALIS" document
+* [ ] Update contribution document
+* [ ] Update code of conduct
+
+### Start up
+
+* [x] Check hardware configuration of device
+* [x] Create base version of the program
+* [x] Check the network connection
+* [x] Sync the time with NTP servers
+
+### Pre Install Section
+
+* [ ] Create keyboard layout selector
+* [ ] Build device/partition wipe
+* [ ] Create auto partition script
+* [ ] Format disks
+
+### Installation Section
+
+* [ ] (PENDING)
+
+### System Configuration Section
+
+* [ ] (PENDING)
+
+### Post Installation Section
+
+* [ ] (PENDING)
