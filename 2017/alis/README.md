@@ -108,6 +108,7 @@ Follow the on screen instructions to install Arch Linux.
 * [x] Create a usage menu
 * [x] Split sections into individual modules
 * [x] Create Whiptail module
+* [ ] Extend Whiptail module to use smart parameters
 * [ ] Design and create a new menu page using the new modules
 
 ### Documentation

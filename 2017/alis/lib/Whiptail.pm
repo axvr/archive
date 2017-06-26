@@ -8,7 +8,7 @@ use warnings;
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(msgbox yesno inputbox passwordbox
-    textbox menu checklist radiolist);
+    textbox menu checklist radiolist gauge);
 
 
 sub msgbox {
@@ -93,5 +93,18 @@ sub radiolist {
     my $title = $_[0];
     my $message = $_[1];
 }
+
+
+sub gauge {
+    my $title = $_[0];
+    my $message = $_[1];
+
+    my $whiptail = qq{ whiptail }.
+        qq{ --title "$title" }.
+        qq{ --gauge "$message" }.
+        qq{ 7 45 0 };
+    return $whiptail;
+}
+
 
 1;

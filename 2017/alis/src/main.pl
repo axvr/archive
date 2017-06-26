@@ -11,8 +11,6 @@
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
 
-# [x] TODO add multi-language support
-# [x] TODO comment code
 # [ ] TODO add main menu
 # [ ] TODO add keyboard map selection
 # [ ] TODO move the network check script into a perl module
@@ -40,6 +38,7 @@ use Whiptail qw(msgbox yesno inputbox passwordbox
     textbox menu checklist radiolist);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
+#use Network qw(network_check);
 
 
 
@@ -128,8 +127,12 @@ sub main {
     msgbox(type("welcome_message_title"), type("welcome_message"));
 
     # Run network check script and sync time
+    # TODO Get this to fully work as an independent module
+    #network_check(type(...), type(...));
     system("bash", "src/network_check.sh");
     sync_time();
+
+
 
 }
 
