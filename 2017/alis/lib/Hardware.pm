@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# This module records the hardware information
+# of the current system to check compatibility
+
 package Hardware;
 
 use strict;
@@ -13,7 +16,6 @@ use lib dirname(dirname abs_path $0) . '/lib';
 use Log qw(log wipe);
 
 use Exporter qw(import);
-
 our @EXPORT_OK = qw(hw_check sync_time get_arch get_boot);
 
 # Collect hardware information

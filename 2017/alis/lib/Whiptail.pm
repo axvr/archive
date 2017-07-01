@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# Module containing quick and simple access to
+# Whiptail interfaces to reduce the chances of errors
+
 package Whiptail;
 
 use strict;
@@ -68,17 +71,25 @@ sub textbox {
 }
 
 
+# How to use the menu() subroutine
+# --------------------------------
+# # Use the type() function to insert text
+# my $item1 = qq{ "Item 1" "Tag 1" };
+# my $item2 = qq{ "Item 2" "Tag 2" };
+# my $item3 = qq{ "Item 3" "Tag 3" };
+# my $item4 = qq{ "Item 4" "Tag 4" };
+# my ans = menu($title, $message, $item1, $item2, $item3, $item4);
 sub menu {
-    # TODO Menu selection screens
-    my $title = $_[0];
-    my $message = $_[1];
-    my @temp;
-    my $whiptail = qq{ whiptail --nocancel }.
-        qq{ --title "$title" }.
-        qq{ --menu "$message" }.
-        qq{ @temp }.
-        qq{ 15 55 7 }.
-        qq{ 3>&1 1>&2 2>&3 };
+    my @items = @_;
+    my $title = shift(@items);
+    my $message = shift(@items);
+
+    my $whiptail = qq{ whiptail }. qq{ --nocancel }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --menu }. qq{"\n$message" }.
+        qq{ 16 }. qq{ 55 }. qq{ 7 }.
+        qq{ @items }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
     return `$whiptail`;
 }
 
@@ -100,9 +111,9 @@ sub gauge {
     my $message = $_[1];
 
     my $whiptail = qq{ whiptail }.
-        qq{ --title "$title" }.
-        qq{ --gauge "$message" }.
-        qq{ 7 45 0 };
+        qq{ --title }. qq{ "$title" }.
+        qq{ --gauge }. qq{ "$message" }.
+        qq{ 7 }. qq{ 45 }. qq{ 0 };
     return $whiptail;
 }
 

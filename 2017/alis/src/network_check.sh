@@ -11,9 +11,7 @@
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
 
-
-#error_msg=ping: archlinux.org: Temporary failure in name resolution
-#check=`echo \`ping -c 1 archlinux.org\``
+# TODO replace this with the Network.pm module
 
 fail="0"
 echo " " >> alis.log

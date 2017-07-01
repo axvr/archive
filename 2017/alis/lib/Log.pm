@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# An easier solution to print to a log file
+# reduces the chances of errors and corruption
+
 package Log;
 
 use strict;

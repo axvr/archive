@@ -34,10 +34,10 @@ use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
 use Log qw(log wipe);
-use Whiptail qw(msgbox yesno inputbox passwordbox
-    textbox menu checklist radiolist);
+use Whiptail qw(msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
+use Menu qw(set_menu_lang main_menu);
 #use Network qw(network_check);
 
 
@@ -132,7 +132,10 @@ sub main {
     system("bash", "src/network_check.sh");
     sync_time();
 
-
+    set_menu_lang("$language_selected");
+    main_menu();
+    # TODO the main menu will contain only the menu code and loops
+    # main.pl will be returned a value to call a specific module
 
 }
 

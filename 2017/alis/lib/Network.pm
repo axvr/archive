@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+# Module to check the current network connection status
+# to determine if it is stable enough for ALIS
+# TODO still not fully functioning
+
 package Network;
 
 use strict;
