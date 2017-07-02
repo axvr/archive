@@ -9,7 +9,7 @@ use strict;
 use warnings;
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(msgbox yesno inputbox passwordbox
+our @EXPORT_OK = qw(msgbox msgbox_large yesno inputbox passwordbox
     textbox menu checklist radiolist gauge);
 
 
@@ -25,15 +25,27 @@ sub msgbox {
 }
 
 
+sub msgbox_large {
+    # Whiptail message box
+    my $title = $_[0];
+    my $message = $_[1];
+    system(qq{whiptail},
+           qq{--title}, qq{$title},
+           qq{--msgbox}, qq{$message},
+           qq{13}, qq{55} );
+    return 1;
+}
+
+
 sub yesno {
     # Yes and no box
     my $title = $_[0];
     my $message = $_[1];
-    my $whiptail = qq{ whiptail }.
-           qq{ --title }. qq{ $title }.
-           qq{ --yesno }. qq{ $message }.
-           qq{ 8 }. qq{ 55 };
-    return `$whiptail`;
+    system(qq{whiptail},
+           qq{--title}, qq{$title},
+           qq{--yesno}, qq{$message},
+           qq{8}, qq{55});
+    return $?;
 }
 
 

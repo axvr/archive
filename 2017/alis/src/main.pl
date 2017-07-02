@@ -37,7 +37,8 @@ use Log qw(log wipe);
 use Whiptail qw(msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
-use Menu qw(set_menu_lang main_menu);
+use Menu qw(set_menu_lang main_menu pre_install install config
+    post_install about quit);
 #use Network qw(network_check);
 
 
@@ -132,14 +133,31 @@ sub main {
     system("bash", "src/network_check.sh");
     sync_time();
 
+    # Menu for ALIS
     set_menu_lang("$language_selected");
-    my ans = main_menu();
-    # TODO the main menu will contain the menu code and loops and call other modules
-    # TODO maybe move the Menu.pm script into the main.pl script
 
-    while () {
-        1;
+    my $quit = 0;
+    my $returned_value;
+
+    while ($quit == 0) {
+        $returned_value = main_menu();
+        if ($returned_value eq "pre_install") {
+            pre_install();
+        } elsif ($returned_value eq "install") {
+            install();
+        } elsif ($returned_value eq "config") {
+            config();
+        } elsif ($returned_value eq "post_install") {
+            post_install();
+        } elsif ($returned_value eq "about") {
+            about();
+        } else {
+            my $result = quit();
+            if ($result == 0) { $quit = 1; }
+        }
     }
+
+    log("\nALIS was exited");
 
 }
 

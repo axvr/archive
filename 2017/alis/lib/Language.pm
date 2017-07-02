@@ -41,6 +41,14 @@ our %language = (
         main_menu_item4 => qq{ "Post-Installation" "Post-install set up for Arch" },
         main_menu_item5 => qq{ "About ALIS" "Information about ALIS" },
         main_menu_item6 => qq{ "Quit / Cancel" "Close ALIS" },
+        about_title     => qq{About ALIS},
+        about_message   => qq{ALIS - Arch Linux Installation Script\n}.
+            qq{-------------------------------------\n\n}.
+            qq{ALIS is the successor of Architect Linux's AIF\n}.
+            qq{Made by Alex Vear (axvr - GitHub, u/axvr - Reddit)\n}.
+            qq{Licenced under the MIT Licence},
+        quit_title => "Quit ALIS",
+        quit_message => "Are you sure you want to quit?",
 
     },
 
@@ -57,6 +65,10 @@ our %language = (
         main_menu_item4 => qq{ "Post-Installation" "Post-install set up for Arch" },
         main_menu_item5 => qq{ "About ALIS" "Information about ALIS" },
         main_menu_item6 => qq{ "Quit / Cancel" "Close ALIS" },
+        about_title     => "About ALIS",
+        about_message   => "ALIS about message",
+        quit_title => "Quit ALIS",
+        quit_message => "Are you sure you want to quit?",
 
     },
 
@@ -73,6 +85,10 @@ our %language = (
         main_menu_item4 => qq{ "Post-Installation" "Post-install set up for Arch" },
         main_menu_item5 => qq{ "About ALIS" "Information about ALIS" },
         main_menu_item6 => qq{ "Quit / Cancel" "Close ALIS" },
+        about_title     => "About ALIS",
+        about_message   => "ALIS about message",
+        quit_title => "Quit ALIS",
+        quit_message => "Are you sure you want to quit?",
 
     },
 
@@ -89,6 +105,10 @@ our %language = (
         main_menu_item4 => qq{ "" "" },
         main_menu_item5 => qq{ "" "" },
         main_menu_item6 => qq{ "" "" },
+        about_title     => "",
+        about_message   => "",
+        quit_title => "",
+        quit_message => "",
 
     },
 
