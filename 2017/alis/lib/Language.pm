@@ -1,7 +1,24 @@
 #!/usr/bin/perl
 
+
+# ALIS - Arch Linux Installation Script
+# =====================================
+#
+# The successor to Architect Linux
+#
+# This is the lib/Language.pm file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
+#
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
+
+
 # This module contains the dictionaries to allow for
 # multiple language functionality in ALIS
+
+
+# -------------------------------------------------------------------------------
+
 
 package Language;
 
@@ -10,6 +27,9 @@ use warnings;
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(%language check_language);
+
+
+# -------------------------------------------------------------------------------
 
 
 sub check_language {
@@ -52,6 +72,7 @@ our %language = (
 
     },
 
+
     # French language pack   TODO add menu languages and re-translate
     fr => {
 
@@ -72,6 +93,7 @@ our %language = (
 
     },
 
+
     # Spanish language pack   TODO add menu languages and re-translate
     es => {
 
@@ -91,6 +113,7 @@ our %language = (
         quit_message => "Are you sure you want to quit?",
 
     },
+
 
     # Meme easter egg language pack   TODO add menu languages and re-translate
     meme => {

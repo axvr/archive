@@ -1,20 +1,40 @@
 #!/usr/bin/perl
 
+
+# ALIS - Arch Linux Installation Script
+# =====================================
+#
+# The successor to Architect Linux
+#
+# This is the lib/Menu.pm file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
+#
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
+
+
 # This module holds all of the code for the main menu
 # in ALIS and will link to other modules to run their code
+
+
+# -------------------------------------------------------------------------------
+
 
 package Menu;
 
 use strict;
 use warnings;
 
+# Custom modules
+use Whiptail qw(menu msgbox msgbox_large yesno);
+use Language qw(%language);
+
 use Exporter qw(import);
 our @EXPORT_OK = qw(set_menu_lang main_menu pre_install install
     config post_install about quit);
 
-# Custom modules
-use Whiptail qw(menu msgbox_large yesno);
-use Language qw(%language);
+
+# -------------------------------------------------------------------------------
 
 
 # Set the language for the main menu
@@ -26,8 +46,7 @@ sub set_menu_lang {
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
-
-# TODO build this module correctly
+# Main menu Screen
 sub main_menu {
 
     my $title   = type("main_menu_title");
@@ -68,40 +87,33 @@ sub pre_install {
 
 sub install {
     1;
-
 }
 
 
 sub config {
     1;
-
 }
 
 
 sub post_install {
     1;
-
 }
 
 
+# About Screen
 sub about {
-
     my $title = type("about_title");
     my $message = type("about_message");
-
     msgbox_large("$title", "$message");
 }
 
 
+# Quit Screen
 sub quit {
-
     my $title = type("quit_title");
     my $message = type("quit_message");
-
     my $result = yesno("$title", "$message");
-
     return $result;
-
 }
 
 

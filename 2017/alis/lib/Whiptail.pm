@@ -1,7 +1,24 @@
 #!/usr/bin/perl
 
+
+# ALIS - Arch Linux Installation Script
+# =====================================
+#
+# The successor to Architect Linux
+#
+# This is the lib/Whiptail.pm file for ALIS (https://github.com/axvr/alis).
+# Created by Alex Vear - axvr (https://github.com/axvr).
+#
+# This project is licenced under the MIT Licence
+# (https://github.com/axvr/alis/blob/master/LICENCE).
+
+
 # Module containing quick and simple access to
 # Whiptail interfaces to reduce the chances of errors
+
+
+# -------------------------------------------------------------------------------
+
 
 package Whiptail;
 
@@ -13,8 +30,11 @@ our @EXPORT_OK = qw(msgbox msgbox_large yesno inputbox passwordbox
     textbox menu checklist radiolist gauge);
 
 
+# -------------------------------------------------------------------------------
+
+
+# Whiptail message box
 sub msgbox {
-    # Whiptail message box
     my $title = $_[0];
     my $message = $_[1];
     system(qq{whiptail},
@@ -25,8 +45,8 @@ sub msgbox {
 }
 
 
+# Larger Whiptail message box
 sub msgbox_large {
-    # Whiptail message box
     my $title = $_[0];
     my $message = $_[1];
     system(qq{whiptail},
@@ -37,8 +57,8 @@ sub msgbox_large {
 }
 
 
+# Yes and no box
 sub yesno {
-    # Yes and no box
     my $title = $_[0];
     my $message = $_[1];
     system(qq{whiptail},
@@ -49,8 +69,8 @@ sub yesno {
 }
 
 
+# Text input box
 sub inputbox {
-    # Text input box
     my $title = $_[0];
     my $message = $_[1];
     my $whiptail = qq{ whiptail }.
@@ -61,8 +81,8 @@ sub inputbox {
 }
 
 
+# Password input box
 sub passwordbox {
-    # Password input box
     my $title = $_[0];
     my $message = $_[1];
     my $whiptail = qq{ whiptail }.
@@ -73,8 +93,8 @@ sub passwordbox {
 }
 
 
+# TODO Display contents of a file
 sub textbox {
-    # TODO Display contents of a file
     my $title = $_[0];
     my $file = $_[1];
     return 1;
@@ -104,6 +124,7 @@ sub menu {
 }
 
 
+# Check list
 sub checklist {
     # TODO
     my $title = $_[0];
@@ -111,6 +132,7 @@ sub checklist {
 }
 
 
+# Radio button list
 sub radiolist {
     # TODO
     my $title = $_[0];
@@ -118,6 +140,7 @@ sub radiolist {
 }
 
 
+# Gauge/progress bar in Whiptail
 sub gauge {
     my $title = $_[0];
     my $message = $_[1];

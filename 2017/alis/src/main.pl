@@ -16,6 +16,8 @@
 # [ ] TODO move the network check script into a perl module
 
 
+# -------------------------------------------------------------------------------
+
 
 ######################
 ### Modules set up ###
@@ -41,6 +43,8 @@ use Menu qw(set_menu_lang main_menu pre_install install config
     post_install about quit);
 #use Network qw(network_check);
 
+
+# -------------------------------------------------------------------------------
 
 
 ##########################
