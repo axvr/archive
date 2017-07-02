@@ -133,9 +133,13 @@ sub main {
     sync_time();
 
     set_menu_lang("$language_selected");
-    main_menu();
-    # TODO the main menu will contain only the menu code and loops
-    # main.pl will be returned a value to call a specific module
+    my ans = main_menu();
+    # TODO the main menu will contain the menu code and loops and call other modules
+    # TODO maybe move the Menu.pm script into the main.pl script
+
+    while () {
+        1;
+    }
 
 }
 

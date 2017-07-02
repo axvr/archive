@@ -12,7 +12,6 @@ use Exporter qw(import);
 our @EXPORT_OK = qw(set_menu_lang main_menu);
 
 # Custom modules
-use Log qw(log);
 use Whiptail qw(menu);
 use Language qw(%language);
 
@@ -42,12 +41,13 @@ sub main_menu {
     my $result = menu("$title", "$message", "$item1", "$item2",
                       "$item3", "$item4", "$item5", "$item6");
 
-    # TODO add if statements and other menus
-    print("$result \n");
-    print("$language_selected \n");
+    return $result;
 
+}
+
+
+sub pre_install {
     1;
-
 }
 
 1;

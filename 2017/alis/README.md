@@ -74,7 +74,7 @@ You will then need to Move into the new ALIS directory (the ```<version>``` will
 
 Start ALIS using
 
-```perl src/main.pl```
+```./alis```
 
 Follow the on screen instructions to install Arch Linux.
 
@@ -108,7 +108,8 @@ Follow the on screen instructions to install Arch Linux.
 * [x] Create a usage menu
 * [x] Split sections into individual modules
 * [x] Create Whiptail module
-* [ ] Extend Whiptail module to use smart parameters
+* [x] Extend Whiptail module to use smart parameters
+* [ ] Complete a basic version of the Whiptail module
 * [ ] Design and create a new menu page using the new modules
 
 ### Documentation

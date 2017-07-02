@@ -14,12 +14,11 @@ use Cwd  qw(abs_path);
 use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
-use Log qw(log wipe);
+use Log qw(log);
 use Whiptail qw(gauge);
 use Language qw(%language);
 
 use Exporter qw(import);
-
 our @EXPORT_OK = qw(network_check);
 
 

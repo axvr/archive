@@ -9,7 +9,6 @@ use strict;
 use warnings;
 
 use Exporter qw(import);
-
 our @EXPORT_OK = qw(log wipe);
 
 # Set the location and name of the log file here
