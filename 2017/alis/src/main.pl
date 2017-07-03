@@ -36,7 +36,7 @@ use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
 use Log qw(log wipe);
-use Whiptail qw(msgbox);
+use Whiptail qw(set_whiptail_lang msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
 use Menu qw(set_menu_lang main_menu pre_install install config
@@ -52,9 +52,9 @@ use Menu qw(set_menu_lang main_menu pre_install install config
 ##########################
 
 my $version_number = "v0.2.0";
-my $usage_message = "usage: alis [-v | --version] [-l | --language <code>]
-    [-h | --help] [-u | --usage] \n";
-my $help_message = "$usage_message
+my $usage_message  = "usage: alis [-v | --version] [-l | --language <code>]
+            [-h | --help] [-u | --usage] \n";
+my $help_message   = "$usage_message
 This is a list of the ALIS commands that can be used
 
 Parameters
@@ -69,21 +69,22 @@ ALIS Language Codes
     es => Spanish \n";
 
 
+
 #########################
 ### Parameter parsing ###
 #########################
 
-my $param_version = "";
-my $start = !scalar(@ARGV);
+my $param_version     = "";
+my $start             = !scalar(@ARGV);
 my $language_selected = "en";
-my $display_help = "";
-my $display_usage = "";
+my $display_help      = "";
+my $display_usage     = "";
 
 GetOptions (
-    "v|version+"   => \$param_version,
+    "v|version+"    => \$param_version,
     "l|language=s"  => \$language_selected,
-    "h|help+" => \$display_help,
-    "u|usage+" => \$display_usage,
+    "h|help+"       => \$display_help,
+    "u|usage+"      => \$display_usage,
     );
 
 # Display usage menu
@@ -121,6 +122,10 @@ sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 sub main {
 
+    # Menu and interface language settings for ALIS
+    set_whiptail_lang("$language_selected");
+    set_menu_lang("$language_selected");
+
     # Set up the log file
     wipe();
     log("ALIS is starting");
@@ -138,8 +143,6 @@ sub main {
     sync_time();
 
     # Menu for ALIS
-    set_menu_lang("$language_selected");
-
     my $quit = 0;
     my $returned_value;
 

@@ -61,7 +61,9 @@ sub main_menu {
     my $result = menu("$title", "$message", "$item1", "$item2",
                       "$item3", "$item4", "$item5", "$item6");
 
-    if ($item1 =~ /$result/) {
+    if ($result eq "") {
+        $result = "error";
+    } elsif ($item1 =~ /$result/) {
         $result = "pre_install";
     } elsif ($item2 =~ /$result/) {
         $result = "install";

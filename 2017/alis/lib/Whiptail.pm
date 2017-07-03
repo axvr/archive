@@ -25,22 +25,36 @@ package Whiptail;
 use strict;
 use warnings;
 
+use Language qw(%language);
+
 use Exporter qw(import);
-our @EXPORT_OK = qw(msgbox msgbox_large yesno inputbox passwordbox
-    textbox menu checklist radiolist gauge);
+our @EXPORT_OK = qw(set_whiptail_lang msgbox msgbox_large yesno inputbox
+    passwordbox textbox menu checklist radiolist gauge);
 
 
 # -------------------------------------------------------------------------------
+
+
+# Set language for buttons
+my $language_selected = "en";
+sub set_whiptail_lang {
+    $language_selected = "$_[0]";
+    return 1;
+}
+sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
 # Whiptail message box
 sub msgbox {
     my $title = $_[0];
     my $message = $_[1];
+    my $ok_button_text = type("ok_button");
+
     system(qq{whiptail},
            qq{--title}, qq{$title},
            qq{--msgbox}, qq{$message},
-           qq{8}, qq{55} );
+           qq{--ok-button}, qq{$ok_button_text},
+           qq{9}, qq{55} );
     return 1;
 }
 
@@ -49,10 +63,13 @@ sub msgbox {
 sub msgbox_large {
     my $title = $_[0];
     my $message = $_[1];
+    my $ok_button_text = type("ok_button");
+
     system(qq{whiptail},
            qq{--title}, qq{$title},
            qq{--msgbox}, qq{$message},
-           qq{13}, qq{55} );
+           qq{--ok-button}, qq{$ok_button_text},
+           qq{16}, qq{65} );
     return 1;
 }
 
@@ -61,10 +78,15 @@ sub msgbox_large {
 sub yesno {
     my $title = $_[0];
     my $message = $_[1];
+    my $yes_button_text = type("yes_button");
+    my $no_button_text = type("no_button");
+
     system(qq{whiptail},
            qq{--title}, qq{$title},
            qq{--yesno}, qq{$message},
-           qq{8}, qq{55});
+           qq{--yes-button}, qq{$yes_button_text},
+           qq{--no-button}, qq{$no_button_text},
+           qq{9}, qq{55});
     return $?;
 }
 
@@ -76,7 +98,7 @@ sub inputbox {
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --inputbox }. qq{ $message }.
-        qq{ 8 }. qq{ 55 };
+        qq{ 9 }. qq{ 55 };
     return `$whiptail`;
 }
 
@@ -88,7 +110,7 @@ sub passwordbox {
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --passwordbox }. qq{ $message }.
-        qq{ 8 }. qq{ 55 };
+        qq{ 9 }. qq{ 55 };
     return `$whiptail`;
 }
 
@@ -113,11 +135,15 @@ sub menu {
     my @items = @_;
     my $title = shift(@items);
     my $message = shift(@items);
+    my $ok_button_text = type("ok_button");
+    my $cancel_button_text = type("cancel_button");
 
-    my $whiptail = qq{ whiptail }. qq{ --nocancel }.
+    my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
-        qq{ --menu }. qq{"\n$message" }.
-        qq{ 16 }. qq{ 55 }. qq{ 7 }.
+        qq{ --menu }. qq{ "\n$message" }.
+        qq{ --ok-button }. qq{ "$ok_button_text" }.
+        qq{ --cancel-button }. qq{ "$cancel_button_text" }.
+        qq{ 16 }. qq{ 65 }. qq{ 7 }.
         qq{ @items }.
         qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
     return `$whiptail`;
@@ -148,7 +174,7 @@ sub gauge {
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --gauge }. qq{ "$message" }.
-        qq{ 7 }. qq{ 45 }. qq{ 0 };
+        qq{ 9 }. qq{ 55 }. qq{ 0 };
     return $whiptail;
 }
 
