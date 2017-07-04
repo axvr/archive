@@ -149,15 +149,34 @@ sub main {
     while ($quit == 0) {
         $returned_value = main_menu();
         if ($returned_value eq "pre_install") {
-            pre_install();
+
+            # TODO while loop for other menus
+            my $pre_install_quit = 0;
+            while ($pre_install_quit == 0) {
+                $returned_value = pre_install();
+                if ($returned_value eq "temporary value") {
+                    1;
+                } else {
+                    $pre_install_quit = 1;
+                }
+            }
+
         } elsif ($returned_value eq "install") {
+
             install();
+
         } elsif ($returned_value eq "config") {
+
             config();
+
         } elsif ($returned_value eq "post_install") {
+
             post_install();
+
         } elsif ($returned_value eq "about") {
+
             about();
+
         } else {
             my $result = quit();
             if ($result == 0) { $quit = 1; }
@@ -167,5 +186,6 @@ sub main {
     log("\nALIS was exited");
 
 }
+
 
 1;

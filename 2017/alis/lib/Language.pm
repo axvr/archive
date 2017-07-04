@@ -72,6 +72,22 @@ our %language = (
         main_menu_item5   => qq{ "About ALIS" "Information about ALIS" },
         main_menu_item6   => qq{ "Quit / Cancel" "Close ALIS" },
 
+        pre_install_menu_title   => qq{ALIS Pre-install Menu},
+        pre_install_menu_message => qq{Pick an item to ...},
+        pre_install_menu_item1   => qq{ "foo" "bar" },
+
+        install_menu_title   => qq{ALIS Install Menu},
+        install_menu_message => qq{Pick an item to ...},
+        install_menu_item1   => qq{ "foo" "bar" },
+
+        config_menu_title   => qq{ALIS Configuration Menu},
+        config_menu_message => qq{Pick an item to ...},
+        config_menu_item1   => qq{ "foo" "bar" },
+
+        post_install_menu_title   => qq{ALIS Post-install Menu},
+        post_install_menu_message => qq{Pick an item to ...},
+        post_install_menu_item1   => qq{ "foo" "bar" },
+
         about_title   => qq{About ALIS},
         about_message => qq{ALIS - Arch Linux Installation Script}. qq{\n}.
             qq{-------------------------------------}.              qq{\n\n}.

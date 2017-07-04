@@ -83,22 +83,74 @@ sub main_menu {
 
 
 sub pre_install {
-    1;
+
+    my $title = type("pre_install_menu_title");
+    my $message = type("pre_install_menu_message");
+    my $item1 = type("pre_install_menu_item1");
+
+    my $result = menu("$title", "$message", "$item1");
+
+    # TODO if statements
+    if ($result eq "") {
+        $result = "error";
+    }
+
+    return $result;
+
 }
 
 
 sub install {
-    1;
+
+    my $title = type("install_menu_title");
+    my $message = type("install_menu_message");
+    my $item1 = type("install_menu_item1");
+
+    my $result = menu("$title", "$message", "$item1");
+
+    # TODO if statements
+    if ($result eq "") {
+        $result = "error";
+    }
+
+    return $result;
+
 }
 
 
 sub config {
-    1;
+
+    my $title = type("config_menu_title");
+    my $message = type("config_menu_message");
+    my $item1 = type("config_menu_item1");
+
+    my $result = menu("$title", "$message", "$item1");
+
+    # TODO if statements
+    if ($result eq "") {
+        $result = "error";
+    }
+
+    return $result;
+
 }
 
 
 sub post_install {
-    1;
+
+    my $title = type("post_install_menu_title");
+    my $message = type("post_install_menu_message");
+    my $item1 = type("post_install_menu_item1");
+
+    my $result = menu("$title", "$message", "$item1");
+
+    # TODO if statements
+    if ($result eq "") {
+        $result = "error";
+    }
+
+    return $result;
+
 }
 
 
