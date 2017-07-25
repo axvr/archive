@@ -26,7 +26,7 @@ use strict;
 use warnings;
 
 # Custom modules
-use Whiptail qw(menu msgbox msgbox_large yesno);
+use Whiptail qw(menu msgbox yesno);
 use Language qw(%language);
 
 use Exporter qw(import);
@@ -158,7 +158,7 @@ sub post_install {
 sub about {
     my $title = type("about_title");
     my $message = type("about_message");
-    msgbox_large("$title", "$message");
+    msgbox("$title", "$message");
 }
 
 

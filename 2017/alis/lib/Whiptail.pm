@@ -28,7 +28,7 @@ use warnings;
 use Language qw(%language);
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(set_whiptail_lang msgbox msgbox_large yesno inputbox
+our @EXPORT_OK = qw(set_whiptail_lang msgbox yesno inputbox
     passwordbox textbox menu checklist radiolist gauge);
 
 
@@ -50,26 +50,28 @@ sub msgbox {
     my $message = $_[1];
     my $ok_button_text = type("ok_button");
 
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size if list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 4;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
     system(qq{whiptail},
            qq{--title}, qq{$title},
            qq{--msgbox}, qq{$message},
            qq{--ok-button}, qq{$ok_button_text},
-           qq{9}, qq{55} );
-    return 1;
-}
-
-
-# Larger Whiptail message box
-sub msgbox_large {
-    my $title = $_[0];
-    my $message = $_[1];
-    my $ok_button_text = type("ok_button");
-
-    system(qq{whiptail},
-           qq{--title}, qq{$title},
-           qq{--msgbox}, qq{$message},
-           qq{--ok-button}, qq{$ok_button_text},
-           qq{16}, qq{65} );
+           qq{$height}, qq{$width} );
     return 1;
 }
 
@@ -81,12 +83,29 @@ sub yesno {
     my $yes_button_text = type("yes_button");
     my $no_button_text = type("no_button");
 
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size if list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 4;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
     system(qq{whiptail},
            qq{--title}, qq{$title},
            qq{--yesno}, qq{$message},
            qq{--yes-button}, qq{$yes_button_text},
            qq{--no-button}, qq{$no_button_text},
-           qq{9}, qq{55});
+           qq{$height}, qq{$width});
     return $?;
 }
 
@@ -95,10 +114,28 @@ sub yesno {
 sub inputbox {
     my $title = $_[0];
     my $message = $_[1];
+
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size if list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 55;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --inputbox }. qq{ $message }.
-        qq{ 9 }. qq{ 55 };
+        qq{ $height }. qq{ $width };
     return `$whiptail`;
 }
 
@@ -107,10 +144,28 @@ sub inputbox {
 sub passwordbox {
     my $title = $_[0];
     my $message = $_[1];
+
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size if list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 55;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --passwordbox }. qq{ $message }.
-        qq{ 9 }. qq{ 55 };
+        qq{ $height }. qq{ $width };
     return `$whiptail`;
 }
 
@@ -138,12 +193,46 @@ sub menu {
     my $ok_button_text = type("ok_button");
     my $cancel_button_text = type("cancel_button");
 
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size in list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 65;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
+    # Calculate max width based on length of items in list
+    foreach my $item (@items) {
+        if (length($item) > ($width - 4)) {
+            $width = length($item) + 4;
+        }
+    }
+
+    # Calculate number of items to display in list
+    my $max_num_items_shown = 10;
+    my $num_items = $#items + 1;
+    if ($num_items < $max_num_items_shown) {
+        $max_num_items_shown = $num_items;
+    }
+
+    # + $num_list_items_shown for item list, + 2 for extra whitespace
+    $height = $height + $max_num_items_shown + 2;
+
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --menu }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
         qq{ --cancel-button }. qq{ "$cancel_button_text" }.
-        qq{ 16 }. qq{ 65 }. qq{ 7 }.
+        qq{ $height }. qq{ $width }. qq{ $max_num_items_shown }.
         qq{ @items }.
         qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
     return `$whiptail`;
@@ -171,12 +260,31 @@ sub gauge {
     my $title = $_[0];
     my $message = $_[1];
 
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size if list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 55;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
     my $whiptail = qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --gauge }. qq{ "$message" }.
-        qq{ 9 }. qq{ 55 }. qq{ 0 };
+        qq{ $height }. qq{ $width }. qq{ 0 };
     return $whiptail;
 }
 
 
 1;
+
+# vim: set ts=8 sw=4 tw=80 et :
