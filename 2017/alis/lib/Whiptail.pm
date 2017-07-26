@@ -241,9 +241,57 @@ sub menu {
 
 # Check list
 sub checklist {
-    # TODO
-    my $title = $_[0];
-    my $message = $_[1];
+
+    my @items = @_;
+    my $title = shift(@items);
+    my $message = shift(@items);
+    my $ok_button_text = type("ok_button");
+    my $cancel_button_text = type("cancel_button");
+
+    my @split_message = split /\n/, $message;
+    # + 1 for absolute size in list, + 6 to correct win size
+    my $height = $#split_message + 1 + 6;
+    my $width = 55;
+
+    # Calculate max width based on length of title
+    if (length($title) > ($width - 4)) {
+        $width = length($title) + 4;
+    }
+
+    # Calculate max width based on length of message
+    foreach my $row (@split_message) {
+        if (length($row) > ($width - 4)) {
+            $width = length($row) + 4;
+        }
+    }
+
+    # Calculate max width based on length of items in list
+    foreach my $item (@items) {
+        if (length($item) > ($width - 4)) {
+            $width = length($item) + 4;
+        }
+    }
+
+    # Calculate number of items to display in list
+    my $max_num_items_shown = 10;
+    my $num_items = $#items + 1;
+    if ($num_items < $max_num_items_shown) {
+        $max_num_items_shown = $num_items;
+    }
+
+    # + $num_list_items_shown for item list, + 2 for extra whitespace
+    $height = $height + $max_num_items_shown + 2;
+
+    my $whiptail = qq{ whiptail }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --checklist }. qq{ "\n$message" }.
+        qq{ --ok-button }. qq{ "$ok_button_text" }.
+        qq{ --cancel-button }. qq{ "$cancel_button_text" }.
+        qq{ $height }. qq{ $width }. qq{ $max_num_items_shown }.
+        qq{ @items }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
+    return `$whiptail`;
+
 }
 
 

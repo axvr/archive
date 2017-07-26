@@ -17,7 +17,7 @@
 # multiple language functionality in ALIS
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 package Language;
@@ -29,7 +29,7 @@ use Exporter qw(import);
 our @EXPORT_OK = qw(%language check_language);
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 sub check_language {
@@ -63,18 +63,37 @@ our %language = (
 
         # TODO Network check dictionary definitions
 
-        main_menu_title   => qq{ALIS Main Menu},
-        main_menu_message => qq{Please pick an item from the list below.},
-        main_menu_item1   => qq{ "Pre-installation" "Set up prior to installation" },
-        main_menu_item2   => qq{ "Installation" "Install Arch to your system" },
-        main_menu_item3   => qq{ "Configuration" "Configure your Arch install" },
-        main_menu_item4   => qq{ "Post-Installation" "Post-install set up for Arch" },
-        main_menu_item5   => qq{ "About ALIS" "Information about ALIS" },
-        main_menu_item6   => qq{ "Quit / Cancel" "Close ALIS" },
+        main_menu_title             => qq{ALIS Main Menu},
+        main_menu_message           => qq{Please pick an item from the list below.},
+        main_menu_item_pre_install  => qq{ "Pre-installation" "Set up prior to installation" },
+        main_menu_item_install      => qq{ "Installation" "Install Arch to your system" },
+        main_menu_item_config       => qq{ "Configuration" "Configure your Arch install" },
+        main_menu_item_post_install => qq{ "Post-installation" "Post-install set up for Arch" },
+        main_menu_item_about        => qq{ "About ALIS" "Information about ALIS" },
+        main_menu_item_quit         => qq{ "Quit / Cancel" "Close ALIS" },
 
-        pre_install_menu_title   => qq{ALIS Pre-install Menu},
-        pre_install_menu_message => qq{Pick an item to ...},
-        pre_install_menu_item1   => qq{ "foo" "bar" },
+        pre_install_menu_title                  => qq{ALIS Pre-install Menu},
+        pre_install_menu_message                => qq{Pick an item to from the list below.},
+        pre_install_menu_item_partition_map     => qq{ "Partition Map" "Display map of current partition scheme" },
+        pre_install_menu_item_wipe_disk         => qq{ "Wipe Disk" "Securely wipe disk" },
+        pre_install_menu_item_manual_partition  => qq{ "Manual Partition" "Partition the disk manually" },
+        pre_install_menu_item_auto_partition    => qq{ "Automatic Partition" "Partition the disk automatically" },
+
+        pre_install_partition_map_title => qq{Current Partition Map},
+
+        pre_install_wipe_disks_menu_title => qq{Securely Wipe Disks},
+        pre_install_wipe_disks_menu_message => qq{Pick a disk wipe method, the items are listed in descending}. qq{\n}.
+            qq{complexity & security order. This may take a very long time.},
+        pre_install_wipe_disks_menu_item_zeros => qq{ "Zeros" "Set all bits on the disk to zeros" },
+        pre_install_wipe_disks_menu_item_random => qq{ "Random" "Randomise all bits on the disk" },
+        pre_install_wipe_disks_menu_item_zeros_random => qq{ "Zeros then Random" "Set all bits to zeros then randomise" },
+
+        pre_install_wipe_disks_select_partitions_screen_title => qq{Select Partitions to Wipe},
+        pre_install_wipe_disks_select_partitions_screen_message => qq{Select partitions from the list below to be wiped.},
+
+        pre_install_wipe_disks_yesno_screen_title => qq{Wipe Disks Confirmation},
+        pre_install_wipe_disks_yesno_screen_message => qq{Are you sure you want to wipe the disks?}. qq{\n}.
+            qq{This cannot be undone.},
 
         install_menu_title   => qq{ALIS Install Menu},
         install_menu_message => qq{Pick an item to ...},
@@ -113,14 +132,14 @@ our %language = (
         welcome_message       => qq{Bienvenue dans ALIS - Arch Linux Script d'installation.}. qq{\n}.
             qq{Appuyez sur d'accord pour continuer.},
 
-        main_menu_title   => qq{Menu principal d'ALIS},
-        main_menu_message => qq{Choisissez un élément dans la liste ci-dessous.},
-        main_menu_item1   => qq{ "Pré-installation" "Mise en place avant l'installation" },
-        main_menu_item2   => qq{ "Installation" "Installez Arch dans votre système" },
-        main_menu_item3   => qq{ "Configuration" "Configurez votre installation Arch" },
-        main_menu_item4   => qq{ "Post-installation" "Configuration post-installation pour Arch" },
-        main_menu_item5   => qq{ "À propos d'ALIS" "Informations sur ALIS" },
-        main_menu_item6   => qq{ "Quitter / Annuler" "Fermer ALIS" },
+        main_menu_title             => qq{Menu principal d'ALIS},
+        main_menu_message           => qq{Choisissez un élément dans la liste ci-dessous.},
+        main_menu_item_pre_install  => qq{ "Pré-installation" "Mise en place avant l'installation" },
+        main_menu_item_install      => qq{ "Installation" "Installez Arch dans votre système" },
+        main_menu_item_config       => qq{ "Configuration" "Configurez votre installation Arch" },
+        main_menu_item_post_install => qq{ "Post-installation" "Configuration post-installation pour Arch" },
+        main_menu_item_about        => qq{ "À propos d'ALIS" "Informations sur ALIS" },
+        main_menu_item_quit         => qq{ "Quitter / Annuler" "Fermer ALIS" },
 
         about_title   => qq{À propos d'ALIS},
         about_message => qq{ALIS - Arch Linux Script d'installation}. qq{\n}.
@@ -149,12 +168,12 @@ our %language = (
 
         main_menu_title   => qq{ALIS Menú principal},
         main_menu_message => qq{Elija un elemento de la lista a continuación.},
-        main_menu_item1   => qq{ "Preinstalación" "Configurar antes de la instalación" },
-        main_menu_item2   => qq{ "Instalación" "Instalar Arch en el sistema" },
-        main_menu_item3   => qq{ "Configuración" "Configurar la instalación de Arch" },
-        main_menu_item4   => qq{ "Posterior a la instalación" "Instalación post-instalación de Arch" },
-        main_menu_item5   => qq{ "Acerca de ALIS" "Información sobre ALIS" },
-        main_menu_item6   => qq{ "Salir / Cancelar" "Cerrar ALIS" },
+        main_menu_item_pre_install  => qq{ "Preinstalación" "Configurar antes de la instalación" },
+        main_menu_item_install      => qq{ "Instalación" "Instalar Arch en el sistema" },
+        main_menu_item_config       => qq{ "Configuración" "Configurar la instalación de Arch" },
+        main_menu_item_post_install => qq{ "Posterior a la instalación" "Instalación post-instalación de Arch" },
+        main_menu_item_about        => qq{ "Acerca de ALIS" "Información sobre ALIS" },
+        main_menu_item_quit         => qq{ "Salir / Cancelar" "Cerrar ALIS" },
 
         about_title   => qq{Acerca de ALIS},
         about_message => qq{ALIS - Arch Linux Script de instalación}. qq{\n}.
@@ -182,12 +201,12 @@ our %language = (
 
         main_menu_title   => qq{The Tragedy of Darth Plagueis the Wise},
         main_menu_message => qq{},
-        main_menu_item1   => qq{ "" "" },
-        main_menu_item2   => qq{ "" "" },
-        main_menu_item3   => qq{ "" "" },
-        main_menu_item4   => qq{ "" "" },
-        main_menu_item5   => qq{ "" "" },
-        main_menu_item6   => qq{ "" "" },
+        main_menu_item_pre_install  => qq{ "" "" },
+        main_menu_item_install      => qq{ "" "" },
+        main_menu_item_config       => qq{ "" "" },
+        main_menu_item_post_install => qq{ "" "" },
+        main_menu_item_about        => qq{ "" "" },
+        main_menu_item_quit         => qq{ "" "" },
 
         about_title     => qq{The Tragedy of Darth Plagueis the Wise},
         about_message   => qq{},

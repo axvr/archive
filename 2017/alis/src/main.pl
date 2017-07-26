@@ -40,7 +40,9 @@ use Whiptail qw(set_whiptail_lang msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
 use Menu qw(set_menu_lang main_menu pre_install install config
-    post_install about quit);
+    post_install about quit pre_install_partition_map
+    pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
+    pre_install_wipe_disks_select_partitions_screen);
 #use Network qw(network_check);
 
 
@@ -148,13 +150,71 @@ sub main {
 
     while ($quit == 0) {
         $returned_value = main_menu();
-        if ($returned_value eq "pre_install") {
 
-            # TODO while loop for other menus
+        if ($returned_value eq "pre_install") {
             my $pre_install_quit = 0;
             while ($pre_install_quit == 0) {
                 $returned_value = pre_install();
-                if ($returned_value eq "temporary value") {
+
+                if ($returned_value eq "partition_map") {
+                    pre_install_partition_map();
+                } elsif ($returned_value eq "wipe_disk") {
+                    my $wipe_disks_quit = 0;
+                    while ($wipe_disks_quit == 0) {
+                        $returned_value = pre_install_wipe_disks_menu();
+
+                        if ($returned_value eq "zeros") {
+                            my $partitions = pre_install_wipe_disks_select_partitions_screen();
+                            if ($partitions ne "") {
+                                my $result = pre_install_wipe_disks_yesno_screen();
+                                if ($result == 0) {
+                                    log("Wiping partitions (setting bits to zeros):");
+                                    my @partitions = split /" "/, $partitions;
+                                    foreach my $partition (@partitions) {
+                                        $partition =~ s/"//g;
+                                        log("  $partition");
+                                    }
+                                    log();
+                                }
+                            }
+
+                        } elsif ($returned_value eq "random") {
+                            my $partitions = pre_install_wipe_disks_select_partitions_screen();
+                            if ($partitions ne "") {
+                                my $result = pre_install_wipe_disks_yesno_screen();
+                                if ($result == 0) {
+                                    log("Wiping partitions (randomising bits):");
+                                    my @partitions = split /" "/, $partitions;
+                                    foreach my $partition (@partitions) {
+                                        $partition =~ s/"//g;
+                                        log("  $partition");
+                                    }
+                                    log();
+                                }
+                            }
+
+                        } elsif ($returned_value eq "zeros_random") {
+                            my $partitions = pre_install_wipe_disks_select_partitions_screen();
+                            if ($partitions ne "") {
+                                my $result = pre_install_wipe_disks_yesno_screen();
+                                if ($result == 0) {
+                                    log("Wiping partitions (setting bits to zeros then randomising them):");
+                                    my @partitions = split /" "/, $partitions;
+                                    foreach my $partition (@partitions) {
+                                        $partition =~ s/"//g;
+                                        log("  $partition");
+                                    }
+                                    log();
+                                }
+                            }
+
+                        } else {
+                            $wipe_disks_quit = 1;
+                        }
+                    }
+                } elsif ($returned_value eq "manual_partition") {
+                    1;
+                } elsif ($returned_value eq "auto_partition") {
                     1;
                 } else {
                     $pre_install_quit = 1;
