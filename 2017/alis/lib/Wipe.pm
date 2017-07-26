@@ -64,8 +64,8 @@ sub wipe_partitions {
     my @partitions = @_;
     my $type = shift(@partitions);
 
-    log("Wiped partitions:")
-    foreach $partition (@partitions) {
+    log("Wiped partitions:");
+    foreach my $partition (@partitions) {
         system("dd", "if=/dev/$type", "of=$partition", "bs=1M");
         log("  $partition");
     }
