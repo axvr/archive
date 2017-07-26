@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# A simple relay script for easier use of ALIS
+
+perl src/main.pl "$@"
+
+# vim: set ts=8 sw=4 tw=80 et :

@@ -46,6 +46,16 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
+## [Unreleased -> 0.2.0] - 2017-XX-XX
+
+### Added
+* Multi-language support
+
+### Changed
+* Full rewrite of ALIS to allow for many new features
+
+
+
 ## [Unreleased -> 0.1.1] - 2017-03-19
 
 ### Fixed
