@@ -110,7 +110,7 @@ Follow the on screen instructions to install Arch Linux.
 * [x] Create Whiptail module
 * [x] Extend Whiptail module to use smart parameters
 * [x] Complete a basic version of the Whiptail module
-* [ ] Design and create a new menu page using the new modules
+* [x] Design and create a new menu page using the new modules
 
 ### Documentation
 
@@ -128,12 +128,13 @@ Follow the on screen instructions to install Arch Linux.
 * [x] Create base version of the program
 * [x] Check the network connection
 * [x] Sync the time with NTP servers
+* [ ] Replace old keyboard layout selector (maybe move sections)
 
 ### Pre Install Section
 
-* [ ] Create keyboard layout selector (maybe move sections)
-* [ ] Display partition map
-* [ ] Build device/partition wipe
+* [x] Display partition map
+* [x] Allow device/partition wiping securely
+* [x] Allow manual partitioning
 * [ ] Create auto partition script
 * [ ] Format disks
 
