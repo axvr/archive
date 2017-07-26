@@ -39,6 +39,7 @@ use Log qw(log wipe);
 use Whiptail qw(set_whiptail_lang msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
+use Wipe qw(zero random);
 use Menu qw(set_menu_lang main_menu pre_install install config
     post_install about quit pre_install_partition_map
     pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
@@ -175,6 +176,7 @@ sub main {
                                         log("  $partition");
                                     }
                                     log();
+                                    zero(@partitions);
                                 }
                             }
 
@@ -190,6 +192,7 @@ sub main {
                                         log("  $partition");
                                     }
                                     log();
+                                    random(@partitions);
                                 }
                             }
 
@@ -205,6 +208,8 @@ sub main {
                                         log("  $partition");
                                     }
                                     log();
+                                    zero(@partitions);
+                                    random(@partitions);
                                 }
                             }
 
