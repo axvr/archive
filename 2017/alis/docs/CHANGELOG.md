@@ -46,13 +46,22 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
-## [Unreleased -> 0.2.0] - 2017-XX-XX
+## [Unreleased -> 0.2.0] - 2017-07-26
 
 ### Added
 * Multi-language support
 
 ### Changed
 * Full rewrite of ALIS to allow for many new features
+* New help & usage menu
+* Split sections into separate modules
+* Reduce chance of log file corruption
+* Simpler method of starting ALIS
+* Whipatail module created; allows for quicker window creation, and dynamic window sizing
+* Updated ```README.md``` to include new features
+
+### Removed
+* Most of the old code
 
 
 
