@@ -95,7 +95,7 @@ Follow the on screen instructions to install Arch Linux.
 * ```es``` => Spanish
 
 
-## ALIS Theme Options (theme names)
+### ALIS Theme Options (theme names)
 
 * ```default```   => Default theme
 * ```cyberpunk``` => Cyberpunk style theme
