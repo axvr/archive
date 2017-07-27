@@ -11,8 +11,6 @@
 # This project is licenced under the MIT Licence
 # (https://github.com/axvr/alis/blob/master/LICENCE).
 
-# [ ] TODO add main menu
-# [ ] TODO add keyboard map selection
 # [ ] TODO move the network check script into a perl module
 
 
@@ -222,7 +220,7 @@ sub main {
                     print STDERR "\nStarting GNU Parted\nAnything done here will not be logged. Type 'quit' to resume ALIS\n\n";
                     log("Starting GNU Parted");
                     log("Anything done will not be logged");
-                    system("sudo", "parted");
+                    system("parted");
                 } elsif ($returned_value eq "auto_partition") {
                     1;
                 } else {
