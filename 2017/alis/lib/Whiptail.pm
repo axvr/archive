@@ -17,7 +17,7 @@
 # Whiptail interfaces to reduce the chances of errors
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 package Whiptail;
@@ -32,7 +32,7 @@ our @EXPORT_OK = qw(set_whiptail_lang msgbox yesno inputbox
     passwordbox textbox menu checklist radiolist gauge);
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 # Set language for buttons
@@ -44,7 +44,7 @@ sub set_whiptail_lang {
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 # TODO move to a separate module
 
@@ -126,7 +126,7 @@ my $cyber_colours = qq{NEWT_COLORS='
 our $colour_scheme = $default_colours;
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 # Whiptail message box
@@ -291,7 +291,8 @@ sub textbox {
 
 # How to use the menu() subroutine
 # --------------------------------
-# # Use the type() function to insert text
+# Use the type() function to insert text
+# Tags can be empty if desired
 # my $item1 = qq{ "Item 1" "Tag 1" };
 # my $item2 = qq{ "Item 2" "Tag 2" };
 # my $item3 = qq{ "Item 3" "Tag 3" };
@@ -352,6 +353,16 @@ sub menu {
 
 
 # Check list
+# How to use the checklist() subroutine
+# -------------------------------------
+# Use the type() function to insert text
+# There can be as many "ON" toggles as required
+# Tags can be empty if desired
+# my $item1 = qq{ "Item 1" "Tag 1" "ON" };
+# my $item2 = qq{ "Item 2" "Tag 2" "OFF" };
+# my $item3 = qq{ "Item 3" "Tag 3" "OFF" };
+# my $item4 = qq{ "Item 4" "Tag 4" "ON" };
+# my ans = checklist($title, $message, $item1, $item2, $item3, $item4);
 sub checklist {
 
     my @items = @_;
@@ -409,6 +420,16 @@ sub checklist {
 
 
 # Radio button list
+# How to use the radiolist() subroutine
+# -------------------------------------
+# Use the type() function to insert text
+# There can only be 1 "ON" toggle
+# Tags can be empty if desired
+# my $item1 = qq{ "Item 1" "Tag 1" "ON" };
+# my $item2 = qq{ "Item 2" "Tag 2" "OFF" };
+# my $item3 = qq{ "Item 3" "Tag 3" "OFF" };
+# my $item4 = qq{ "Item 4" "Tag 4" "OFF" };
+# my ans = radiolist($title, $message, $item1, $item2, $item3, $item4);
 sub radiolist {
 
     my @items = @_;
