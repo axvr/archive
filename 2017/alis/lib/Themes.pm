@@ -33,8 +33,37 @@ our @EXPORT_OK = qw($colour_scheme select_theme);
 
 
 # Colour Schemes
-# -------------------------
-# Possible colours:
+# --------------------------------------------------
+# https://askubuntu.com/questions/776831/whiptail-change-background-color-dynamically-from-magenta
+# --------------------------------------------------
+# name=[fg],[bg][;|:|\n|\r|\t]name2=[fg],[bg]]...
+# --------------------------------------------------
+# Name can be these:
+#   root                  root fg, bg
+#   border                border fg, bg
+#   window                window fg, bg
+#   shadow                shadow fg, bg
+#   title                 title fg, bg
+#   button                button fg, bg
+#   actbutton             active button fg, bg
+#   checkbox              checkbox fg, bg
+#   actcheckbox           active checkbox fg, bg
+#   entry                 entry box fg, bg
+#   label                 label fg, bg
+#   listbox               listbox fg, bg
+#   actlistbox            active listbox fg, bg
+#   textbox               textbox fg, bg
+#   acttextbox            active textbox fg, bg
+#   helpline              help line
+#   roottext              root text
+#   emptyscale            scale full
+#   fullscale             scale empty
+#   disentry              disabled entry fg, bg
+#   compactbutton         compact button fg, bg
+#   actsellistbox         active & sel listbox
+#   sellistbox            selected listbox
+# --------------------------------------------------
+# Possible colours (for "bg" & "fg"):
 #   color0  or black
 #   color1  or red
 #   color2  or green
