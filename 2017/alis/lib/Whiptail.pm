@@ -44,6 +44,88 @@ sub set_whiptail_lang {
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
+# -------------------------------------------------------------------------------
+
+# Colour Schemes
+# -------------------------
+# Possible colours:
+#   color0  or black
+#   color1  or red
+#   color2  or green
+#   color3  or brown
+#   color4  or blue
+#   color5  or magenta
+#   color6  or cyan
+#   color7  or lightgray
+#   color8  or gray
+#   color9  or brightred
+#   color10 or brightgreen
+#   color11 or yellow
+#   color12 or brightblue
+#   color13 or brightmagenta
+#   color14 or brightcyan
+#   color15 or white
+
+my $default_colours = qq{NEWT_COLORS='
+    root=,
+    border=,
+    window=,
+    shadow=,
+    title=,
+    button=,
+    actbutton=,
+    checkbox=,
+    actcheckbox=,
+    entry=,
+    label=,
+    listbox=,
+    actlistbox=,
+    textbox=,
+    acttextbox=,
+    helpline=
+    roottext=
+    emptyscale=
+    fullscale=
+    disentry=,
+    compactbutton=,
+    sellistbox=,
+    actsellistbox=,
+    ' \ };
+
+my $cyber_colours = qq{NEWT_COLORS='
+    root=brightcyan,gray
+    border=brightcyan,gray
+    window=brightcyan,gray
+    shadow=brightcyan,gray
+    title=brightcyan,gray
+    button=brightmagenta,gray
+    actbutton=brightcyan,gray
+    checkbox=brightcyan,gray
+    actcheckbox=brightmagenta,lightgray
+    entry=brightcyan,gray
+    label=brightcyan,gray
+    listbox=brightcyan,gray
+    actlistbox=brightmagenta,gray
+    textbox=brightcyan,gray
+    acttextbox=brightmagenta,gray
+    helpline=
+    roottext=
+    emptyscale=
+    fullscale=
+    disentry=,
+    compactbutton=brightcyan,gray
+    sellistbox=brightmagenta,gray
+    actsellistbox=brightmagenta,gray
+    ' \ };
+
+
+# Select colour scheme
+our $colour_scheme = $default_colours;
+
+
+# -------------------------------------------------------------------------------
+
+
 # Whiptail message box
 sub msgbox {
     my $title = $_[0];
@@ -67,11 +149,23 @@ sub msgbox {
         }
     }
 
-    system(qq{whiptail},
-           qq{--title}, qq{$title},
-           qq{--msgbox}, qq{$message},
-           qq{--ok-button}, qq{$ok_button_text},
-           qq{$height}, qq{$width} );
+    #system(qq{whiptail},
+    #       qq{--title}, qq{$title},
+    #       qq{--msgbox}, qq{$message},
+    #       qq{--ok-button}, qq{$ok_button_text},
+    #       qq{$height}, qq{$width} );
+    #return 1;
+
+
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --msgbox}. qq{ "$message" }.
+        qq{ --ok-button }. qq{ "$ok_button_text" }.
+        qq{ $height }. qq{ $width }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
+    `$whiptail`;
+
     return 1;
 }
 
@@ -227,7 +321,8 @@ sub menu {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --menu }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -282,7 +377,8 @@ sub checklist {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --checklist }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -338,7 +434,8 @@ sub radiolist {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --radiolist }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -373,7 +470,8 @@ sub gauge {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --gauge }. qq{ "$message" }.
         qq{ $height }. qq{ $width }. qq{ 0 };
