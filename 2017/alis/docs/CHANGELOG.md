@@ -46,10 +46,14 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
-## [Unreleased -> 0.3.0] - 2017-XX-XX
+## [Unreleased -> 0.3.0] - 2017-07-27
 
 ### Added
+* Theme selection engine
 * "Work in Progress" window
+
+### Changed
+* Optimised language checking function (now easier to use)
 
 
 

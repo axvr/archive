@@ -2,7 +2,7 @@
 
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.2.0-brightgreen.svg)](https://github.com/axvr/alis/releases)
+[![Version Badge](https://img.shields.io/badge/Version-v0.3.0-brightgreen.svg)](https://github.com/axvr/alis/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/alis/blob/master/LICENCE)
 
 The successor of Architect Linux (currently still in development)
@@ -85,13 +85,20 @@ Follow the on screen instructions to install Arch Linux.
 * Display help message: ```--help``` or ```-h```.
 * Display usage information: ```--usage``` or ```-u```.
 * Display ALIS version information: ```--version``` or ```-v```.
+* Select a theme for ALIS: ```--theme``` or ```-t``` followed by a theme name (see below).
 
 
-### ALIS Language Options
+### ALIS Language Options (language codes)
 
 * ```en``` => English
 * ```fr``` => French
 * ```es``` => Spanish
+
+
+## ALIS Theme Options (theme names)
+
+* ```default```   => Default theme
+* ```cyberpunk``` => Cyberpunk style theme
 
 
 ---
