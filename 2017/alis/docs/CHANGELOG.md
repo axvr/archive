@@ -46,10 +46,21 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
+## [Unreleased -> 0.3.0] - 2017-07-27
+
+### Added
+* Theme selection engine
+* "Work in Progress" window
+
+### Changed
+* Optimised language checking function (now easier to use)
+
+
+
 ## [Unreleased -> 0.2.1] - 2017-07-27
 
 ### Fixed
-* Removed dependency on "sudo" (to access all features: run as root).
+* Removed dependency on "sudo" (to access all features: run as root)
 
 
 

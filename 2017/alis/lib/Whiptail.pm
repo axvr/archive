@@ -17,7 +17,7 @@
 # Whiptail interfaces to reduce the chances of errors
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 package Whiptail;
@@ -26,13 +26,14 @@ use strict;
 use warnings;
 
 use Language qw(%language);
+use Themes qw($colour_scheme);
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(set_whiptail_lang msgbox yesno inputbox
     passwordbox textbox menu checklist radiolist gauge);
 
 
-# -------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 # Set language for buttons
@@ -42,6 +43,9 @@ sub set_whiptail_lang {
     return 1;
 }
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
+
+
+# ------------------------------------------------------------------------------
 
 
 # Whiptail message box
@@ -67,11 +71,22 @@ sub msgbox {
         }
     }
 
-    system(qq{whiptail},
-           qq{--title}, qq{$title},
-           qq{--msgbox}, qq{$message},
-           qq{--ok-button}, qq{$ok_button_text},
-           qq{$height}, qq{$width} );
+    #system(qq{whiptail},
+    #       qq{--title}, qq{$title},
+    #       qq{--msgbox}, qq{$message},
+    #       qq{--ok-button}, qq{$ok_button_text},
+    #       qq{$height}, qq{$width} );
+    #return 1;
+
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --msgbox }. qq{ "$message" }.
+        qq{ --ok-button }. qq{ "$ok_button_text" }.
+        qq{ $height }. qq{ $width }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
+    `$whiptail`;
+
     return 1;
 }
 
@@ -100,12 +115,23 @@ sub yesno {
         }
     }
 
-    system(qq{whiptail},
-           qq{--title}, qq{$title},
-           qq{--yesno}, qq{$message},
-           qq{--yes-button}, qq{$yes_button_text},
-           qq{--no-button}, qq{$no_button_text},
-           qq{$height}, qq{$width});
+    #system(qq{whiptail},
+    #       qq{--title}, qq{$title},
+    #       qq{--yesno}, qq{$message},
+    #       qq{--yes-button}, qq{$yes_button_text},
+    #       qq{--no-button}, qq{$no_button_text},
+    #       qq{$height}, qq{$width});
+
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --yesno }. qq{ "$message" }.
+        qq{ --yes-button }. qq{ "$yes_button_text" }.
+        qq{ --no-button }. qq{ "$no_button_text" }.
+        qq{ $height }. qq{ $width }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
+    `$whiptail`;
+
     return $?;
 }
 
@@ -132,7 +158,8 @@ sub inputbox {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --inputbox }. qq{ $message }.
         qq{ $height }. qq{ $width };
@@ -162,7 +189,8 @@ sub passwordbox {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --passwordbox }. qq{ $message }.
         qq{ $height }. qq{ $width };
@@ -180,7 +208,8 @@ sub textbox {
 
 # How to use the menu() subroutine
 # --------------------------------
-# # Use the type() function to insert text
+# Use the type() function to insert text
+# Tags can be empty if desired
 # my $item1 = qq{ "Item 1" "Tag 1" };
 # my $item2 = qq{ "Item 2" "Tag 2" };
 # my $item3 = qq{ "Item 3" "Tag 3" };
@@ -227,7 +256,8 @@ sub menu {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --menu }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -240,6 +270,16 @@ sub menu {
 
 
 # Check list
+# How to use the checklist() subroutine
+# -------------------------------------
+# Use the type() function to insert text
+# There can be as many "ON" toggles as required
+# Tags can be empty if desired
+# my $item1 = qq{ "Item 1" "Tag 1" "ON" };
+# my $item2 = qq{ "Item 2" "Tag 2" "OFF" };
+# my $item3 = qq{ "Item 3" "Tag 3" "OFF" };
+# my $item4 = qq{ "Item 4" "Tag 4" "ON" };
+# my ans = checklist($title, $message, $item1, $item2, $item3, $item4);
 sub checklist {
 
     my @items = @_;
@@ -282,7 +322,8 @@ sub checklist {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --checklist }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -296,6 +337,16 @@ sub checklist {
 
 
 # Radio button list
+# How to use the radiolist() subroutine
+# -------------------------------------
+# Use the type() function to insert text
+# There can only be 1 "ON" toggle
+# Tags can be empty if desired
+# my $item1 = qq{ "Item 1" "Tag 1" "ON" };
+# my $item2 = qq{ "Item 2" "Tag 2" "OFF" };
+# my $item3 = qq{ "Item 3" "Tag 3" "OFF" };
+# my $item4 = qq{ "Item 4" "Tag 4" "OFF" };
+# my ans = radiolist($title, $message, $item1, $item2, $item3, $item4);
 sub radiolist {
 
     my @items = @_;
@@ -338,7 +389,8 @@ sub radiolist {
     # + $num_list_items_shown for item list, + 2 for extra whitespace
     $height = $height + $max_num_items_shown + 2;
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --radiolist }. qq{ "\n$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
@@ -373,7 +425,8 @@ sub gauge {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
         qq{ --gauge }. qq{ "$message" }.
         qq{ $height }. qq{ $width }. qq{ 0 };
