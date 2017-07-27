@@ -46,6 +46,8 @@ sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 # -------------------------------------------------------------------------------
 
+# TODO move to a separate module
+
 # Colour Schemes
 # -------------------------
 # Possible colours:
@@ -92,6 +94,7 @@ my $default_colours = qq{NEWT_COLORS='
     actsellistbox=,
     ' \ };
 
+# Colours may need tweaking
 my $cyber_colours = qq{NEWT_COLORS='
     root=brightcyan,gray
     border=brightcyan,gray
@@ -156,11 +159,10 @@ sub msgbox {
     #       qq{$height}, qq{$width} );
     #return 1;
 
-
     my $whiptail = qq{ $colour_scheme }.
         qq{ whiptail }.
         qq{ --title }. qq{ "$title" }.
-        qq{ --msgbox}. qq{ "$message" }.
+        qq{ --msgbox }. qq{ "$message" }.
         qq{ --ok-button }. qq{ "$ok_button_text" }.
         qq{ $height }. qq{ $width }.
         qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
@@ -194,12 +196,23 @@ sub yesno {
         }
     }
 
-    system(qq{whiptail},
-           qq{--title}, qq{$title},
-           qq{--yesno}, qq{$message},
-           qq{--yes-button}, qq{$yes_button_text},
-           qq{--no-button}, qq{$no_button_text},
-           qq{$height}, qq{$width});
+    #system(qq{whiptail},
+    #       qq{--title}, qq{$title},
+    #       qq{--yesno}, qq{$message},
+    #       qq{--yes-button}, qq{$yes_button_text},
+    #       qq{--no-button}, qq{$no_button_text},
+    #       qq{$height}, qq{$width});
+
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
+        qq{ --title }. qq{ "$title" }.
+        qq{ --yesno }. qq{ "$message" }.
+        qq{ --yes-button }. qq{ "$yes_button_text" }.
+        qq{ --no-button }. qq{ "$no_button_text" }.
+        qq{ $height }. qq{ $width }.
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
+    `$whiptail`;
+
     return $?;
 }
 
@@ -226,10 +239,12 @@ sub inputbox {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --inputbox }. qq{ $message }.
         qq{ $height }. qq{ $width };
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
     return `$whiptail`;
 }
 
@@ -256,10 +271,12 @@ sub passwordbox {
         }
     }
 
-    my $whiptail = qq{ whiptail }.
+    my $whiptail = qq{ $colour_scheme }.
+        qq{ whiptail }.
         qq{ --title }. qq{ $title }.
         qq{ --passwordbox }. qq{ $message }.
         qq{ $height }. qq{ $width };
+        qq{ 3>&1 }. qq{ 1>&2 }. qq{ 2>&3 };
     return `$whiptail`;
 }
 
