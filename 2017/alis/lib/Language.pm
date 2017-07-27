@@ -32,18 +32,6 @@ our @EXPORT_OK = qw(%language check_language);
 # ------------------------------------------------------------------------------
 
 
-sub check_language {
-    # Check that the language pack has been added
-    my @language_list = ("en", "fr", "es", "meme");
-    my $language_selected = $_[0];
-    my $pass = 0;
-    foreach my $lang (@language_list) {
-        if ($lang eq $language_selected) { $pass = 1; }
-    }
-    if ($pass == 1) { return 1; } else { return 0; }
-    1;
-}
-
 
 # Language dictionary
 our %language = (
@@ -220,6 +208,16 @@ our %language = (
     },
 
     );
+
+
+sub check_language {
+    # Check that the language pack has been added
+    my $language_selected = $_[0];
+    if (defined $language{$language_selected}) {
+        return 1;
+    } else { return 0; }
+}
+
 
 1;
 

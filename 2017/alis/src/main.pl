@@ -38,6 +38,7 @@ use Whiptail qw(set_whiptail_lang msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
 use Wipe qw(zeros random);
+use Themes qw($colour_scheme select_theme);
 use Menu qw(set_menu_lang wip main_menu pre_install install config
     post_install about quit pre_install_partition_map
     pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
@@ -52,9 +53,10 @@ use Menu qw(set_menu_lang wip main_menu pre_install install config
 ### Critical variables ###
 ##########################
 
-my $version_number = "v0.2.0";
+my $version_number = "v0.3.0";
 my $usage_message  = "usage: alis [-v | --version] [-l | --language <code>]
-            [-h | --help] [-u | --usage] \n";
+            [-t | --theme <theme-name>] [-h | --help]
+            [-u | --usage] \n";
 my $help_message   = "$usage_message
 This is a list of the ALIS commands that can be used
 
@@ -63,11 +65,16 @@ Parameters
     -u, --usage               Display ALIS usage information.
     -v, --version             Display version information.
     -l, --language <code>     Set language for ALIS to use; followed by a language code.
+    -t, --theme <theme-name>  Select a theme for ALIS to use; followed by a theme name.
 
 ALIS Language Codes
     en => English
     fr => French
-    es => Spanish \n";
+    es => Spanish
+
+ALIS Theme Names
+    default   => Default theme
+    cyberpunk => Cyberpunk syle theme\n";
 
 
 
@@ -75,15 +82,17 @@ ALIS Language Codes
 ### Parameter parsing ###
 #########################
 
-my $param_version     = "";
-my $start             = !scalar(@ARGV);
-my $language_selected = "en";
-my $display_help      = "";
-my $display_usage     = "";
+my $param_version       = "";
+my $start               = !scalar(@ARGV);
+my $language_selected   = "en";
+my $theme_selected      = "default";
+my $display_help        = "";
+my $display_usage       = "";
 
 GetOptions (
     "v|version+"    => \$param_version,
     "l|language=s"  => \$language_selected,
+    "t|theme=s"     => \$theme_selected,
     "h|help+"       => \$display_help,
     "u|usage+"      => \$display_usage,
     );
@@ -101,7 +110,14 @@ if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
 if ($language_selected) {
     if (check_language($language_selected) == 1) {
         $start = 1;
-    } else { print STDERR "Invalid language selected\n"; }
+    } else { print STDERR "Invalid language selected\n"; exit 1;}
+}
+
+# Check then set theme
+if ($theme_selected) {
+    if (select_theme($theme_selected) == 1) {
+        $start = 1;
+    } else { print STDERR "Invalid theme selected\n"; exit 1;; }
 }
 
 if ($start) { main(); exit 1; }
