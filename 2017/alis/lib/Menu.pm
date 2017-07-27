@@ -30,7 +30,7 @@ use Whiptail qw(menu msgbox yesno checklist);
 use Language qw(%language);
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(set_menu_lang main_menu pre_install install
+our @EXPORT_OK = qw(set_menu_lang wip main_menu pre_install install
     config post_install about quit pre_install_partition_map
     pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
     pre_install_wipe_disks_select_partitions_screen);
@@ -252,6 +252,14 @@ sub pre_install_wipe_disks_yesno_screen {
     my $message = type("pre_install_wipe_disks_yesno_screen_message");
     my $result = yesno("$title", "$message");
     return $result;
+}
+
+
+# Work in progress Screen
+sub wip {
+    my $title = type("wip_title");
+    my $message = type("wip_message");
+    msgbox("$title", "$message");
 }
 
 

@@ -55,7 +55,10 @@ our %language = (
         cancel_button => qq{Cancel},
         yes_button    => qq{Yes},
         no_button     => qq{No},
-        # TODO maybe add a back button
+        back_button   => qq{Back},
+
+        wip_title => qq{Work in Progress},
+        wip_message => qq{This section is a work in progress},
 
         welcome_message_title => qq{ALIS - Arch Linux Installation Script},
         welcome_message       => qq{Welcome to ALIS - Arch Linux Installation Script.}. qq{\n}.

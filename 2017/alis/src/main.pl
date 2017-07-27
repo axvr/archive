@@ -38,7 +38,7 @@ use Whiptail qw(set_whiptail_lang msgbox);
 use Hardware qw(hw_check sync_time get_arch get_boot);
 use Language qw(%language check_language);
 use Wipe qw(zeros random);
-use Menu qw(set_menu_lang main_menu pre_install install config
+use Menu qw(set_menu_lang wip main_menu pre_install install config
     post_install about quit pre_install_partition_map
     pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
     pre_install_wipe_disks_select_partitions_screen);
@@ -216,13 +216,12 @@ sub main {
                         }
                     }
                 } elsif ($returned_value eq "manual_partition") {
-                    1;
                     print STDERR "\nStarting GNU Parted\nAnything done here will not be logged. Type 'quit' to resume ALIS\n\n";
                     log("Starting GNU Parted");
                     log("Anything done will not be logged");
                     system("parted");
                 } elsif ($returned_value eq "auto_partition") {
-                    1;
+                    wip();
                 } else {
                     $pre_install_quit = 1;
                 }
