@@ -46,6 +46,13 @@ Leave 3 spaces between previous change log item -->
 
 ---
 
+## [Unreleased -> 0.2.1] - 2017-07-27
+
+### Fixed
+* Removed dependency on "sudo" (to access all features: run as root).
+
+
+
 ## [Unreleased -> 0.2.0] - 2017-07-26
 
 ### Added
