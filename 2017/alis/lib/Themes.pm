@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-
 # ALIS - Arch Linux Installation Script
 # =====================================
 #
@@ -152,4 +151,4 @@ sub select_theme {
 }
 
 
-# vim: set ts=8 sw=4 tw=80 et :
+# vim: set ts=8 sw=4 tw=80 et ft=perl fdm=marker fmr={{{,}}} :

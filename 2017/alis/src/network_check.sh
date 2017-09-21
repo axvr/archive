@@ -33,14 +33,14 @@ echo " " >> alis.log
 
         if [[ $rc -eq 0 ]] ; then
             ((count = count - 10))
-            i=$(expr $i + 10)
+            i=$(("$i" + 10))
         else
             fail=1
         fi
 
         ((count = count - 1))
-        echo $i
-        i=$(expr $i + 1)
+        echo "$i"
+        i=$(("$i" + 1))
 
     done
     echo 100
@@ -49,7 +49,7 @@ echo " " >> alis.log
 } | whiptail --title "Network Connection" --gauge "\nChecking network connection, Please Wait." 7 45 0
 
 result=$?
-fail=`cat fetch`
+fail=$(cat fetch)
 rm fetch
 #echo $fail
 #echo $result

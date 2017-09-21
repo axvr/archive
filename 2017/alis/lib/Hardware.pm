@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-
 # ALIS - Arch Linux Installation Script
 # =====================================
 #
@@ -24,6 +23,11 @@ package Hardware;
 
 use strict;
 use warnings;
+
+# Module location
+use File::Basename qw(dirname);
+use Cwd  qw(abs_path);
+use lib dirname(dirname abs_path $0) . '/lib';
 
 # Custom modules are listed here
 use Log qw(log);
@@ -86,4 +90,4 @@ sub get_boot { return $bootstrap; }
 
 1;
 
-# vim: set ts=8 sw=4 tw=80 et :
+# vim: set ts=8 sw=4 tw=80 et ft=perl fdm=marker fmr={{{,}}} :

@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-
 # ALIS - Arch Linux Installation Script
 # =====================================
 #
@@ -221,4 +220,4 @@ sub check_language {
 
 1;
 
-# vim: set ts=8 sw=4 tw=80 et :
+# vim: set ts=8 sw=4 tw=80 et ft=perl fdm=marker fmr={{{,}}} :
