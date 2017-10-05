@@ -14,7 +14,7 @@
 
 # Module to check the current network connection status
 # to determine if it is stable enough for ALIS
-# TODO still not fully functioning
+# FIXME still not fully functioning
 
 
 # -------------------------------------------------------------------------------
@@ -45,38 +45,39 @@ our @EXPORT_OK = qw(network_check);
 sub network_check {
 
     # TODO make this fully functional
+    
+    # Count the number of failed pings
+    my $fail_count = 0;
+    # Set the max number of pings to attempt
+    my $count = 100;
 
-    my $bash_script = qq{
-    fail="0"
+    my $title   = type("network_check_title");
+    my $message = type("network_check_message");
 
-    {
-        i="0"
-        ((count = 100))
+    while ($count > 0) {
+        my $ping = `ping -c 1 archlinux.org`;
+        print("$ping");
 
-        while [[ $count -ge 0 ]] ; do
+        # TODO check for errors using regex
+        my $error = 0;
 
-            ping -c 1 archlinux.org
-            rc=$?
+        if ($error == 0) {
+            $count-=10;
+            #print("pass\n$count\n");
+        } else {
+            $fail_count++;
+            $count-=1;
+            #print("fail\n$count\n");
+        }
 
-            if [[ $rc -eq 0 ]] ; then
-                ((count = count - 10))
-                i=$(expr $i + 10)
-            else
-                fail=1
-            fi
+        # TODO calculate percentage
+        my $percentage = 100;
 
-            ((count = count - 1))
-            echo $i
-            i=$(expr $i + 1)
+        # FIXME
+        #network_check($title, $message, $percentage);
+    }
 
-        done
-        echo 100
-        sleep 0.2
-        echo $fail > fetch
-    } | } . gauge(...);
-
-
-
+    # TODO report network status
 }
 
 

@@ -43,7 +43,7 @@ use Menu qw(set_menu_lang wip main_menu pre_install install config
     post_install about quit pre_install_partition_map
     pre_install_wipe_disks_menu pre_install_wipe_disks_yesno_screen
     pre_install_wipe_disks_select_partitions_screen);
-#use Network qw(network_check);
+use Network qw(network_check);
 
 
 # -------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ sub main {
 
     # Run network check script and sync time
     # TODO Get this to fully work as an independent module
-    #network_check(type(...), type(...));
+    #network_check();
     system("bash", "src/network_check.sh");
     sync_time();
 

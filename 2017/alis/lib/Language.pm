@@ -51,7 +51,8 @@ our %language = (
         welcome_message       => qq{Welcome to ALIS - Arch Linux Installation Script.}. qq{\n}.
             qq{Press Ok to continue.},
 
-        # TODO Network check dictionary definitions
+        network_check_title => qq{Network Connection},
+        network_check_message => qq{Checcking network connection, please wait.},
 
         main_menu_title             => qq{ALIS Main Menu},
         main_menu_message           => qq{Please pick an item from the list below.},

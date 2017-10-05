@@ -410,11 +410,12 @@ sub radiolist {
 
 # Gauge/progress bar in Whiptail
 sub gauge {
-    my $title = $_[0];
+    my $title   = $_[0];
     my $message = $_[1];
+    #my $percent = $_[2];
 
     my @split_message = split /\n/, $message;
-    # + 1 for absolute size if list, + 6 to correct win size
+    # '+1' for absolute size if list, '+6' to correct win size
     my $height = $#split_message + 1 + 6;
     my $width = 55;
 
