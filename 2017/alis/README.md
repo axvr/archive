@@ -2,8 +2,8 @@
 
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.3.0-brightgreen.svg)](https://github.com/axvr/archaic/releases)
-[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/archaic/blob/master/LICENCE)
+[![Version Badge](https://img.shields.io/badge/Version-v0.3.1-brightgreen.svg)](https://github.com/axvr/archaic/releases)
+[![Licence Badge](https://img.shields.io/badge/Licence-GNU GPL v3.0-blue.svg)](https://github.com/axvr/archaic/blob/master/LICENCE)
 
 This is Archaic - The Primitive Arch Linux Installer. Archaic has been built from the ground up (including a new and custom Newt Whiptail control framework), using the Perl scripting language and Bash. Archaic contains many advanced configuration options, this makes Archaic very well suited for use by both advanced users, and beginners of Arch Linux. Archaic will create a base plain and simple Arch system, with zero bloat.
 
