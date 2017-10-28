@@ -46,23 +46,23 @@ our %language = (
         wip_title => qq{Work in Progress},
         wip_message => qq{This section is a work in progress},
 
-        welcome_message_title => qq{ALIS - Arch Linux Installation Script},
-        welcome_message       => qq{Welcome to ALIS - Arch Linux Installation Script.}. qq{\n}.
+        welcome_message_title => qq{Archaic - The Primative Arch Linux Installer},
+        welcome_message       => qq{Welcome to Archaic - The Primative Arch Linux Installer.}. qq{\n}.
             qq{Press Ok to continue.},
 
         network_check_title => qq{Network Connection},
         network_check_message => qq{Checcking network connection, please wait.},
 
-        main_menu_title             => qq{ALIS Main Menu},
+        main_menu_title             => qq{Archaic Main Menu},
         main_menu_message           => qq{Please pick an item from the list below.},
         main_menu_item_pre_install  => qq{ "Pre-installation" "Set up prior to installation" },
         main_menu_item_install      => qq{ "Installation" "Install Arch to your system" },
         main_menu_item_config       => qq{ "Configuration" "Configure your Arch install" },
         main_menu_item_post_install => qq{ "Post-installation" "Post-install set up for Arch" },
-        main_menu_item_about        => qq{ "About ALIS" "Information about ALIS" },
+        main_menu_item_about        => qq{ "About Archaic" "Information about Archaic" },
         main_menu_item_quit         => qq{ "Quit / Cancel" "Close ALIS" },
 
-        pre_install_menu_title                  => qq{ALIS Pre-install Menu},
+        pre_install_menu_title                  => qq{Archaic Pre-install Menu},
         pre_install_menu_message                => qq{Pick an item to from the list below.},
         pre_install_menu_item_partition_map     => qq{ "Partition Map" "Display map of current partition scheme" },
         pre_install_menu_item_wipe_disk         => qq{ "Wipe Disk" "Securely wipe disk" },
@@ -85,24 +85,27 @@ our %language = (
         pre_install_wipe_disks_yesno_screen_message => qq{Are you sure you want to wipe the disks?}. qq{\n}.
             qq{This cannot be undone.},
 
-        install_menu_title   => qq{ALIS Install Menu},
+        install_menu_title   => qq{Archaic Install Menu},
         install_menu_message => qq{Pick an item to ...},
         install_menu_item1   => qq{ "foo" "bar" },
 
-        config_menu_title   => qq{ALIS Configuration Menu},
+        config_menu_title   => qq{Archaic Configuration Menu},
         config_menu_message => qq{Pick an item to ...},
         config_menu_item1   => qq{ "foo" "bar" },
 
-        post_install_menu_title   => qq{ALIS Post-install Menu},
+        post_install_menu_title   => qq{Archaic Post-install Menu},
         post_install_menu_message => qq{Pick an item to ...},
         post_install_menu_item1   => qq{ "foo" "bar" },
 
-        about_title   => qq{About ALIS},
-        about_message => qq{ALIS - Arch Linux Installation Script}. qq{\n}.
-            qq{-------------------------------------}.              qq{\n\n}.
-            qq{ALIS is the successor of Architect Linux's AIF}.     qq{\n}.
-            qq{Made by Alex Vear (axvr - GitHub, u/axvr - Reddit)}. qq{\n}.
-            qq{Licenced under the MIT Licence.},
+        about_title   => qq{About Archaic},
+        about_message => qq{Archaic - The Primative Arch Linux Installer}. qq{\n}.
+            qq{--------------------------------------------}.              qq{\n\n}.
+            qq{Archaic is a lightweight and feature rich Arch Linux} . qq{\n}. 
+            qq{installer with a terminal based graphical interface,}. qq{\n} . 
+            qq{and is written in almost pure Perl script.}. qq{\n} . 
+            qq{In a sense it is rather quite primative.} . qq{\n\n} .
+            qq{Created by Alex Vear (axvr - GitHub, u/axvr - Reddit)}. qq{\n}.
+            qq{Licenced under the GNU General Public Licence v3.0.},
 
         quit_title   => qq{Quit ALIS},
         quit_message => qq{Are you sure you want to quit?},
