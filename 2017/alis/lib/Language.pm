@@ -98,12 +98,12 @@ our %language = (
         post_install_menu_item1   => qq{ "foo" "bar" },
 
         about_title   => qq{About Archaic},
-        about_message => qq{Archaic - The Primative Arch Linux Installer}. qq{\n}.
+        about_message => qq{Archaic - The Primitive Arch Linux Installer}. qq{\n}.
             qq{--------------------------------------------}.              qq{\n\n}.
             qq{Archaic is a lightweight and feature rich Arch Linux} . qq{\n}. 
             qq{installer with a terminal based graphical interface,}. qq{\n} . 
             qq{and is written in almost pure Perl script.}. qq{\n} . 
-            qq{In a sense it is rather quite primative.} . qq{\n\n} .
+            qq{In a sense it is rather quite primitive.} . qq{\n\n} .
             qq{Created by Alex Vear (axvr - GitHub, u/axvr - Reddit)}. qq{\n}.
             qq{Licenced under the GNU General Public Licence v3.0.},
 

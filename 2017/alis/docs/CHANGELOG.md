@@ -1,10 +1,10 @@
-# ALIS Change Log
+# Archaic Change Log
 
-History of all of the changes made to ALIS
+History of all of the changes made to Archaic
 
-This is the ```CHANGELOG.md``` file for [ALIS](https://github.com/axvr/alis). Created by [Alex Vear - axvr](https://github.com/axvr).
+This is the `CHANGELOG.md` file for [Archaic](https://github.com/axvr/archaic). Created by [Alex Vear - axvr](https://github.com/axvr).
 
-This project is licenced under the [MIT Licence](https://github.com/axvr/alis/blob/master/LICENCE).
+This project is licenced under the [GNU GPL v3.0](https://github.com/axvr/archaic/blob/master/LICENCE).
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and it also adheres to [Semantic Versioning](http://semver.org/).
 
@@ -16,35 +16,43 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and it als
 * List all items added
 * If  this section contains nothing
 * don't bother to include it within
-* the ``CHANGELOG.md`` file
+* the `CHANGELOG.md` file
 
 ### Changed
 * List all items changed
 * If  this section contains nothing
 * don't bother to include it within
-* the ``CHANGELOG.md`` file
+* the `CHANGELOG.md` file
 
 ### Fixed
 * List all items fixed
 * If  this section contains nothing
 * don't bother to include it within
-* the ``CHANGELOG.md`` file
+* the `CHANGELOG.md` file
 
 ### Removed
 * List all items removed
 * If  this section contains nothing
 * don't bother to include it within
-* the ``CHANGELOG.md`` file
+* the `CHANGELOG.md` file
 
 ### Translations
 * List all sections translated here
 * If this section contains nothing
 * don't bother to include it within
-* the ``CHANGELOG.md`` file
+* the `CHANGELOG.md` file
 
 Leave 3 spaces between previous change log item -->
 
 ---
+
+## [Unreleased -> 0.3.1] - 2017-10-XX
+
+### Changed
+* New name: ALIS (Arch Linux Installation Script) --> Archaic (The Primitive Arch Linux Installer)
+* New Licence: MIT Licence --> GNU GPL v3.0
+
+
 
 ## [Unreleased -> 0.3.0] - 2017-07-27
 
