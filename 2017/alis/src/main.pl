@@ -1,20 +1,19 @@
 #!/usr/bin/perl
 
-# ALIS - Arch Linux Installation Script
-# =====================================
+# Archaic - The Primative Arch Linux Installer
+# ============================================
 #
-# The successor to Architect Linux
-#
-# This is the src/main.pl file for ALIS (https://github.com/axvr/alis).
+# This is the src/main.pl file for Archaic (https://github.com/axvr/archaic).
 # Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence
-# (https://github.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the GNU GPL v3.0 Licence
+# (https://github.com/axvr/archaic/blob/master/LICENCE).
 
 # [ ] TODO move the network check script into a perl module
+# [ ] TODO improve, neaten and simplify this file
 
 
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 ######################
@@ -46,7 +45,7 @@ use Menu qw(set_menu_lang wip main_menu pre_install install config
 use Network qw(network_check);
 
 
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 ##########################
@@ -54,25 +53,25 @@ use Network qw(network_check);
 ##########################
 
 my $version_number = "v0.3.0";
-my $usage_message  = "usage: alis [-v | --version] [-l | --language <code>]
+my $usage_message  = "usage: archaic [-v | --version] [-l | --language <code>]
             [-t | --theme <theme-name>] [-h | --help]
             [-u | --usage] \n";
 my $help_message   = "$usage_message
-This is a list of the ALIS commands that can be used
+This is a list of the Archaic commands that can be used
 
 Parameters
     -h, --help                Display help message.
-    -u, --usage               Display ALIS usage information.
+    -u, --usage               Display Archaic usage information.
     -v, --version             Display version information.
-    -l, --language <code>     Set language for ALIS to use; followed by a language code.
-    -t, --theme <theme-name>  Select a theme for ALIS to use; followed by a theme name.
+    -l, --language <code>     Set language for Archaic to use; followed by a language code.
+    -t, --theme <theme-name>  Select a theme for Archaic to use; followed by a theme name.
 
-ALIS Language Codes
+Archaic Language Codes
     en => English
     fr => French
     es => Spanish
 
-ALIS Theme Names
+Archaic Theme Names
     default   => Default theme
     cyberpunk => Cyberpunk syle theme\n";
 
@@ -104,7 +103,7 @@ if ($display_usage) { print STDERR "$usage_message"; exit 1; }
 if ($display_help) { print STDERR "$help_message"; exit 1; }
 
 # Display version information
-if ($param_version) { print STDERR "ALIS $version_number\n"; exit 1; }
+if ($param_version) { print STDERR "Archaic $version_number\n"; exit 1; }
 
 # Check then set language pack
 if ($language_selected) {
@@ -139,13 +138,13 @@ sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 sub main {
 
-    # Menu and interface language settings for ALIS
+    # Menu and interface language settings for Archaic
     set_whiptail_lang("$language_selected");
     set_menu_lang("$language_selected");
 
     # Set up the log file
     wipe();
-    log("ALIS is starting");
+    log("Archaic is starting");
 
     # Check system hardware
     hw_check();
@@ -159,7 +158,7 @@ sub main {
     system("bash", "src/network_check.sh");
     sync_time();
 
-    # Menu for ALIS
+    # Menu for Archaic
     my $quit = 0;
     my $returned_value;
 
@@ -232,7 +231,7 @@ sub main {
                         }
                     }
                 } elsif ($returned_value eq "manual_partition") {
-                    print STDERR "\nStarting GNU Parted\nAnything done here will not be logged. Type 'quit' to resume ALIS\n\n";
+                    print STDERR "\nStarting GNU Parted\nAnything done here will not be logged. Type 'quit' to resume Archaic\n\n";
                     log("Starting GNU Parted");
                     log("Anything done will not be logged");
                     system("parted");
@@ -265,7 +264,7 @@ sub main {
         }
     }
 
-    log("\nALIS was exited");
+    log("\nArchaic was exited");
 
 }
 

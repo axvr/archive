@@ -1,20 +1,19 @@
 #!/bin/bash
 
-# ALIS - Arch Linux Installation Script
-# =====================================
+# Archaic - The Primative Arch Linux Installer
+# ============================================
 #
-# The successor to Architect Linux
-#
-# This is the src/network-check.sh file for ALIS (https://github.com/axvr/alis).
+# This is the src/network_check.sh file for Archaic 
+# (https://github.com/axvr/archaic).
 # Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence
-# (https://github.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the GNU GPL v3.0 Licence
+# (https://github.com/axvr/archaic/blob/master/LICENCE).
 
 # TODO replace this with the Network.pm module
 
 fail="0"
-echo " " >> alis.log
+echo " " >> archaic.log
 
 {
     i="0"
@@ -56,15 +55,15 @@ rm fetch
 
 if [[ $result -eq 0 && "$fail" -eq 0 ]]; then
     whiptail --title "Network Connection" --msgbox "Network Connection Status: Connected" 7 45
-    echo "Network connection test: PASS" >> alis.log
+    echo "Network connection test: PASS" >> archaic.log
     exit 1
 else
     if (whiptail --title "Network Connection" --yesno "Network Connection Status: Not Connected" --yes-button "Retry" --no-button "Cancel" 7 45) then
-        echo "Network connection test: FAIL" >> alis.log
+        echo "Network connection test: FAIL" >> archaic.log
         bash src/network_check.sh
     else
         whiptail --title "Arch Linux Installer" --msgbox "The Installation has been cancelled." 7 45
-        echo "Installation cancelled by user" >> alis.log
+        echo "Installation cancelled by user" >> archaic.log
         exit 0
     fi
 fi

@@ -1,22 +1,20 @@
 #!/usr/bin/perl
 
-# ALIS - Arch Linux Installation Script
-# =====================================
+# Archaic - The Primative Arch Linux Installer
+# ============================================
 #
-# The successor to Architect Linux
-#
-# This is the lib/Wipe.pm file for ALIS (https://github.com/axvr/alis).
+# This is the lib/Wipe.pm file for Archaic (https://github.com/axvr/archaic).
 # Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence
-# (https://github.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the GNU GPL v3.0 Licence
+# (https://github.com/axvr/archaic/blob/master/LICENCE).
 
 
 # This module holds all of the code for the main menu
 # in ALIS and will link to other modules to run their code
 
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 package Wipe;
@@ -36,7 +34,7 @@ use Exporter qw(import);
 our @EXPORT_OK = qw(zeros random);
 
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 sub disable_swap {
