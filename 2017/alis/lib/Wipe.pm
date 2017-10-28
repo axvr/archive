@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Archaic - The Primative Arch Linux Installer
+# Archaic - The Primitive Arch Linux Installer
 # ============================================
 #
 # This is the lib/Wipe.pm file for Archaic (https://github.com/axvr/archaic).

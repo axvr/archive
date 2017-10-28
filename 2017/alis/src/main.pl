@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Archaic - The Primative Arch Linux Installer
+# Archaic - The Primitive Arch Linux Installer
 # ============================================
 #
 # This is the src/main.pl file for Archaic (https://github.com/axvr/archaic).

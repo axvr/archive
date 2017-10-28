@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Archaic - The Primative Arch Linux Installer
+# Archaic - The Primitive Arch Linux Installer
 # ============================================
 #
 # This is the lib/Language.pm file for Archaic 
@@ -46,8 +46,8 @@ our %language = (
         wip_title => qq{Work in Progress},
         wip_message => qq{This section is a work in progress},
 
-        welcome_message_title => qq{Archaic - The Primative Arch Linux Installer},
-        welcome_message       => qq{Welcome to Archaic - The Primative Arch Linux Installer.}. qq{\n}.
+        welcome_message_title => qq{Archaic - The Primitive Arch Linux Installer},
+        welcome_message       => qq{Welcome to Archaic - The Primitive Arch Linux Installer.}. qq{\n}.
             qq{Press Ok to continue.},
 
         network_check_title => qq{Network Connection},

@@ -51,6 +51,8 @@ Leave 3 spaces between previous change log item -->
 ### Changed
 * New name: ALIS (Arch Linux Installation Script) --> Archaic (The Primitive Arch Linux Installer)
 * New Licence: MIT Licence --> GNU GPL v3.0
+* Updated README
+* Improved about page within Archaic
 
 
 

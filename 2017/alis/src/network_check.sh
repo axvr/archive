@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Archaic - The Primative Arch Linux Installer
+# Archaic - The Primitive Arch Linux Installer
 # ============================================
 #
 # This is the src/network_check.sh file for Archaic 
