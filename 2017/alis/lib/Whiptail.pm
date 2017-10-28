@@ -1,22 +1,21 @@
 #!/usr/bin/perl
 
-# ALIS - Arch Linux Installation Script
-# =====================================
+# Archaic - The Primitive Arch Linux Installer
+# ============================================
 #
-# The successor to Architect Linux
-#
-# This is the lib/Whiptail.pm file for ALIS (https://github.com/axvr/alis).
+# This is the lib/Whiptail.pm file for Archaic 
+# (https://github.com/axvr/archaic).
 # Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence
-# (https://github.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the GNU GPL v3.0 Licence
+# (https://github.com/axvr/archaic/blob/master/LICENCE).
 
 
 # Module containing quick and simple access to
 # Whiptail interfaces to reduce the chances of errors
 
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 package Whiptail;
@@ -38,7 +37,7 @@ our @EXPORT_OK = qw(set_whiptail_lang msgbox yesno inputbox
     passwordbox textbox menu checklist radiolist gauge);
 
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 # Set language for buttons
@@ -50,7 +49,7 @@ sub set_whiptail_lang {
 sub type { return ($language{"$language_selected"}{"$_[0]"}); }
 
 
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 # Whiptail message box

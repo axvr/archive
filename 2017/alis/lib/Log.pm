@@ -1,22 +1,20 @@
 #!/usr/bin/perl
 
-# ALIS - Arch Linux Installation Script
-# =====================================
+# Archaic - The Primitive Arch Linux Installer
+# ============================================
 #
-# The successor to Architect Linux
-#
-# This is the lib/Log.pm file for ALIS (https://github.com/axvr/alis).
+# This is the lib/Log.pm file for Archaic (https://github.com/axvr/archaic).
 # Created by Alex Vear - axvr (https://github.com/axvr).
 #
-# This project is licenced under the MIT Licence
-# (https://github.com/axvr/alis/blob/master/LICENCE).
+# This project is licenced under the GNU GPL v3.0 Licence
+# (https://github.com/axvr/archaic/blob/master/LICENCE).
 
 
 # An easier solution to print to a log file
 # reduces the chances of errors and corruption
 
 
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 package Log;
@@ -28,11 +26,11 @@ use Exporter qw(import);
 our @EXPORT_OK = qw(log wipe);
 
 
-# -------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 # Set the location and name of the log file here
-my $log_file = qq{alis.log};
+my $log_file = qq{archaic.log};
 
 
 # Log message to the log file
@@ -47,7 +45,7 @@ sub log {
 # wipe and set up the log file by truncating it
 sub wipe {
     open (my $cl, ">", $log_file) or die qq{Could not open '$log_file'. $!};
-    print $cl qq{ALIS Log File\n};
+    print $cl qq{Archaic Log File\n};
     print $cl qq{=============\n\n};
     print $cl qq{Log file wiped\n};
     close $cl or die qq{Could not close '$log_file'. $!};
