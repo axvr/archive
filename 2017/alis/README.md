@@ -99,6 +99,7 @@ Follow the on screen instructions to install Arch Linux.
 
 * `default`   => Default theme
 * `cyberpunk` => Cyberpunk style theme
+* `hacker`    => 80's Hacker style theme (green on black)
 
 
 ---

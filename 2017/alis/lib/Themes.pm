@@ -135,6 +135,33 @@ my %theme_list = (
         qq{ ' \ }
         ,
 
+    hacker => qq{ NEWT_COLORS=' }.
+        qq{ root=brightgreen,black }.
+        qq{ border=brightgreen,black }.
+        qq{ window=brightgreen,black }.
+        qq{ shadow=brightgreen,black }.
+        qq{ title=brightgreen,black }.
+        qq{ button=green,black }.
+        qq{ actbutton=brightgreen,black }.
+        qq{ checkbox=brightgreen,black }.
+        qq{ actcheckbox=green,gray }.
+        qq{ entry=brightgreen,black }.
+        qq{ label=brightgreen,black }.
+        qq{ listbox=brightgreen,black }.
+        qq{ actlistbox=green,black }.
+        qq{ textbox=brightgreen,black }.
+        qq{ acttextbox=green,black }.
+        qq{ helpline= }.
+        qq{ roottext= }.
+        qq{ emptyscale= }.
+        qq{ fullscale= }.
+        qq{ disentry=, }.
+        qq{ compactbutton=brightgreen,black }.
+        qq{ sellistbox=green,black }.
+        qq{ actsellistbox=green,black }.
+        qq{ ' \ }
+        ,
+
 );
 
 # Select colour scheme

@@ -48,6 +48,9 @@ Leave 3 spaces between previous change log item -->
 
 ## [Unreleased -> 0.3.1] - 2017-10-XX
 
+### Added
+* New theme: hacker
+
 ### Changed
 * New name: ALIS (Arch Linux Installation Script) --> Archaic (The Primitive Arch Linux Installer)
 * New Licence: MIT Licence --> GNU GPL v3.0
