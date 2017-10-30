@@ -46,7 +46,7 @@ sub log {
 sub wipe {
     open (my $cl, ">", $log_file) or die qq{Could not open '$log_file'. $!};
     print $cl qq{Archaic Log File\n};
-    print $cl qq{=============\n\n};
+    print $cl qq{================\n\n};
     print $cl qq{Log file wiped\n};
     close $cl or die qq{Could not close '$log_file'. $!};
 }

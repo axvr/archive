@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# A simple relay script for easier use of ALIS
+# A simple relay script for easier use of Archaic
 
 perl src/main.pl "$@"
 

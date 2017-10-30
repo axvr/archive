@@ -19,12 +19,13 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 
 ## Screenshots
 
-<!-- TODO create new screenshots (and place in codedump to shrink download size)-->
+![Archaic Main Menu (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-main-menu-default-colours.png)
 
-![Welcome Screen](docs/screenshots/001-alis-welcome-screen.png)
+![Archaic Pre-install Menu (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-pre-install-menu-default-colours.png)
 
-![Network Check](docs/screenshots/003-alis-network-check.png)
+![Archaic Partition Map (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-partition-map-default-colours.png)
 
+![Archaic Main Menu (hacker colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-main-menu-hacker-colours.png)
 
 ---
 
