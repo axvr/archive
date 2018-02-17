@@ -1,6 +1,43 @@
 # ALIS - Arch Linux Installation Script
 
 
+**NOTE: ALIS (what was going to become Archaic) has been depreciated, this is
+due to several factors which I explain below.**
+
+* ALIS was in dire need of yet a second rewrite/full refactor. I wrote ALIS when
+  I was learning Perl (and programming in general), and didn't know enough about
+  it (e.g. Moose and OOP, Perl CPAN, the list goes on).
+* It was started as a learning project. I was using and learning about Arch
+  Linux at the time, and thought it would be a great way to learn more about the
+  Linux world, and it has helped me a great deal.
+* During the process of building ALIS, I learnt how to manually install Arch
+  (the "normal" way), so I no longer required an installer (this had been the
+  plan all along).
+* I no longer use Arch Linux. At the time of writing this, I have moved to
+  Fedora, There are several reasons for this but the main one was that I wanted
+  to actually get stuff done rather than having to fix OS issues all of the time
+  (especially WiFi drivers). Arch is still one of my favourite Linux distros.
+* Feature creep had become a huge problem in ALIS. ALIS was beginning to evolve
+  into a full on desktop configuration tool (even before the installer had been
+  completed). I now try to follow the [Unix
+  philosophy](http://www.catb.org/~esr/writings/taoup/html/ch01s06.html) in my
+  programs, and focus on code
+  [simplicity](https://www.youtube.com/watch?v=rI8tNMsozo0) and
+  [minimalism](http://minifesto.org/) in an effort to minimise complexity. ALIS
+  had become a complexity nightmare, and an example of what not to do (it even
+  had colour theme support!  Seriously, who needs that?). 
+
+Things that were going to be implemented next:
+
+* Split the Libraries away from the ALIS core.
+* Rewrite the Whiptail module to be a wrapper over the Newt Perl CPAN module, in
+  an OOP style.
+* Simplify the code, especially `src/main.pl`.
+* Integrate network checking into the `network.pm` Perl module.
+* Improve multi-language support.
+
+---
+
 <!-- Badges made using https://shields.io/ -->
 [![Version Badge](https://img.shields.io/badge/Version-v0.3.0-brightgreen.svg)](https://github.com/axvr/alis/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/alis/blob/master/LICENCE)
@@ -156,3 +193,4 @@ Follow the on screen instructions to install Arch Linux.
 ### Post Installation Section
 
 * [ ] (PENDING)
+
