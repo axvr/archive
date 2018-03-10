@@ -1,6 +1,7 @@
 
 body {
-    font-family: Monospace;
+    font-family: 'Roboto Slab', serif, 'Zilla Slab', serif;
+    font-size: 14px;
     margin: auto;
     width: 1000px;
 }
@@ -19,6 +20,7 @@ body {
 }
 .item {
     border: 2px solid;
+    padding: 10px;
 }
 
 
@@ -28,7 +30,6 @@ body {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     grid-gap: 1rem;
-    padding: 10px;
 }
 .content .item {
     height: 150px;
@@ -36,11 +37,10 @@ body {
 
 
 .title {
-
+    font-size: 18px;
 }
 .sidebar {
     grid-area: sidebar;
-    padding: 10px;
 }
 .footer {
 
