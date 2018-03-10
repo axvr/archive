@@ -35,19 +35,6 @@ h2, h3 {
 }
 
 
-div#profile-pic {
-    padding: 10px;
-    overflow: hidden;
-    /* Hide profile pic */
-    visibility: hidden;
-    display: none;
-}
-div#profile-pic img {
-    border-radius: 10px;
-    width: 100%;
-}
-
-
 .content {
     grid-area: content;
     display: grid;
@@ -66,8 +53,14 @@ div#profile-pic img {
 .sidebar {
     grid-area: sidebar;
 }
-.sidebar a:link, .sidebar a:visited, .sidebar a:hover, .sidebar a:active {
+.sidebar a:link, .sidebar a:visited {
     color: #0063A6;
+}
+.sidebar a:hover {
+    color: #8963A6;
+}
+.sidebar a:active {
+    color: #8900A6;
 }
 .footer {
 
