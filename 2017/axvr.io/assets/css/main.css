@@ -2,8 +2,19 @@
 body {
     font-family: 'Roboto Slab', serif, 'Zilla Slab', serif;
     font-size: 14px;
+    color: #212121;
     margin: auto;
     width: 1000px;
+}
+
+h3, h4, h5, h6 {
+    font-weight: normal;
+}
+h1 {
+    font-size: 18px;
+}
+h2, h3 {
+    font-size: 16px;
 }
 
 
@@ -19,8 +30,21 @@ body {
     padding: 10px;
 }
 .item {
-    border: 2px solid;
+    /*border: 2px solid;*/
     padding: 10px;
+}
+
+
+div#profile-pic {
+    padding: 10px;
+    overflow: hidden;
+    /* Hide profile pic */
+    visibility: hidden;
+    display: none;
+}
+div#profile-pic img {
+    border-radius: 10px;
+    width: 100%;
 }
 
 
@@ -30,17 +54,20 @@ body {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     grid-gap: 1rem;
+    padding: 0px;
+    border: none;
 }
 .content .item {
     height: 150px;
 }
 
 
-.title {
-    font-size: 18px;
-}
+
 .sidebar {
     grid-area: sidebar;
+}
+.sidebar a:link, .sidebar a:visited, .sidebar a:hover, .sidebar a:active {
+    color: #0063A6;
 }
 .footer {
 
@@ -65,6 +92,10 @@ body {
             "content"
             "footer";
         padding: 5%;
+    }
+    div#profile-pic, .projects {
+        visibility: hidden;
+        display: none;
     }
 }
 @media all and (max-width: 515px) {
