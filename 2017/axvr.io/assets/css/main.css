@@ -93,7 +93,7 @@ div#profile-pic img {
             "footer";
         padding: 5%;
     }
-    div#profile-pic, .projects {
+    .mobile-hide {
         visibility: hidden;
         display: none;
     }
