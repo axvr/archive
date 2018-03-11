@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Roboto Slab', serif, 'Zilla Slab', serif;
     font-size: 14px;
@@ -7,6 +6,7 @@ body {
     width: 1000px;
 }
 
+/* Heading formatting */
 h3, h4, h5, h6 {
     font-weight: normal;
 }
@@ -17,7 +17,33 @@ h2, h3 {
     font-size: 16px;
 }
 
+/* Link formatting */
+a:link, a:visited {
+    color: #0063A6;
+}
+a:hover {
+    color: #8963A6;
+}
+a:active {
+    color: #8900A6;
+}
 
+/* TODO: Make tables look better */
+table {
+    display: block;
+    overflow-x: auto;
+}
+/* TODO: Add syntax highlighting to code  */
+/* TODO: Provide a default monospace font */
+pre {
+    display: block;
+    overflow-x: auto;
+    white-space: pre;
+    font-family: monospace;
+}
+
+
+/* Styling for the core container */
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -32,9 +58,11 @@ h2, h3 {
 .item {
     /*border: 2px solid;*/
     padding: 10px;
+    overflow: hidden;
 }
 
 
+/* Main content of website */
 .content {
     grid-area: content;
     display: grid;
@@ -45,28 +73,27 @@ h2, h3 {
     border: none;
 }
 .content .item {
-    height: 150px;
+    height: minmax(150px, auto);
 }
-
+.content .item img {
+    width: 100%;
+}
 
 
 .sidebar {
     grid-area: sidebar;
-}
-.sidebar a:link, .sidebar a:visited {
-    color: #0063A6;
-}
-.sidebar a:hover {
-    color: #8963A6;
-}
-.sidebar a:active {
-    color: #8900A6;
 }
 .footer {
 
 }
 
 
+/* Styling rules to allow website to work on different screen sizes */
+
+.mobile-toggle-show {
+    visibility: hidden;
+    display: none;
+}
 
 @media all and (max-width: 1015px) {
     body {
@@ -86,9 +113,13 @@ h2, h3 {
             "footer";
         padding: 5%;
     }
-    .mobile-hide {
+    .mobile-toggle-hide {
         visibility: hidden;
         display: none;
+    }
+    .mobile-toggle-show {
+        visibility: visible;
+        display: block;
     }
 }
 @media all and (max-width: 515px) {
