@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto Slab', serif, 'Zilla Slab', serif;
+    font-family: 'Roboto Slab', serif;
     font-size: 14px;
     color: #212121;
     margin: auto;
@@ -39,7 +39,7 @@ pre {
     display: block;
     overflow-x: auto;
     white-space: pre;
-    font-family: monospace;
+    font-family: 'Roboto Mono', monospace;
 }
 
 
