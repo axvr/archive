@@ -33,8 +33,7 @@ table {
     display: block;
     overflow-x: auto;
 }
-/* TODO: Add syntax highlighting to code  */
-/* TODO: Provide a default monospace font */
+/* TODO: Add syntax highlighting for code  */
 pre {
     display: block;
     overflow-x: auto;
