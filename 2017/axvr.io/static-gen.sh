@@ -5,11 +5,7 @@
 
 # TODO RSS feed construction (and where to put the link)
 
-for FILE in $(find . -name '*-content.html' -o -name '*.md'); do
-
-    if [ $FILE == "./README.md" ]; then
-        continue
-    fi
+for FILE in $(find . -name '*-content.html'); do
 
     # Tags could be comments, and the title could be a <h1> tag
     TITLE=$(sed -n 's/^###TITLE###:\(.*\)$/\1/p' "$FILE")
@@ -29,4 +25,3 @@ for FILE in $(find . -name '*-content.html' -o -name '*.md'); do
     echo "$FILE --> $OUT_FILE"
 
 done
-
