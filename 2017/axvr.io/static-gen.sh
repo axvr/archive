@@ -22,6 +22,6 @@ for FILE in $(find . -name '*-content.html'); do
     sed -i -e "/###CONTENT###/r $FILE" "$OUT_FILE"
     sed -i '/###\(TITLE\|CONTENT\|AUTHOR\)###/d' "$OUT_FILE"
 
-    echo "$FILE --> $OUT_FILE"
+    printf "%s --> %s\\n" "$FILE" "$OUT_FILE"
 
 done
