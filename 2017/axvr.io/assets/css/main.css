@@ -51,7 +51,7 @@ pre {
         "title   sidebar"
         "content sidebar"
         "footer  sidebar";
-    grid-gap: 1rem;
+    grid-gap: 0px 30px;
     padding: 10px;
 }
 .item {
@@ -67,7 +67,7 @@ pre {
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
-    grid-gap: 1rem;
+    grid-gap: 0px 30px;
     padding: 0px;
     border: none;
 }
