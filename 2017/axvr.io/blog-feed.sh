@@ -10,7 +10,7 @@ printf "###TITLE###:Home\\n###AUTHOR###:Alex Vear\\n" > "$FEED_PAGE"
 for ARTICLE in $(find ./blog/ -name '*-content.html' | sort -r | sed 10q); do
 
     TITLE=$(sed -n 's/^###TITLE###:\(.*\)$/\1/p' "$ARTICLE")
-    URL=$(printf "%s" "$ARTICLE" | sed -n 's/-content\.html/.html/p' | sed -n 's/^\.//p')
+    URL=$(printf "%s" "$ARTICLE" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
     DESC_START=$(grep -nm 1 "<p>" "$ARTICLE" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
     DESC_END=$(grep -nm 1 "</p>"  "$ARTICLE" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
 
