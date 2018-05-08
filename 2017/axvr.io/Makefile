@@ -1,4 +1,4 @@
-all: blog site
+all: feed site
 
 site:
 	./scripts/static-gen.sh
