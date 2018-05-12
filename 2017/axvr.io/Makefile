@@ -1,7 +1,9 @@
-all: feed site
+all: blog site
 
 site:
 	./scripts/static-gen.sh
 
-feed:
+blog:
 	./scripts/blog-feed.sh
+
+.PHONY:	blog site
