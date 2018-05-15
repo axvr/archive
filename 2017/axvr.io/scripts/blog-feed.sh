@@ -4,12 +4,12 @@
 
 # TODO RSS feed construction (and where to put the link)
 
-FEED_PAGE="index-content.html"
+FEED_PAGE="index.content.html"
 
 # Reset the feed page
 printf "###TITLE###:Home\\n###AUTHOR###:Alex Vear\\n" > "$FEED_PAGE"
 
-for ARTICLE in $(find ./blog/ -name '*-content.html' | sort -r | sed 10q); do
+for ARTICLE in $(find ./blog/ -name '*.content.html' | sort -r | sed 10q); do
 
     TITLE=$(sed -n 's/^###TITLE###:\(.*\)$/\1/p' "$ARTICLE")
     URL=$(printf "%s" "$ARTICLE" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
