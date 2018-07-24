@@ -33,7 +33,6 @@ table {
     display: block;
     overflow-x: auto;
 }
-/* TODO: Add syntax highlighting for code  */
 pre {
     display: block;
     overflow-x: auto;
@@ -55,7 +54,6 @@ pre {
     padding: 10px;
 }
 .item {
-    /*border: 2px solid;*/
     padding: 10px;
     overflow: hidden;
 }
@@ -63,18 +61,10 @@ pre {
 
 /* Main content of website */
 .content {
-    grid-area: content;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    grid-gap: 0px 30px;
-    padding: 0px;
     border: none;
-}
-.content .item {
     height: minmax(150px, auto);
 }
-.content .item img {
+.content img {
     width: 100%;
 }
 
