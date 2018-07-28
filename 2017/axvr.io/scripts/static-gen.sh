@@ -2,20 +2,20 @@
 
 # Simple script to generate the static HTML pages for my website
 
-for FILE in $(find . -name '*.content.html'); do
+for file in $(find . -name '*.content.html'); do
 
-    TITLE=$(sed -n 's/^###TITLE###:\(.*\)$/\1/p' "$FILE")
-    AUTHOR=$(sed -n 's/^###AUTHOR###:\(.*\)$/\1/p' "$FILE")
+    title=$(sed -n 's/<h1>\(.*\)<\/h1>/\1/p' "$file")
+    author=$(sed -n 's/^###AUTHOR###:\(.*\)$/\1/p' "$file")
 
-    OUT_FILE=$(echo "$FILE" | sed -n 's/\(\.md\|\.content\.html\)$/\.html/p')
-    cp "template.html" "$OUT_FILE"
+    out_file=$(echo "$file" | sed -n 's/\(\.md\|\.content\.html\)$/\.html/p')
+    cp "template.html" "$out_file"
 
-    sed -i "s/###TITLE###/$TITLE/" "$OUT_FILE"
-    sed -i "s/###AUTHOR###/$AUTHOR/" "$OUT_FILE"
+    sed -i "s/###TITLE###/$title/" "$out_file"
+    sed -i "s/###AUTHOR###/$author/" "$out_file"
 
-    sed -i -e "/###CONTENT###/r $FILE" "$OUT_FILE"
-    sed -i '/###\(TITLE\|CONTENT\|AUTHOR\)###/d' "$OUT_FILE"
+    sed -i -e "/###CONTENT###/r $file" "$out_file"
+    sed -i '/\(^<h1>\(.*\)<\/h1>\|###\(CONTENT\|AUTHOR\)###\)/d' "$out_file"
 
-    printf "%s --> %s\\n" "$FILE" "$OUT_FILE"
+    printf "%s --> %s\\n" "$file" "$out_file"
 
 done

@@ -4,26 +4,24 @@
 
 # TODO RSS feed construction (and where to put the link)
 
-FEED_PAGE="index.content.html"
+feed_page="index.content.html"
 
 # Reset the feed page
-printf "###TITLE###:Home\\n###AUTHOR###:Alex Vear\\n" > "$FEED_PAGE"
+printf "<h1>Home</h1>\\n###AUTHOR###:Alex Vear\\n" > "$feed_page"
 
-for ARTICLE in $(find ./blog/ -name '*.content.html' | sort -r | sed 10q); do
+for article in $(find ./blog/ -name '*.content.html' | sort -r | sed 10q); do
 
-    TITLE=$(sed -n 's/^###TITLE###:\(.*\)$/\1/p' "$ARTICLE")
-    URL=$(printf "%s" "$ARTICLE" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
-    DESC_START=$(grep -nm 1 "<p>" "$ARTICLE" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
-    DESC_END=$(grep -nm 1 "</p>"  "$ARTICLE" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
+    title=$(sed -n 's/<h1>\(.*\)<\/h1>/\1/p' "$article")
+    url=$(printf "%s" "$article" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
+    desc_start=$(grep -nm 1 "<p>" "$article" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
+    desc_end=$(grep -nm 1 "</p>"  "$article" | sed -n 's/^\([0-9]\+\):.*$/\1/p')
 
     {
-        # printf "\\n<div class=\"item\">\\n"
-        printf "<h2><a href=\"%s\">%s</a></h2>\\n" "$URL" "$TITLE"
-        printf "%s\\n" "$(sed -n "${DESC_START},${DESC_END}p" "$ARTICLE")"
+        printf "<h2><a href=\"%s\">%s</a></h2>\\n" "$url" "$title"
+        printf "%s\\n" "$(sed -n "${desc_start},${desc_end}p" "$article")"
         printf "<br>\\n"
-        # printf "</div>\\n"
-    } >> "$FEED_PAGE"
+    } >> "$feed_page"
 
-    printf "%s --> %s\\n" "$ARTICLE" "$FEED_PAGE"
+    printf "%s --> %s\\n" "$article" "$feed_page"
 
 done

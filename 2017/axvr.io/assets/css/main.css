@@ -28,7 +28,7 @@ a:active {
     color: #8900A6;
 }
 
-/* TODO: Make tables look better */
+/* Tables and code blocks */
 table {
     display: block;
     overflow-x: auto;
