@@ -1,4 +1,4 @@
-all: blog site
+all: markdown blog site
 
 site:
 	./scripts/static-gen.sh
@@ -6,4 +6,7 @@ site:
 blog:
 	./scripts/blog-feed.sh
 
-.PHONY:	blog site
+markdown:
+	./scripts/md-to-content.sh
+
+.PHONY:	blog site markdown

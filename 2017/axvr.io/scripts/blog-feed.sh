@@ -7,7 +7,7 @@
 feed_page="index.content.html"
 
 # Reset the feed page
-printf "<h1>Home</h1>\\n###AUTHOR###:Alex Vear\\n" > "$feed_page"
+printf "<h1>Home</h1>\\n<!--\\n###AUTHOR###:Alex Vear\\n-->\\n" > "$feed_page"
 
 for article in $(find ./blog/ -name '*.content.html' | sort -r | sed 10q); do
 

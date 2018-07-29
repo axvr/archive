@@ -14,7 +14,10 @@ for file in $(find . -name '*.content.html'); do
     sed -i "s/###AUTHOR###/$author/" "$out_file"
 
     sed -i -e "/###CONTENT###/r $file" "$out_file"
-    sed -i '/\(^<h1>\(.*\)<\/h1>\|###\(CONTENT\|AUTHOR\)###\)/d' "$out_file"
+    # sed -i '/\(^<h1>\(.*\)<\/h1>\|###\(CONTENT\|AUTHOR\)###\)/d' "$out_file"
+    sed -i '/^<h1>\(.*\)<\/h1>/d' "$out_file"
+
+    rm "$file"
 
     printf "%s --> %s\\n" "$file" "$out_file"
 
