@@ -12,11 +12,6 @@ Vivid is a [Vim](https://www.vim.org) plugin management solution; designed to
 work with, not against Vim. Vivid also acts as the foundation for Vim "layers"
 through the _VLF_ (_Vivid Layer Framework_).
 
-### [dotnet.vim](https://github.com/axvr/dotnet.vim)
-
-A Vim "layer" aiming to significantly improve the .NET Core development
-experience for Vim users.
-
 ### [Code Dump](https://github.com/axvr/codedump)
 
 A repository full of random code which I have written, some is just general

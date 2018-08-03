@@ -13,5 +13,5 @@ for file in $(find . -name '*.md'); do
     content_file="$(printf "$file" | sed -n 's/\.md$/.content.html/p')"
     pandoc -f gfm-gfm_auto_identifiers -t html "$file" > "$content_file"
 
-    printf "%s --> %s\\n" "$file" "$content_file"
+    printf "converted '%s' --> '%s'\\n" "$file" "$content_file"
 done

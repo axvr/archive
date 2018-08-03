@@ -20,6 +20,6 @@ for article in $(find ./blog/ -name '*.content.html' | sort -r | sed 10q); do
         printf "<br>\\n"
     } >> "$feed_page"
 
-    printf "%s --> %s\\n" "$article" "$feed_page"
+    printf "listed '%s' --> '%s'\\n" "$article" "$feed_page"
 
 done
