@@ -1,4 +1,4 @@
-all: markdown blog site
+all: markdown blog site clean
 
 site:
 	./scripts/static-gen.sh
@@ -9,4 +9,7 @@ blog:
 markdown:
 	./scripts/md-to-content.sh
 
-.PHONY:	blog site markdown
+clean:
+	find . -name '*.content.html' -type f -exec rm -rv {} +
+
+.PHONY:	blog site markdown clean

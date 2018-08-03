@@ -2,8 +2,6 @@
 
 # Simple script to create the blog content feed for a HTML-content page.
 
-# TODO RSS feed construction (and where to put the link)
-
 feed_page="index.content.html"
 
 # Reset the feed page
