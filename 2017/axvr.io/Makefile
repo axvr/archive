@@ -12,4 +12,7 @@ markdown:
 clean:
 	find . -name '*.content.html' -type f -exec rm -rv {} +
 
-.PHONY:	blog site markdown clean
+serve:
+	python3 -m http.server 8000
+
+.PHONY:	blog site markdown clean serve
