@@ -10,7 +10,7 @@ markdown:
 	./scripts/md-to-content.sh
 
 clean:
-	find . -name '*.content.html' -type f -exec rm -rv {} +
+	find . -name '*.html.tmp' -type f -exec rm -rv {} +
 
 serve:
 	python3 -m http.server 8000
