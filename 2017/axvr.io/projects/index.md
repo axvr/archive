@@ -9,14 +9,8 @@
 ### [Vivid.vim](https://github.com/axvr/vivid.vim)
 
 Vivid is a [Vim](https://www.vim.org) plugin manager, built to be minimal, fast
-and efficient. Vivid provides Vim users with simple, but powerful tools, to
-fine tune exactly when their plugins should be enabled.
-
-### [Code Dump](https://github.com/axvr/codedump)
-
-A repository full of random code which I have written, some of it is just
-testing, and other bits are actual functioning programs. Come and take a look
-around the "Code Dumpster", you may find something useful.
+and efficient. Vivid provides Vim users with simple, but powerful tools, which
+allow them to fine tune exactly when their plugins should be enabled.
 
 <br>
 
