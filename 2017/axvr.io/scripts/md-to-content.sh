@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Simple script to convert Markdown pages to HTML-content pages
+# Simple script to convert Markdown pages to HTML pages.
 
 for file in $(find . -name '*.md'); do
     [ "$file" = "./README.md" ] && continue

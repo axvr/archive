@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Simple script to create the blog content feed for a HTML-content page.
+# Simple script to create the blog content feed.
 
 feed_page="index.html.tmp"
 
@@ -8,7 +8,7 @@ feed_page="index.html.tmp"
 printf "<h1>Home</h1>\\n<!--\\n###AUTHOR###:Alex Vear\\n-->\\n" > "$feed_page"
 
 # Itterate over all articles in chronological order and take the top 15.
-for article in $(find ./blog/ -name '*.content.html' -o -name '*.html.tmp' | sort -r | sed 15q); do
+for article in $(find ./blog/ -name '*.html.tmp' | sort -r | sed 15q); do
 
     title=$(sed -n 's/<h1>\(.*\)<\/h1>/\1/p' "$article")
     url=$(printf "%s" "$article" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
