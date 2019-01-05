@@ -7,7 +7,7 @@ blog:
 	./scripts/blog-feed.sh
 
 markdown:
-	./scripts/md-to-content.sh
+	./scripts/md-to-html.sh
 
 clean:
 	find . -name '*.html.tmp' -type f -exec rm -rv {} +

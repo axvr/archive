@@ -1,8 +1,4 @@
-# Cheap Thermoelectric Generator
-
-<!--
-###AUTHOR###:Alex Vear
--->
+<title>Cheap Thermoelectric Generator</title>
 
 ### Date: 2015-11-08 - 2016-03-??
 

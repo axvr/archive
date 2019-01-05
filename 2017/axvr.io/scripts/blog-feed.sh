@@ -5,7 +5,7 @@
 feed_page="index.html.tmp"
 
 # Reset the feed page
-printf "<h1>Home</h1>\\n<!--\\n###AUTHOR###:Alex Vear\\n-->\\n" > "$feed_page"
+printf "<title>Home</title>\\n" > "$feed_page"
 
 # Itterate over all articles in chronological order and take the top 15.
 for article in $(find ./blog/ -name '*.html.tmp' | sort -r | sed 15q); do

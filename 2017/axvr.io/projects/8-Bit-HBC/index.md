@@ -1,8 +1,4 @@
-# 8-Bit Homebrew Computer
-
-<!--
-###AUTHOR###:Alex Vear
--->
+<title>8-Bit Homebrew Computer</title>
 
 ### Date: 2016-11-16 - Decades from now
 

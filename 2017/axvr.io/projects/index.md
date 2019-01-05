@@ -1,8 +1,4 @@
-# Projects
-
-<!-- METADATA
-###AUTHOR###:Alex Vear
--->
+<title>Projects</title>
 
 ## Software Projects
 
