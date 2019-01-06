@@ -1,6 +1,6 @@
 <title>Projects</title>
 
-## Software Projects
+# Software Projects
 
 ### [Vivid.vim](https://github.com/axvr/vivid.vim)
 
@@ -17,7 +17,7 @@ format.
 
 <br>
 
-## Hardware Projects
+# Hardware Projects
 
 ### [Cheap Thermoelectric Generator](/projects/TEG)
 

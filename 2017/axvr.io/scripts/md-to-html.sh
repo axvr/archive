@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Script to convert all Markdown files to HTML files.
+# Script to compile all Markdown files to HTML files.
 
 for md_file in $(find . -name '*.md' -type f); do
     [ "$md_file" = "./README.md" ] && continue

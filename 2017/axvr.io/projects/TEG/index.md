@@ -117,7 +117,7 @@ This is an image of the TEG powering some LED lights.
 - **2 × 0.1µF Capacitor.** For the Conversion Circuit.
 - **2 × 100K Resistor.** For the Conversion Circuit.
 - **1 × 1N5818 Schottky Diode.** For the Conversion Circuit.
-- **1 × 10µH Power Inductor 2A+.**For the Conversion Circuit.
+- **1 × 10µH Power Inductor 2A+.** For the Conversion Circuit.
 - **1 × USB Type A female Socket.** For the Conversion Circuit.
 - **1 × 8Pin IC Socket.** For the Conversion Circuit.
 - **1 × Perfboard.** For the Conversion Circuit.

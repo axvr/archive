@@ -1,4 +1,4 @@
-all: markdown blog site clean
+all: compile blog site clean
 
 site:
 	./scripts/static-gen.sh
@@ -6,7 +6,7 @@ site:
 blog:
 	./scripts/blog-feed.sh
 
-markdown:
+compile:
 	./scripts/md-to-html.sh
 
 clean:

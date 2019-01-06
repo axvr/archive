@@ -2,13 +2,13 @@
 
 # Simple script to create the blog content feed.
 
-feed_page="index.html.tmp"
+feed_page="posts/index.html.tmp"
 
 # Reset the feed page
-printf "<title>Home</title>\\n" > "$feed_page"
+printf "<title>Posts</title>\\n" > "$feed_page"
 
 # Itterate over all articles in chronological order and take the top 15.
-for article in $(find ./blog/ -name '*.html.tmp' | sort -r | sed 15q); do
+for article in $(find ./posts/*/ -name '*.html.tmp' | sort -r | sed 15q); do
 
     title=$(sed -n 's/<h1>\(.*\)<\/h1>/\1/p' "$article")
     url=$(printf "%s" "$article" | sed -n 's/\/[^/]\+$//p' | sed -n 's/^\.//p')
