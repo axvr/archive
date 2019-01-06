@@ -1,5 +1,7 @@
 <title>8-Bit Homebrew Computer</title>
 
+# 8-Bit Homebrew Computer
+
 ### Date: 2016-11-16 - Decades from now
 
 This page was originally hosted on [Hackaday.io](https://hackaday.io), but I

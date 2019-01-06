@@ -15,6 +15,11 @@ and [RDBMS](https://en.wikipedia.org/wiki/RDBMS) which stores the table data in
 text files, using the [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
 format.
 
+### [Code Dump](https://github.com/axvr/codedump)
+
+A repository of random code, programming notes and project assets I have
+created, ranging from experiments to fully functioning programs.
+
 <br>
 
 # Hardware Projects

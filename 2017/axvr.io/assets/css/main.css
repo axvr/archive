@@ -43,10 +43,13 @@ table {
     overflow-x: auto;
 }
 pre, code {
-    display: block;
     overflow-x: auto;
     white-space: pre;
     font-family: 'Inconsolata', monospace;
+    color: #323232;
+}
+code:hover {
+    color: #000000;
 }
 
 

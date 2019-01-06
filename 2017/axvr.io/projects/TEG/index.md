@@ -1,5 +1,7 @@
 <title>Cheap Thermoelectric Generator</title>
 
+# Cheap Thermoelectric Generator
+
 ### Date: 2015-11-08 - 2016-03-??
 
 This page was originally hosted on [Hackaday.io](https://hackaday.io), but I
