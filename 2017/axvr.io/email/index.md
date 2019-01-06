@@ -1,3 +1,5 @@
+<title>Contact</title>
+
 # Email Address
 
 To avoid spam, I have intentionally obfuscated my email address using various
@@ -37,7 +39,7 @@ Cipher: mnopqrstuvwxyz-_.@abcdefghijkl
 
 ## The Boring Methods
 
-### Instructions
+### Instructions &amp; Construction
 
 1. Combine the initials of my fore- and surname.
 2. Add an `@`

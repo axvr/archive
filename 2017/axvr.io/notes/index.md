@@ -14,6 +14,8 @@ please don't hesitate to contact me through [email](/email).
 Inspired by [Nadia Eghbal's](https://nadiaeghbal.com/notes/) and
 [Quentin Carbonneaux's](https://c9x.me/notes/) notes pages.
 
+<br>
+
 ### 19/01/06
 
 Although it may be controversial to say, but I believe that one of the best
