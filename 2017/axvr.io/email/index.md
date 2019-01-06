@@ -19,12 +19,12 @@ echo 'th4tjhq2bn' | tr 'a-z42' 'h-mu-zn-ta-g@.'
 
 ### Caesar Cipher
 
-A pretty simple Caesar Cipher, but with a modified "alphabet" to add required
-characters for my email address.
+A pretty simple Caesar Cipher, but with a modified "alphabet" to add characters
+required for my email address.
 
 ```
 Plain:      abcdefghijklmnopqrstuvwxyz-_.@
-Key:        18 - left shift
+Key:        18 (left shift)
 Ciphertext: mdlmfd@ku-
 ```
 

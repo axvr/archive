@@ -4,7 +4,7 @@ site:
 	./scripts/static-gen.sh
 
 blog:
-	./scripts/blog-feed.sh
+	./scripts/post-feed.sh
 
 compile:
 	./scripts/md-to-html.sh

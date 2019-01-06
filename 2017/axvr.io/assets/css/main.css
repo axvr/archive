@@ -119,5 +119,6 @@ code:hover {
 @media all and (max-width: 515px) {
     .container {
         padding: 2%;
+        padding-top: 0%;
     }
 }

@@ -3,13 +3,13 @@
 # Notes
 
 This page contains expanded versions of some of my thoughts from my notes app.
-I have found that this is a quicker way of writing about simple ideas than
+I have found that this is a quicker way of explaining about simple ideas than
 writing an entire article about them.
 
 Not all of these are fully developed ideas, and my opinions on things can
 change very quickly, so any opinions expressed should be taken with a grain of
-salt. I you would like me to further expand or discuss anything mentioned here,
-please don't hesitate to contact me through [email](/email).
+salt. If you would like me to further expand or discuss anything mentioned
+here, please don't hesitate to contact me through [email](/email).
 
 Inspired by [Nadia Eghbal's](https://nadiaeghbal.com/notes/) and
 [Quentin Carbonneaux's](https://c9x.me/notes/) notes pages.
