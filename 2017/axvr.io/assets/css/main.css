@@ -106,6 +106,7 @@ code:hover {
             'sidebar'
             'content';
         padding: 5%;
+        padding-top: 0%;
     }
     .mobile-toggle-hide {
         visibility: hidden;

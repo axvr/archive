@@ -31,11 +31,11 @@
 <p>To avoid spam, I have intentionally obfuscated my email address using various methods, you can pick whichever of the following methods you would rather use to reverse the obfuscation.</p>
 <h2>The Interesting Methods</h2>
 <h3>Unix Shell</h3>
-<p>This one is easy, run the following command on a Unix shell, and my email address will be magically revealed.</p>
+<p>This one is easy, run the following command in a Unix shell, and my email address will be magically revealed.</p>
 <pre><code>echo &#39;th4tjhq2bn&#39; | tr &#39;a-z42&#39; &#39;h-mu-zn-ta-g@.&#39;
 </code></pre>
 <h3>Caesar Cipher</h3>
-<p>A pretty simple Caesar Cipher, but with a modified &quot;alphabet&quot; to add characters required for my email address.</p>
+<p>A simple Caesar Cipher, but with a modified &quot;alphabet&quot; to add characters required for my email address.</p>
 <pre><code>Plain:      abcdefghijklmnopqrstuvwxyz-_.@
 Key:        18 (left shift)
 Ciphertext: mdlmfd@ku-
@@ -61,9 +61,9 @@ Ciphertext: mdlmfd@ku-
 
             <nav class="item sidebar">
 
-                <h1 class="mobile-toggle-none"><a href="/">Alex Vear</a></h1>
+                <h1><a href="/">Alex Vear</a></h1>
 
-                <div>
+                <div class="mobile-toggle-hide">
                     <a href="/posts"><i class="fa fa-pencil"></i> Posts</a>
                     <br>
                     <a href="/notes"><i class="fa fa-sticky-note"></i> Notes</a>
@@ -73,9 +73,15 @@ Ciphertext: mdlmfd@ku-
                     <a href="https://github.com/axvr"><i class="fa fa-github"></i> GitHub</a>
                 </div>
 
-                <br class="mobile-toggle-hide">
+                <div class="mobile-toggle-show">
+                    <a href="/posts"><i class="fa fa-pencil"></i> Posts</a><code> </code>
+                    <a href="/notes"><i class="fa fa-sticky-note"></i> Notes</a><code> </code>
+                    <a href="/projects"><i class="fa fa-code"></i> Projects</a><code> </code>
+                    <a href="https://github.com/axvr"><i class="fa fa-github"></i> GitHub</a><code> </code>
+                </div>
 
                 <div class="projects mobile-toggle-hide">
+                    <br>
 
                     <h2>Projects</h2>
 
@@ -86,7 +92,6 @@ Ciphertext: mdlmfd@ku-
                     An experimental RDBMS and DB engine using CSV text files to store tables.</p>
 
                     <br>
-
                 </div>
 
                 <div class="licence mobile-toggle-hide">

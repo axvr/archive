@@ -10,7 +10,7 @@ to reverse the obfuscation.
 
 ### Unix Shell
 
-This one is easy, run the following command on a Unix shell, and my email
+This one is easy, run the following command in a Unix shell, and my email
 address will be magically revealed.
 
 ```
@@ -19,7 +19,7 @@ echo 'th4tjhq2bn' | tr 'a-z42' 'h-mu-zn-ta-g@.'
 
 ### Caesar Cipher
 
-A pretty simple Caesar Cipher, but with a modified "alphabet" to add characters
+A simple Caesar Cipher, but with a modified "alphabet" to add characters
 required for my email address.
 
 ```
@@ -39,7 +39,7 @@ Cipher: mnopqrstuvwxyz-_.@abcdefghijkl
 
 ## The Boring Methods
 
-### Instructions &amp; Construction
+### Instructions & Construction
 
 1. Combine the initials of my fore- and surname.
 2. Add an `@`
