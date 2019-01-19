@@ -1,4 +1,4 @@
-# Hello world
+# Hello, World!
 
 This website is still under heavy development, so some pages may not have any
 proper content yet.
