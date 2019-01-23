@@ -3,8 +3,8 @@
 # Email Address
 
 To avoid spam, I have intentionally obfuscated my email address using various
-methods, you can pick whichever of the following methods you would rather use
-to reverse the obfuscation.
+techniques, you can pick whichever of the following methods you would rather
+use to reverse the obfuscation.
 
 ## The Interesting Methods
 
