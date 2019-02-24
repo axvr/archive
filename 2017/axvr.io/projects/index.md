@@ -17,11 +17,9 @@ format.
 
 ### [Org.vim](https://github.com/axvr/org.vim)
 
-A minimal [Org-mode](https://orgmode.org/) plugin for Vim. It provides only the
-absolute necessities (e.g. syntax highlighting, indentation, folding, etc.).
-The goal of this plugin is to replicate Vim's existing
-[Markdown](https://github.com/tpope/vim-markdown/) editing experience for
-Org-mode files.
+A minimal [Org-mode](https://orgmode.org/) plugin for
+[Vim](https://www.vim.org). It provides only the absolute necessities (e.g.
+syntax highlighting and folding) at a high standard.
 
 ### [Code Dump](https://github.com/axvr/codedump)
 
@@ -34,7 +32,7 @@ created, ranging from experiments to fully functioning programs.
 
 ### [8-Bit Homebrew Computer](/projects/8-Bit-HBC)
 
-On my quest to learn how computers actually work, I decided to attempt to
+As part of my quest to learn how computers actually work, I'm attempting to
 design and build a "simple" 8-bit computer completely from scratch.
 
 ### [Cheap Thermoelectric Generator](/projects/TEG)
