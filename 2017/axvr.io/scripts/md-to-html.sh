@@ -11,7 +11,7 @@ for md_file in $(find . -name '*.md' -type f); do
     fi
 
     html_file="$(printf "$md_file" | sed -n 's/\.md$/.html.tmp/p')"
-    pandoc -f gfm-gfm_auto_identifiers -t html "$md_file" > "$html_file"
+    pandoc -f gfm -t html "$md_file" > "$html_file"
 
     printf "converted '%s' --> '%s'\\n" "$md_file" "$html_file"
 done
