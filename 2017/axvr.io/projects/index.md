@@ -2,6 +2,14 @@
 
 # Software Projects
 
+### [Photon.vim](https://github.com/axvr/photon.vim)
+
+Photon is a low-contrast colour scheme for [Vim](https://www.vim.org/), which
+cares about the little details.  It is based on an old version of
+[paramount](https://github.com/owickstrom/vim-colors-paramount) and is designed
+to look exactly the same on 256 colour terminals as it does on true colour
+terminals.
+
 ### [Vivid.vim](https://github.com/axvr/vivid.vim)
 
 Vivid is a [Vim](https://www.vim.org) plugin manager, built to be minimal, fast
@@ -20,11 +28,6 @@ format.
 A minimal [Org-mode](https://orgmode.org/) plugin for
 [Vim](https://www.vim.org). It provides only the absolute necessities (e.g.
 syntax highlighting and folding) at a high standard.
-
-### [Code Dump](https://github.com/axvr/codedump)
-
-A repository of random code, programming notes and project assets I have
-created, ranging from experiments to fully functioning programs.
 
 <br>
 
