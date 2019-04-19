@@ -41,6 +41,12 @@ a:active {
 table {
   display: block;
   overflow-x: auto;
+  border-collapse: collapse;
+}
+th, td {
+  text-align: left;
+  border: 1px solid #323232;
+  padding: 8px;
 }
 pre, code {
   overflow-x: auto;
@@ -50,6 +56,12 @@ pre, code {
 }
 code:hover {
   color: #000000;
+}
+
+blockquote {
+  border-left: 2px solid #323232;
+  margin-left: 28px;
+  padding-left: 10px;
 }
 
 
