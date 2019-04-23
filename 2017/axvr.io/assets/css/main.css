@@ -48,14 +48,23 @@ th, td {
   border: 1px solid #323232;
   padding: 8px;
 }
+
+/* Code and pre-formatted text blocks */
 pre, code {
   overflow-x: auto;
   white-space: pre;
   font-family: 'Inconsolata', monospace;
-  color: #323232;
+  background-color: #f2f2f2;
+  border-radius: 4px;
 }
-code:hover {
-  color: #000000;
+pre {
+  padding: 5px 10px;
+}
+code {
+  padding: 1px 3px;
+}
+pre code {
+  padding: 0px;
 }
 
 blockquote {
