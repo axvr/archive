@@ -74,6 +74,17 @@ blockquote {
 }
 
 
+/* Styling for the link bar */
+#linkbar ul {
+  list-style: none;
+  padding-left: 0px;
+  margin: 0px;
+}
+#linkbar ul li i {
+  padding-right: 4px;
+}
+
+
 /* Styling for the core container */
 .container {
   display: grid;
@@ -106,11 +117,6 @@ blockquote {
 
 /* Styling rules to allow website to work on different screen sizes */
 
-.mobile-toggle-show {
-  visibility: hidden;
-  display: none;
-}
-
 @media all and (max-width: 1015px) {
   body {
     width: 800px;
@@ -128,13 +134,16 @@ blockquote {
     padding: 5%;
     padding-top: 0%;
   }
-  .mobile-toggle-hide {
-    visibility: hidden;
+  #linkbar ul li {
+    display: inline;
+    padding-right: 7px;
+  }
+  #linkbar ul li i {
     display: none;
   }
-  .mobile-toggle-show {
-    visibility: visible;
-    display: block;
+  #side-content, #licence {
+    visibility: hidden;
+    display: none;
   }
 }
 @media all and (max-width: 515px) {
