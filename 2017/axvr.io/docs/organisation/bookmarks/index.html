@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | Docs</title>
+    <title>Alex Vear | Bookmarking</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,20 +24,31 @@
     <div class="container">
 
       <div class="item content">
-<title>Docs</title>
+<title>Bookmarking</title>
 
-<h1 id="docs">Docs</h1>
-<p>This is the home of all in-depth content/documents that I write.</p>
-<br>
-
-<h2 id="pages">Pages</h2>
-<p>My personal wiki.</p>
+<p><a href="../">&lt;-- back</a></p>
+<h1 id="my-bookmarking-system">My bookmarking system</h1>
+<p>I believe I have managed to come up with a functional and efficient bookmarking solution. It makes heavy use of browser bookmarks (it can also be done with regular text files, e.g. Org-mode and Markdown, however the ability to automatically sync between devices (without the use of additional tools) is lost).</p>
+<p>Some design considerations that I made were:</p>
 <ul>
-<li><a href="ascribe">Ascribe</a> - An EditorConfig alternative.</li>
-<li><a href="organisation">Organisational systems</a>.</li>
+<li>Low maintenance, and easy to manage.</li>
+<li>Mostly flat, rely on search (because there will always be edge cases when trying to categorise everything).</li>
+<li>Easy to implement as simple text files.</li>
+<li>Simple to understand, and easy to use.</li>
+<li>Extensible, and easily parsed by simple tools.</li>
 </ul>
-<h2 id="papers">Papers</h2>
-<p><em>Coming soon.</em></p>
+<h2 id="the-system">The system</h2>
+<p>I have designed the system to be as low maintainance as possible, while still providing basic organisation.</p>
+<p>The system operates using a small number of bookmark folders (i.e. <em>categories</em>).</p>
+<ul>
+<li><a href="v1">Version 1</a></li>
+<li><a href="v2">Version 2</a></li>
+<li><a href="v3">Version 3</a></li>
+</ul>
+<h2 id="creating-an-auto-archiver">Creating an auto-archiver</h2>
+<p>By using this simple system, I should be able to create a simple script which accepts the exported bookmarks file, and sends each of the links to the <a href="https://web.archive.org/">Wayback Machine</a>, and creates local archives of the bookmarks using tools such as <a href="https://www.gnu.org/software/wget/">wget</a>, and <a href="https://rg3.github.io/youtube-dl/">youtube-dl</a>.</p>
+<h3 id="considerations-still-to-make">Considerations still to make</h3>
+<p>A convention may need to be created to allow me to manually specify the link depth the archiver should attempt to archive, for example this would ensure that all of the pages of a multi-page article get archived.</p>
       </div>
 
       <nav class="item sidebar">

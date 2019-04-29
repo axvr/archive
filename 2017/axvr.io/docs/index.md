@@ -2,7 +2,7 @@
 
 # Docs
 
-This is my personal wiki. _WIP_.
+This is the home of all in-depth content/documents that I write.
 
 <br>
 
@@ -10,7 +10,8 @@ This is my personal wiki. _WIP_.
 
 My personal wiki.
 
-_Coming soon._
+- [Ascribe](ascribe) - An EditorConfig alternative.
+- [Organisational systems](organisation).
 
 ## Papers
 
