@@ -1,12 +1,12 @@
-<title>ConstConf other VCS</title>
+<title>Ascribe other VCS</title>
 
 [\<-- back](../)
 
-# ConstConf support for other VCS
+# Ascribe support for other VCS
 
 Eventually it would be nice to add support for additional version control tools
-(especially Mercurial). Unfortunately ConstConf will only focus on Git support
-at this point in time.
+(especially Mercurial). Unfortunately Ascribe will only focus on Git support at
+this point in time.
 
 ### Make it work on any file (hacky solution)
 

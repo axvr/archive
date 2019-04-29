@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | ConstConf vs EditorConfig</title>
+    <title>Alex Vear | Ascribe vs EditorConfig</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,10 +24,10 @@
     <div class="container">
 
       <div class="item content">
-<title>ConstConf vs EditorConfig</title>
+<title>Ascribe vs EditorConfig</title>
 
 <p><a href="../">&lt;-- back</a></p>
-<h1 id="comparison-between-editorconfig-and-constconf">Comparison between EditorConfig and ConstConf</h1>
+<h1 id="comparison-between-editorconfig-and-ascribe">Comparison between EditorConfig and Ascribe</h1>
 <h3 id="benefits-of-editorconfig">Benefits of EditorConfig</h3>
 <ul>
 <li>Extensions exist for many editors and other development tools.</li>
@@ -42,19 +42,19 @@
 <li>File encoding rules don't actually work when used with Git (Git will still store and checkout the file in UTF-8).</li>
 <li>Some implementations of EditorConfig suffer from security issues; arbitrary code execution. For example these issues were reported about an <a href="https://github.com/sgur/vim-editorconfig">unofficial EditorConfig Vim extension</a>: <a href="https://github.com/sgur/vim-editorconfig/issues/33">#31</a> and <a href="https://github.com/sgur/vim-editorconfig/issues/31">#33</a>.</li>
 </ul>
-<h3 id="benefits-of-constconf">Benefits of ConstConf</h3>
+<h3 id="benefits-of-ascribe">Benefits of Ascribe</h3>
 <ul>
 <li>Some settings are enforced; even if an extension doesn't yet exist (enforced through Git, since it uses the <code>.gitattributes</code> file).</li>
-<li>ConstConf extensions are significantly simpler, quicker and easier to write than EditorConfig extensions.</li>
+<li>Ascribe extensions are significantly simpler, quicker and easier to write than EditorConfig extensions.</li>
 <li>You probably already have <code>.gitattributes</code> file your repository.</li>
 <li>File pattern rules are the same as those used in <code>.gitignore</code> files.</li>
 <li>Extremely easy to add new options (it literally only takes a few seconds).</li>
 <li>Safer than EditorConfig and modelines, by preventing arbitrary code execution.</li>
 <li>File encoding rules partially work (issues with old Git versions and alternative Git implementations, it can also slow down some Git operations).</li>
 <li>Other tools use the <code>.gitattributes</code> file to get their information, so you will just be setting the options once and in the same place (e.g. you can <a href="https://github.com/github/linguist#overrides">override GitHub's file type detection</a>).</li>
-<li>If a <code>.gitattributes</code> parser needs to be written for a ConstConf extension, it'll be much more useful than an EditorConfig parser.</li>
+<li>If a <code>.gitattributes</code> parser needs to be written for a Ascribe extension, it'll be much more useful than an EditorConfig parser.</li>
 </ul>
-<h3 id="problems-with-constconf">Problems with ConstConf</h3>
+<h3 id="problems-with-ascribe">Problems with Ascribe</h3>
 <ul>
 <li>The <code>.gitattribute</code> file format is difficult to understand at first.</li>
 <li>Only works with Git repositories (however a hacky solution is possible to make it work on non-git repos without writing a <code>.gitattributes</code> parser).</li>
@@ -62,8 +62,8 @@
 </ul>
 <hr />
 <h2 id="the-biggest-problem-with-editorconfig">The biggest problem with EditorConfig</h2>
-<p>Possibly the biggest problem with EditorConfig is the size and complexity of the extensions which allow it to actually work. As an example I'll be comparing the <a href="https://github.com/editorconfig/editorconfig-vim">official Vim EditorConfig extension</a> against the <a href="https://git.sr.ht/~axvr/constconf.vim/">ConstConf equivalent</a>.</p>
-<p>The EditorConfig extension contains ~2500 LOC (including the <a href="https://github.com/editorconfig/editorconfig-core-py">parser</a>), and the ConstConf extension contains ~100 LOC (at the time of writing), both have the exact same functionality. To reitterate upon that; the <strong>exact same</strong> functionality but requiring just 4% of the code.</p>
+<p>Possibly the biggest problem with EditorConfig is the size and complexity of the extensions which allow it to actually work. As an example I'll be comparing the <a href="https://github.com/editorconfig/editorconfig-vim">official Vim EditorConfig extension</a> against the <a href="https://git.sr.ht/~axvr/constconf.vim/">Ascribe equivalent</a>.</p>
+<p>The EditorConfig extension contains ~2500 LOC (including the <a href="https://github.com/editorconfig/editorconfig-core-py">parser</a>), and the Ascribe extension contains ~100 LOC (at the time of writing), both have the exact same functionality. To reitterate upon that; the <strong>exact same</strong> functionality but requiring just 4% of the code.</p>
       </div>
 
       <nav class="item sidebar">

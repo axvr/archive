@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | ConstConf other VCS</title>
+    <title>Alex Vear | Ascribe goals</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,13 +24,16 @@
     <div class="container">
 
       <div class="item content">
-<title>ConstConf other VCS</title>
+<title>Ascribe goals</title>
 
 <p><a href="../">&lt;-- back</a></p>
-<h1 id="constconf-support-for-other-vcs">ConstConf support for other VCS</h1>
-<p>Eventually it would be nice to add support for additional version control tools (especially Mercurial). Unfortunately ConstConf will only focus on Git support at this point in time.</p>
-<h3 id="make-it-work-on-any-file-hacky-solution">Make it work on any file (hacky solution)</h3>
-<p>We can temporarily emulate a git repo by creating the base dir and file structure. In there we can place a <code>.git/info/attributes</code> symbolic link to the located attributes file.</p>
+<h1 id="ascribe-project-goals--scope">Ascribe project goals &amp; scope</h1>
+<h2 id="goals">Goals</h2>
+<p>One major goal of Ascribe is to encourage the improvement of existing tools and infrastructure rather than creating something completely new (i.e. EditorConfig) which could have just as easily been built on top of existing tools (please try to ignore the irony of that last statement).</p>
+<p>Ascribe is achieving this goal by promoting the use of the <code>.gitattributes</code> file and improving parsers for it. One example of this is the possible future feature for file-type detection which should use the same attribute and value names as <a href="https://github.com/github/linguist#overrides">GitHub's linguist</a> tool.</p>
+<p>I also want to promote good design of software so all &quot;official&quot; Ascribe extensions must meet extremely high code quality standards and aim to be virtually bug free.</p>
+<h2 id="scope">Scope</h2>
+<p>Often I see many people complaining about EditorConfig not including &quot;this&quot; or &quot;that&quot; obscure feature; mainly whether <code>{</code> (curly braces) should be on a new line. To those people, I say no. Such features are out side the scope of the EditorConfig and Ascribe projects, most editors don't have configuration options for such style rules. If you want the <code>{</code> to be on a new line, press the return key before typing the curly brace.</p>
       </div>
 
       <nav class="item sidebar">

@@ -1,12 +1,12 @@
-<title>ConstConf spec</title>
+<title>Ascribe spec</title>
 
 [\<-- back](../)
 
-# ConstConf specification
+# Ascribe specification
 
 ## Options
 
-| EditorConfig               | ConstConf                  | Implemented |
+| EditorConfig               | Ascribe                    | Implemented |
 |----------------------------|----------------------------|-------------|
 | `indent_style`             | `expand-tab`               | Yes         |
 | `indent_size`              | `tab-stop`                 | Yes         |

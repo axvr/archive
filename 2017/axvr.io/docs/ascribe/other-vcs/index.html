@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | ConstConf global config</title>
+    <title>Alex Vear | Ascribe other VCS</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,48 +24,13 @@
     <div class="container">
 
       <div class="item content">
-<title>ConstConf global config</title>
+<title>Ascribe other VCS</title>
 
 <p><a href="../">&lt;-- back</a></p>
-<h1 id="constconf-global-configuration">ConstConf global configuration</h1>
-<p>Since ConstConf uses the Git CLI tool (the example implementation does anyway), it is technically possible to have a global file containing ConstConf configuration options for many file types which will (eventually) be portable between editors.</p>
-<p>I however, recommend against doing this for several reasons, the first of which is that the options will only work for files in a Git repository. The second reason is that you will probably forget to copy those settings into a project-local <code>.gitattributes</code> file. The third reason is that the ConstConf is not well supported (well, it isn't yet anyway).</p>
-<h2 id="example">Example</h2>
-<pre><code># Cross-editor file type configuration
-
-*           text=auto final-newline trim-trailing-whitespace
-
-*.py        expand-tab tab-stop=4 line-length=79
-*.rb        expand-tab tab-stop=2
-*.pl        expand-tab tab-stop=4 line-length=79
-*.pm        expand-tab tab-stop=4 line-length=79
-
-*.hs        expand-tab tab-stop=4 line-length=79
-
-# Markup
-*.md        expand-tab tab-stop=2
-*.mkd       expand-tab tab-stop=2
-*.markdown  expand-tab tab-stop=2
-*.tex       expand-tab tab-stop=2
-
-# Web
-*.html      expand-tab tab-stop=2
-*.css       expand-tab tab-stop=2
-*.js        expand-tab tab-stop=4 line-length=79
-*.ts        expand-tab tab-stop=4 line-length=79
-
-# C &amp; C++
-*.c         -expand-tab
-*.h         -expand-tab
-*.cc        -expand-tab
-*.cpp       -expand-tab
-Makefile    -expand-tab
-
-# .NET Core
-*.cs        expand-tab tab-stop=4
-*.csproj    expand-tab tab-stop=2 eol=crlf
-*.sln       -expand-tab eol=crlf -final-newline -trim-tailing-whitespace
-</code></pre>
+<h1 id="ascribe-support-for-other-vcs">Ascribe support for other VCS</h1>
+<p>Eventually it would be nice to add support for additional version control tools (especially Mercurial). Unfortunately Ascribe will only focus on Git support at this point in time.</p>
+<h3 id="make-it-work-on-any-file-hacky-solution">Make it work on any file (hacky solution)</h3>
+<p>We can temporarily emulate a git repo by creating the base dir and file structure. In there we can place a <code>.git/info/attributes</code> symbolic link to the located attributes file.</p>
       </div>
 
       <nav class="item sidebar">

@@ -1,8 +1,8 @@
-<title>ConstConf vs EditorConfig</title>
+<title>Ascribe vs EditorConfig</title>
 
 [\<-- back](../)
 
-# Comparison between EditorConfig and ConstConf
+# Comparison between EditorConfig and Ascribe
 
 ### Benefits of EditorConfig
 
@@ -24,11 +24,11 @@
   [#31](https://github.com/sgur/vim-editorconfig/issues/33) and
   [#33](https://github.com/sgur/vim-editorconfig/issues/31).
 
-### Benefits of ConstConf
+### Benefits of Ascribe
 
 - Some settings are enforced; even if an extension doesn't yet exist (enforced
   through Git, since it uses the `.gitattributes` file).
-- ConstConf extensions are significantly simpler, quicker and easier to write
+- Ascribe extensions are significantly simpler, quicker and easier to write
   than EditorConfig extensions.
 - You probably already have `.gitattributes` file your repository.
 - File pattern rules are the same as those used in `.gitignore` files.
@@ -40,10 +40,10 @@
 - Other tools use the `.gitattributes` file to get their information, so you
   will just be setting the options once and in the same place (e.g. you can
   [override GitHub's file type detection](https://github.com/github/linguist#overrides)).
-- If a `.gitattributes` parser needs to be written for a ConstConf extension,
+- If a `.gitattributes` parser needs to be written for a Ascribe extension,
   it'll be much more useful than an EditorConfig parser.
 
-### Problems with ConstConf
+### Problems with Ascribe
 
 - The `.gitattribute` file format is difficult to understand at first.
 - Only works with Git repositories (however a hacky solution is possible to
@@ -58,10 +58,10 @@
 Possibly the biggest problem with EditorConfig is the size and complexity of
 the extensions which allow it to actually work. As an example I'll be comparing
 the [official Vim EditorConfig extension](https://github.com/editorconfig/editorconfig-vim)
-against the [ConstConf equivalent](https://git.sr.ht/~axvr/constconf.vim/).
+against the [Ascribe equivalent](https://git.sr.ht/~axvr/constconf.vim/).
 
 The EditorConfig extension contains ~2500 LOC (including the
 [parser](https://github.com/editorconfig/editorconfig-core-py)), and the
-ConstConf extension contains ~100 LOC (at the time of writing), both have the
+Ascribe extension contains ~100 LOC (at the time of writing), both have the
 exact same functionality. To reitterate upon that; the **exact same**
 functionality but requiring just 4% of the code.

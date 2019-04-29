@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | ConstConf spec</title>
+    <title>Alex Vear | Ascribe global config</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,90 +24,48 @@
     <div class="container">
 
       <div class="item content">
-<title>ConstConf spec</title>
+<title>Ascribe global config</title>
 
 <p><a href="../">&lt;-- back</a></p>
-<h1 id="constconf-specification">ConstConf specification</h1>
-<h2 id="options">Options</h2>
-<table>
-<thead>
-<tr class="header">
-<th>EditorConfig</th>
-<th>ConstConf</th>
-<th>Implemented</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>indent_style</code></td>
-<td><code>expand-tab</code></td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code>indent_size</code></td>
-<td><code>tab-stop</code></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code>tab_width</code></td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr class="even">
-<td><code>end_of_line</code></td>
-<td><code>eol</code></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code>charset</code></td>
-<td><code>working-tree-encoding</code></td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><code>trim_trailing_whitespace</code></td>
-<td><code>trim-trailing-whitespace</code></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code>insert_final_newline</code></td>
-<td><code>final-newline</code></td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code>root</code></td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td><code>max_line_length</code></td>
-<td><code>line-length</code></td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<h3 id="boolean">Boolean</h3>
-<ul>
-<li>explicit unset</li>
-<li>explicit set</li>
-<li>unspecified</li>
-</ul>
-<h3 id="value">Value</h3>
-<ul>
-<li>explicit set to value</li>
-<li>unspecified</li>
-</ul>
-<h2 id="possible-extensions">Possible extensions</h2>
-<ul>
-<li>File type detection.</li>
-<li>Trim trailing newlines from end of file.</li>
-<li>Spell check.</li>
-<li>Spell check language.</li>
-</ul>
-<h2 id="more-information">More information</h2>
-<ul>
-<li><a href="https://www.git-scm.com/docs/gitattributes"><code>gitattributes(5)</code></a></li>
-<li><a href="https://www.git-scm.com/docs/git-check-attr"><code>git-check-attr(1)</code></a> - The official <code>.gitattributes</code> parser.</li>
-</ul>
+<h1 id="ascribe-global-configuration">Ascribe global configuration</h1>
+<p>Since Ascribe uses the Git CLI tool (the example implementation does anyway), it is technically possible to have a global file containing Ascribe configuration options for many file types which will (eventually) be portable between editors.</p>
+<p>I however, recommend against doing this for several reasons, the first of which is that the options will only work for files in a Git repository. The second reason is that you will probably forget to copy those settings into a project-local <code>.gitattributes</code> file. The third reason is that the Ascribe is not well supported (well, it isn't yet anyway).</p>
+<h2 id="example">Example</h2>
+<pre><code># Cross-editor file type configuration
+
+*           text=auto final-newline trim-trailing-whitespace
+
+*.py        expand-tab tab-stop=4 line-length=79
+*.rb        expand-tab tab-stop=2
+*.pl        expand-tab tab-stop=4 line-length=79
+*.pm        expand-tab tab-stop=4 line-length=79
+
+*.hs        expand-tab tab-stop=4 line-length=79
+
+# Markup
+*.md        expand-tab tab-stop=2
+*.mkd       expand-tab tab-stop=2
+*.markdown  expand-tab tab-stop=2
+*.tex       expand-tab tab-stop=2
+
+# Web
+*.html      expand-tab tab-stop=2
+*.css       expand-tab tab-stop=2
+*.js        expand-tab tab-stop=4 line-length=79
+*.ts        expand-tab tab-stop=4 line-length=79
+
+# C &amp; C++
+*.c         -expand-tab
+*.h         -expand-tab
+*.cc        -expand-tab
+*.cpp       -expand-tab
+Makefile    -expand-tab
+
+# .NET Core
+*.cs        expand-tab tab-stop=4
+*.csproj    expand-tab tab-stop=2 eol=crlf
+*.sln       -expand-tab eol=crlf -final-newline -trim-tailing-whitespace
+</code></pre>
       </div>
 
       <nav class="item sidebar">

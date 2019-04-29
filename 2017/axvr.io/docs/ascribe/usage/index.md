@@ -8,7 +8,7 @@ _WIP_
 
 ## Example
 
-This is the `.gitattributes` file for the ConstConf Vim extension.
+This is the `.gitattributes` file for the Ascribe Vim extension.
 
 ```
 *        text=auto final-newline eol=lf

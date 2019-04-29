@@ -1,8 +1,8 @@
-<title>ConstConf</title>
+<title>Ascribe</title>
 
 [\<-- back](../)
 
-# ConstConf - Consistent Configuration
+# Ascribe
 
 ### An alternative to [EditorConfig](https://editorconfig.org/).
 
@@ -10,11 +10,11 @@ The idea behind EditorConfig is an excellent one. It provides a mechanism to
 automate the setting of core editor configuration options, for a huge number of
 editors and other development tools on a per-project basis.
 
-EditorConfig is undoubtedly a very useful tool, but I think we can do one
+EditorConfig is undoubtedly a very useful tool, but I think I can do one
 better.
 
-- [Comparison between EditorConfig and ConstConf](comparison).
-- [ConstConf specification](specification).
+- [Comparison between EditorConfig and Ascribe](comparison).
+- [Ascribe specification](specification).
 - [Using `.gitattributes` files](usage).
 - [Project goals & scope](goals).
 - [Global configuration](global).
@@ -22,4 +22,5 @@ better.
 
 ## Official extensions
 
-- [constconf.vim](https://git.sr.ht/~axvr/constconf.vim)
+- [Vim](https://git.sr.ht/~axvr/ascribe.vim)
+- GNU Emacs - ascribe.el

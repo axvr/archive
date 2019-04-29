@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Alex Vear | ConstConf goals</title>
+    <title>Alex Vear | Ascribe spec</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,16 +24,90 @@
     <div class="container">
 
       <div class="item content">
-<title>ConstConf goals</title>
+<title>Ascribe spec</title>
 
 <p><a href="../">&lt;-- back</a></p>
-<h1 id="constconf-project-goals--scope">ConstConf project goals &amp; scope</h1>
-<h2 id="goals">Goals</h2>
-<p>One major goal of ConstConf is to encourage the improvement of existing tools and infrastructure rather than creating something completely new (i.e. EditorConfig) which could have just as easily been built on top of existing tools (please try to ignore the irony of that last statement).</p>
-<p>ConstConf is achieving this goal by promoting the use of the <code>.gitattributes</code> file and improving parsers for it. One example of this is the possible future feature for file-type detection which should use the same attribute and value names as <a href="https://github.com/github/linguist#overrides">GitHub's linguist</a> tool.</p>
-<p>I also want to promote good design of software so all &quot;official&quot; ConstConf extensions must meet extremely high code quality standards and aim to be virtually bug free.</p>
-<h2 id="scope">Scope</h2>
-<p>Often I see many people complaining about EditorConfig not including &quot;this&quot; or &quot;that&quot; obscure feature; mainly whether <code>{</code> (curly braces) should be on a new line. To those people, I say no. Such features are out side the scope of the EditorConfig and ConstConf projects, most editors don't have configuration options for such style rules. If you want the <code>{</code> to be on a new line, press the return key before typing the curly brace.</p>
+<h1 id="ascribe-specification">Ascribe specification</h1>
+<h2 id="options">Options</h2>
+<table>
+<thead>
+<tr class="header">
+<th>EditorConfig</th>
+<th>Ascribe</th>
+<th>Implemented</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>indent_style</code></td>
+<td><code>expand-tab</code></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><code>indent_size</code></td>
+<td><code>tab-stop</code></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><code>tab_width</code></td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td><code>end_of_line</code></td>
+<td><code>eol</code></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><code>charset</code></td>
+<td><code>working-tree-encoding</code></td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code>trim_trailing_whitespace</code></td>
+<td><code>trim-trailing-whitespace</code></td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><code>insert_final_newline</code></td>
+<td><code>final-newline</code></td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><code>root</code></td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td><code>max_line_length</code></td>
+<td><code>line-length</code></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="boolean">Boolean</h3>
+<ul>
+<li>explicit unset</li>
+<li>explicit set</li>
+<li>unspecified</li>
+</ul>
+<h3 id="value">Value</h3>
+<ul>
+<li>explicit set to value</li>
+<li>unspecified</li>
+</ul>
+<h2 id="possible-extensions">Possible extensions</h2>
+<ul>
+<li>File type detection.</li>
+<li>Trim trailing newlines from end of file.</li>
+<li>Spell check.</li>
+<li>Spell check language.</li>
+</ul>
+<h2 id="more-information">More information</h2>
+<ul>
+<li><a href="https://www.git-scm.com/docs/gitattributes"><code>gitattributes(5)</code></a></li>
+<li><a href="https://www.git-scm.com/docs/git-check-attr"><code>git-check-attr(1)</code></a> - The official <code>.gitattributes</code> parser.</li>
+</ul>
       </div>
 
       <nav class="item sidebar">

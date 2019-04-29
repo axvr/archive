@@ -1,18 +1,18 @@
-<title>ConstConf global config</title>
+<title>Ascribe global config</title>
 
 [\<-- back](../)
 
-# ConstConf global configuration
+# Ascribe global configuration
 
-Since ConstConf uses the Git CLI tool (the example implementation does anyway),
-it is technically possible to have a global file containing ConstConf
+Since Ascribe uses the Git CLI tool (the example implementation does anyway),
+it is technically possible to have a global file containing Ascribe
 configuration options for many file types which will (eventually) be portable
 between editors.
 
 I however, recommend against doing this for several reasons, the first of which
 is that the options will only work for files in a Git repository. The second
 reason is that you will probably forget to copy those settings into a
-project-local `.gitattributes` file. The third reason is that the ConstConf is
+project-local `.gitattributes` file. The third reason is that the Ascribe is
 not well supported (well, it isn't yet anyway).
 
 ## Example
