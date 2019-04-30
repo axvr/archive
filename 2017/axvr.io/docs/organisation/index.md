@@ -1,11 +1,10 @@
-<title>Organisation systems</title>
+<title>Organisational systems</title>
 
 [\<-- back](../)
 
-# Organisation systems
+# Organisational systems
 
-This is where you can find various organisation systems I have designed over
-the years.
+This is where you can find various organisational systems I have designed.
 
 - [Issue tracker labelling](issues).
 - [Bookmarking system](bookmarks).

@@ -8,9 +8,9 @@ idea meets or surpasses my high standards, I put it into practice.
 I am currently on a quest to learn everything I possibly can about computers
 and computation.
 
-If you would like to contact me, please do so via [email](/email).
+If you would like to contact me, please do so via [email](/contact).
 
-The source code for my programming projects can be found on my
+The source code for my software projects can be found on my
 [GitHub profile](https://github.com/axvr) and/or my
 [Sourcehut profile](https://git.sr.ht/~axvr/) (username: `axvr`).
 

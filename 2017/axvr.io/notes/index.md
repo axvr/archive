@@ -9,7 +9,7 @@ writing an entire article about them.
 Not all of these are fully developed ideas, and my views on things can change
 very quickly, so any opinions expressed should be taken with a grain of salt.
 If you would like me to further expand or discuss anything mentioned here,
-please don't hesitate to contact me through [email](/email).
+please don't hesitate to contact me through [email](/contact).
 
 Inspired by [Nadia Eghbal's](https://nadiaeghbal.com/notes/) and
 [Quentin Carbonneaux's](https://c9x.me/notes/) notes pages.
