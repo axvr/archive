@@ -33,12 +33,12 @@ syntax highlighting and folding) at a high standard.
 
 # Hardware Projects
 
-### [8-Bit Homebrew Computer](/projects/8-Bit-HBC)
+### [8-Bit Homebrew Computer](/projects/8-bit-hbc)
 
 As part of my quest to learn how computers actually work, I'm attempting to
 design and build a "simple" 8-bit computer completely from scratch.
 
-### [Cheap Thermoelectric Generator](/projects/TEG)
+### [Cheap Thermoelectric Generator](/projects/teg)
 
 Building a Thermoelectric generator as cheaply as possible, capable of charging
 a mobile phone, using the Seebeck Effect.
