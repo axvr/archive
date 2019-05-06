@@ -5,3 +5,5 @@
 *.png   binary
 *.jpg   binary
 *.jpeg  binary
+website.template.1  linguist-language=HTML
+website.template.2  linguist-language=HTML
