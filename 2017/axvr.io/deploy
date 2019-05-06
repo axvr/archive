@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Place deployable files in the `dist/` dir ready for deployment.
+
+if [ ! -d 'dist' ]; then
+    git worktree add dist master
+else
+    # TODO: maybe spawn a sub-shell and cd into it (run files proc)
+    rm -r dist/*
+fi
+
+files() {
+    {
+        find . -name '*.html' -type f
+
+        for dir in `find . -name 'assets' -type d`
+        do
+            find "$dir" -name '*' -type f
+        done
+    } | sed 's/^\.\///'
+}
+
+for i in `files`; do
+    # TODO: can rsync operate on directories?
+    rsync -R "$i" dist/
+done
+
+# TODO: git diff and ask to commit (give auto-message)?
