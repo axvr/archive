@@ -4,6 +4,25 @@
 
 # Comparison between EditorConfig and Ascribe
 
+<!--
+Many of Ascribe's options are enforced at the VCS level, so there is less to
+worry about if someone is not using an Ascribe extension.
+
+`.editorconfig` parsers are not as useful as `.gitattributes` parsers.
+-->
+
+| EditorConfig               | Ascribe                    |
+|----------------------------|----------------------------|
+| `indent_style`             | `expand-tab`               |
+| `indent_size`              | `tab-stop`                 |
+| `tab_width`                | N/A                        |
+| `end_of_line`              | `eol`                      |
+| `charset`                  | `working-tree-encoding`    |
+| `trim_trailing_whitespace` | `trim-trailing-whitespace` |
+| `insert_final_newline`     | `final-newline`            |
+| `root`                     | N/A                        |
+| `max_line_length`          | `line-length`              |
+
 ### Benefits of EditorConfig
 
 - Extensions exist for many editors and other development tools.

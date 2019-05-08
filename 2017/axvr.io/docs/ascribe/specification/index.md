@@ -17,6 +17,7 @@
 | `insert_final_newline`     | `final-newline`            | Yes         |
 | `root`                     | N/A                        | N/A         |
 | `max_line_length`          | `line-length`              | Yes         |
+| N/A                        | `binary`                   | No          |
 
 ### Boolean
 
