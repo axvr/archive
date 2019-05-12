@@ -18,7 +18,7 @@ retrieve and handle information on the various files within a project through
 the `.gitattributes` file already found in many software projects.
 
 While EditorConfig does mostly achieve the same goal, it is solely focused on
-editors, thus it doesn't (_easily_) allow anyone to add additional options for
+editors, therefore it doesn't (_easily_) allow anyone to add additional options for
 other types of development tools.
 
 Ascribe is designed to allow software developers to keep all information about
@@ -33,11 +33,9 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 - [Ascribe specification](specification).
 - [Using `.gitattributes` files](usage).
 - [Project goals & scope](goals).
-- [Global configuration](global).
-- [Supporting other VCS](other-vcs).
 
 ## Official extensions
 
 - [Vim](https://git.sr.ht/~axvr/ascribe.vim) (_WIP_)
-- [GNU Emacs](https://git.sr.ht/~axvr/ascribe.el) (_WIP_)
-- _More coming soon_.
+- GNU Emacs (_WIP_)
+- Git CLI (_WIP_ - uses Git hooks)
