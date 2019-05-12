@@ -1,44 +1,42 @@
 <title>Projects</title>
 
-# Software Projects
+# Projects and contributions
 
-### [Photon.vim](https://github.com/axvr/photon.vim)
+In my free time I work on various open-source and free-software projects.
+Sometimes I do hardware projects.
 
-Photon is a low-contrast colour scheme for [Vim](https://www.vim.org/), which
-cares about the little details.  It is based on an old version of
-[paramount](https://github.com/owickstrom/vim-colors-paramount) and is designed
-to look exactly the same on 256 colour terminals as it does on true colour
-terminals.
+- [Active projects](#active-projects)
+- [Completed projects](#completed-projects)
+- [Archived projects](#archiveddeprecated-projects)
+- [Contributed to](#contributed-to)
 
-### [Vivid.vim](https://github.com/axvr/vivid.vim)
+## Active projects
 
-Vivid is a [Vim](https://www.vim.org) plugin manager, built to be minimal, fast
-and efficient. Vivid provides Vim users with simple, but powerful tools, which
-allow them to fine tune exactly when their plugins should be enabled.
+- [Ascribe](ascribe) - An EditorConfig alternative.
+- [Photon.vim](https://github.com/axvr/photon.vim) - A minimal and elegant dark
+  colour scheme for Vim.
+- [txtdb](https://github.com/axvr/txtdb) - A transparent RDBMS and DB engine
+  to help teach about databases.
+- [Org.vim](https://github.com/axvr/org.vim) - A minimal Org-mode plugin for
+  Vim providing only the absolute necessities.
+- [8-bit homebrew computer](8-bit-hbc) - I'm working on designing and building
+  a simple 8-bit computer from scratch.
 
-### [txtdb](https://github.com/axvr/txtdb)
+## Completed projects
 
-An attempt to create a simple [database engine](https://en.wikipedia.org/wiki/Database_engine)
-and [RDBMS](https://en.wikipedia.org/wiki/RDBMS) which stores the table data in
-text files, using the [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
-format.
+- [Thermoelectric Generator](/projects/teg) - Creating a thermoelectric
+  generator capable of charging a mobile phone for as little money as possible.
+- [Vivid.vim](https://github.com/axvr/vivid.vim) - An extremely minimal Vim
+  plugin manager focused on providing users with maximum control over when
+  their plugins are enabled. _I no longer use this_.
 
-### [Org.vim](https://github.com/axvr/org.vim)
+## Archived/deprecated projects
 
-A minimal [Org-mode](https://orgmode.org/) plugin for
-[Vim](https://www.vim.org). It provides only the absolute necessities (e.g.
-syntax highlighting and folding) at a high standard.
+- [ALIS](https://github.com/axvr/alis) - An Arch Linux installer. This was my
+  first programming project, it is embarassing how bad the code quality is.
 
-<br>
+## Contributed to
 
-# Hardware Projects
-
-### [8-Bit Homebrew Computer](/projects/8-bit-hbc)
-
-As part of my quest to learn how computers actually work, I'm attempting to
-design and build a "simple" 8-bit computer completely from scratch.
-
-### [Cheap Thermoelectric Generator](/projects/teg)
-
-Building a Thermoelectric generator as cheaply as possible, capable of charging
-a mobile phone, using the Seebeck Effect.
+- [OmniSharp-Vim](https://github.com/OmniSharp/omnisharp-vim) - I wrote the
+  automatic installer for both MS Windows and Unix-like OSs. I occasionally fix
+  bugs and help resolve issues.

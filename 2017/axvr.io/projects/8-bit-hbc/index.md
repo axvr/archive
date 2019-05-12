@@ -4,8 +4,6 @@
 
 ### Date: 2019-02-24 - Still in progress
 
-<br>
-
 ## Description
 
 As part of my quest to learn how computers actually work, I'm attempting to
