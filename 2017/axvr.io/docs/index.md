@@ -4,14 +4,17 @@
 
 This is the home of all in-depth content/documents that I write.
 
-<br>
-
 ## Pages
 
 My personal wiki.
 
-- [Ascribe](ascribe) - An EditorConfig alternative.
 - [Organisational systems](organisation).
+
+## Projects
+
+- [Ascribe](../projects/ascribe) - An EditorConfig alternative.
+- [8-bit homebrew computer](../projects/8-bit-hbc).
+- [View more](../projects).
 
 ## Papers
 

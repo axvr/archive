@@ -38,5 +38,13 @@ Sometimes I do hardware projects.
 ## Contributed to
 
 - [OmniSharp-Vim](https://github.com/OmniSharp/omnisharp-vim) - I wrote the
-  automatic installer for both MS Windows and Unix-like OSs. I occasionally fix
-  bugs and help resolve issues.
+  automatic installer for both MS Windows and Unix-like OSs.  I occasionally
+  fix bugs and help resolve issues.
+
+<!-- Alternative layout for these list items
+<dl>
+  <dt><code>2015</code> <a href="/projects/teg">Thermoelectric Generator</a></dt>
+  <dd>Creating a thermoelectric generator capable of charging a mobile phone
+  for as little money as possible.</dd>
+</dl>
+-->

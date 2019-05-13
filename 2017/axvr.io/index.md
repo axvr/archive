@@ -1,8 +1,8 @@
 # Cognition
 
-Welcome to my testing ground (a.k.a. my website).
+Welcome to my testbed, this is where I document my ideas and projects.
 
-I create original ideas and sometimes improve upon the ideas of others. If an
+I create original ideas and sometimes improve upon the ideas of others.  If an
 idea meets or surpasses my high standards, I put it into practice.
 
 I am currently on a quest to learn everything I possibly can about computers
@@ -19,3 +19,4 @@ The source code for my software projects can be found on my
 - [Docs](/docs) (in-depth documents)
 - [Posts](/posts) (opinion/update articles)
 - [Notes](/notes) (quick thoughts/notes)
+- [Projects](/projects) (my projects)
