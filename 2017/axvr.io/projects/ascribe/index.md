@@ -4,15 +4,6 @@
 
 ### An alternative to [EditorConfig](https://editorconfig.org/).
 
-The idea behind EditorConfig is an excellent one. It provides a mechanism to
-automate the setting of core editor configuration options, for a huge number of
-editors and other development tools on a per-project basis.
-
-EditorConfig is undoubtedly a very useful tool, but I think I can do one
-better.
-
-## What actually is Ascribe?
-
 Ascribe is a standard for software development tools (specifically editors) to
 retrieve and handle information on the various files within a project through
 the `.gitattributes` file already found in many software projects.
@@ -27,11 +18,10 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 
 ## Want to learn more?
 
-**Note**: _These pages are still a work in progress_.
-
+- Why did I create Ascribe? (_WIP_)
 - [Comparison between EditorConfig and Ascribe](comparison).
-- [Ascribe specification](specification).
 - [Using `.gitattributes` files](usage).
+- [Ascribe specification](specification).
 - [Project goals & scope](goals).
 
 ## Official extensions

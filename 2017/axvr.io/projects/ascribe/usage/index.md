@@ -1,10 +1,15 @@
-<title>Using .gitattributes</title>
+<title>Using .gitattributes files</title>
 
 [\<-- back](../)
 
 # Using `.gitattributes` files
 
 _WIP_
+
+<!-- TODO: explain explicit set/unset, unspecified, explicit set to value, etc. -->
+
+<!-- TODO: to learn about the available options please read the specification,
+it however it recommended that you read this page first. -->
 
 ## Example
 
@@ -29,3 +34,8 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 ```
+
+## More information
+
+- [`gitattributes(5)`](https://www.git-scm.com/docs/gitattributes)
+- [`git-check-attr(1)`](https://www.git-scm.com/docs/git-check-attr) - The official `.gitattributes` parser.

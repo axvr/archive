@@ -33,9 +33,9 @@ The Ascribe standard reuses the `.gitattributes` file commonly found in many
 projects. It defines how to use specific attributes in the `.gitattributes` to
 alter the behaviour of editors.
 
-Ascribe makes use of the existing attributes commonly used by Git (e.g. `text`,
-`eol`, `binary`, etc.), and adds some editor specific ones on top. These
-attributes are used by Ascribe extensions which can be installed to the editor.
+Ascribe makes use of the existing attributes commonly used by Git (e.g. `eol`
+and `binary`), and adds some editor specific ones on top. These attributes are
+used by Ascribe extensions which can be installed to the editor.
 
 Since Ascribe uses the `.gitattributes` file, and reuses some of the existing
 attributes, many of the most important options are enforced at the VCS level by
@@ -69,8 +69,6 @@ Ascribe depends on the [Git version control system](https://git-scm.com/).
 
 - Ascribe extensions are significantly simpler and easier to write than
   EditorConfig extensions.
-- File encoding rules partially work (there are issues with old Git versions
-  and alternative Git implementations).
 - Some options are enforced at the VCS level.
 - Keeps all information on project files in a centralised location, many other
   tools use the `.gitattributes` file to get information (for example

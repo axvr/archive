@@ -1,4 +1,4 @@
-<title>Ascribe goals</title>
+<title>Ascribe goals and scope</title>
 
 [\<-- back](../)
 
