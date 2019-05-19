@@ -38,8 +38,8 @@ and `binary`), and adds some editor specific ones on top. These attributes are
 used by Ascribe extensions which can be installed to the editor.
 
 Since Ascribe uses the `.gitattributes` file, and reuses some of the existing
-attributes, many of the most important options are enforced at the VCS level by
-Git. This reduces problems for developers who don't use a supported editor.
+attributes, several important options are enforced at the VCS level by Git.
+This reduces problems for developers who don't use a supported editor.
 
 Ascribe depends on the [Git version control system](https://git-scm.com/).
 

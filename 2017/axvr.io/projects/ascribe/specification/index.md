@@ -4,6 +4,9 @@
 
 # Ascribe specification
 
+**Version**: `v1.0`<br>
+**Last modified**: `2019-05-19`
+
 This is the Ascribe specification. If you are unsure how `.gitattributes` files
 work, you can read my document on [using `.gitattributes` files](../usage).
 That document also explains the various terms used in this page, e.g.
@@ -79,16 +82,10 @@ Typically this would occur just before saving the file.
 **Type**: boolean.
 
 The [POSIX specification](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206)
-defines a line as:
-
-> A sequence of zero or more non-`<newline>` characters plus a terminating
-> `<newline>` character.
-
-This includes the last line of the file.
-
-Many tools in the Unix world expect this final newline character to be there,
-otherwise they will consider the file corrupted or at the very least,
-truncated.
+states that a line should always end with a newline character, including the
+last line of the file. Many tools in the Unix world expect this final newline
+character to be there, otherwise they may consider the file to be corrupted or
+at the very least, truncated.
 
 By explicitly setting this option, an Ascribe tool will automatically insert
 the final newline character if it is missing.
@@ -122,11 +119,10 @@ checking out the file.
 
 This option is enforced by Git, however there are some limitations. According
 to the [`gitattributes(5)`](https://www.git-scm.com/docs/gitattributes) manual
-page, there can be pretty major consequential issues when using Git clients
-which don't support the `working-tree-encoding` option, and it can slow down
-common Git operations (e.g. `checkout`).
+page, there can be pretty major issues when using Git clients which don't
+support the `working-tree-encoding` option.
 
 Because of these issues, this option hasn't yet been implemented in the
 "official" Ascribe extensions. If you must use it, please read the entirety of
 the appropriate section of the `gitattributes(5)` manual page, do it
-manually and inform all contributors.
+manually and inform all contributors about potential issues.
