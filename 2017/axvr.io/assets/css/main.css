@@ -68,9 +68,12 @@ pre code {
 }
 
 blockquote {
-  border-left: 2px solid #323232;
+  border-left: none;
   margin-left: 28px;
   padding-left: 10px;
+  font-family: 'Lato Light', 'Libre Franklin Light', sans-serif;
+  font-style: italic;
+  line-height: 18px;
 }
 
 
