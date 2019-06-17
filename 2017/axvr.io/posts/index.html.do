@@ -7,10 +7,11 @@ cat ../website.template.1 | sed 's/###TITLE###/Alex Vear | Posts/' >> "$3"
 
 cat << EOF >> "$3"
 <title>Posts</title>
-<h1>All Posts</h1>
+<h1>Hopefully coherent</h1>
+<p>This is where I publish opinion pieces I write.  RSS feed coming soon.</p>
 EOF
 
-# Itterate over all posts and sort in chronological order.
+# Iterate over all posts and sort in chronological order.
 for article in $(find */ -name '*.html' -type f | sort -r)
 do
 
@@ -25,9 +26,10 @@ do
     {
         printf "<h2><a href=\"%s\">%s</a></h2>\\n" "$url" "$title"
         printf "%s\n" "$(sed -n "${desc_start},${desc_end}p" "$article")"
-        printf "<br>\n"
     } >> "$3"
 
 done
 
 cat ../website.template.2 >> "$3"
+
+# TODO: make this smarter. Add metadata stuff to the top of the post documents.
