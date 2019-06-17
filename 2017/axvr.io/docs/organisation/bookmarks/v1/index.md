@@ -4,7 +4,9 @@
 
 # Version 1
 
-The inital version, 100% flat structure and as few categories as possible.
+The inital version, 100% flat structure and as few categories as possible.  It
+was designed to replace [Pocket](https://getpocket.com/) by acting as a reading
+list.
 
 - [Websites](#websites)
 - [Unread](#unread)
@@ -21,13 +23,13 @@ contain pages which have complex URLs.
 
 ## Unread
 
-Reading list of articles and books. Unlike services such as
-[Pocket](https://getpocket.com/) this supports PDFs, and multi-page articles.
+Reading list of articles and books. Unlike services such as Pocket this
+supports PDFs, and multi-page articles.
 
 ## Read
 
 An archive of articles and books I have read, but may want to go back to in the
-future. Similar to [Pocket](https://getpocket.com/)'s "Archive" feature.
+future. Similar to Pocket's "Archive" feature.
 
 ## Archive
 

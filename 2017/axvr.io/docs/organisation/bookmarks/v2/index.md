@@ -6,7 +6,8 @@
 
 A simple extension to the initial version, sub-folders have been introduced,
 and the "Articles" folder and missing folders for keynote watch status were
-added.
+added.  These folders where added to replace YouTube's "Watch Later" and
+"Favourites" functionality.
 
 - [Articles](#articles)
   - [Unread](#unread)
