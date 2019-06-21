@@ -3,20 +3,14 @@
 # Projects and contributions
 
 In my free time I work on various open-source and free-software projects.
-Sometimes I do hardware projects.
-
-- [Active projects](#active-projects)
-- [Completed projects](#completed-projects)
-- [Archived projects](#archiveddeprecated-projects)
-- [Contributed to](#contributed-to)
+Occasionally I'll work on hardware projects.
 
 ## Active projects
 
 - [Ascribe](ascribe) - An EditorConfig alternative.
-- [Photon.vim](https://github.com/axvr/photon.vim) - A minimal and elegant dark
-  colour scheme for Vim.
-- [txtdb](https://github.com/axvr/txtdb) - A transparent RDBMS and DB engine
-  to help teach about databases.
+- [Photon.vim](https://github.com/axvr/photon.vim) - An elegant, dark colour
+  scheme with minimal syntax highlighting for Vim.
+- [Gait](gait) - An experimental and intelligent UI framework project.
 - [Org.vim](https://github.com/axvr/org.vim) - A minimal Org-mode plugin for
   Vim providing only the absolute necessities.
 - [8-bit homebrew computer](8-bit-hbc) - I'm working on designing and building
@@ -32,19 +26,13 @@ Sometimes I do hardware projects.
 
 ## Archived/deprecated projects
 
+- [txtdb](https://github.com/axvr/txtdb) - An experimental RDBMS and DB engine
+  using CSV text files to store tables.
 - [ALIS](https://github.com/axvr/alis) - An Arch Linux installer. This was my
-  first programming project, it is embarassing how bad the code quality is.
+  first programming project, it is embarrassing how bad the code quality is.
 
 ## Contributed to
 
 - [OmniSharp-Vim](https://github.com/OmniSharp/omnisharp-vim) - I wrote the
   automatic installer for both MS Windows and Unix-like OSs.  I occasionally
   fix bugs and help resolve issues.
-
-<!-- Alternative layout for these list items
-<dl>
-  <dt><code>2015</code> <a href="/projects/teg">Thermoelectric Generator</a></dt>
-  <dd>Creating a thermoelectric generator capable of charging a mobile phone
-  for as little money as possible.</dd>
-</dl>
--->
