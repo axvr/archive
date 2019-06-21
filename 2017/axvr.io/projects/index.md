@@ -11,8 +11,8 @@ Occasionally I'll work on hardware projects.
 - [Photon.vim](https://github.com/axvr/photon.vim) - An elegant, dark colour
   scheme with minimal syntax highlighting for Vim.
 - [Gait](gait) - An experimental and intelligent UI framework project.
-- [Org.vim](https://github.com/axvr/org.vim) - A minimal Org-mode plugin for
-  Vim providing only the absolute necessities.
+- [Org.vim](https://github.com/axvr/org.vim) - An Org-mode plugin for Vim
+  providing only the absolute necessities.
 - [8-bit homebrew computer](8-bit-hbc) - I'm working on designing and building
   a simple 8-bit computer from scratch.
 
@@ -27,7 +27,7 @@ Occasionally I'll work on hardware projects.
 ## Archived/deprecated projects
 
 - [txtdb](https://github.com/axvr/txtdb) - An experimental RDBMS and DB engine
-  using CSV text files to store tables.
+  using CSV files to store tables.
 - [ALIS](https://github.com/axvr/alis) - An Arch Linux installer. This was my
   first programming project, it is embarrassing how bad the code quality is.
 

@@ -12,10 +12,10 @@ My personal wiki.
 
 ## Projects
 
-- [Ascribe](../projects/ascribe) - An EditorConfig alternative.
-- [8-bit homebrew computer](../projects/8-bit-hbc).
-- [View more](../projects).
+- [Ascribe](/projects/ascribe) - An EditorConfig alternative.
+- [Gait](/projects/gait) - An experimental UI framework.
+- [View more](/projects).
 
-## Papers
+## Papers & essays
 
 _Coming soon._

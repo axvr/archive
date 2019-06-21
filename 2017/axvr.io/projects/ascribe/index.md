@@ -18,7 +18,6 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 
 ## Want to learn more?
 
-- Why did I create Ascribe? (_WIP_)
 - [Comparison between EditorConfig and Ascribe](comparison).
 - [Using `.gitattributes` files](usage).
 - [Ascribe specification](specification).
@@ -27,5 +26,5 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 ## Official extensions
 
 - [Vim](https://github.com/axvr/ascribe.vim)
-- GNU Emacs (_WIP_)
 - Git CLI (_WIP_ - uses Git hooks)
+<!-- - GNU Emacs (_WIP_) -->
