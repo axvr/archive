@@ -7,7 +7,7 @@ cat ../website.template.1 | sed 's/###TITLE###/Alex Vear | Posts/' >> "$3"
 
 cat << EOF >> "$3"
 <title>Posts</title>
-<h1>Hopefully coherent</h1>
+<h1>All posts</h1>
 <p>This is where I publish opinion pieces I write.  RSS feed coming soon.</p>
 EOF
 
