@@ -8,6 +8,7 @@ This is the home of all in-depth content/documents that I write.
 
 My personal wiki.
 
+- [Licencing](licencing) - How I licence my projects and creative works.
 - [Organisational systems](organisation).
 
 ## Projects
