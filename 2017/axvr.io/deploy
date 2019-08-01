@@ -17,7 +17,6 @@ files() {
             find "$dir" -name '*' -type f
         done
 
-        echo "favicon.ico"
         echo "robots.txt"
         echo "LICENCE"
         echo "CNAME"
