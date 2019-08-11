@@ -1,10 +1,6 @@
-<title>8-Bit Homebrew Computer</title>
+<title>8-bit homebrew computer</title>
 
-# 8-Bit Homebrew Computer
-
-### Date: 2019-02-24 - Still in progress
-
-## Description
+# 8-bit homebrew computer
 
 As part of my quest to learn how computers actually work, I'm attempting to
 design and build a "simple" 8-bit computer completely from scratch.

@@ -2,37 +2,34 @@
 
 # Projects and contributions
 
-In my free time I work on various open-source and free-software projects.
-Occasionally I'll work on hardware projects.
+This is a list of my featured projects, you can find the full list on the
+[project timeline](timeline). Most tend to be software projects, however a few
+are hardware focused.
 
-## Active projects
+## Current projects
 
-- [Ascribe](ascribe) - An EditorConfig alternative.
-- [Photon.vim](https://github.com/axvr/photon.vim) - An elegant, dark colour
-  scheme with minimal syntax highlighting for Vim.
-- [Gait](gait) - An experimental and intelligent UI framework project.
+- [Ascribe](ascribe) - An alternative to EditorConfig.
+- [Photon](https://github.com/axvr/photon.vim) - An elegant, dark colour scheme
+  with minimal syntax highlighting.
 - [Org.vim](https://github.com/axvr/org.vim) - An Org-mode plugin for Vim
   providing only the absolute necessities.
-- [8-bit homebrew computer](8-bit-hbc) - I'm working on designing and building
-  a simple 8-bit computer from scratch.
+- [txtdb](https://github.com/axvr/txtdb) - An experimental RDBMS and DB engine
+  using CSV files to store tables.
 
 ## Completed projects
 
-- [Thermoelectric Generator](/projects/teg) - Creating a thermoelectric
-  generator capable of charging a mobile phone for as little money as possible.
-- [Vivid.vim](https://github.com/axvr/vivid.vim) - An extremely minimal Vim
-  plugin manager focused on providing users with maximum control over when
-  their plugins are enabled. _I no longer use this_.
+- [Thermoelectric generator](teg) - An attempt to create a cheap thermoelectric
+  generator capable of charging a mobile phone.
 
-## Archived/deprecated projects
+## Future projects
 
-- [txtdb](https://github.com/axvr/txtdb) - An experimental RDBMS and DB engine
-  using CSV files to store tables.
-- [ALIS](https://github.com/axvr/alis) - An Arch Linux installer. This was my
-  first programming project, it is embarrassing how bad the code quality is.
+- [Gait](gait) - An experimental and intelligent UI framework project.
+- [Envy](envy) - An efficient, reliable, and simple dektop stack for Unix-like OSs.
+- [8-bit homebrew computer](8-bit-hbc) - Designing and building a simple 8-bit
+  computer from scratch.
 
-## Contributed to
+## Contribute to
 
 - [OmniSharp-Vim](https://github.com/OmniSharp/omnisharp-vim) - I wrote the
   automatic installer for both MS Windows and Unix-like OSs.  I occasionally
-  fix bugs and help resolve issues.
+  fix bugs, add features and help resolve issues.

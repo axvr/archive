@@ -1,8 +1,8 @@
-<title>Cheap Thermoelectric Generator</title>
+<title>Cheap thermoelectric generator</title>
 
-# Cheap Thermoelectric Generator
+# Cheap thermoelectric generator
 
-### Date: 2015-11-08 - 2016-03-??
+### Date: 2015-11-08 - 2016-02-??
 
 This page was originally hosted on [Hackaday.io](https://hackaday.io), but I
 moved it here on 2018-03-24.
@@ -83,8 +83,8 @@ tape (sellotape in the prototype - above).
 
 This device was a proof of concept, and performed brilliantly and fully worked,
 with only four modules and four tea light candles, it was able to charge a
-mobile phone to full charge. (I recommend not testing this on your own phone as
-it may break it if the wiring was not correct or a component was damaged).
+mobile phone. (I recommend not testing this on your own phone as it may break
+it if the wiring was not correct or a component was damaged).
 
 At some point in the future I may try to make a more efficient version of this.
 Feel free to use this design or modify it as you wish.
