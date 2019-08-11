@@ -1,6 +1,6 @@
 <title>Docs</title>
 
-# Docs
+# Documents
 
 This is the home of all in-depth content/documents that I write.
 
@@ -10,12 +10,7 @@ My personal wiki.
 
 - [Licencing](licencing) - How I licence my projects and creative works.
 - [Organisational systems](organisation).
-
-## Projects
-
-- [Ascribe](/projects/ascribe) - An EditorConfig alternative.
-- [Gait](/projects/gait) - An experimental UI framework.
-- [View more](/projects).
+- [Setup guides](setup).
 
 ## Papers & essays
 
