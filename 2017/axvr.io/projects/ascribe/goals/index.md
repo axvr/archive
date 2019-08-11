@@ -14,8 +14,7 @@ Ascribe extensions must meet extremely high code quality standards and aim to
 be virtually bug free.
 
 If you have have a question or have created an Ascribe extension and would like
-to submit it to become an "official" extension, please don't hesitate to
-[contact me](/contact).
+to submit it to become an "official" extension, please [contact me](/contact).
 
 ## Scope
 

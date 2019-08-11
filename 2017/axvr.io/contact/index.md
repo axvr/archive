@@ -1,12 +1,12 @@
 <title>Contact</title>
 
-# Email Address
+# Email address
 
 To avoid spam, I have intentionally obfuscated my email address using various
 techniques, you can pick whichever of the following methods you would rather
 use to reverse the obfuscation.
 
-## The Interesting Methods
+## The interesting methods
 
 ### Unix Shell
 
@@ -37,9 +37,9 @@ Cipher: mnopqrstuvwxyz-_.@abcdefghijkl
 
 </details>
 
-## The Boring Methods
+## The boring methods
 
-### Instructions & Construction
+### Instructions & construction
 
 1. Combine the initials of my fore- and surname.
 2. Add an `@`
@@ -47,6 +47,5 @@ Cipher: mnopqrstuvwxyz-_.@abcdefghijkl
 
 ### GitHub
 
-If you have a [GitHub](https://github.com/) account and are logged in, you
-should be able to view my email address by visiting
-[my profile](https://github.com/axvr).
+If you have a GitHub account and are logged in, you should be able to view my
+email address by visiting [my profile](https://github.com/axvr).

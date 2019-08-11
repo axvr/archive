@@ -68,7 +68,7 @@ For full source files use this file header:
  */
 ```
 
-For small code snippets and <abbr title="Hypertext Markup Language">HTML</abbr>
+For small code snippets, <abbr title="Hypertext Markup Language">HTML</abbr>
 and <abbr title="Cascading Style Sheets">CSS</abbr> files, this header will
 suffice:
 
