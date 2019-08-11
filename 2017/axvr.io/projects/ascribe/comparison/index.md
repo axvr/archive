@@ -54,6 +54,7 @@ Ascribe depends on the [Git version control system](https://git-scm.com/).
 
 <u>Problems</u>
 
+- Requires the creation of large, complex and unreliable/bug-prone extensions.
 - File encoding rules don't actually work when used with Git (Git will still
   store and checkout the file in UTF-8 unless you use the `.gitattributes` file).
 - Some implementations suffer from security issues caused by allowing arbitrary
