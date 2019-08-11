@@ -16,10 +16,18 @@ Inspired by [Nadia Eghbal's](https://nadiaeghbal.com/notes/) and
 
 <br>
 
+### 19/06/30
+
+Do we still need multi-user operating systems?
+
+Computing resources have become so cheap and important over the last few year
+that almost everyone has their own personal smart phones, and many even have
+their own laptop or desktop. What percentage of users actually need multiple
+accounts for these devices?
+
 ### 19/01/06
 
-It may be controversial to say, but I'll say it anyway: I believe that one of
-the best things to ever happen to Bitcoin was Satoshi leaving.
+Possibly the best thing to happen to Bitcoin may have been Satoshi leaving.
 
 Satoshi was --and still is-- idolised by many within in the crypto space, so
 whatever his opinion on a related topic (e.g. the block-size limit), it would
@@ -61,14 +69,6 @@ give pointers.
 
 Will historians of the future ever document the "information age" since we are
 already documenting everything?
-
-### 18/12/31
-
-From my observations, it seems that the larger an online community becomes, the
-greater the chance of Balkanisation. As evidenced by the _r/Bitcoin_ and
-_r/btc_ subreddits. This is partly why services such as Reddit are so toxic to
-communities, because they allow and encourage the rapid formation of "echo
-chambers".
 
 ### 18/12/30
 
