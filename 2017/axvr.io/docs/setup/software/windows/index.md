@@ -33,16 +33,53 @@ Some ASUS motherboards inject software into your Windows installation, but it
 can be turned off in the BIOS settings, however you will also have to do an
 entire file system search for any mention of ASUS and delete all results.
 
+## Remove built-in applications
+
+For some reason Microsoft like to pack Windows full of applications you will
+likely never use or want to use. Almost all of these can be _safely_ removed
+from PowerShell.
+
+### List installed applicaitons
+
+```
+GetAppxPackage
+```
+
+Optionally use the `-AllUsers` flag to remove apps from all accounts.
+
+### Remove specific apps
+
+For each app insert the app ID into this command:
+
+```
+GetAppxPackage *id* | Remove-AppxPackage
+```
+
+| Applications                 | ID                   |
+|------------------------------|----------------------|
+| Messaging                    | `messaging`          |
+| Sway                         | `sway`               |
+| Phone, Phone Companion       | `phone`              |
+| People                       | `people`             |
+| Money, News, Sports, Weather | `bing`               |
+| OneNote                      | `onenote`            |
+| Maps                         | `maps`               |
+| Xbox                         | `xbox`               |
+| Solitaire                    | `solitaire`          |
+| Get Office                   | `officehub`          |
+| Get Skype                    | `skypeapp`           |
+| Get Started                  | `getstarted`         |
+| 3D Builder                   | `3dbuilder`          |
+
 ## Install the applications
 
 Install each of the following applications.
 
 - [Mozilla Firefox](https://mozilla.org/firefox/)
-- [Google Chrome](https://chrome.google.com/)
 - [Git](https://git-scm.com/)
+- [.NET Core](https://dotnet.microsoft.com/download/dotnet-core)
 - [Node.js](https://nodejs.org/)
 - [NuGet CLI](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-nuget-cli)
-- [Postman](https://www.getpostman.com/)
 - [Ngrok](https://ngrok.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
 - [Visual Studio Code](https://code.visualstudio.com/)

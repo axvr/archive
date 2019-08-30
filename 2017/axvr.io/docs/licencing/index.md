@@ -118,3 +118,10 @@ patents that I may have.
 
 My stance on patents is the following: I dislike patents and don't believe in
 intellectual property, as such I will never hold a patent on any of my works.
+
+## More information
+
+- [Various Licenses and Comments about Them | Free Software Foundation](https://www.gnu.org/licenses/license-list.en.html)
+- [Placing documents into the public domain | Daniel J. Bernstein](https://cr.yp.to/publicdomain.html)
+- [Who's Afraid of the Public Domain? | Peter Saint-Andre](https://stpeter.im/writings/essays/publicdomain.html)
+- [Mozilla Source Code License Policy | Mozilla](https://www.mozilla.org/en-US/MPL/license-policy/)
