@@ -1,6 +1,6 @@
 <title>Dell XPS 13 (9370)</title>
 
-[\<-- back](..)
+[\<-- back](../..)
 
 # Dell XPS 13 (9370)
 

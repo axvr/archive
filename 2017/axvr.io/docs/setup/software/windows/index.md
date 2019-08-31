@@ -1,10 +1,12 @@
 <title>Microsoft Windows</title>
 
-[\<-- back](..)
+[\<-- back](../../)
 
 # Microsoft Windows
 
 This is how I set up my machines running [Microsoft Windows](https://www.microsoft.com/en-gb/windows/).
+
+Windows 10 ISOs can be downloaded from [here](https://www.microsoft.com/en-us/software-download/windows10ISO).
 
 ## Updates
 
@@ -45,8 +47,6 @@ from PowerShell.
 GetAppxPackage
 ```
 
-Optionally use the `-AllUsers` flag to remove apps from all accounts.
-
 ### Remove specific apps
 
 For each app insert the app ID into this command:
@@ -57,19 +57,19 @@ GetAppxPackage *id* | Remove-AppxPackage
 
 | Applications                 | ID                   |
 |------------------------------|----------------------|
-| Messaging                    | `messaging`          |
-| Sway                         | `sway`               |
-| Phone, Phone Companion       | `phone`              |
-| People                       | `people`             |
-| Money, News, Sports, Weather | `bing`               |
-| OneNote                      | `onenote`            |
-| Maps                         | `maps`               |
-| Xbox                         | `xbox`               |
-| Solitaire                    | `solitaire`          |
+| 3D Builder                   | `3dbuilder`          |
 | Get Office                   | `officehub`          |
 | Get Skype                    | `skypeapp`           |
 | Get Started                  | `getstarted`         |
-| 3D Builder                   | `3dbuilder`          |
+| Maps                         | `maps`               |
+| Messaging                    | `messaging`          |
+| Money, News, Sports, Weather | `bing`               |
+| OneNote                      | `onenote`            |
+| People                       | `people`             |
+| Phone, Phone Companion       | `phone`              |
+| Solitaire                    | `solitaire`          |
+| Sway                         | `sway`               |
+| Xbox                         | `xbox`               |
 
 ## Install the applications
 
@@ -85,13 +85,13 @@ Install each of the following applications.
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 - [Microsoft Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
-- Windows Terminal (not yet available)
+- [Windows Terminal](https://github.com/microsoft/terminal) (install from the [Windows Store](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701))
 
 Aim to install user-level applications in this directory to help keep the
 system clean:
 
 ```
-C:\Users\<username>\AppData\Local\Programs
+C:\Users\%username%\AppData\Local\Programs
 ```
 
 ## Cygwin
@@ -150,6 +150,11 @@ git submodule init && git submodule update
 rm ~/.{profile,bashrc}
 stow -t ~ bin git shell tmux vim
 ```
+
+### Fixing issues in WSL
+
+Sometimes I may accidentally make a change to my Bash config which breaks WSL.
+To perform repairs, open _Command Prompt_ and enter `bash.exe -c sh`.
 
 ## Useful to know
 

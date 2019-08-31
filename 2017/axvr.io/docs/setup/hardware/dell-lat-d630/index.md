@@ -1,10 +1,10 @@
 <title>Dell Latitude D630</title>
 
-[\<-- back](..)
+[\<-- back](../..)
 
 # Dell Latitude D630
 
-Set up wireless drivers on Linux for the Dell Latitude D630.
+Set up wireless drivers for Linux on the Dell Latitude D630.
 
 ## Install the Broadcom b43 and b43-legacy wireless drivers
 
@@ -34,6 +34,12 @@ sudo make install
 cd ../
 ```
 
+If the above site hosting b43-fwcutter were to ever go offline, b43-fwcutter
+and the PGP signature can be downloaded from here:
+
+- [`b43-fwcutter-018.tar.bz2`](assets/b43-fwcutter-018.tar.bz2)
+- [`b43-fwcutter-018.tar.bz2.asc`](assets/b43-fwcutter-018.tar.bz2.asc)
+
 ### Install the driver
 
 ```
@@ -42,3 +48,8 @@ wget http://www.lwfinger.com/b43-firmware/broadcom-wl-5.100.138.tar.bz2
 tar xjf broadcom-wl-5.100.138.tar.bz2
 sudo b43-fwcutter -w "$FIRMWARE_INSTALL_DIR" broadcom-wl-5.100.138/linux/wl_apsta.o
 ```
+
+If the above site hosting the driver download were to ever go offline, the
+broadcom-wl driver can be downloaded from here:
+
+- [`broadcom-wl-5.100.138.tar.bz2`](assets/broadcom-wl-5.100.138.tar.bz2)
