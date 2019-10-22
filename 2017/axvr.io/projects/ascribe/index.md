@@ -26,5 +26,4 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 ## Official extensions
 
 - Vim ([GitHub](https://github.com/axvr/ascribe.vim), [Sourcehut](https://git.sr.ht/~axvr/ascribe.vim))
-- Git Hooks (_WIP_)
-- GNU Emacs (_Planned_)
+- Git Hooks (_Planned_)

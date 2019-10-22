@@ -51,13 +51,13 @@ stuff works and electrical engineering basics.
 
   <dt><code>2018</code> <a href="https://github.com/axvr/org.vim">Org.vim</a></dt>
   <dd><p>
-  Org.vim is a minimal <a href="https://orgmode.org/">Org-mode</a> plugin for
+  Org.vim is a minimal <a href="https://orgmode.org/">Org mode</a> plugin for
   Vim. It provides only the absolute necessities (e.g. syntax highlighting and
   folding) at a high standard.
 
   The main goal of this plugin is to replicate
   <a href="https://github.com/tpope/vim-markdown/">Vim's default Markdown</a>
-  editing experience for Org-mode files.
+  editing experience for Org mode files.
   </p></dd>
 
 

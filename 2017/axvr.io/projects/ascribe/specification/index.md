@@ -19,7 +19,7 @@ are mentioned below.
 To reduce risks posed by arbitrary code execution, only specific characters are
 allowed to be used in the value for an option. The value has to match this
 ([POSIX extended](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_04))
-regular expression: `/[a-zA-Z0-9_.-]+/`.
+regular expression: `/[a-zA-Z0-9_.-]*/`.
 
 - [`expand-tab`](#expand-tab)
 - [`tab-stop`](#tab-stop)
@@ -48,10 +48,8 @@ number of spaces a tab is expanded to is controlled by [`tab-stop`](#tab-stop).
 
 **Type**: integer.
 
-How many spaces represent a tab. When [`expand-tab`](#expand-tab) is explicitly
-"unset", this option will default to `8`, however you can override this.
-
-The most common values for this attribute are: `2`, `4` and `8`.
+The number of spaces which represent a tab character. The most common values
+for this attribute are: `2`, `4` and `8`.
 
 ## `eol`
 
