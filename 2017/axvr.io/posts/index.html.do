@@ -3,7 +3,7 @@
 redo-ifchange $(find . -type f -name '*.md' | sed 's/\.md$/.html/') \
     "../website.template.1" "../website.template.2"
 
-cat ../website.template.1 | sed 's/###TITLE###/Alex Vear | Posts/' >> "$3"
+cat ../website.template.1 | sed 's/###TITLE###/Posts | Alex Vear/' >> "$3"
 
 cat << EOF >> "$3"
 <title>Posts</title>
