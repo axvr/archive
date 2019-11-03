@@ -10,7 +10,6 @@ My personal wiki.
 
 - [Licencing](licencing) - How I licence my projects and creative works.
 - [Organisational systems](organisation).
-- [Setup guides](setup).
 
 ## Papers & essays
 
