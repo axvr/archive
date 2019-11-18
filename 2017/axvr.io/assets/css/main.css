@@ -1,157 +1,100 @@
+.container {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-auto-rows: auto;
+	grid-template-areas: 'content sidebar';
+	grid-gap: 10px 30px;
+}
+.item { overflow: hidden; }
+.content { grid-area: content; }
+.content img { max-width: 100%; }
+.sidebar { grid-area: sidebar; }
+
+#linkbar ul {
+	list-style: none;
+	padding-left: 0px;
+	margin: 0px;
+}
+#linkbar ul li i { padding-right: 4px; }
+
 body {
-  font-family: 'Libre Franklin', 'Lato', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  color: #212121;
-  margin: auto;
-  width: 1000px;
+	font-family: 'Libre Franklin', sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	color: #131516;
+	min-width: auto;
+	max-width: 1000px;
+	margin: auto;
+	padding: 20px 27px;
 }
 
-/* Heading formatting */
-h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-  font-weight: normal;
-}
 h1, h2 {
-  font-family: 'Lato', sans-serif;
-  font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
 }
-h1 {
-  font-size: 22px;
+h3, h4, h5, h6 {
+	font-family: 'Lato', sans-serif;
+	font-weight: normal;
 }
-h2 {
-  font-size: 20px;
-}
-h3 {
-  font-size: 18px;
-}
+h1 { font-size: 22px; }
+h2 { font-size: 20px; }
+h3 { font-size: 18px; }
 
-/* Link formatting */
-a:link, a:visited {
-  color: #0063A6;
-}
-a:hover {
-  color: #8963A6;
-}
-a:active {
-  color: #8900A6;
-}
+a:link, a:visited { color: #2a5db0; }
+a:hover, a:focus { color: #8963A6; }
+a:active { color: #8900A6; }
 
 /* Tables and code blocks */
 table {
-  display: block;
-  overflow-x: auto;
-  border-collapse: collapse;
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
 }
 th, td {
-  text-align: left;
-  border: 1px solid #323232;
-  padding: 8px;
+	text-align: left;
+	border: 1px solid #323232;
+	padding: 8px;
 }
 
-/* Code and pre-formatted text blocks */
 pre, code {
-  overflow-x: auto;
-  white-space: pre;
-  font-family: 'Inconsolata', monospace;
-  background-color: #f2f2f2;
-  border-radius: 4px;
+	overflow-x: auto;
+	white-space: pre;
+	font-family: 'Inconsolata', monospace;
+	background-color: #f2f2f2;
+	border-radius: 4px;
 }
-pre {
-  padding: 5px 10px;
-}
-code {
-  padding: 1px 3px;
-}
-pre code {
-  padding: 0px;
-}
+pre { padding: 5px 10px; }
+code { padding: 1px 3px; }
+pre code { padding: 0px; }
 
 blockquote {
-  border-left: none;
-  margin-left: 28px;
-  padding-left: 10px;
-  font-family: 'Lato Light', 'Libre Franklin Light', serif;
-  font-style: italic;
-  line-height: 18px;
+	color: #777;
+	border-left: 3px solid #777;
+	margin-left: 0;
+	padding-left: 15px;
+	font-style: italic;
 }
 
-
-/* Styling for the link bar */
-#linkbar ul {
-  list-style: none;
-  padding-left: 0px;
-  margin: 0px;
-}
-#linkbar ul li i {
-  padding-right: 4px;
+hr {
+	width: 8em;
+	margin: 30px auto;
 }
 
-
-/* Styling for the core container */
-.container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-  grid-template-areas: 'content sidebar';
-  grid-gap: 0px 30px;
-  padding: 10px;
-}
-.item {
-  padding: 10px;
-  overflow: hidden;
-}
-
-
-/* Main content of website */
-.content {
-  border: none;
-  height: minmax(150px, auto);
-}
-.content img {
-  width: 100%;
-}
-
-
-.sidebar {
-  grid-area: sidebar;
-}
-
-
-/* Styling rules to allow website to work on different screen sizes */
-
-@media all and (max-width: 1015px) {
-  body {
-    width: 800px;
-  }
-}
 @media all and (max-width: 815px) {
-  body {
-    width: auto;
-  }
-  .container {
-    grid-template-columns: 100%;
-    grid-template-areas:
-      'sidebar'
-      'content';
-    padding: 5%;
-    padding-top: 0%;
-  }
-  #linkbar ul li {
-    display: inline;
-    padding-right: 7px;
-  }
-  #linkbar ul li i {
-    display: none;
-  }
-  #side-content, #licence {
-    visibility: hidden;
-    display: none;
-  }
-}
-@media all and (max-width: 515px) {
-  .container {
-    padding: 2%;
-    padding-top: 0%;
-  }
+	body {
+		padding: 5px 5%;
+	}
+	.container {
+		grid-template-columns: 100%;
+		grid-template-areas: 'sidebar' 'content';
+	}
+	#linkbar ul li {
+		display: inline;
+		padding-right: 7px;
+	}
+	#linkbar ul li i { display: none; }
+	#side-content, #licence {
+		visibility: hidden;
+		display: none;
+	}
 }
