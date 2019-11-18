@@ -21,7 +21,6 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 - [Comparison between EditorConfig and Ascribe](comparison).
 - [Using `.gitattributes` files](usage).
 - [Ascribe specification](specification).
-- [Project goals & scope](goals).
 
 ## Official extensions
 
