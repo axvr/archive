@@ -29,7 +29,7 @@ Ciphertext: mdlmfd@ku-
 ```
 
 <details>
-<summary>Click for a hint.</summary>
+<summary>Need a hint?</summary>
 
 ```
 Cipher: mnopqrstuvwxyz-_.@abcdefghijkl

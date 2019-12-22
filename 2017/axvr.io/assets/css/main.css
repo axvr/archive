@@ -65,11 +65,11 @@ pre, code {
 }
 pre { padding: 5px 10px; }
 code { padding: 1px 3px; }
-pre code { padding: 0px; }
+pre code { padding: 0; }
 
 blockquote {
-	color: #777;
-	border-left: 3px solid #777;
+	color: #666;
+	border-left: 3px solid #666;
 	margin-left: 0;
 	padding-left: 15px;
 	font-style: italic;
@@ -79,6 +79,13 @@ hr {
 	width: 8em;
 	margin: 30px auto;
 }
+
+details {
+	background-color: #fcfae0;
+	border-radius: 4px;
+	padding: 5px 10px;
+}
+summary { cursor: pointer; }
 
 @media all and (max-width: 815px) {
 	body {

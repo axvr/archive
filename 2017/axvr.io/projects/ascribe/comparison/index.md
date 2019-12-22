@@ -1,6 +1,6 @@
 <title>Ascribe vs EditorConfig</title>
 
-[\<-- back](../)
+[← back](../)
 
 # Comparison between EditorConfig and Ascribe
 

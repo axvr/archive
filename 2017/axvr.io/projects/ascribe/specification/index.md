@@ -1,6 +1,6 @@
 <title>Ascribe specification</title>
 
-[\<-- back](../)
+[← back](../)
 
 # Ascribe specification
 

@@ -14,7 +14,7 @@ please don't hesitate to contact me through [email](/contact).
 Inspired by [Nadia Eghbal](https://nadiaeghbal.com/notes/)'s and
 [Quentin Carbonneaux](https://c9x.me/notes/)'s notes pages.
 
-<br>
+---
 
 ### 2019-06-30
 

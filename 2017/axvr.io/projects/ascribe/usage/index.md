@@ -1,6 +1,6 @@
 <title>Using .gitattributes files</title>
 
-[\<-- back](../)
+[← back](../)
 
 # Using `.gitattributes` files
 

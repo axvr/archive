@@ -1,6 +1,6 @@
 <title>Project timeline</title>
 
-[\<-- back](../)
+[← back](../)
 
 # Project timeline
 
