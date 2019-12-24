@@ -3,8 +3,7 @@
 # Projects and contributions
 
 This is a list of my featured projects, you can find the full list on the
-[project timeline](timeline). Most tend to be software projects, however a few
-are hardware focused.
+[project timeline](timeline).
 
 ## Active projects
 
@@ -20,13 +19,6 @@ are hardware focused.
   generator capable of charging a mobile phone.
 - [Org.vim](https://github.com/axvr/org.vim) - A very minimal Org mode and
   Outline mode plugin for Vim providing only syntax highlighting and folding.
-
-<!-- ## Future projects -->
-
-<!-- - [Gait](gait) - An experimental and intelligent UI framework project. -->
-<!-- - [Envy](envy) - An efficient, reliable, and simple dektop stack for Unix-like OSs. -->
-<!-- - [8-bit homebrew computer](8-bit-hbc) - Designing and building a simple 8-bit -->
-<!--   computer from scratch. -->
 
 ## Contribute to
 
