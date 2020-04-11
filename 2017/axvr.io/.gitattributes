@@ -1,6 +1,7 @@
 *       text=auto
 
 *.ico   binary
+*.svg   binary
 *.gif   binary
 *.pdf   binary
 *.png   binary
