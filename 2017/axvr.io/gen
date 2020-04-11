@@ -126,7 +126,6 @@
               (cdr attrs)))))
 
 
-;; TODO: inject content and handle generated attributes.
 (define (build-file template-fname target-fname attributes)
   "Build new file from template and inject content/attributes."
   (with-output-to-file

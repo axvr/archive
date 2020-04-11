@@ -10,4 +10,4 @@
 gen     linguist-language=Scheme
 
 *.css   -expand-tab
-*.html  -expand-tab
+*.html  expand-tab tab-stop=2
