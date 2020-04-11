@@ -1,9 +1,13 @@
 *       text=auto
+
 *.ico   binary
 *.gif   binary
 *.pdf   binary
 *.png   binary
 *.jpg   binary
 *.jpeg  binary
-website.template.1  linguist-language=HTML
-website.template.2  linguist-language=HTML
+
+gen     linguist-language=Scheme
+
+*.css   -expand-tab
+*.html  -expand-tab

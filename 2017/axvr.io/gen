@@ -1,0 +1,161 @@
+#!/usr/local/bin/csi -ss
+
+;;;; Alex's lispy static website generator.
+;;;; ISC licence (c) 2020 Alex Vear
+
+
+(load "lib/alist.scm")
+
+(import (chicken io)
+        (chicken irregex)
+        (prefix alist av/))
+
+
+(define default-attrs
+  '(("author" . "Alex Vear")
+    ("generator" . "Custom generator written in CHICKEN Scheme")
+    ("copyright" . "CC BY 4.0 (c) 2020 Alex Vear")))
+
+
+(define (chain-apply fns val)
+    "Successively apply each function in a list to a value."
+    (if (eq? '() fns)
+      val
+      (chain-apply (cdr fns)
+                   ((car fns) val))))
+
+
+;; TODO: clean up everything in this function.
+(define (attributes content)
+  "Retrieve attributes from a file."
+  (let ((start '(: bol (* whitespace) "<!--" (* whitespace) "METADATA" (* whitespace) eol))
+        (end '(: bol (* whitespace) "-->" (* whitespace) eol))
+        (pair '(: bol (=> key (*? any)) ":" (* whitespace) (=> value (* any)) (* whitespace) eol)))
+
+    (define (get-pair pairs line)
+      (let ((regex-match (irregex-match pair line)))
+        (if (irregex-match-data? regex-match)
+          (av/assoc pairs
+                    (irregex-match-substring regex-match 'key)
+                    (irregex-match-substring regex-match 'value))
+          pairs)))
+
+    ;; Full page title.
+    (define (page-title attrs)
+      (let ((title (av/get attrs "title"))
+            (author (av/get attrs "author")))
+        (av/assoc attrs ".page-title" (if (and (not (eq? '() title))
+                                               (> (string-length title) 0))
+                                        (string-append title " — " author)
+                                        author))))
+
+    ;; HTML meta tags.
+    (define (meta-tags attrs)
+      (let ((pairs (av/dissoc
+                     (av/map-on-keys
+                       (lambda (x)
+                         (if (eq? #\. (car (string->list x)))
+                           "PRIVATE"
+                           x))
+                       attrs)
+                     "PRIVATE")))
+        (av/assoc attrs
+                  ".meta-tags"
+                  (apply string-append
+                         (av/map-on
+                           (lambda (k v)
+                             (string-append "<meta name=\"" k "\" content=\"" v "\">\n"))
+                           pairs)))))
+
+    (define (replace-content-tokens attrs)
+      (av/assoc attrs ".content" (inject (av/get attrs ".content") attrs)))
+
+    ;; Page redirects.
+    (define (redirect attrs)
+      (let ((redirect-uri (av/get attrs ".redirect")))
+        (av/assoc attrs
+                  ".redirect-tag"
+                  (if (eq? redirect-uri '())
+                    ""
+                    (string-append "<meta http-equiv=\"refresh\" content=\"0;url=" redirect-uri "\"/>")))))
+
+    (define attr-modifiers
+      (list page-title
+            meta-tags
+            redirect
+            replace-content-tokens))
+
+    (define (generated-attrs attrs)
+      (define (content-list->string)
+        (apply string-append
+               (map (lambda (x) (string-append x "\n"))
+                    (reverse (cdr (reverse content))))))
+      (chain-apply attr-modifiers
+                   (av/assoc attrs ".content" (content-list->string))))
+
+    (define (process-line collect line rest searching)
+      (cond ((eof-object? line)
+             (generated-attrs collect))
+            (searching
+              (process-line (get-pair collect line)
+                            (car rest)
+                            (cdr rest)
+                            (not (irregex-match? end line))))
+            (else
+              (process-line collect
+                            (car rest)
+                            (cdr rest)
+                            (irregex-match? start line)))))
+
+    (process-line default-attrs
+                  (car content)
+                  (cdr content)
+                  #f)))
+
+
+(define (inject line attrs)
+  "Replace tokens in a line of text."
+  (if (eq? '() attrs)
+    line
+    (let ((key (caar attrs))
+          (val (cdar attrs)))
+      (inject (irregex-replace/all
+                `(: (or "{{" "%7B%7B") (* whitespace) ,key (* whitespace) (or "}}" "%7D%7D"))
+                line
+                val)
+              (cdr attrs)))))
+
+
+;; TODO: inject content and handle generated attributes.
+(define (build-file template-fname target-fname attributes)
+  "Build new file from template and inject content/attributes."
+  (with-output-to-file
+    target-fname
+    (lambda ()
+      (with-input-from-file
+        template-fname
+        (lambda ()
+          (let loop ((line (read-line)))
+            (when (not (eof-object? line))
+              (display (inject line attributes))
+              (newline)
+              (loop (read-line)))))))))
+
+
+(define (read-stdin)
+  (define (get-line collect line)
+    (if (eof-object? line)
+      (reverse (cons line collect))
+      (get-line (cons line collect) (read-line))))
+  (get-line '() (read-line)))
+
+
+(define (main args)
+  (let ((template (car args))
+        (target (cadr args))
+        (content (read-stdin)))
+    (build-file template target (attributes content))
+    0))
+
+
+;;; vim: set ft=scheme :
