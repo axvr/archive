@@ -6,8 +6,8 @@ title: Using .gitattributes files
 
 # Using `.gitattributes` files
 
-This document will teach you how to use read and use `.gitattributes` files. To
-learn about the attributes Ascribe uses, read the
+This document will teach you how to use read and use `.gitattributes` files.
+To learn about the attributes Ascribe uses, read the
 [specification](../specification), however it is greatly recommended that you
 read this page first.
 
@@ -43,8 +43,8 @@ trim_trailing_whitespace = true
 
 ## Rules
 
-Each line of a `.gitattributes` file is a separate rule. It begins with a [file
-pattern](#file-pattern), and is followed by a [list of
+Each line of a `.gitattributes` file is a separate rule.  It begins with
+a [file pattern](#file-pattern), and is followed by a [list of
 attributes](#attribute-list) (whitespace is insignificant).
 
 ```
@@ -54,7 +54,7 @@ attributes](#attribute-list) (whitespace is insignificant).
 File pattern             Attribute list
 ```
 
-A file can be matched by multiple rules. In this example a file named
+A file can be matched by multiple rules.  In this example a file named
 `something.vim` will match both the `*` and `*.vim` rules, the resulting
 attribute list will be a combination of the two rules with the lower lines
 taking precedence over the upper lines.
@@ -74,8 +74,8 @@ If an attribute is mentioned in the `.gitattributes` file, it has been
 "explicitly specified".
 
 Attributes which appear in the resulting attribute list but are not in the
-`.gitattibutes` file are "implicitly specified". Sometimes explicitly
-specifying an attribute will cause another to be implicitly specified. For
+`.gitattibutes` file are "implicitly specified".  Sometimes explicitly
+specifying an attribute will cause another to be implicitly specified.  For
 example explicitly setting the `binary` attribute will implicitly unset the
 `diff` attribute.
 
@@ -95,10 +95,10 @@ These states are represented in `.gitattributes` files as the following.
              Explicitly set  to value
 ```
 
-To explicitly set an attribute, just specify its name. To unset it, prepend it
-with a hyphen (`-`). To set to a value append an equals (`=`) and the value.
+To explicitly set an attribute, just specify its name.  To unset it, prepend it
+with a hyphen (`-`).  To set to a value append an equals (`=`) and the value.
 
 ## More information
 
 - [`gitattributes(5)`](https://www.git-scm.com/docs/gitattributes)
-- [`git-check-attr(1)`](https://www.git-scm.com/docs/git-check-attr) - The official `.gitattributes` parser.
+- [`git-check-attr(1)`](https://www.git-scm.com/docs/git-check-attr) — The official `.gitattributes` parser.

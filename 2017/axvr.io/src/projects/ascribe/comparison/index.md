@@ -6,7 +6,7 @@ title: Ascribe vs EditorConfig
 
 # Comparison between EditorConfig and Ascribe
 
-Both Ascribe and EditorConfig have clear advantages and disadvantages. I have
+Both Ascribe and EditorConfig have clear advantages and disadvantages.  I have
 created this page to provide an overview and basic comparison between the two
 tools, to enable you to make an informed decision about which one to use.
 
@@ -15,7 +15,7 @@ tools, to enable you to make an informed decision about which one to use.
 ### [EditorConfig](https://editorconfig.org/)
 
 EditorConfig is a standard which defines a file (`.editorconfig`), and a format
-for that file. The standard also defines several options which that file can
+for that file.  The standard also defines several options which that file can
 contain, each of these options can change the behaviour of the developer's
 editor when editing specific files.
 
@@ -32,11 +32,11 @@ EditorConfig does not depend on any version control tools.
 ### [Ascribe](../)
 
 The Ascribe standard reuses the `.gitattributes` file commonly found in many
-projects. It defines how to use specific attributes in the `.gitattributes` to
+projects.  It defines how to use specific attributes in the `.gitattributes` to
 alter the behaviour of editors.
 
 Ascribe makes use of the existing attributes commonly used by Git (e.g. `eol`
-and `binary`), and adds some editor specific ones on top. These attributes are
+and `binary`), and adds some editor specific ones on top.  These attributes are
 used by Ascribe extensions which can be installed to the editor.
 
 Since Ascribe uses the `.gitattributes` file, and reuses some of the existing

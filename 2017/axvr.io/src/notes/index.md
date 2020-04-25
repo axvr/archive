@@ -24,7 +24,7 @@ Do we still need multi-user operating systems?
 
 Computing resources have become so cheap and important over the last few year
 that almost everyone has their own personal smart phones, and many even have
-their own laptop or desktop. What percentage of users actually need multiple
+their own laptop or desktop.  What percentage of users actually need multiple
 accounts for these devices?
 
 ### 2019-01-06
@@ -36,7 +36,7 @@ space, so whatever his opinion on a related topic (e.g. the block-size limit),
 it would likely influence many others; without proper debate.
 
 His leaving has resulted in Bitcoin development to becoming more decentralised,
-thus improving consensus and security of the network. This is in contrast to
+thus improving consensus and security of the network.  This is in contrast to
 many other blockchains, which typically have a core development team, who hold
 a huge amount of influence over their respective network.
 
@@ -48,7 +48,7 @@ Recently while I was learning about the lambda calculus, it dawned on me that
 mathematical equivalence and can be represented as simple boolean operators.
 
 A boolean equivalence check (`x ≡ y`) is the same as performing an _XNOR_
-operation on the two inputs. Likewise a boolean non-equivalence check (`x ≢ y`)
+operation on the two inputs.  Likewise a boolean non-equivalence check (`x ≢ y`)
 is the same as an _XOR_ operation.
 
 ### 2018-12-31

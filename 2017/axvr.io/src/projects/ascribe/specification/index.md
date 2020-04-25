@@ -9,17 +9,17 @@ title: Ascribe specification
 **Version**: `v1.0`<br>
 **Last modified**: `2019-05-19`
 
-This is the Ascribe specification. If you are unsure how `.gitattributes` files
-work, you can read my document on [using `.gitattributes` files](../usage).
+This is the Ascribe specification.  If you are unsure how `.gitattributes`
+files work, you can read my document on [using `.gitattributes` files](../usage).
 That document also explains the various terms used in this page, e.g.
 "explicitly set/unset".
 
 Most of the time if a specific option is "unspecified", Ascribe should use the
-default settings of the editor or tool, i.e. do nothing. Any exceptions to this
+default settings of the editor or tool, i.e. do nothing.  Any exceptions to this
 are mentioned below.
 
 To reduce risks posed by arbitrary code execution, only specific characters are
-allowed to be used in the value for an option. The value has to match this
+allowed to be used in the value for an option.  The value has to match this
 ([POSIX extended](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_04))
 regular expression: `/[a-zA-Z0-9_.-]*/`.
 
@@ -43,14 +43,14 @@ regular expression: `/[a-zA-Z0-9_.-]*/`.
 
 **Type**: boolean.
 
-Controls whether presses of the tab key will be expanded into spaces. The
+Controls whether presses of the tab key will be expanded into spaces.  The
 number of spaces a tab is expanded to is controlled by [`tab-stop`](#tab-stop).
 
 ## `tab-stop`
 
 **Type**: integer.
 
-The number of spaces which represent a tab character. The most common values
+The number of spaces which represent a tab character.  The most common values
 for this attribute are: `2`, `4` and `8`.
 
 ## `eol`
@@ -83,7 +83,7 @@ Typically this would occur just before saving the file.
 
 The [POSIX specification](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206)
 states that a line should always end with a newline character, including the
-last line of the file. Many tools in the Unix world expect this final newline
+last line of the file.  Many tools in the Unix world expect this final newline
 character to be there, otherwise they may consider the file to be corrupted or
 at the very least, truncated.
 
@@ -97,7 +97,7 @@ inform you if it is missing.
 
 **Type**: integer.
 
-This option is primarily used for line length guides. Ascribe intentionally
+This option is primarily used for line length guides.  Ascribe intentionally
 doesn't try to enforce it.
 
 ## `binary`
@@ -112,17 +112,17 @@ inform the editor that the file contains binary content.
 **Type**: string.
 
 Whenever a file is checked into Git, it will be stored using the UTF-8 file
-encoding. When files are checked out of Git, they will also be encoded in UTF-8
-(regardless of the encoding the file was originally using). The
+encoding.  When files are checked out of Git, they will also be encoded in
+UTF-8 (regardless of the encoding the file was originally using).  The
 `working-tree-encoding` option allows you to override the encoding used when
 checking out the file.
 
-This option is enforced by Git, however there are some limitations. According
+This option is enforced by Git, however there are some limitations.  According
 to the [`gitattributes(5)`](https://www.git-scm.com/docs/gitattributes) manual
 page, there can be pretty major issues when using Git clients which don't
 support the `working-tree-encoding` option.
 
 Because of these issues, this option hasn't yet been implemented in the
-"official" Ascribe extensions. If you must use it, please read the entirety of
-the appropriate section of the `gitattributes(5)` manual page, do it
-manually and inform all contributors about potential issues.
+"official" Ascribe extensions.  If you must use it, please read the entirety of
+the appropriate section of the `gitattributes(5)` manual page, do it manually
+and inform all contributors about potential issues.
