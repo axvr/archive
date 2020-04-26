@@ -1,4 +1,5 @@
 ;;;; Better association lists.
+;;;; Public domain.  No rights reserved.
 
 (module alist (get contains? keys vals
                assoc dissoc merge

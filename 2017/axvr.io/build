@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# No rights reserved.  Public domain.
+
 # TODO: atomic builds.
 # TODO: use GNU parallel?
 # TODO: remove duplicate code.

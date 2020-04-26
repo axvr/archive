@@ -5,6 +5,8 @@
 
 ;;;; Improve readability of HTML documents by making white space at the end of
 ;;;; sentences slightly wider.  (Uses double-space to detect end of sentences.)
+;;;;
+;;;; No rights reserved.  Public domain.
 
 ;;; TODO: support these Markdown/HTML features?
 ;;;   - Quoteblocks (don't touch `>`)
