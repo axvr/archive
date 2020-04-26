@@ -9,8 +9,8 @@ This is a list of my featured projects, you can find the full list on the
 
 ## Active projects
 
-- [Zepl.vim](https://github.com/axvr/zepl.vim) — Lightweight REPL integration
-  for Vim.
+- [Zepl.vim](https://github.com/axvr/zepl.vim) — Lightweight and easy REPL
+  integration for Vim.
 - [MdView](https://github.com/axvr/MdView) — The flexible Markdown control for
   *Xamarin.Forms*.
 - [Ascribe](ascribe) — An alternative to EditorConfig.
