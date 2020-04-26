@@ -1,6 +1,4 @@
-;;;;
 ;;;; Better association lists.
-;;;;
 
 (module alist (get contains? keys vals
                assoc dissoc merge

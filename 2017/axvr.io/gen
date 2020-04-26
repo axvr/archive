@@ -1,5 +1,8 @@
 #!/usr/local/bin/csi -ss
 
+;;; -*- scheme -*-
+;;; vim: set ft=scheme :
+
 ;;;; Alex's lispy static website generator.
 ;;;; ISC licence (c) 2020 Alex Vear
 
@@ -14,11 +17,12 @@
 (define default-attrs
   '(("author" . "Alex Vear")
     ("generator" . "Custom generator written in CHICKEN Scheme")
-    ("copyright" . "CC BY 4.0 (c) 2020 Alex Vear")))
+    ("copyright" . "CC BY 4.0 (c) 2020 Alex Vear")
+    (".head" . "")))
 
 
+;;; Successively apply each function in a list to a value.
 (define (chain-apply fns val)
-    "Successively apply each function in a list to a value."
     (if (eq? '() fns)
       val
       (chain-apply (cdr fns)
@@ -155,6 +159,3 @@
         (content (read-stdin)))
     (build-file template target (attributes content))
     0))
-
-
-;;; vim: set ft=scheme :
