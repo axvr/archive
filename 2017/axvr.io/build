@@ -21,13 +21,12 @@ fi
 )
 
 dest () { echo "$1" | sed 's/^src\/\(.*\)\..*\?$/dist\/\1.html/'; }
-gen () { cat | ./gen 'template.html' "$1"; }
 
 for page in $(find src/ -type f -name '*.html'); do
     {
         dest="$(dest "$page")"
         mkdir -p "$(dirname "$dest")"
-        gen "$dest" < "$page"
+        ./2sp < "$page" | ./gen 'template.html' "$dest"
         echo "$page --> $dest"
     } &
 done
@@ -36,7 +35,7 @@ for page in $(find src/ -type f -name '*.md'); do
     {
         dest="$(dest "$page")"
         mkdir -p "$(dirname "$dest")"
-        pandoc -f gfm -t html "$page" | gen "$dest"
+        ./2sp < "$page" | pandoc -f gfm -t html | ./gen 'template.html' "$dest"
         echo "$page --> $dest"
     } &
 done
