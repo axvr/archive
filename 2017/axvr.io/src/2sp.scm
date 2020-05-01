@@ -1,4 +1,4 @@
-#!/usr/local/bin/csi -ss
+#!/usr/local/bin/csi -script
 
 ;;; -*- scheme -*-
 ;;; vim: set ft=scheme :

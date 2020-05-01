@@ -11,7 +11,7 @@ src/2sp: src/2sp.scm
 	csc -o src/2sp src/2sp.scm
 
 serve:
-	./src/serve.sh
+	cd dist && python3 -m http.server 8000
 
 clean:
 	rm -f src/*.o
