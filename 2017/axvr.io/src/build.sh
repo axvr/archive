@@ -15,29 +15,29 @@ else
 fi
 
 (
-    cd src
+    cd content
     # TODO: don't require assets dir hack.
     for i in $(find . -name 'assets' -type d); do
         rsync -rR "$i" ../dist/
     done
 )
 
-dest () { echo "$1" | sed 's/^src\/\(.*\)\..*\?$/dist\/\1.html/'; }
+dest () { echo "$1" | sed 's/^content\/\(.*\)\..*\?$/dist\/\1.html/'; }
 
-for page in $(find src/ -type f -name '*.html'); do
+for page in $(find content/ -type f -name '*.html'); do
     {
         dest="$(dest "$page")"
         mkdir -p "$(dirname "$dest")"
-        ./2sp < "$page" | ./gen 'template.html' "$dest"
+        ./src/2sp < "$page" | ./src/gen 'template.html' "$dest"
         echo "$page --> $dest"
     } &
 done
 
-for page in $(find src/ -type f -name '*.md'); do
+for page in $(find content/ -type f -name '*.md'); do
     {
         dest="$(dest "$page")"
         mkdir -p "$(dirname "$dest")"
-        ./2sp < "$page" | pandoc -f gfm -t html | ./gen 'template.html' "$dest"
+        ./src/2sp < "$page" | pandoc -f gfm -t html | ./src/gen 'template.html' "$dest"
         echo "$page --> $dest"
     } &
 done

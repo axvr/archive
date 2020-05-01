@@ -1,4 +1,4 @@
-#!/usr/local/bin/csi -ss
+#!/usr/local/bin/csi -script
 
 ;;; -*- scheme -*-
 ;;; vim: set ft=scheme :
@@ -7,10 +7,13 @@
 ;;;; Public domain.  No rights reserved.
 
 
-(load "lib/alist.scm")
+(cond-expand
+  (compiling (declare (uses alist)))
+  (else (load "scripts/alist.scm")))
 
 (import (chicken io)
         (chicken irregex)
+        (chicken process-context)
         (prefix alist av/))
 
 
@@ -30,6 +33,7 @@
 
 
 ;; TODO: clean up everything in this function.
+;; TODO: make this faster.  This is the bottleneck.
 (define (attributes content)
   "Retrieve attributes from a file."
   (let ((start '(: bol (* whitespace) "<!--" (* whitespace) "METADATA" (* whitespace) eol))
@@ -153,9 +157,7 @@
   (get-line '() (read-line)))
 
 
-(define (main args)
-  (let ((template (car args))
-        (target (cadr args))
-        (content (read-stdin)))
-    (build-file template target (attributes content))
-    0))
+(let ((template (car (command-line-arguments)))
+      (target (cadr (command-line-arguments)))
+      (content (read-stdin)))
+  (build-file template target (attributes content)))

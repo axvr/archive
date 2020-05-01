@@ -1,6 +1,8 @@
 ;;;; Better association lists.
 ;;;; Public domain.  No rights reserved.
 
+(declare (unit alist))
+
 (module alist (get contains? keys vals
                assoc dissoc merge
                map-on map-on-vals map-on-keys)

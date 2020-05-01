@@ -1,3 +1,7 @@
 dist/
 DOING
 DONE
+src/*.o
+alist.import.scm
+src/2sp
+src/gen

@@ -8,11 +8,7 @@
 ;;;;
 ;;;; No rights reserved.  Public domain.
 
-;;; TODO: support these Markdown/HTML features?
-;;;   - Quoteblocks (don't touch `>`)
-;;;   - Pre/code blocks (don't modify)
-
-;;; TODO: combine both regular expressions?
+;;; TODO: simplify and combine both regular expressions?
 
 (import (chicken io)
         (chicken irregex))
@@ -20,18 +16,20 @@
 (define thin-space " ")  ; &thinsp;
 
 (define (repair)
-  (define 2-space '(: (=> punct
-                          (or #\. #\! #\?)
-                          (* (or #\) #\] #\" #\')))
-                      (= 2 " ")
-                      (=> first
-                          (* (or #\( #\[ #\" #\'))
-                          (or upper-case numeric))))
+  (define 2-space
+    '(: (=> punct
+            (or #\. #\! #\?)
+            (* (or #\) #\] #\" #\')))
+        (= 2 " ")
+        (=> first
+            (* (or #\( #\[ #\" #\'))
+            (or upper-case numeric))))
 
-  (define end-of-line '(: (=> punct
-                              (or #\. #\! #\?)
-                              (* (or #\) #\] #\" #\')))
-                          eol))
+  (define end-of-line
+    '(: (=> punct
+            (or #\. #\! #\?)
+            (* (or #\) #\] #\" #\')))
+        eol))
 
   (define (process-line line)
     (when (not (eof-object? line))
@@ -51,6 +49,4 @@
       (process-line (read-line))))
     (process-line (read-line)))
 
-(define (main args)
-  (repair)
-  0)
+(repair)

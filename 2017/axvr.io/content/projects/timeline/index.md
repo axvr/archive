@@ -49,6 +49,7 @@ We're just getting started.
 These were the early days; I was just beginning to learn how to write code, how
 stuff works and electrical engineering basics.
 
+
 <dl>
 
   <dt><code>2019-02</code> <i>Finished apprenticeship, stayed on.</i></dt>
