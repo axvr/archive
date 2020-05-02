@@ -1,3 +1,5 @@
+# Public domain.  No rights reserved.
+
 all: src/2sp src/gen
 
 src/alist.o: src/alist.scm
