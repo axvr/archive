@@ -92,7 +92,7 @@ These states are represented in `.gitattributes` files as the following.
       |__________| |__________| |_______|
             |            |          |
      Explicitly set      |   Explicitly unset
-             Explicitly set  to value
+             Explicitly set to value
 ```
 
 To explicitly set an attribute, just specify its name.  To unset it, prepend it
