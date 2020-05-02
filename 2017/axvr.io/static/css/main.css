@@ -19,6 +19,10 @@
 }
 #linkbar ul li i { padding-right: 4px; }
 
+.side-content {
+	padding-top: 20px;
+}
+
 body {
 	font-family: 'Libre Franklin', sans-serif;
 	font-size: 16px;
@@ -103,7 +107,7 @@ summary { cursor: pointer; }
 		padding-right: 7px;
 	}
 	#linkbar ul li i { display: none; }
-	#side-content, #copyright {
+	.side-content {
 		visibility: hidden;
 		display: none;
 	}
