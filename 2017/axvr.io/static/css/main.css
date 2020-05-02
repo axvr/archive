@@ -103,7 +103,7 @@ summary { cursor: pointer; }
 		padding-right: 7px;
 	}
 	#linkbar ul li i { display: none; }
-	#side-content, #licence {
+	#side-content, #copyright {
 		visibility: hidden;
 		display: none;
 	}

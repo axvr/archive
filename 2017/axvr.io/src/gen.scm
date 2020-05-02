@@ -22,8 +22,8 @@
     ("generator" . "Custom generator written in CHICKEN Scheme")
     ("copyright" . "Copyright (c) 2020, Alex Vear.  Available under the CC BY 4.0.")
     #;("copyright" . "Public domain.  No rights reserved.")
-    (".licence" . "<p>All content on this page is available under the terms of the <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a> licence.</p>")
-    #;(".licence" . "<p>All content on this page is dedicated to the <a href=\"/legal/copyright/public-domain\">public domain</a> using the <a title=\"Creative Commons Zero 1.0 Universal\" href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0</a> public domain dedication.</p>")
+    (".copyright-notice" . "<p>All content on this page is available under the terms of the <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a> licence.</p>")
+    #;(".copyright-notice" . "<p>All content on this page is dedicated to the <a href=\"/legal/copyright/public-domain\">public domain</a> using the <a title=\"Creative Commons Zero 1.0 Universal\" href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0</a> public domain dedication.</p>")
     (".head" . "")))
 
 
