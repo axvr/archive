@@ -1,12 +1,10 @@
-# Home
+# Who am I?
 
-Welcome to my website, this is where I document my ideas and projects.
+I'm a software developer at [Numerous Technology](https://numerous.app).
+I spend my free time learning, writing and working on personal projects.
 
-I create original ideas and sometimes improve upon the ideas of others.  If an
-idea meets or surpasses my high standards, I put it into practice.
+Currently I'm trying to improve the ways we design, program and use computers
+through the creation of tools to make it easier to build rich interactive GUI
+applications, design custom processor architectures and much more.
 
-If you would like to contact me, please do so via [email](/contact).
-
-The source code for my software projects can be found on my
-[GitHub profile](https://github.com/axvr) and/or my
-[Sourcehut profile](https://git.sr.ht/~axvr/) (username: `axvr`).
+Please send any questions, comments and corrections to me via [email](contact).
