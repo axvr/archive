@@ -4,7 +4,8 @@ title: Projects
 
 # Projects and contributions
 
-This is a list of my featured projects.
+This is a list of my featured projects, you can find the full list on the
+[project timeline](timeline).
 
 ## Active projects
 

@@ -90,6 +90,14 @@ details {
 }
 summary { cursor: pointer; }
 
+div .date {
+	font-family: 'Lato', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	color: #666;
+	margin-top: -10px;
+}
+
 @media all and (max-width: 815px) {
 	body {
 		padding: 5px 5%;

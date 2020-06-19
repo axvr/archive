@@ -27,4 +27,4 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 ## Official extensions
 
 - [Vim](https://github.com/axvr/ascribe.vim)
-- Git Hooks (_Planned_)
+- Git Hooks (_Not started_)
