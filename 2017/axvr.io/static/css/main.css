@@ -11,17 +11,13 @@
 .content { grid-area: content; }
 .content img { max-width: 100%; }
 .sidebar { grid-area: sidebar; }
-
+.side-content { padding-top: 20px; }
 #linkbar ul {
 	list-style: none;
 	padding-left: 0px;
 	margin: 0px;
 }
 #linkbar ul li i { padding-right: 4px; }
-
-.side-content {
-	padding-top: 20px;
-}
 
 body {
 	font-family: 'Libre Franklin', sans-serif;

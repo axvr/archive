@@ -9,26 +9,22 @@
 
   (import (except scheme assoc))
 
-  (define (empty? list)
-    "Check if a list is empty."
-    (eq? list '()))
-
   (define (get alist key)
     "Retrieve value from a alist."
-    (cond ((empty? alist) '())
+    (cond ((null? alist) '())
           ((equal? key (caar alist))
            (cdar alist))
           (else (get (cdr alist) key))))
 
   (define (contains? alist key)
-    "Check if a alist contains a specfied key."
-    (cond ((empty? alist) #f)
+    "Check if an alist contains a specfied key."
+    (cond ((null? alist) #f)
           ((equal? key (caar alist)) #t)
           (else (contains? (cdr alist) key))))
 
   (define (assoc alist key value)
     "Associate a key in a alist with a value."
-    (cond ((empty? alist) (list (cons key value)))
+    (cond ((null? alist) (list (cons key value)))
           ((equal? key (caar alist))
            (cons (cons key value)
                  (cdr alist)))
@@ -37,7 +33,7 @@
 
   (define (dissoc alist key)
     "Dissociate a key from a alist."
-    (cond ((empty? alist) '())
+    (cond ((null? alist) '())
           ((equal? key (caar alist))
            (dissoc (cdr alist) key))
           (else (cons (car alist)
@@ -45,7 +41,7 @@
 
   (define (merge base override)
     "Merge 2 alists into 1."
-    (if (empty? override)
+    (if (null? override)
       base
       (merge (assoc base
                     (caar override)

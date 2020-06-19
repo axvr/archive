@@ -9,7 +9,7 @@
 
 (cond-expand
   (compiling (declare (uses alist)))
-  (else (load "scripts/alist.scm")))
+  (else (load "src/alist.scm")))
 
 (import (chicken io)
         (chicken irregex)
@@ -36,7 +36,6 @@
 
 
 ;; TODO: clean up everything in this function.
-;; TODO: make this faster.  This is the bottleneck.
 (define (attributes content)
   "Retrieve attributes from a file."
   (let ((start '(: bol (* whitespace) "<!--" (* whitespace) "METADATA" (* whitespace) eol))
@@ -62,21 +61,20 @@
 
     ;; HTML meta tags.
     (define (meta-tags attrs)
-      (let ((pairs (av/dissoc
-                     (av/map-on-keys
-                       (lambda (x)
-                         (if (eq? #\. (car (string->list x)))
-                           "PRIVATE"
-                           x))
-                       attrs)
-                     "PRIVATE")))
-        (av/assoc attrs
-                  ".meta-tags"
-                  (apply string-append
-                         (av/map-on
-                           (lambda (k v)
-                             (string-append "<meta name=\"" k "\" content=\"" v "\">\n"))
-                           pairs)))))
+      (av/assoc attrs
+                ".meta-tags"
+                (apply string-append
+                       (av/map-on
+                         (lambda (k v)
+                           (string-append "<meta name=\"" k "\" content=\"" v "\">\n"))
+                         (av/dissoc
+                           (av/map-on-keys
+                             (lambda (x)
+                               (if (eq? #\. (car (string->list x)))
+                                 "PRIVATE"
+                                 x))
+                             attrs)
+                           "PRIVATE")))))
 
     (define (replace-content-tokens attrs)
       (av/assoc attrs ".content" (inject (av/get attrs ".content") attrs)))
@@ -96,13 +94,13 @@
             redirect
             replace-content-tokens))
 
+    ;; TODO: make this faster.  This entire function is the bottleneck.
     (define (generated-attrs attrs)
-      (define (content-list->string)
-        (apply string-append
-               (map (lambda (x) (string-append x "\n"))
-                    (reverse (cdr (reverse content))))))
-      (chain-apply attr-modifiers
-                   (av/assoc attrs ".content" (content-list->string))))
+      (let ((content2 (apply string-append
+                             (map (lambda (x) (string-append x "\n"))
+                                  (reverse (cdr (reverse content)))))))
+        (chain-apply attr-modifiers
+                     (av/assoc attrs ".content" content2))))
 
     (define (process-line collect line rest searching)
       (cond ((eof-object? line)
