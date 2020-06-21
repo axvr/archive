@@ -18,7 +18,7 @@ h5 {
     margin-bottom: 0px;
     margin-top: 25px;
     color: #999;
-    font-size: 20px;
+    font-size: 1.25em;
     font-style: italic;
 }
 </style>

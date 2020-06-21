@@ -21,8 +21,8 @@
 
 body {
 	font-family: 'Libre Franklin', sans-serif;
-	font-size: 16px;
-	line-height: 24px;
+	font-size: 100%;
+	line-height: 150%;
 	color: #131516;
 	min-width: auto;
 	max-width: 1000px;
@@ -38,10 +38,10 @@ h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
 	font-weight: normal;
 }
-h1 { font-size: 24px; }
-h2 { font-size: 22px; }
-h3 { font-size: 20px; }
-h4 { font-size: 18px; }
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.375em; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1.125em; }
 
 a:link, a:visited { color: #2a5db0; }
 a:hover, a:focus { color: #8963A6; }
@@ -93,7 +93,7 @@ summary { cursor: pointer; }
 div .date {
 	font-family: 'Lato', sans-serif;
 	font-weight: normal;
-	font-size: 18px;
+	font-size: 1.125em;
 	color: #666;
 	margin-top: -10px;
 }
