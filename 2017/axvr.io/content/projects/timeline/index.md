@@ -7,14 +7,14 @@ title: Project timeline
 -->
 
 <style>
-h2 {
+.content h2 {
     margin-top: 30px;
 }
 div .date {
     margin-bottom: -3px;
 }
 /* Context */
-h5 {
+.content h5 {
     margin-bottom: 0px;
     margin-top: 25px;
     color: #999;
