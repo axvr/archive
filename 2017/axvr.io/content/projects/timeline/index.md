@@ -1,9 +1,9 @@
 <!-- METADATA
 title: Project timeline
 
-.maintainer: <b>Maintainer</b>
-.active: <b>Active</b>
-.complete: <b>Complete</b>
+.maintainer: <b title="I was a maintainer, (but not original author) of this project for the given time period.">Maintainer</b>
+.active: <b title="I am actively working on this project.">Active</b>
+.complete: <b title="I consider this project to be complete but I still maintain and provide support for it.">Complete</b>
 -->
 
 <style>
@@ -32,26 +32,10 @@ pretty basic, but you have to start somewhere.  This page explains the
 motivation behind my projects and provides a permanent archive for the really
 small ones.
 
-<details>
-<summary>Some entries have a tag beside the date, click here to view what they mean.</summary>
-
-<dl>
-  <dt>{{.active}}</dt>
-  <dd>I am actively working on the project.</dd>
-  <dt>{{.complete}}</dt>
-  <dd>I consider the project to be complete but still maintain and provide support for it.</dd>
-  <dt>{{.maintainer}}</dt>
-  <dd>I was a maintainer, (but not original author) of the project for the given time period.</dd>
-</dl>
-
-</details>
-
-(Hovering your mouse cursor over the years will show the exact dates.)
-
 ---
 
 ## [Zepl.vim](https://github.com/axvr/zepl.vim)
-<div class="date" title="2020-02-23 &ndash; Present">2020 &ndash; Present&ensp;{{.active}}</div>
+<div class="date"><span title="2020-02-23 &ndash; Present">2020 &ndash; Present</span>&ensp;{{.active}}</div>
 
 Zepl is a lightweight, simple and easy to use REPL integration package for Vim
 8.1+ and Neovim.  It provides a small set of key bindings and commands to start
@@ -59,13 +43,13 @@ and interact with a running REPL.
 
 
 ## [MdView](https://github.com/axvr/MdView)
-<div class="date" title="2020-01-28 &ndash; Present">2020 &ndash; Present&ensp;{{.active}}</div>
+<div class="date"><span title="2020-01-28 &ndash; Present">2020 &ndash; Present</span>&ensp;{{.active}}</div>
 
 The flexible Markdown control for Xamarin.Forms.
 
 
 ## [Ascribe](/projects/ascribe)
-<div class="date" title="2019-04-21 &ndash; Present">2019 &ndash; Present&ensp;{{.active}}</div>
+<div class="date"><span title="2019-04-21 &ndash; Present">2019 &ndash; Present</span>&ensp;{{.active}}</div>
 
 Ascribe is a standard for software development tools (specifically editors) to
 retrieve and handle information on the various files within a project through
@@ -75,7 +59,7 @@ It is essentially an alternative to [EditorConfig](https://editorconfig.org/).
 
 
 ## [Photon.vim](https://github.com/axvr/photon.vim)
-<div class="date" title="2019-03-23 &ndash; 2020-02-23">2019 &ndash; 2020&ensp;{{.complete}}</div>
+<div class="date"><span title="2019-03-23 &ndash; 2020-02-23"><span>2019 &ndash; 2020</span>&ensp;{{.complete}}</div>
 
 An elegant, dark colour scheme with minimal syntax highlighting for Vim.
 
@@ -88,7 +72,7 @@ same on 256 colour terminals as it does on true colour terminals.
 
 
 ## [Org.vim](https://github.com/axvr/org.vim)
-<div class="date" title="2018-11-03 &ndash; 2020-05-03">2018 &ndash; 2020&ensp;{{.complete}}</div>
+<div class="date"><span title="2018-11-03 &ndash; 2020-05-03">2018 &ndash; 2020</span>&ensp;{{.complete}}</div>
 
 Org.vim is a minimal [Org mode](https://orgmode.org/) plugin for Vim.  It
 provides only the absolute necessities (e.g. syntax highlighting and folding)
@@ -123,7 +107,7 @@ over the years, ranging from experiments to fully functioning programs.
 
 
 ## [This website](https://github.com/axvr/axvr.github.io)
-<div class="date" title="2017-09-09 &ndash; Present">2017 &ndash; Present&ensp;{{.active}}</div>
+<div class="date"><span title="2017-09-09 &ndash; Present">2017 &ndash; Present</span>&ensp;{{.active}}</div>
 
 This website was created.  Didn't look anything like it does now though.
 
@@ -142,7 +126,7 @@ package management.
 
 
 ## [dotfiles](https://github.com/axvr/dotfiles)
-<div class="date" title="2017-04-16 &ndash; Present">2017 &ndash; Present&ensp;{{.active}}</div>
+<div class="date" title="2017-04-16 &ndash; Present">2017 &ndash; Present</div>
 
 A Git repository containing the configuration files I use for various
 development tools.
