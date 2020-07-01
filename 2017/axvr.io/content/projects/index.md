@@ -9,8 +9,6 @@ This is a list of my featured projects, you can find the full list on the
 
 ## Active projects
 
-- [Zepl.vim](https://github.com/axvr/zepl.vim) — Lightweight and easy REPL
-  integration for Vim.
 - [MdView](https://github.com/axvr/MdView) — The flexible Markdown control for
   *Xamarin.Forms*.
 - [Ascribe](ascribe) — An alternative to EditorConfig.
@@ -19,10 +17,12 @@ This is a list of my featured projects, you can find the full list on the
 
 - [Photon.vim](https://github.com/axvr/photon.vim) — An elegant dark Vim colour
   scheme with minimal syntax highlighting that cares about the little details.
+- [Zepl.vim](https://github.com/axvr/zepl.vim) — Lightweight, simple and easy
+  REPL integration for Vim and Neovim.
+- [Org.vim](https://github.com/axvr/org.vim) — Org mode and Outline mode syntax
+  highlighting and folding for Vim.
 - [Thermoelectric generator](teg) — An attempt to create a cheap thermoelectric
   generator capable of charging a mobile phone.
-- [Org.vim](https://github.com/axvr/org.vim) — A very minimal Org mode and
-  Outline mode plugin for Vim providing only syntax highlighting and folding.
 
 ## Contribute to
 

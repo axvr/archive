@@ -35,7 +35,7 @@ small ones.
 ---
 
 ## [Zepl.vim](https://github.com/axvr/zepl.vim)
-<div class="date"><span title="2020-02-23 &ndash; Present">2020 &ndash; Present</span>&ensp;{{.active}}</div>
+<div class="date"><span title="2020-02-23 &ndash; 2020-07-01">2020</span>&ensp;{{.complete}}</div>
 
 Zepl is a lightweight, simple and easy to use REPL integration package for Vim
 8.1+ and Neovim.  It provides a small set of key bindings and commands to start
