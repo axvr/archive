@@ -1,0 +1,19 @@
+- Add more useful Lisp functions/special forms.
+  - Let?
+  - Cond?
+  - IfLet?
+  - WhenLet?
+  - Threading macros?
+  - Empty?
+  - Except? (opposite of Where)
+  - Bind?
+  - Fold/ForEach?
+  - Not?  E.g. `.Where(Not(string.IsNullOrEmpty))`
+  - ...
+- Naming: WhenNot vs. Unless (IfNot?)
+- Unit tests.
+- Documentation.
+- Add documentation comments.
+- Release first version.
+- Configure CI.
+- Rename namespace or rename folder to match namespace.

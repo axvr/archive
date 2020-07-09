@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>Numerous Technology;Alex Vear</Authors>
+    <PackageId>LinqLisp</PackageId>
+    <PackageIconUrl></PackageIconUrl>
+    <Title>LinqLisp</Title>
+    <Summary></Summary>
+    <Description></Description>
+    <Copyright>Copyright © 2020, Numerous Technology</Copyright>
+    <IsPackable>true</IsPackable>
+    <RepositoryUrl>https://github.com/NumerousTechnology/LinqLisp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <PackageTage>.NET;Lisp;Linq;Expression;Conditional;Tree</PackageTage>
+  </PropertyGroup>
+
+</Project>
