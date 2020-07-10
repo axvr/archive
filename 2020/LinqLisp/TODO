@@ -1,6 +1,5 @@
 - Add more useful Lisp functions/special forms.
   - Let?
-  - Cond?
   - IfLet?
   - WhenLet?
   - Threading macros?
@@ -9,6 +8,8 @@
   - Bind?
   - Fold/ForEach?
   - Not?  E.g. `.Where(Not(string.IsNullOrEmpty))`
+  - While/Until looping?
+  - Batch?
   - ...
 - Naming: WhenNot vs. Unless (IfNot?)
 - Unit tests.
