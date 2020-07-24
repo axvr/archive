@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LinqLisp
 {
-    public static partial class LinqLisp
+    public static partial class Conditionals
     {
         public static IEnumerable<TSource> When<TSource>(this IEnumerable<TSource> source, bool cond, Func<IEnumerable<TSource>, IEnumerable<TSource>> then)
         {
