@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Numerous.LinqLisp
+namespace LinqLisp
 {
     public static partial class LinqLisp
     {
