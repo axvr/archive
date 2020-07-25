@@ -38,7 +38,7 @@ for page in $(find content/ -type f -name '*.md'); do
         dest="$(dest "$page")"
         mkdir -p "$(dirname "$dest")"
         ./src/2sp < "$page" | pandoc -f gfm -t html | ./src/gen 'template.html' "$dest"
-        echo "$page --> $dest"
+        echo "$page -> $dest"
     } &
 done
 
