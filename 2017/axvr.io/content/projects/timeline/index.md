@@ -4,6 +4,7 @@ title: Project timeline
 .maintainer: <b title="I was a maintainer, (but not original author) of this project for the given time period.">Maintainer</b>
 .active: <b title="I am actively working on this project.">Active</b>
 .complete: <b title="I consider this project to be complete but I still maintain and provide support for it.">Complete</b>
+.fav: <span title="Featured project.">★</span>
 -->
 
 <style>
@@ -27,14 +28,12 @@ div .date {
 
 # {{ title }}
 
-The following is a list of my all of my projects, some of the early ones are
-pretty basic, but you have to start somewhere.  This page explains the
-motivation behind my projects and provides a permanent archive for the really
-small ones.
+This is a list of all my projects.  Lots of small bits of code I've wrote over
+the years have been archived within my [_code dump_](#code-dump) repository.
 
 ---
 
-## [Zepl.vim](https://github.com/axvr/zepl.vim)
+## [Zepl.vim](https://github.com/axvr/zepl.vim) {{.fav}}
 <div class="date"><span title="2020-02-23 &ndash; 2020-07-01">2020</span>&ensp;{{.complete}}</div>
 
 Zepl is a lightweight, simple and easy to use REPL integration package for Vim
@@ -42,23 +41,23 @@ Zepl is a lightweight, simple and easy to use REPL integration package for Vim
 and interact with a running REPL.
 
 
-## [MdView](https://github.com/axvr/MdView)
+## [MdView](https://github.com/axvr/MdView) {{.fav}}
 <div class="date"><span title="2020-01-28 &ndash; Present">2020 &ndash; Present</span>&ensp;{{.active}}</div>
 
 The flexible Markdown control for Xamarin.Forms.
 
 
-## [Ascribe](/projects/ascribe)
+## [Ascribe](/projects/ascribe) {{.fav}}
 <div class="date"><span title="2019-04-21 &ndash; Present">2019 &ndash; Present</span>&ensp;{{.active}}</div>
 
 Ascribe is a standard for software development tools (specifically editors) to
 retrieve and handle information on the various files within a project through
 the `.gitattributes` file already found in many software projects.
 
-It is essentially an alternative to [EditorConfig](https://editorconfig.org/).
+It is essentially a simpler alternative to [EditorConfig](https://editorconfig.org/).
 
 
-## [Photon.vim](https://github.com/axvr/photon.vim)
+## [Photon.vim](https://github.com/axvr/photon.vim) {{.fav}}
 <div class="date"><span title="2019-03-23 &ndash; 2020-02-23"><span>2019 &ndash; 2020</span>&ensp;{{.complete}}</div>
 
 An elegant, dark colour scheme with minimal syntax highlighting for Vim.
@@ -71,16 +70,17 @@ same on 256 colour terminals as it does on true colour terminals.
 ##### Finished apprenticeship, stayed on.  2019-02
 
 
-## [Org.vim](https://github.com/axvr/org.vim)
+## [Org.vim](https://github.com/axvr/org.vim) {{.fav}}
 <div class="date"><span title="2018-11-03 &ndash; 2020-05-03">2018 &ndash; 2020</span>&ensp;{{.complete}}</div>
 
-Org.vim is a minimal [Org mode](https://orgmode.org/) plugin for Vim.  It
-provides only the absolute necessities (e.g. syntax highlighting and folding)
-at a high standard.
+Org.vim is a minimal [Org mode](https://orgmode.org/) and Outline mode plugin
+for Vim providing only syntax highlighting and folding.
 
-The main goal of this plugin is to replicate [Vim's default
-Markdown](https://github.com/tpope/vim-markdown/) editing experience but for
-Org mode files.
+It aims to replicate Vim’s [existing Markdown](https://github.com/tpope/vim-markdown/)
+editing experience on Org mode (and Outline mode) files, rather than trying to
+be a full featured Org mode plugin—that is what [Emacs](https://www.gnu.org/software/emacs/)
+is for.  Originally created so I could use [Orgzly](https://github.com/orgzly/orgzly-android/)
+without worrying Emacs lock-in.
 
 
 ## [txtdb](https://github.com/axvr/txtdb)
@@ -160,7 +160,7 @@ scratch.
 ##### Began learning Vim.  2016-09
 
 
-## [Thermoelectric generator (TEG)](/projects/teg)
+## [Thermoelectric generator (TEG)](/projects/teg) {{.fav}}
 <div class="date" title="2015-11-08 &ndash; 2016-02">2015 &ndash; 2016</div>
 
 While taking part in a mini survival-like competition as a teenager, I thought

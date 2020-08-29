@@ -15,10 +15,10 @@ This is a list of my featured projects, you can find the full list on the
 
 ## Completed projects
 
-- [Photon.vim](https://github.com/axvr/photon.vim) — An elegant dark Vim colour
-  scheme with minimal syntax highlighting that cares about the little details.
 - [Zepl.vim](https://github.com/axvr/zepl.vim) — Lightweight, simple and easy
   REPL integration for Vim and Neovim.
+- [Photon.vim](https://github.com/axvr/photon.vim) — A dark Vim colour scheme
+  with minimal syntax highlighting.
 - [Org.vim](https://github.com/axvr/org.vim) — Org mode and Outline mode syntax
   highlighting and folding for Vim.
 - [Thermoelectric generator](teg) — An attempt to create a cheap thermoelectric
