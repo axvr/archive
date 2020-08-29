@@ -39,6 +39,10 @@
   content: "\f121"
 }
 
+.fa-envelope:before {
+  content: "\f0e0"
+}
+
 /*
 .fa-home:before {
   content: "\f015"
@@ -59,9 +63,5 @@
 
 .fa-key:before {
   content: "\f084"
-}
-
-.fa-envelope:before {
-  content: "\f0e0"
 }
 */
