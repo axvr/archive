@@ -4,19 +4,18 @@ title: Ascribe
 
 # Ascribe
 
-### An alternative to [EditorConfig](https://editorconfig.org/).
+### A simpler alternative to [EditorConfig](https://editorconfig.org/).
 
 Ascribe is a standard for software development tools (specifically editors) to
-retrieve and handle information on the various files within a project through
-the `.gitattributes` file already found in many software projects.
+retrieve and handle useful information about various files within a project
+through the `.gitattributes` file already found in many software projects.
 
-While EditorConfig does mostly achieve the same goal, it is solely focused on
-editors, therefore it doesn't (_easily_) allow anyone to add additional options for
-other types of development tools.
+By using the `.gitattributes` file, Ascribe keeps all information about the
+files in a project in a single place, and encourages the improvement of
+existing—and arguably more useful—`.gitattributes` parsers.
 
-Ascribe is designed to allow software developers to keep all information about
-the files in their projects in one place, and encourages the improvement of the
-existing (and arguably, much more useful) `.gitattributes` parsers.
+Ascribe extensions tend to be much smaller, faster and simpler than their
+EditorConfig counterparts.
 
 ## Want to learn more?
 
@@ -24,7 +23,7 @@ existing (and arguably, much more useful) `.gitattributes` parsers.
 - [Using `.gitattributes` files](usage).
 - [Ascribe specification](specification).
 
-## Official extensions
+## Extensions
 
 - [Vim](https://github.com/axvr/ascribe.vim)
 - Git Hooks (_Not started_)

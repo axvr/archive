@@ -78,6 +78,7 @@ Ascribe depends on the [Git version control system](https://git-scm.com/).
   [GitHub](https://github.com/)'s file type detection can be overridden using
   the [`linguist-language` attribute][]), this makes `.gitattributes` parsers
   much more useful than their `.editorconfig` counterparts.
+- Global `.gitattributes` file are possible (although not recommended).
 
 [`linguist-language` attribute]: https://github.com/github/linguist#using-gitattributes
 
