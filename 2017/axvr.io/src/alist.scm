@@ -9,6 +9,8 @@
 
   (import (except scheme assoc))
 
+  ;; TODO: alist? function
+
   (define (get alist key)
     "Retrieve value from a alist."
     (cond ((null? alist) '())

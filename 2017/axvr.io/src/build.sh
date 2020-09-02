@@ -10,6 +10,7 @@ if [ -d dist ]; then
     rm -rf dist/*
     cp -r static/* dist
 else
+    git worktree remove -f dist
     git worktree add dist master
     exec "$0"
 fi

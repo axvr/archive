@@ -11,7 +11,7 @@ This is a list of my featured projects, you can find the full list on the
 
 - [MdView](https://github.com/axvr/MdView) — The flexible Markdown control for
   *Xamarin.Forms*.
-- [Ascribe](ascribe) — An alternative to EditorConfig.
+- [Ascribe](ascribe) — A simpler alternative to EditorConfig.
 
 ## Completed projects
 
