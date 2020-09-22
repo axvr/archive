@@ -7,8 +7,8 @@
     [ring.middleware.resource         :refer [wrap-resource]]
     [ring.middleware.content-type     :refer [wrap-content-type]]
     [ring.middleware.not-modified     :refer [wrap-not-modified]]
-    [org.enqueue.router               :refer [router route-map
-                                              wrap-ignore-trailing-slash]]))
+    [org.enqueue.router               :refer [router route-map]]
+    [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash]]))
 
 ;; TODO: DB.
 ;; TODO: File upload/download and storage.
