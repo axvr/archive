@@ -1,29 +1,13 @@
 (ns org.enqueue.router
   (:require
     [clout.core                    :refer [route-matches]]
-    [hiccup.core                   :refer [html]]
-    [org.enqueue.router.middleware :refer [wrap-async]]))
-
-(defn not-found-handler [request]
-  {:status 404
-   :headers {"Content-Type" "text/html"}
-   :body "<h1>404</h1>"})
-
-(defn home-handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body (html [:html
-                [:head
-                 [:title "Enqueue API"]]
-                [:body
-                 [:h1 "Enqueue API"]
-                 [:p "YOUR digital music collection, anywhere."]]])})
-
-(defn about-handler [req] {:status 200
-                           :headers {"Content-Type" "text/html"}
-                           :body "<h1>About Enqueue</h1>"})
+    [org.enqueue.router.middleware :refer [wrap-async]]
+    [org.enqueue.handlers          :refer [home-handler
+                                           about-handler
+                                           not-found-handler]]))
 
 ;; TODO: Rewrite/redirect rules.
+
 (def route-map
   [["/"      {:get {:handler home-handler
                     :middleware [wrap-async]}}]
