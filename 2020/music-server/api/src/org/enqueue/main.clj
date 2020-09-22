@@ -10,13 +10,11 @@
     [org.enqueue.router               :refer [router route-map
                                               wrap-ignore-trailing-slash]]))
 
-;; TODO: spec.
-;; [clojure.spec.alpha :as s]
-
 ;; TODO: DB.
 ;; TODO: File upload/download and storage.
 ;; TODO: Authentication.
-;; TODO: appsettings.
+;; TODO: Appsettings.
+;; TODO: Spec.  [clojure.spec.alpha :as s]
 
 (def dev-handler
   (-> (router route-map)
@@ -28,7 +26,7 @@
       wrap-multipart-params
       wrap-ignore-trailing-slash))
 
-;; TODO: make app async.
 ;; TODO: accept map which specifies mode/env and port.
+;; TODO: {:async? true} and other options (doc run-jetty).
 (defn -main [& args]
   (run-jetty #'dev-handler {:port 3000}))

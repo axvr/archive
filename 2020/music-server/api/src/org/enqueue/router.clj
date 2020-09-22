@@ -35,9 +35,12 @@
 ;;    ["/admin" {:get {:handler home-handler
 ;;                     :middleware [(auth-policy :admin)]}]])
 
-(defn- invoke-handler [{:keys [handler middleware]} request]
-  ;; TODO: use middleware.
-  (handler request))
+;; TODO: use middleware.
+(defn- invoke-handler
+  ([{:keys [handler middleware]} request]
+   (handler request))
+  ([{:keys [handler middleware]} request respond raise]
+   (handler request respond raise)))
 
 (defn- route->handler [request route-map]
   (loop [routes route-map]
@@ -56,17 +59,28 @@
           (recur (rest routes)))))))
 
 (defn router [route-map]
-  ;; TODO: make async.  Raise on no handler found.
-  (fn [req]
-    (let [{:keys [handler request]} (route->handler req route-map)]
-      (invoke-handler handler request))))
+  (fn
+    ([req]
+     (let [{:keys [handler request]}
+           (route->handler req route-map)]
+       (invoke-handler handler request)))
+    ([req respond raise]
+     (if-let [{:keys [handler request]}
+              (route->handler req route-map)]
+       (invoke-handler handler request respond raise)
+       (raise (Throwable. (str "No HTTP handler defined for path " (:uri req))))))))
 
 (defn wrap-ignore-trailing-slash [handler]
-  (fn [request]
-    (let* [path   (:uri request)
-           length (count path)]
-      (if (and (not (= length 1))
-               (ends-with? path "/"))
-        (let [trimed-path (subs path 0 (- length 1))]
-          (handler (assoc request :uri trimed-path)))
-        (handler request)))))
+  (letfn [(fix-uri [request]
+            (let* [path   (:uri request)
+                   length (count path)]
+              (if (and (not (= length 1))
+                       (ends-with? path "/"))
+                (let [trimed-path (subs path 0 (- length 1))]
+                  (assoc request :uri trimed-path))
+                request)))]
+    (fn
+      ([request]
+       (handler (fix-uri request)))
+      ([request respond raise]
+       (handler (fix-uri request) respond raise)))))
