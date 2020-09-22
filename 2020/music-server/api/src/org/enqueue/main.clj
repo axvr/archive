@@ -4,10 +4,11 @@
     [ring.middleware.reload           :refer [wrap-reload]]
     [ring.middleware.params           :refer [wrap-params]]
     [ring.middleware.multipart-params :refer [wrap-multipart-params]]
+    [ring.middleware.resource         :refer [wrap-resource]]
+    [ring.middleware.content-type     :refer [wrap-content-type]]
+    [ring.middleware.not-modified     :refer [wrap-not-modified]]
     [org.enqueue.router               :refer [router route-map
-                                              wrap-ignore-trailing-slash]]
-    [ring.middleware.resource :refer [wrap-resource]]
-    [ring.middleware.content-type :refer [wrap-content-type]]))
+                                              wrap-ignore-trailing-slash]]))
 
 ;; TODO: spec.
 ;; [clojure.spec.alpha :as s]
@@ -20,7 +21,8 @@
 (def dev-handler
   (-> (router route-map)
       (wrap-resource "public")
-      ;; wrap-content-type
+      wrap-content-type
+      wrap-not-modified
       wrap-reload
       wrap-params
       wrap-multipart-params
@@ -28,6 +30,5 @@
 
 ;; TODO: make app async.
 ;; TODO: accept map which specifies mode/env and port.
-;; TODO: HTTPS redirection?
 (defn -main [& args]
   (run-jetty #'dev-handler {:port 3000}))
