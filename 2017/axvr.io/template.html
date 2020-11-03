@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 
 <html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
+	<head>
+		<meta charset="utf-8" />
 
-    <title>{{.page-title}}</title>
+		<title>{{.page-title}}</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 {{.head}}
 
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="/css/lato.css" />
-    <link rel="stylesheet" type="text/css" href="/css/libre-franklin.css" />
-    <link rel="stylesheet" type="text/css" href="/css/inconsolata.css" />
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="/css/lato.css" />
+		<link rel="stylesheet" type="text/css" href="/css/libre-franklin.css" />
+		<link rel="stylesheet" type="text/css" href="/css/inconsolata.css" />
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
 
-    <!-- <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/posts/feed.xml" /> -->
+		<!-- <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/posts/feed.xml" /> -->
 
 {{.meta-tags}}
 {{.redirect-tag}}
-  </head>
+	</head>
 
-  <body>
+	<body>
 
-    <div class="container">
+		<div class="container">
 
-      <article class="item content">
+			<article class="item content">
 {{.content}}
-      </article>
+			</article>
 
-      <nav class="item sidebar">
+			<nav class="item sidebar">
 
-        <h1><a href="/" title="Home">Alex Vear</a></h1>
+				<h1><a href="/" title="Home">Alex Vear</a></h1>
 
-        <div id="linkbar">
-          <ul>
-            <li><a href="/posts" title="Essays"><i class="fa fa-pencil"></i>Essays</a></li>
-            <li><a href="/projects" title="Projects & contributions"><i class="fa fa-code"></i>Projects</a></li>
-            <li><a href="https://github.com/axvr" title="GitHub (axvr)"><i class="fa fa-github"></i>GitHub</a></li>
-            <li><a href="/contact" title="Contact me"><i class="fa fa-envelope"></i>Email</a></li>
-          </ul>
-        </div>
+				<div id="linkbar">
+					<ul>
+						<li><a href="/posts" title="Essays"><i class="fa fa-pencil"></i>Essays</a></li>
+						<li><a href="/projects" title="Projects & contributions"><i class="fa fa-code"></i>Projects</a></li>
+						<li><a href="https://github.com/axvr" title="GitHub (axvr)"><i class="fa fa-github"></i>GitHub</a></li>
+						<li><a href="/contact" title="Contact me"><i class="fa fa-envelope"></i>Email</a></li>
+					</ul>
+				</div>
 
-        <div class="side-content">
-          <h2>Projects</h2>
+				<div class="side-content">
+					<h2>Projects</h2>
 
-          <ul style="list-style: none; padding-left: 0px; margin: 0px">
+					<ul style="list-style: none; padding-left: 0px; margin: 0px">
 
-            <li style="margin: 10px 0px"><a href="https://github.com/axvr/zepl.vim"><b>Zepl.vim</b></a>
-              A lightweight and easy REPL integration plugin for Vim.</li>
+						<li style="margin: 10px 0px"><a href="https://github.com/axvr/zepl.vim"><b>Zepl.vim</b></a>
+							A lightweight and easy REPL integration plugin for Vim.</li>
 
-            <li style="margin: 10px 0px"><a href="/projects/ascribe"><b>Ascribe</b></a>
-              A simpler alternative to EditorConfig.<li>
+						<li style="margin: 10px 0px"><a href="/projects/ascribe"><b>Ascribe</b></a>
+							A simpler alternative to EditorConfig.<li>
 
-            <li style="margin: 10px 0px"><a href="https://github.com/axvr/MdView"><b>MdView</b></a>
-              The flexible Markdown control for <i>Xamarin.Forms.</i></li>
+						<li style="margin: 10px 0px"><a href="https://github.com/axvr/MdView"><b>MdView</b></a>
+							The flexible Markdown control for <i>Xamarin.Forms.</i></li>
 
-          </ul>
+					</ul>
 
-          <a href="/projects" title="Vew more of my projects.">View more...</a>
-        </div>
+					<a href="/projects" title="Vew more of my projects.">View more...</a>
+				</div>
 
-        <div class="side-content">
-          {{.copyright-notice}}
-        </div>
+				<div class="side-content">
+					{{.copyright-notice}}
+				</div>
 
-      </nav>
+			</nav>
 
-    </div>
+		</div>
 
-  </body>
+	</body>
 </html>
