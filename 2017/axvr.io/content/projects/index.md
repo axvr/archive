@@ -24,6 +24,11 @@ This is a list of my featured projects, you can find the full list on the
 - [Thermoelectric generator](teg) — An attempt to create a cheap thermoelectric
   generator capable of charging a mobile phone.
 
+## Maintainer of
+
+- [Clojure.vim](https://github.com/clojure-vim/clojure.vim) — Vim runtime files
+  for Clojure.
+
 ## Contribute to
 
 - [OmniSharp-Vim](https://github.com/OmniSharp/omnisharp-vim) — I wrote the
