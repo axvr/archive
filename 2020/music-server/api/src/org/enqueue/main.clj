@@ -11,10 +11,9 @@
     [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash]]))
 
 ;; TODO: DB.
-;; TODO: File upload/download and storage.
 ;; TODO: Authentication.
 ;; TODO: Appsettings.
-;; TODO: Spec.  [clojure.spec.alpha :as s]
+;; TODO: File upload/download and storage.
 
 (def dev-handler
   (-> (router route-map)
