@@ -8,13 +8,13 @@ _Your digital music collection, anywhere..._
 Start the server in development mode:
 
 ```sh
-clojure -A:run-dev
+clojure -M:run-dev
 ```
 
 Start the development server with a socket REPL:
 
 ```sh
-clojure -A:socket:run-dev
+clojure -A:socket -M:run-dev
 ```
 
 
