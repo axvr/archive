@@ -10,7 +10,6 @@
     [org.enqueue.router               :refer [router route-map]]
     [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash]]))
 
-;; TODO: DB.
 ;; TODO: Authentication.
 ;; TODO: Appsettings.
 ;; TODO: File upload/download and storage.
