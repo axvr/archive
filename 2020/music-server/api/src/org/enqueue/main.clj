@@ -25,6 +25,6 @@
       wrap-ignore-trailing-slash))
 
 ;; TODO: accept map which specifies mode/env and port.
-;; TODO: {:async? true} and other options (doc run-jetty).
+;; TODO: other Jetty options (doc run-jetty).
 (defn -main [& args]
-  (run-jetty #'dev-handler {:port 3000}))
+  (run-jetty #'dev-handler {:port 3000, :async? true}))
