@@ -1,6 +1,7 @@
 (ns org.enqueue.db
   (:require [next.jdbc :as jdbc]
             [next.jdbc.sql :as sql]
+            [honeysql.core :as honey]
             ragtime.jdbc
             ragtime.repl))
 
@@ -14,6 +15,7 @@
 ;;;; -----------------------------------------------------------
 ;;;; DB interaction functions.
 
+;; TODO: doc strings.
 (def insert! (partial sql/insert! ds))
 (def insert-multi! (partial sql/insert-multi! ds))
 (def delete! (partial sql/delete! ds))
@@ -21,8 +23,12 @@
 (def get-by-id (partial sql/get-by-id ds))
 (def find-by-keys (partial sql/find-by-keys ds))
 (def query (partial sql/query ds))
-(def execute! (partial jdbc/execute! ds))
-(def execute-one! (partial jdbc/execute-one! ds))
+
+(defn execute! [sql]
+  (jdbc/execute! ds (honey/format sql)))
+
+(defn execute-one! [sql]
+  (jdbc/execute-one! ds (honey/format sql)))
 
 (comment
   (jdbc/execute!

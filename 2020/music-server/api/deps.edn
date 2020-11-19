@@ -5,7 +5,8 @@
          hiccup/hiccup          {:mvn/version "1.0.5"}
          seancorfield/next.jdbc {:mvn/version "1.1.588"}
          org.xerial/sqlite-jdbc {:mvn/version "3.32.3.2"}
-         ragtime/ragtime        {:mvn/version "0.8.0"}}
+         ragtime/ragtime        {:mvn/version "0.8.0"}
+         honeysql/honeysql      {:mvn/version "1.0.444"}}
          ;; org.clojure/math.numeric-tower {:mvn/version "0.0.4"}
  :aliases {:test {:extra-paths ["tests"]
                   :extra-deps {com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
