@@ -11,12 +11,6 @@ Start the server in development mode:
 clojure -M:run-dev
 ```
 
-Start the development server with a socket REPL:
-
-```sh
-clojure -A:socket -M:run-dev
-```
-
 
 ## Legal
 
