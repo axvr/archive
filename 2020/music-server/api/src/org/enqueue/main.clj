@@ -7,12 +7,24 @@
     [ring.middleware.resource         :refer [wrap-resource]]
     [ring.middleware.content-type     :refer [wrap-content-type]]
     [ring.middleware.not-modified     :refer [wrap-not-modified]]
-    [org.enqueue.router               :refer [router route-map]]
-    [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash]]))
+    [org.enqueue.router               :refer [router]]
+    [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash
+                                              wrap-async]]
+    [org.enqueue.handlers             :refer [home-handler
+                                              about-handler
+                                              not-found-handler]]))
 
 ;; TODO: Authentication.
 ;; TODO: Appsettings.
 ;; TODO: File upload/download and storage.
+
+(def route-map
+  [["/"      {:get {:handler home-handler
+                    :middleware [wrap-async]}}]
+   ["/about" {:get {:handler about-handler
+                    :middleware [wrap-async]}}]
+   ["*"      {:all {:handler not-found-handler
+                    :middleware [wrap-async]}}]])
 
 (def dev-handler
   (-> (router route-map)

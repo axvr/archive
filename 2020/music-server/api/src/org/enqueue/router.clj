@@ -1,18 +1,5 @@
 (ns org.enqueue.router
-  (:require
-    [clout.core                    :refer [route-matches]]
-    [org.enqueue.router.middleware :refer [wrap-async]]
-    [org.enqueue.handlers          :refer [home-handler
-                                           about-handler
-                                           not-found-handler]]))
-
-(def route-map
-  [["/"      {:get {:handler home-handler
-                    :middleware [wrap-async]}}]
-   ["/about" {:get {:handler about-handler
-                    :middleware [wrap-async]}}]
-   ["*"      {:all {:handler not-found-handler
-                    :middleware [wrap-async]}}]])
+  (:require [clout.core :refer [route-matches]]))
 
 (defn- invoke-handler
   ([{:keys [handler middleware]} request]
