@@ -11,11 +11,8 @@ retrieve and handle useful information about various files within a project
 through the `.gitattributes` file already found in many software projects.
 
 By using the `.gitattributes` file, Ascribe keeps all information about the
-files in a project in a single place, and encourages the improvement of
-existing—and arguably more useful—`.gitattributes` parsers.
-
-Ascribe extensions tend to be much smaller, faster and simpler than their
-EditorConfig counterparts.
+files in a project in a single place.  Ascribe extensions tend to be much
+smaller, faster and simpler than their EditorConfig counterparts.
 
 ## Want to learn more?
 
@@ -26,4 +23,3 @@ EditorConfig counterparts.
 ## Extensions
 
 - [Vim](https://github.com/axvr/ascribe.vim)
-- Git Hooks (_Not started_)

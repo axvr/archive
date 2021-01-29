@@ -34,9 +34,10 @@ regular expression: `/[a-zA-Z0-9_.-]*/`.
 
 <!-- Possible additional attributes
 - File type detection.
-- Trim trailing newlines from end of file.
+- Trim excess trailing newlines from end of file.
 - Spell check.
 - Spell check language.
+- Read-only.  (Implicitly set by `binary`.)
 -->
 
 ## `expand-tab`
