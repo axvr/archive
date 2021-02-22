@@ -1,4 +1,4 @@
-(ns org.enqueue.main
+(ns org.enqueue.core
   (:require
     [ring.adapter.jetty               :refer [run-jetty]]
     [ring.middleware.reload           :refer [wrap-reload]]
@@ -14,10 +14,6 @@
                                               about-handler
                                               not-found-handler]]))
 
-;; TODO: Authentication.
-;; TODO: Appsettings.
-;; TODO: File upload/download and storage.
-
 (def route-map
   [["/"      {:get {:handler home-handler
                     :middleware [wrap-async]}}]
@@ -26,17 +22,19 @@
    ["*"      {:all {:handler not-found-handler
                     :middleware [wrap-async]}}]])
 
-(def dev-handler
+(def app-handler
   (-> (router route-map)
       (wrap-resource "public")
       wrap-content-type
       wrap-not-modified
-      wrap-reload
       wrap-params
       wrap-multipart-params
       wrap-ignore-trailing-slash))
 
-;; TODO: accept map which specifies mode/env and port.
-;; TODO: other Jetty options (doc run-jetty).
-(defn -main [& args]
-  (run-jetty #'dev-handler {:port 3000, :async? true}))
+(defn run [{:keys [dev? port]}]
+  ;; TODO: other Jetty options (doc run-jetty).
+  (run-jetty
+    (if dev?
+      (wrap-reload #'app-handler)
+      #'app-handler)
+    {:port port, :async? true}))

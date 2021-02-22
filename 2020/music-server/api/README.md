@@ -7,8 +7,8 @@ _Your digital music collection, anywhere..._
 
 Start the server in development mode:
 
-```sh
-clojure -M:run-dev
+```
+clojure -X:run :dev? true
 ```
 
 
