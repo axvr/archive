@@ -20,10 +20,13 @@
      (handler (remove-trailing-slash request) respond raise))))
 
 (defn wrap-async
-  "Make a synchronous Ring handler asynchronous."
+  "Make any synchronous Ring handler asynchronous."
   [handler]
   (fn
     ([request]
      (handler request))
     ([request respond raise]
-     (respond (handler request)))))
+     (try
+       (respond (handler request))
+       (catch Exception e
+         (raise e))))))
