@@ -1,16 +1,14 @@
 (ns org.enqueue.router.middleware
   (:require [clojure.string :as string]
-            [ring.util.response :refer [header]]))
+            [ring.util.response :refer [header]]
+            [org.enqueue.helpers :refer [trim-end]]))
 
 
 (defn- remove-trailing-slash [request]
-  (let [path   (:uri request)
-        length (count path)]
-    (if (and (not (= length 1))
-             (string/ends-with? path "/"))
-      (let [trimed-path (subs path 0 (- length 1))]
-        (assoc request :uri trimed-path))
-      request)))
+  (let [path (:uri request)]
+    (if (= path "/")
+      request
+      (assoc request :uri (trim-end path "/")))))
 
 
 (defn wrap-ignore-trailing-slash

@@ -5,15 +5,20 @@
             ragtime.jdbc
             ragtime.repl))
 
-(def db-spec  ; TODO: DB credentials.
+
+;; TODO: DB credentials.
+;; TODO: Switch to PostgreSQL?
+(def db-spec
   {:dbtype "sqlite"
    :dbname "resources/example.db"})
+
 
 (def ds (jdbc/get-datasource db-spec))
 
 
-;;;; -----------------------------------------------------------
-;;;; DB interaction functions.
+;;; -----------------------------------------------------------
+;;; DB interaction functions
+
 
 ;; TODO: doc strings.
 (def insert! (partial sql/insert! ds))
@@ -24,11 +29,20 @@
 (def find-by-keys (partial sql/find-by-keys ds))
 (def query (partial sql/query ds))
 
-(defn execute! [sql]
-  (jdbc/execute! ds (honey/format sql)))
 
-(defn execute-one! [sql]
-  (jdbc/execute-one! ds (honey/format sql)))
+(defn execute!
+  ([sql]
+   (jdbc/execute! ds (honey/format sql)))
+  ([sql opts]
+   (jdbc/execute! ds (honey/format sql) opts)))
+
+
+(defn execute-one!
+  ([sql]
+   (jdbc/execute-one! ds (honey/format sql)))
+  ([sql opts]
+   (jdbc/execute-one! ds (honey/format sql) opts)))
+
 
 (comment
   (jdbc/execute!
@@ -42,18 +56,22 @@
   (execute-one! ["SELECT * FROM [artists]"]))
 
 
-;;;; -----------------------------------------------------------
-;;;; Migrations.
+;;; -----------------------------------------------------------
+;;; Migrations
+
 
 (def ragtime-config
   {:datastore (ragtime.jdbc/sql-database db-spec)
    :migrations (ragtime.jdbc/load-resources "migrations")})
 
+
 (defn migrate []
   (ragtime.repl/migrate ragtime-config))
 
+
 (defn rollback []
   (ragtime.repl/rollback ragtime-config))
+
 
 (comment
   ;; Execute migration.

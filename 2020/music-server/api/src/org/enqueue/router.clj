@@ -1,28 +1,26 @@
 (ns org.enqueue.router
   (:require [clout.core :refer [route-matches]]
-            [org.enqueue.helpers :refer [splat-apply]]))
+            [org.enqueue.helpers :refer [splat-apply while-nil]]))
+
 
 (defn- invoke
-  ([{:keys [handler middleware]} request]
-   ((splat-apply `-> handler middleware) request))
-  ([{:keys [handler middleware]} request respond raise]
-   ((splat-apply `-> handler middleware) request respond raise)))
+  ([{:keys [handler middleware request]}]
+   ((splat-apply '-> handler middleware) request))
+  ([{:keys [handler middleware request]} respond raise]
+   ((splat-apply '-> handler middleware) request respond raise)))
 
-(defn- route->handler [request route-map]
-  (loop [routes route-map]
-    (when (seq routes)
-      (let [method     (:request-method request)
-            route      (first routes)
-            path       (first route)
-            method-map (second route)
-            handler    (get method-map method (:all method-map))]
-        (if (some? handler)
-          (let [matches (route-matches path request)]
-            (if (some? matches)
-              {:request (assoc request :uri-params matches)
-               :handler handler}
-              (recur (rest routes))))
-          (recur (rest routes)))))))
+
+(defn- find-handler [request route-map]
+  (let [method (:request-method request)]
+    (while-nil [route route-map]
+      (let [[path method-map] route
+            handler (get method-map method (:all method-map))]
+        (when (some? handler)
+          (when-let [matches (route-matches path request)]
+            (assoc handler
+                   :request
+                   (assoc request :uri-params matches))))))))
+
 
 (defn- no-handler-throwable [request]
   (Throwable.
@@ -31,17 +29,18 @@
          " and method "
          (:request-method request))))
 
+
 (defn router [route-map]
   (fn
-    ([req]
-     (let [{:keys [handler request]}
-           (route->handler req route-map)]
+    ([request]
+     (let [handler (find-handler request route-map)]
        (if (some? (:handler handler))
-         (invoke handler request)
-         (throw (no-handler-throwable req)))))
-    ([req respond raise]
-     (let [{:keys [handler request]}
-           (route->handler req route-map)]
+         (invoke handler)
+         (throw (no-handler-throwable
+                  (get handler :request request))))))
+    ([request respond raise]
+     (let [handler (find-handler request route-map)]
        (if (some? (:handler handler))
-         (invoke handler request respond raise)
-         (raise (no-handler-throwable req)))))))
+         (invoke handler respond raise)
+         (raise (no-handler-throwable
+                  (get handler :request request))))))))
