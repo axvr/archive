@@ -9,7 +9,8 @@
     [ring.middleware.not-modified     :refer [wrap-not-modified]]
     [org.enqueue.router               :refer [router]]
     [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash
-                                              wrap-async]]
+                                              wrap-async
+                                              wrap-security-headers]]
     [org.enqueue.handlers             :refer [home-handler
                                               about-handler
                                               not-found-handler]]))
@@ -24,6 +25,7 @@
 
 (def app-handler
   (-> (router route-map)
+      (wrap-security-headers #{"enqueue.org" "*.enqueue.org"})
       (wrap-resource "public")
       wrap-content-type
       wrap-not-modified
