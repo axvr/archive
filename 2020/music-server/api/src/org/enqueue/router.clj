@@ -1,20 +1,21 @@
 (ns org.enqueue.router
-  (:require [clout.core :refer [route-matches]]))
+  (:require [clout.core :refer [route-matches]]
+            [org.enqueue.helpers :refer [splat-apply]]))
 
-(defn- invoke-handler
+(defn- invoke
   ([{:keys [handler middleware]} request]
-   ((eval (conj (seq middleware) handler '->)) request))  ; TODO: make this a macro.
+   ((splat-apply `-> handler middleware) request))
   ([{:keys [handler middleware]} request respond raise]
-   ((eval (conj (seq middleware) handler '->)) request respond raise)))
+   ((splat-apply `-> handler middleware) request respond raise)))
 
 (defn- route->handler [request route-map]
   (loop [routes route-map]
     (when (seq routes)
-      (let* [method     (:request-method request)
-             route      (first routes)
-             path       (first route)
-             method-map (second route)
-             handler    (get method-map method (:all method-map))]
+      (let [method     (:request-method request)
+            route      (first routes)
+            path       (first route)
+            method-map (second route)
+            handler    (get method-map method (:all method-map))]
         (if (some? handler)
           (let [matches (route-matches path request)]
             (if (some? matches)
@@ -36,11 +37,11 @@
      (let [{:keys [handler request]}
            (route->handler req route-map)]
        (if (some? (:handler handler))
-         (invoke-handler handler request)
+         (invoke handler request)
          (throw (no-handler-throwable req)))))
     ([req respond raise]
      (let [{:keys [handler request]}
            (route->handler req route-map)]
        (if (some? (:handler handler))
-         (invoke-handler handler request respond raise)
+         (invoke handler request respond raise)
          (raise (no-handler-throwable req)))))))
