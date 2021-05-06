@@ -23,9 +23,15 @@
    ["*"      {:all {:handler not-found-handler
                     :middleware [wrap-async]}}]])
 
+(def cors-origins #{"https://www.enqueue.org"
+                    "https://enqueue.org"
+                    "https://api.enqueue.org"})
+
+(def xss-origins #{"enqueue.org" "*.enqueue.org"})
+
 (def app-handler
-  (-> (router route-map)
-      (wrap-security-headers #{"enqueue.org" "*.enqueue.org"})
+  (-> (router route-map cors-origins)
+      (wrap-security-headers xss-origins)
       (wrap-resource "public")
       wrap-content-type
       wrap-not-modified
