@@ -1,13 +1,17 @@
 (ns org.enqueue.router
   (:require [clout.core :refer [route-matches]]
-            [org.enqueue.helpers :refer [splat-apply while-nil]]))
+            [org.enqueue.helpers :refer [while-nil]]))
+
+
+(defn- apply-middleware [handler middleware]
+  (eval (flatten (list '-> handler middleware))))
 
 
 (defn- invoke
   ([{:keys [handler middleware request]}]
-   ((splat-apply '-> handler middleware) request))
+   ((apply-middleware handler middleware) request))
   ([{:keys [handler middleware request]} respond raise]
-   ((splat-apply '-> handler middleware) request respond raise)))
+   ((apply-middleware handler middleware) request respond raise)))
 
 
 (defn- find-handler [request route-map]
