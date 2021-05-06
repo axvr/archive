@@ -39,7 +39,10 @@
       (header "X-Frame-Options" "deny")
       (header "Content-Security-Policy"
               (str "default-src 'self' " (string/join " " origins)))
-      (header "Permissions-Policy" "interest-cohort=()")))
+      (header "Permissions-Policy" "interest-cohort=()")
+      (header "X-Content-Type-Options" "nosniff")
+      ;; TODO: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/strict-transport-security>
+      #_(header "Strict-Transport-Security" "max-age=63072000; includeSubDomains; preload")))
 
 
 (defn wrap-security-headers

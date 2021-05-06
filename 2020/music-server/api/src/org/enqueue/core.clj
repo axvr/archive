@@ -39,4 +39,6 @@
     (if dev?
       (wrap-reload #'app-handler)
       #'app-handler)
-    {:port port, :async? true}))
+    {:port port
+     :async? true
+     :send-server-version? false}))
