@@ -24,3 +24,16 @@
          (if (some? res#)
            res#
            (recur (rest j#)))))))
+
+
+(defmacro when-let*
+  "Short circuiting when-let on multiple binding forms."
+  [bindings & body]
+  (let [form (first bindings)
+        tst  (second bindings)
+        rst  (subvec bindings 2)]
+    (if (seq rst)
+      `(when-let [~form ~tst]
+         (when-let* [~@rst] ~@body))
+      `(when-let [~form ~tst]
+         ~@body))))
