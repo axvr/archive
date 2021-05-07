@@ -7,11 +7,11 @@
          ragtime/ragtime         {:mvn/version "0.8.1"}
          honeysql/honeysql       {:mvn/version "1.0.461"}
          org.xerial/sqlite-jdbc  {:mvn/version "3.34.0"}
-         com.github.seancorfield/next.jdbc {:mvn/version "1.1.646"}}
+         com.github.seancorfield/next.jdbc {:mvn/version "1.2.659"}}
  :aliases {:test {:extra-paths ["tests"]
                   :extra-deps {com.cognitect/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                :sha     "b6b3193fcc42659d7e46ecd1884a228993441182"}}
+                                :sha     "5557e92c932f024127762ec6007d849bec869c8f"}}
                   :main-opts ["-m" "cognitect.test-runner"]}
            :run {:exec-fn org.enqueue.core/run
                  :exec-args {:dev? true
