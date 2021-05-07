@@ -5,7 +5,7 @@
 
 
 (defn- apply-middleware [handler middleware]
-  (eval (flatten (list '-> handler middleware))))
+  (eval (filter some? (flatten (list '-> handler middleware)))))
 
 
 (defn- invoke
@@ -42,6 +42,19 @@
          (:request-method request))))
 
 
+(defn- not-found-handler
+  ([request]
+   {:status 404
+    :headers {"Content-Type" "text/html"}
+    :body "<h1>404</h1>"})
+  ([request respond raise]
+   (respond (not-found-handler request))))
+
+
+(def fallback-routes
+  [["*" {:all {:handler not-found-handler}}]])
+
+
 (defn- get-cors-allowed-origin
   "If browser sent allowed origin return it, else return an allowed origin."
   [request origins]
@@ -64,15 +77,18 @@
                      "Access-Control-Allow-Headers" "X-PINGOTHER, Content-Type"
                      "Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)
                      "Access-Control-Max-Age" "86400"}})
-        ;; TODO: maybe use regular not-found fallback?
-        {:status 404
-         :headers {"Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)}}))))
+        (assoc-in (not-found-handler request)
+                  [:headers "Access-Control-Allow-Origin"] (get-cors-allowed-origin request origins))))))
 
 
 (defn- cors-check-complex [request route-map origins]
   (if-let [origin (get-in request [:headers "origin"])]
     (if (origins origin) :allow :block)
     :no-cors))
+
+
+;; TODO: experiment with per-endpoint CORS.
+;; ^ per-section endpoint configs?
 
 
 ;; TODO: test CORS on a non-localhost domain/server.

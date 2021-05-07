@@ -7,21 +7,17 @@
     [ring.middleware.resource         :refer [wrap-resource]]
     [ring.middleware.content-type     :refer [wrap-content-type]]
     [ring.middleware.not-modified     :refer [wrap-not-modified]]
-    [org.enqueue.router               :refer [router]]
+    [org.enqueue.router               :refer [router fallback-routes]]
     [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash
-                                              wrap-async
-                                              wrap-security-headers]]
-    [org.enqueue.handlers             :refer [home-handler
-                                              about-handler
-                                              not-found-handler]]))
+                                              wrap-security-headers
+                                              wrap-async]]
+    [org.enqueue.handlers             :refer [home-handler]]))
 
 (def route-map
-  [["/"      {:get {:handler home-handler
-                    :middleware [wrap-async]}}]
-   ["/about" {:get {:handler about-handler
-                    :middleware [wrap-async]}}]
-   ["*"      {:all {:handler not-found-handler
-                    :middleware [wrap-async]}}]])
+  (concat
+    [["/" {:get {:handler home-handler
+                 :middleware [wrap-async]}}]]
+    fallback-routes))
 
 (def cors-origins #{"https://www.enqueue.org"
                     "https://enqueue.org"
@@ -30,7 +26,8 @@
 (def xss-origins #{"enqueue.org" "*.enqueue.org"})
 
 (def app-handler
-  (-> (router route-map cors-origins)
+  (-> route-map
+      (router cors-origins)
       (wrap-security-headers xss-origins)
       (wrap-resource "public")
       wrap-content-type

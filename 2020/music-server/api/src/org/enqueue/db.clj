@@ -7,7 +7,6 @@
 
 
 ;; TODO: DB credentials.
-;; TODO: Switch to PostgreSQL?
 (def db-spec
   {:dbtype "sqlite"
    :dbname "resources/example.db"})
