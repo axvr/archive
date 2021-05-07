@@ -1,7 +1,6 @@
 (ns org.enqueue.core
   (:require
     [ring.adapter.jetty               :refer [run-jetty]]
-    [ring.middleware.reload           :refer [wrap-reload]]
     [ring.middleware.params           :refer [wrap-params]]
     [ring.middleware.multipart-params :refer [wrap-multipart-params]]
     [ring.middleware.resource         :refer [wrap-resource]]
@@ -13,7 +12,7 @@
                                               wrap-async]]
     [org.enqueue.handlers             :refer [home-handler]]))
 
-(def route-map
+(defn- build-route-map []
   (concat
     [["/" {:get {:handler home-handler
                  :middleware [wrap-async]}}]]
@@ -26,7 +25,7 @@
 (def xss-origins #{"enqueue.org" "*.enqueue.org"})
 
 (def app-handler
-  (-> route-map
+  (-> build-route-map
       (router cors-origins)
       (wrap-security-headers xss-origins)
       (wrap-resource "public")
@@ -39,9 +38,7 @@
 (defn run [{:keys [dev? port]}]
   ;; TODO: other Jetty options (doc run-jetty).
   (run-jetty
-    (if dev?
-      (wrap-reload #'app-handler)
-      #'app-handler)
+    #'app-handler
     {:port port
      :async? true
      :send-server-version? false}))

@@ -1,12 +1,13 @@
 {:paths ["src" "resources"]
- :deps  {org.clojure/clojure {:mvn/version "1.10.3"}
-         ring/ring           {:mvn/version "1.9.3"}
-         clout/clout         {:mvn/version "2.2.1"}
-         hiccup/hiccup       {:mvn/version "1.0.5"}
-         com.github.seancorfield/next.jdbc {:mvn/version "1.1.646"}
-         org.xerial/sqlite-jdbc {:mvn/version "3.34.0"}
-         ragtime/ragtime        {:mvn/version "0.8.1"}
-         honeysql/honeysql      {:mvn/version "1.0.461"}}
+ :deps  {org.clojure/clojure     {:mvn/version "1.10.3"}
+         ring/ring-core          {:mvn/version "1.9.3"}
+         ring/ring-jetty-adapter {:mvn/version "1.9.3"}
+         clout/clout             {:mvn/version "2.2.1"}
+         hiccup/hiccup           {:mvn/version "1.0.5"}
+         ragtime/ragtime         {:mvn/version "0.8.1"}
+         honeysql/honeysql       {:mvn/version "1.0.461"}
+         org.xerial/sqlite-jdbc  {:mvn/version "3.34.0"}
+         com.github.seancorfield/next.jdbc {:mvn/version "1.1.646"}}
  :aliases {:test {:extra-paths ["tests"]
                   :extra-deps {com.cognitect/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"

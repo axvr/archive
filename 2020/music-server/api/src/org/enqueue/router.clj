@@ -94,40 +94,42 @@
 ;; TODO: test CORS on a non-localhost domain/server.
 ;; TODO: make CORS optional?  Disable on dev?
 ;; TODO: eliminate duplicate code.
-(defn router [route-map origins]
+(defn router [route-map-builder origins]
   (fn
     ([request]
-     (if-let [preflight-resp (wrap-cors-preflight request route-map origins)]
-       preflight-resp
-       (let [cors-status (cors-check-complex request route-map origins)]
-         (if (= cors-status :block)
-           {:status 403
-            :headers {"Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)}}
-           (let [handler (find-handler request route-map)]
-             (if (some? (:handler handler))
-               (if (= cors-status :allow)
-                 (assoc-in (invoke handler)
-                           [:headers "Access-Control-Allow-Origin"] (get-cors-allowed-origin request origins))
-                 (invoke handler))
-               (throw (no-handler-throwable
-                        (get handler :request request)))))))))
+     (let [route-map (route-map-builder)]
+       (if-let [preflight-resp (wrap-cors-preflight request route-map origins)]
+         preflight-resp
+         (let [cors-status (cors-check-complex request route-map origins)]
+           (if (= cors-status :block)
+             {:status 403
+              :headers {"Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)}}
+             (let [handler (find-handler request route-map)]
+               (if (some? (:handler handler))
+                 (if (= cors-status :allow)
+                   (assoc-in (invoke handler)
+                             [:headers "Access-Control-Allow-Origin"] (get-cors-allowed-origin request origins))
+                   (invoke handler))
+                 (throw (no-handler-throwable
+                          (get handler :request request))))))))))
     ([request respond raise]
-     (if-let [preflight-resp (wrap-cors-preflight request route-map origins)]
-       (respond preflight-resp)
-       (let [cors-status (cors-check-complex request route-map origins)]
-         (if (= cors-status :block)
-           (respond {:status 403
-                     :headers {"Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)}})
-           (let [handler (find-handler request route-map)]
-             (if (some? (:handler handler))
-               (invoke handler
-                       (if (= cors-status :allow)
-                         (fn [response]
-                           (respond (assoc-in
-                                      response
-                                      [:headers "Access-Control-Allow-Origin"]
-                                      (get-cors-allowed-origin request origins))))
-                         respond)
-                       raise)
-               (raise (no-handler-throwable
-                        (get handler :request request)))))))))))
+     (let [route-map (route-map-builder)]
+       (if-let [preflight-resp (wrap-cors-preflight request route-map origins)]
+         (respond preflight-resp)
+         (let [cors-status (cors-check-complex request route-map origins)]
+           (if (= cors-status :block)
+             (respond {:status 403
+                       :headers {"Access-Control-Allow-Origin" (get-cors-allowed-origin request origins)}})
+             (let [handler (find-handler request route-map)]
+               (if (some? (:handler handler))
+                 (invoke handler
+                         (if (= cors-status :allow)
+                           (fn [response]
+                             (respond (assoc-in
+                                        response
+                                        [:headers "Access-Control-Allow-Origin"]
+                                        (get-cors-allowed-origin request origins))))
+                           respond)
+                         raise)
+                 (raise (no-handler-throwable
+                          (get handler :request request))))))))))))
