@@ -22,7 +22,7 @@
 
 
 (defn wrap-async
-  "Make any synchronous Ring handler asynchronous."
+  "Make a synchronous Ring handler asynchronous."
   [handler]
   (fn
     ([request]

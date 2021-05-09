@@ -11,7 +11,7 @@
  :aliases {:test {:extra-paths ["tests"]
                   :extra-deps {com.cognitect/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                :sha     "5557e92c932f024127762ec6007d849bec869c8f"}}
+                                :sha     "6323e6b09e086e1b98682c4bcf6ef9702254b285"}}
                   :main-opts ["-m" "cognitect.test-runner"]}
            :run {:exec-fn org.enqueue.core/run
                  :exec-args {:dev? true

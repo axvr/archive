@@ -45,6 +45,10 @@
   (get-in request [:headers "origin"]))
 
 
+(defn- preflight? [request]
+  (= :options (:request-method request)))
+
+
 (defn- add-origin [response request allowed-origins]
   (assoc-in
     response
@@ -99,7 +103,6 @@
        :else
        (cors-failed-handler origins request))))
   ([{:keys [handler request origins]} respond raise]
-   (println (get-origin request))
    (let [browser-origin (get-origin request)]
      (cond
        ;; No Origin header sent.
@@ -120,7 +123,7 @@
   (fn
     ([request]
      (let [route-map (route-map-builder)]
-       (if (= :options (:request-method request))
+       (if (preflight? request)
          (cors-preflight request route-map allowed-origins)
          (let [handler (get-handler request route-map)]
            (if (some? (:handler handler))
@@ -129,7 +132,7 @@
                       (get handler :request request))))))))
     ([request respond raise]
      (let [route-map (route-map-builder)]
-       (if (= :options (:request-method request))
+       (if (preflight? request)
          (respond (cors-preflight request route-map allowed-origins))
          (let [handler (get-handler request route-map)]
            (if (some? (:handler handler))
