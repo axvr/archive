@@ -12,6 +12,13 @@ clojure -X:run :dev? true
 ```
 
 
+## Dependencies
+
+- [PostgreSQL](https://www.postgresql.org/)
+  - [Install on Fedora](https://fedoraproject.org/wiki/PostgreSQL)
+- [libsodium](https://libsodium.gitbook.io/doc/installation)
+
+
 ## Legal
 
 Copyright © 2020, [Alex Vear](https://axvr.io).

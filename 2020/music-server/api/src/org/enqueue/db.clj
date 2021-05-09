@@ -22,16 +22,21 @@
 ;;; DB interaction functions
 
 
-(comment
-  (jdbc/execute!
-    ds
-    ["INSERT INTO artists (name)
-      VALUES ('The Smashing Pumpkins')"])
+(def sql-format sql/format)
 
-  (insert! :artists {:name "The Smashing Pumpkins"})
-  (insert! :artists {:name "Pearl Jam"})
-  (query ["SELECT * FROM [artists]"])
-  (execute-one! ["SELECT * FROM [artists]"]))
+
+(defn execute!
+  ([sql]
+   (jdbc/execute! ds (sql/format sql)))
+  ([sql opts]
+   (jdbc/execute! ds (sql/format sql) opts)))
+
+
+(defn execute-one!
+  ([sql]
+   (jdbc/execute-one! ds (sql/format sql)))
+  ([sql opts]
+   (jdbc/execute-one! ds (sql/format sql))))
 
 
 ;;; -----------------------------------------------------------

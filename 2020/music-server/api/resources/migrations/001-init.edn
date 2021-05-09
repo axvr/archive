@@ -1,0 +1,11 @@
+;;;; Initial DB structure.
+
+;; TODO: create indicies
+{:up ["CREATE TABLE users
+         (id             UUID PRIMARY KEY,
+          email_address  VARCHAR(320),
+          password_hash  CHAR(172),
+          created_at     TIMESTAMPTZ,
+          UNIQUE(email_address));"]
+
+ :down ["DROP TABLE users;"]}
