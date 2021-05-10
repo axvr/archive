@@ -3,16 +3,20 @@
             [clojure.string :as string]))
 
 
-(defn- encode
+(defn base64-encode
   "Encodes a string using Base64."
-  [s]
-  (.encodeToString (java.util.Base64/getEncoder) (.getBytes s)))
+  ([s]
+   (base64-encode s "UTF-8"))
+  ([s charset]
+   (.encodeToString (java.util.Base64/getEncoder) (.getBytes s charset))))
 
 
-(defn- decode
+(defn base64-decode
   "Decodes a Base64 encoded string."
-  [s]
-  (String. (.decode (java.util.Base64/getDecoder) s) "UTF-8"))
+  ([s]
+   (base64-decode s "UTF-8"))
+  ([s charset]
+   (String. (.decode (java.util.Base64/getDecoder) s) charset)))
 
 
 (defn hash-password
@@ -21,10 +25,11 @@
   hash can be stored in a UTF-8 encoded PostgreSQL database which rejects the
   NUL terminated strings returned by libsodium (a C library)."
   [password]
-  (encode
+  (base64-encode
     (pwhash/pwhash-str password
                        pwhash/opslimit-sensitive
-                       pwhash/memlimit-sensitive)))
+                       pwhash/memlimit-sensitive)
+    "US-ASCII"))
 
 
 (defn verify-password
@@ -32,5 +37,5 @@
   authentication and testing if initial password hashing was successful."
   [password-hash password]
   (= 0 (pwhash/pwhash-str-verify
-         (decode password-hash)
+         (base64-decode password-hash "US-ASCII")
          password)))

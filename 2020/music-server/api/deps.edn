@@ -10,10 +10,11 @@
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.659"}
          com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc1"}}
  :aliases {:test {:extra-paths ["tests"]
-                  :extra-deps {com.cognitect/test-runner
+                  :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                :sha     "6323e6b09e086e1b98682c4bcf6ef9702254b285"}}
-                  :main-opts ["-m" "cognitect.test-runner"]}
+                                :sha     "2d69f33d7980c3353b246c28f72ffeafbd9f2fab"}}
+                  :exec-fn cognitect.test-runner.api/test
+                  :exec-args {:dirs ["tests"]}}
            :run {:exec-fn org.enqueue.core/run
                  :exec-args {:dev? true
                              :port 3000}}}}
