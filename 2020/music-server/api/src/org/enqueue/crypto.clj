@@ -1,10 +1,9 @@
 (ns org.enqueue.crypto
-  (:require [caesium.crypto.pwhash :as pwhash]
-            [clojure.string :as string]))
+  (:require [caesium.crypto.pwhash :as pwhash]))
 
 
 (defn base64-encode
-  "Encodes a string using Base64."
+  "Encodes a string using Base64.  If no charset is specified, assumes UTF-8."
   ([s]
    (base64-encode s "UTF-8"))
   ([s charset]
@@ -12,7 +11,8 @@
 
 
 (defn base64-decode
-  "Decodes a Base64 encoded string."
+  "Decodes a Base64 encoded string.  If no charset is specified, assumes
+  UTF-8."
   ([s]
    (base64-decode s "UTF-8"))
   ([s charset]

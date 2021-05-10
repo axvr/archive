@@ -36,7 +36,7 @@
   ([sql]
    (jdbc/execute-one! ds (sql/format sql)))
   ([sql opts]
-   (jdbc/execute-one! ds (sql/format sql))))
+   (jdbc/execute-one! ds (sql/format sql) opts)))
 
 
 ;;; -----------------------------------------------------------
@@ -58,10 +58,10 @@
 
 
 (comment
-  ;; Execute migration.
   (require 'org.enqueue.db)
+
+  ;; Run migration.
   (org.enqueue.db/migrate)
 
   ;; Rollback migration.
-  (require 'org.enqueue.db)
   (org.enqueue.db/rollback))

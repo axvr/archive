@@ -35,7 +35,7 @@
       wrap-multipart-params
       wrap-ignore-trailing-slash))
 
-(defn run [{:keys [dev? port]}]
+(defn run [{:keys [port]}]
   ;; TODO: other Jetty options (doc run-jetty).
   (run-jetty
     #'app-handler
