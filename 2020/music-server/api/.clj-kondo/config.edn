@@ -1,0 +1,4 @@
+{:linters
+ {:unresolved-symbol {:exclude [(org.enqueue.helpers/while-nil)
+                                (org.enqueue.helpers/when-let*)
+                                (clojure.core/comment)]}}}
