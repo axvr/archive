@@ -21,9 +21,9 @@
 
 (defn hash-password
   "Hashes a user password using libsodium's pwhash API.  The returned hash is
-  a Base64 encoded UTF-8 string.  The Base64 encoding is performed so that the
-  hash can be stored in a UTF-8 encoded PostgreSQL database which rejects the
-  NUL terminated strings returned by libsodium (a C library)."
+  a Base64 encoded string.  This encoding is done so that the hash can be
+  stored in a UTF-8 encoded PostgreSQL database which would otherwise reject
+  the ASCII null terminated strings returned by libsodium (a C library)."
   [password]
   (base64-encode
     (pwhash/pwhash-str password
@@ -34,7 +34,7 @@
 
 (defn verify-password
   "Checks if a given password matches a Base64 encoded password hash.  Used for
-  authentication and testing if initial password hashing was successful."
+  user authentication."
   [password-hash password]
   (= 0 (pwhash/pwhash-str-verify
          (base64-decode password-hash "US-ASCII")

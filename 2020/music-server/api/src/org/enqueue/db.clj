@@ -23,20 +23,28 @@
 
 
 (def sql-format sql/format)
+(def execute! (partial jdbc/execute! ds))
+(def execute-one! (partial jdbc/execute-one! ds))
 
 
-(defn execute!
+(defn query
   ([sql]
    (jdbc/execute! ds (sql/format sql)))
   ([sql opts]
    (jdbc/execute! ds (sql/format sql) opts)))
 
 
-(defn execute-one!
+(defn query-first
   ([sql]
    (jdbc/execute-one! ds (sql/format sql)))
   ([sql opts]
    (jdbc/execute-one! ds (sql/format sql) opts)))
+
+
+(defn insert [table values]
+  (query-first {:insert-into [table]
+                :columns (keys values)
+                :values [(vals values)]}))
 
 
 ;;; -----------------------------------------------------------

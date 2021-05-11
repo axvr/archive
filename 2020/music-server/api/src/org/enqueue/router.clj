@@ -2,7 +2,20 @@
   "Custom Enqueue routing library for Ring."
   (:require [clout.core :refer [route-matches]]
             [org.enqueue.helpers :refer [while-nil when-let*]]
-            [clojure.string :as string]))
+            [clojure.string :as str]))
+
+
+(defn- not-found-handler
+  ([request]
+   {:status 404
+    :headers {"Content-Type" "text/html"}
+    :body "<h1>404</h1>"})
+  ([request respond raise]
+   (respond (not-found-handler request))))
+
+
+(def fallback-routes
+  [["*" {:all {:handler not-found-handler}}]])
 
 
 (defn- apply-middleware
@@ -26,19 +39,6 @@
          (:uri request)
          " and method "
          (:request-method request))))
-
-
-(defn- not-found-handler
-  ([request]
-   {:status 404
-    :headers {"Content-Type" "text/html"}
-    :body "<h1>404</h1>"})
-  ([request respond raise]
-   (respond (not-found-handler request))))
-
-
-(def fallback-routes
-  [["*" {:all {:handler not-found-handler}}]])
 
 
 (defn- get-origin [request]
@@ -72,8 +72,8 @@
       (if (seq methods)
         (let [allowed-methods (->> (conj methods :options)
                                    (map name)
-                                   (map string/upper-case)
-                                   (string/join ", "))]
+                                   (map str/upper-case)
+                                   (str/join ", "))]
           {:status 204
            :headers {"Access-Control-Allow-Methods" allowed-methods
                      "Access-Control-Allow-Headers" "X-PINGOTHER, Content-Type"

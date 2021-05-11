@@ -1,5 +1,5 @@
 (ns org.enqueue.helpers
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as str]))
 
 
 (defn trim-end
@@ -7,7 +7,7 @@
   ([s rem]
    (if (and (string? s)
             (string? rem)
-            (string/ends-with? s rem))
+            (str/ends-with? s rem))
      (subs s 0 (- (count s)
                   (count rem)))
      s)))

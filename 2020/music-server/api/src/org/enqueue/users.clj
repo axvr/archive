@@ -9,17 +9,18 @@
         where (cond id [:= :id id]
                     email-address [:= :email-address email-address])]
     (when where
-      (db/execute-one! (assoc query :where where)))))
+      (db/query-first (assoc query :where where)))))
 
 
 (defn- create-user [email-address password]
   (if (nil? (find-user-by :email-address email-address))
     (let [user-id (java.util.UUID/randomUUID)
           hashed-password (crypto/hash-password password)]
-      (db/execute-one!
-        {:insert-into [:users]
-         :columns [:id :email-address :password-hash :created-at]
-         :values [[user-id email-address hashed-password (java.time.Instant/now)]]})
+      (db/insert :users
+                 {:id user-id
+                  :email-address email-address
+                  :password-hash hashed-password
+                  :created-at (java.time.Instant/now)})
       user-id)
     (throw (Exception. "User account with that email address already exists."))))
 

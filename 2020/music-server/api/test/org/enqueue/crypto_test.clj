@@ -1,7 +1,7 @@
 (ns org.enqueue.crypto-test
   (:require [clojure.test :refer :all]
             [org.enqueue.crypto :as crypto]
-            [clojure.string :as string]))
+            [clojure.string :as str]))
 
 
 (defn rand-unicode-string []
@@ -40,7 +40,7 @@
     (dotimes [i 10]
       (let [password (rand-unicode-string)
             hashed-password (crypto/hash-password password)]
-        (is (not (string/ends-with? hashed-password "\u0000")))
+        (is (not (str/ends-with? hashed-password "\u0000")))
         (is (not (= password hashed-password)))
         (is (= 172 (count hashed-password)))
         (is (not (= (crypto/base64-encode password) hashed-password)))

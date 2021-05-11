@@ -9,8 +9,16 @@
     [org.enqueue.router               :refer [router fallback-routes]]
     [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash
                                               wrap-security-headers
-                                              wrap-async]]
-    [org.enqueue.handlers             :refer [home-handler]]))
+                                              wrap-async]]))
+
+
+(defn home-handler [_]
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body (str "<title>Enqueue API</title>"
+              "<h1>Enqueue API</h1>"
+              "<p>Your digital music collection, anywhere.</p>")})
+
 
 (defn- build-route-map []
   (concat
@@ -18,11 +26,14 @@
                  :middleware [wrap-async]}}]]
     fallback-routes))
 
+
 (def cors-origins #{"https://www.enqueue.org"
                     "https://enqueue.org"
                     "https://api.enqueue.org"})
 
+
 (def xss-origins #{"enqueue.org" "*.enqueue.org"})
+
 
 (def app-handler
   (-> build-route-map
@@ -34,6 +45,7 @@
       wrap-params
       wrap-multipart-params
       wrap-ignore-trailing-slash))
+
 
 (defn run [{:keys [port]}]
   ;; TODO: other Jetty options (doc run-jetty).

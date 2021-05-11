@@ -1,5 +1,5 @@
 (ns org.enqueue.router.middleware
-  (:require [clojure.string :as string]
+  (:require [clojure.string :as str]
             [ring.util.response :refer [header]]
             [org.enqueue.helpers :refer [trim-end]]))
 
@@ -38,7 +38,7 @@
   (-> resp
       (header "X-Frame-Options" "deny")
       (header "Content-Security-Policy"
-              (str "default-src 'self' " (string/join " " origins)))
+              (str "default-src 'self' " (str/join " " origins)))
       (header "Permissions-Policy" "interest-cohort=()")
       (header "X-Content-Type-Options" "nosniff")
       ;; TODO: <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/strict-transport-security>
