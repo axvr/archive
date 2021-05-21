@@ -25,16 +25,16 @@
     (throw (Exception. "User account with that email address already exists."))))
 
 
-(defn gen-payload-attrs [type]
+(defn- gen-payload-attrs [type]
   (assert (or (= type :eat-a) (= type :eat-r)))
   {:type    type
    :version "1"
-   :expires (.toString (.plus (java.time.Instant/now) 1 java.time.temporal.ChronoUnit/HOURS))
+   :expires (.toString (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS))
    :issued  (.toString (java.time.Instant/now))
    :issuer  "api.enqueue.org"})
 
 
-(defn sign-token [payload key]
+(defn- sign-token [payload key]
   (str payload ":" (crypto/sign-message key payload)))
 
 
@@ -59,9 +59,29 @@
           data)))))
 
 
+(defn- extract-eat-token [request key]
+  (when-let [auth-header (get-in request [:headers "Authorization"])]
+    (let [[type credentials] (map str/trim (str/split auth-header #"\s+" 2))]
+      (when (= type "EAT")
+        (read-token credentials key)))))
+
+
+(defn wrap-auth
+  "Wrap handler with token extraction.  If token is invalid or missing,
+  responds with HTTP status 401."
+  [handler key]
+  (fn
+    ([request]
+     (if-let [token (extract-eat-token request key)]
+       (handler (assoc request :token token))
+       {:status 401}))
+    ([request respond raise]
+     (if-let [token (extract-eat-token request key)]
+       (handler (assoc request :token token) respond raise)
+       (respond {:status 401})))))
+
 ;; TODO: refresh tokens.
 ;; TODO: token endpoint.
-;; TODO: token middleware.
 
 
 (comment
@@ -79,12 +99,13 @@
 
   (def key (crypto/gen-signing-key))
 
-  (read-token
+  (def token
     (cons-token
       {:user-id (java.util.UUID/randomUUID), :agent-id (java.util.UUID/randomUUID)}
       :eat-a
-      key)
-    key)
+      key))
+
+  (extract-eat-token {:headers {"Authorization" (str "EAT " token)}} key)
 
   )
 
