@@ -21,7 +21,7 @@ clojure -X:run :dev? true
 
 ## Legal
 
-Copyright © 2020, [Alex Vear](https://axvr.io).
+Copyright © 2020–2021, [Alex Vear](https://www.alexvear.com).
 
 This software is distributed under the terms of the _GNU AGPLv3_.  A full copy
 of the licence text is can be found in the included COPYING file.  The author
