@@ -7,7 +7,8 @@
          ragtime/ragtime         {:mvn/version "0.8.1"}
          org.postgresql/postgresql         {:mvn/version "42.2.22"}
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.674"}
-         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc3"}}
+         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc3"}
+         com.cognitect/transit-clj {:mvn/version "1.0.324"}}
  :aliases {:test {:extra-paths ["test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"

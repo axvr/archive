@@ -1,6 +1,7 @@
 (ns org.enqueue.users
   (:require [org.enqueue.db :as db]
             [org.enqueue.crypto :as crypto]
+            [org.enqueue.transit :as transit]
             [clojure.string :as str]))
 
 
@@ -29,8 +30,8 @@
   (assert (or (= type :eat-a) (= type :eat-r)))
   {:type    type
    :version "1"
-   :expires (.toString (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS))
-   :issued  (.toString (java.time.Instant/now))
+   :expires (java.util.Date/from (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS))
+   :issued  (java.util.Date/from (java.time.Instant/now))
    :issuer  "api.enqueue.org"})
 
 
@@ -41,20 +42,21 @@
 (defn cons-token [data type key]
   (-> data
       (merge (gen-payload-attrs type))
-      str
+      transit/writer
+      (. toString)
       crypto/base64-encode
       (sign-token key)))
 
 
 (defn token-expired? [{:keys [expires]}]
   (> 0 (.compareTo (java.time.Instant/now)
-                   (java.time.Instant/parse expires))))
+                   (.toInstant expires))))
 
 
 (defn read-token [token key]
   (let [[payload sig] (str/split token #":" 2)]
     (when (crypto/valid-signature? key payload sig)
-      (let [data (read-string (crypto/base64-decode payload))]
+      (let [data (transit/reader (crypto/base64-decode payload))]
         (when (token-expired? data)
           data)))))
 
@@ -97,15 +99,15 @@
   ;; TODO: Idempotence.
 
 
-  (def key (crypto/gen-signing-key))
+  (def key_ (crypto/gen-signing-key))
 
   (def token
     (cons-token
       {:user-id (java.util.UUID/randomUUID), :agent-id (java.util.UUID/randomUUID)}
       :eat-a
-      key))
+      key_))
 
-  (extract-eat-token {:headers {"Authorization" (str "EAT " token)}} key)
+  (extract-eat-token {:headers {"Authorization" (str "EAT " token)}} key_)
 
   )
 
