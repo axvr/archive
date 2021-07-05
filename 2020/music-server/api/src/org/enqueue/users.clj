@@ -42,8 +42,7 @@
 (defn cons-token [data type key]
   (-> data
       (merge (gen-payload-attrs type))
-      transit/writer
-      (. toString)
+      transit/encode
       crypto/base64-encode
       (sign-token key)))
 
@@ -56,7 +55,7 @@
 (defn read-token [token key]
   (let [[payload sig] (str/split token #":" 2)]
     (when (crypto/valid-signature? key payload sig)
-      (let [data (transit/reader (crypto/base64-decode payload))]
+      (let [data (transit/decode (crypto/base64-decode payload))]
         (when (token-expired? data)
           data)))))
 

@@ -9,30 +9,26 @@
 ;; Content-Type: application/transit+json
 
 
-;; TODO: auto-string?
-(defn writer
-  ([data]
-   (writer (ByteArrayOutputStream.) data))
-  ([stream data]
-   (let [writer (transit/writer stream :json)]
-     (transit/write writer data)
-     stream)))
+(defn encode [data]
+  (let [stream (ByteArrayOutputStream.)
+        writer (transit/writer stream :json)]
+    (transit/write writer data)
+    (.toString stream)))
 
 
-(defmulti reader (fn [in & args] (type in)))
+(defmulti decode (fn [in & _] (type in)))
 
-;; FIXME: cannot read multiple values.
-(defmethod reader ByteArrayInputStream
+(defmethod decode ByteArrayInputStream
   [stream]
   (let [r (transit/reader stream :json)]
     (transit/read r)))
 
-(defmethod reader ByteArrayOutputStream
+(defmethod decode ByteArrayOutputStream
   [stream]
-  (reader (ByteArrayInputStream. (.toByteArray stream))))
+  (decode (ByteArrayInputStream. (.toByteArray stream))))
 
-(defmethod reader java.lang.String
+(defmethod decode java.lang.String
   ([string]
-   (reader string "UTF-8"))
+   (decode string "UTF-8"))
   ([string charset]
-   (reader (ByteArrayInputStream. (.getBytes string charset)))))
+   (decode (ByteArrayInputStream. (.getBytes string charset)))))
