@@ -31,8 +31,8 @@
   (assert (or (= type :eat-a) (= type :eat-r)))
   {:type    type
    :version "1"
-   :expires (java.util.Date/from (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS))
-   :issued  (java.util.Date/from (java.time.Instant/now))
+   :expires (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS)
+   :issued  (java.time.Instant/now)
    :issuer  "api.enqueue.org"})
 
 
@@ -49,9 +49,7 @@
 
 
 (defn token-expired? [{:keys [expires]}]
-  (date-compare <=
-                (java.time.Instant/now)
-                (.toInstant expires)))
+  (date-compare <= (java.time.Instant/now) expires))
 
 
 (defn read-token [token key]
@@ -102,13 +100,14 @@
 
   (def key_ (crypto/gen-signing-key))
 
-  (def token
+  (def token_
     (cons-token
       {:user-id (java.util.UUID/randomUUID), :agent-id (java.util.UUID/randomUUID)}
       :eat-a
       key_))
 
-  (extract-eat-token {:headers {"Authorization" (str "EAT " token)}} key_)
+  (clojure.pprint/pprint
+    (extract-eat-token {:headers {"Authorization" (str "EAT " token_)}} key_))
 
   )
 
