@@ -1,14 +1,14 @@
 # Enqueue
 
-_Your digital music collection, anywhere..._
+_An ethical music streaming service._
 
 
 ## Run server
 
-Start the server in development mode:
+Start the server:
 
 ```
-clojure -X:run :dev? true
+clojure -X:run
 ```
 
 
