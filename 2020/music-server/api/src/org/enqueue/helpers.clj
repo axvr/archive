@@ -2,6 +2,12 @@
   (:require [clojure.string :as str]))
 
 
+(defn date-compare
+  "Compare date1 to date2 using op.  Example ops: < > <= >= ="
+  [op date1 date2]
+  (op (.compareTo date1 date2) 0))
+
+
 (defn trim-end
   "Trims 'rem' from the end of 's'."
   ([s rem]

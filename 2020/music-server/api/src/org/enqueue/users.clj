@@ -2,6 +2,7 @@
   (:require [org.enqueue.db :as db]
             [org.enqueue.crypto :as crypto]
             [org.enqueue.transit :as transit]
+            [org.enqueue.helpers :refer [date-compare]]
             [clojure.string :as str]))
 
 
@@ -48,8 +49,9 @@
 
 
 (defn token-expired? [{:keys [expires]}]
-  (> 0 (.compareTo (java.time.Instant/now)
-                   (.toInstant expires))))
+  (date-compare <=
+                (java.time.Instant/now)
+                (.toInstant expires)))
 
 
 (defn read-token [token key]
