@@ -29,11 +29,12 @@
 
 (defn- gen-payload-attrs [type]
   (assert (or (= type :eat-a) (= type :eat-r)))
-  {:type    type
-   :version "1"
-   :expires (.plus (java.time.Instant/now) 2 java.time.temporal.ChronoUnit/HOURS)
-   :issued  (java.time.Instant/now)
-   :issuer  "api.enqueue.org"})
+  (let [now (java.time.Instant/now)]
+    {:type    type
+     :version "1"
+     :expires (.plus now 2 java.time.temporal.ChronoUnit/HOURS)
+     :issued  now
+     :issuer  "api.enqueue.org"}))
 
 
 (defn- sign-token [payload key]
@@ -49,14 +50,14 @@
 
 
 (defn token-expired? [{:keys [expires]}]
-  (date-compare <= (java.time.Instant/now) expires))
+  (date-compare > (java.time.Instant/now) expires))
 
 
 (defn read-token [token key]
   (let [[payload sig] (str/split token #":" 2)]
     (when (crypto/valid-signature? key payload sig)
       (let [data (transit/decode (crypto/base64-decode payload))]
-        (when (token-expired? data)
+        (when-not (token-expired? data)
           data)))))
 
 
