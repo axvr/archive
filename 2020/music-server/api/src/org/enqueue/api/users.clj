@@ -2,13 +2,15 @@
   (:require [org.enqueue.api.db :as db]
             [org.enqueue.api.crypto :as crypto]
             [org.enqueue.api.transit :as transit]
+            [org.enqueue.api.agents.middleware :refer [wrap-auth]]
             [org.enqueue.api.router.middleware :refer [wrap-async]])
   (:import [java.time Instant]
            [java.util UUID]))
 
 
-;; TODO: data validation with spec.
-;; TODO: password changing.
+;; TODO: data validation with spec (email addresses).
+;; TODO: send emails.
+;; TODO: make idempotent.
 
 
 (defn find-user-by [& {:keys [id email-address]}]
@@ -26,9 +28,7 @@
    :body message})
 
 
-;; TODO: make idempotent.
 (defn register [email-address password]
-  ;; TODO: validate email-address (use spec?)
   (if-not (find-user-by :email-address email-address)
     (let [user-id (UUID/randomUUID)
           hashed-password (crypto/hash-password password)]
@@ -48,27 +48,56 @@
       (reply 400 "Invalid body"))))
 
 
-;; (comment
-;;   (def key_ (crypto/new-signing-key))
-;;   (def idempotency-key (UUID/randomUUID))
+(defn change-password [user-id old-password new-password]
+  (if-let [user (find-user-by :user-id user-id)]
+    (if (crypto/valid-password? (:users/password_hash user) old-password)
+      (let [hashed-password (crypto/hash-password new-password)]
+        (db/update! :users [:= :id user-id]
+                    {:password-hash hashed-password})
+        (reply 204 "Password changed"))
+      (reply 401 "Invalid credentials"))
+    (reply 404 "User not found")))
 
-;;   (register "alex.vear@enqueue.org" "password")
-;;   (def tokens (log-in {:email-address "alex.vear@enqueue.org"
-;;                        :password "password"}
-;;                       {:name "Enqueue"
-;;                        :platform "Desktop"
-;;                        :idiom "REPL"
-;;                        :version "0"}
-;;                       idempotency-key
-;;                       key_))
 
-;;   (refresh (read-token key_ (:eat-r (transit/decode (tokens :body))))
-;;            {:version "1"}
-;;            idempotency-key
-;;            key_)
-;;   )
+(defn change-password-handler [request]
+  (let [user-id      (get-in request [:token :user-id])
+        body         (transit/decode (:body request))
+        old-password (:old-password body)
+        new-password (:new-password body)]
+    (change-password user-id old-password new-password)))
+
+
+(comment
+  (require '[org.enqueue.api.agents :as agents]
+           '[org.enqueue.api.agents.eat :as eat]
+           '[org.enqueue.api.settings :as settings])
+
+  (def idempotency-key (UUID/randomUUID))
+
+  (register "alex.vear@enqueue.org" "password")
+
+  (def tokens
+    (agents/log-in
+      {:email-address "alex.vear@enqueue.org"
+       :password "password"}
+      {:name "Enqueue"
+       :platform "Desktop"
+       :idiom "REPL"
+       :version "0"}
+      idempotency-key
+      settings/signing-key))
+
+  (agents/refresh
+    (eat/read-token settings/signing-key
+                    (-> tokens :body transit/decode :eatr))
+    {:version "1"}
+    idempotency-key
+    settings/signing-key)
+  )
 
 
 (def user-routes
   [["/user/register" {:post {:handler registration-handler
-                             :middleware [wrap-async]}}]])
+                             :middleware [wrap-async]}}]
+   ["user/password/change" {:post {:handler change-password-handler
+                                   :middleware [wrap-async wrap-auth]}}]])
