@@ -5,12 +5,17 @@
             [clojure.string :as str]))
 
 
+;;; TODO: doc strings.
+;;; TODO: another clean-up/simplification + refer to this implementation for inspiration:
+;;; <https://github.com/r0man/ring-cors/blob/master/src/ring/middleware/cors.cljc>
+
+
 (defn- not-found-handler
-  ([request]
+  ([_]
    {:status 404
     :headers {"Content-Type" "text/html"}
     :body "<h1>404</h1>"})
-  ([request respond raise]
+  ([request respond _]
    (respond (not-found-handler request))))
 
 
@@ -85,7 +90,7 @@
 (defn- cors-failed-handler
   ([allowed-origins request]
    (add-origin {:status 403} request allowed-origins))
-  ([allowed-origins request respond raise]
+  ([allowed-origins request respond _]
    (respond (cors-failed-handler allowed-origins request))))
 
 
