@@ -255,6 +255,19 @@
     (refresh token (:agent body) idempotency-key _key)))
 
 
+(defn log-out [agent-id]
+  (db/update! :agents [:= :id agent-id]
+              {:access-revoked  true
+               :refresh-key     nil
+               :idempotency-key nil}))
+
+
+(defn log-out-handler [request]
+  (let [agent-id (get-in request [:token :agent-id])]
+    (log-out agent-id)
+    {:status 204}))
+
+
 ;; TODO: change password.
 
 
@@ -285,4 +298,6 @@
    ["/account/auth/refresh" {:post {:handler refresh-handler
                                     :middleware [wrap-async]}}]
    ["/account/auth/log-in" {:post {:handler log-in-handler
-                                   :middleware [wrap-async]}}]])
+                                   :middleware [wrap-async]}}]
+   ["/account/auth/log-out" {:post {:handler log-out-handler
+                                    :middleware [wrap-async wrap-auth]}}]])
