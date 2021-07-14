@@ -1,4 +1,4 @@
-(ns org.enqueue.helpers
+(ns org.enqueue.api.helpers
   (:require [clojure.string :as str]))
 
 

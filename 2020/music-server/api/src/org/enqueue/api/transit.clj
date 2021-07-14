@@ -1,4 +1,4 @@
-(ns org.enqueue.transit
+(ns org.enqueue.api.transit
   "Wrapper around Transit to make it easier to use within Enqueue."
   (:require [cognitect.transit :as transit])
   (:import  [java.io ByteArrayInputStream ByteArrayOutputStream]))

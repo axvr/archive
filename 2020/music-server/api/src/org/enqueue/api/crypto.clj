@@ -1,4 +1,4 @@
-(ns org.enqueue.crypto
+(ns org.enqueue.api.crypto
   "Core cryptographic functions for Enqueue."
   (:require [caesium.crypto.pwhash :as pwhash]
             [caesium.crypto.auth :as auth]

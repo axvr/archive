@@ -1,4 +1,4 @@
-(ns org.enqueue.db
+(ns org.enqueue.api.db
   (:require [next.jdbc :as jdbc]
             next.jdbc.date-time
             [honey.sql :as sql]

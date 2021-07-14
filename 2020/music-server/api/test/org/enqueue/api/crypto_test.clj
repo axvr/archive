@@ -1,6 +1,6 @@
-(ns org.enqueue.crypto-test
+(ns org.enqueue.api.crypto-test
   (:require [clojure.test :refer :all]
-            [org.enqueue.crypto :as crypto]
+            [org.enqueue.api.crypto :as crypto]
             [clojure.string :as str]))
 
 

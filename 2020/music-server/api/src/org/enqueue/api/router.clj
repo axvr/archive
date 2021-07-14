@@ -1,7 +1,7 @@
-(ns org.enqueue.router
+(ns org.enqueue.api.router
   "Custom Enqueue routing library for Ring."
   (:require [clout.core :refer [route-matches]]
-            [org.enqueue.helpers :refer [while-nil when-let*]]
+            [org.enqueue.api.helpers :refer [while-nil when-let*]]
             [clojure.string :as str]))
 
 

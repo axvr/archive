@@ -1,6 +1,6 @@
-(ns org.enqueue.transit-test
+(ns org.enqueue.api.transit-test
   (:require [clojure.test :refer :all]
-            [org.enqueue.transit :as transit]))
+            [org.enqueue.api.transit :as transit]))
 
 
 (def date-pattern

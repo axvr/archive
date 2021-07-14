@@ -1,7 +1,7 @@
-(ns org.enqueue.router.middleware
+(ns org.enqueue.api.router.middleware
   (:require [clojure.string :as str]
             [ring.util.response :refer [header]]
-            [org.enqueue.helpers :refer [trim-end]]))
+            [org.enqueue.api.helpers :refer [trim-end]]))
 
 
 (defn- remove-trailing-slash [request]

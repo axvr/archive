@@ -1,8 +1,8 @@
-(ns org.enqueue.users
-  (:require [org.enqueue.db :as db]
-            [org.enqueue.crypto :as crypto]
-            [org.enqueue.transit :as transit]
-            [org.enqueue.helpers :refer [date-compare]]
+(ns org.enqueue.api.users
+  (:require [org.enqueue.api.db :as db]
+            [org.enqueue.api.crypto :as crypto]
+            [org.enqueue.api.transit :as transit]
+            [org.enqueue.api.helpers :refer [date-compare]]
             [clojure.string :as str]))
 
 

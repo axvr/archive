@@ -1,15 +1,15 @@
-(ns org.enqueue.core
+(ns org.enqueue.api.core
   (:require
-    [ring.adapter.jetty               :refer [run-jetty]]
-    [ring.middleware.params           :refer [wrap-params]]
-    [ring.middleware.multipart-params :refer [wrap-multipart-params]]
-    [ring.middleware.resource         :refer [wrap-resource]]
-    [ring.middleware.content-type     :refer [wrap-content-type]]
-    [ring.middleware.not-modified     :refer [wrap-not-modified]]
-    [org.enqueue.router               :refer [router fallback-routes]]
-    [org.enqueue.router.middleware    :refer [wrap-ignore-trailing-slash
-                                              wrap-security-headers
-                                              wrap-async]]))
+    [ring.adapter.jetty                :refer [run-jetty]]
+    [ring.middleware.params            :refer [wrap-params]]
+    [ring.middleware.multipart-params  :refer [wrap-multipart-params]]
+    [ring.middleware.resource          :refer [wrap-resource]]
+    [ring.middleware.content-type      :refer [wrap-content-type]]
+    [ring.middleware.not-modified      :refer [wrap-not-modified]]
+    [org.enqueue.api.router            :refer [router fallback-routes]]
+    [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
+                                               wrap-security-headers
+                                               wrap-async]]))
 
 
 (defn home-handler [_]

@@ -1,4 +1,4 @@
-# Enqueue
+# Enqueue API
 
 _An ethical music streaming service._
 
