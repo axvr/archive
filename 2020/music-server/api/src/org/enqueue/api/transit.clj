@@ -5,8 +5,13 @@
 
 
 ;; TODO: headers
-;; Accept: application/transit+json
-;; Content-Type: application/transit+json
+;;   Accept: application/transit+json
+;;   Content-Type: application/transit+json
+;; TODO: middleware
+;;   Hook middleware into above rules?  If present, then encode/decode.
+
+
+(def content-type "application/transit+json")
 
 
 (def ^:private date-time-format
@@ -56,4 +61,7 @@
   ([string]
    (decode string "UTF-8"))
   ([string charset]
-   (decode (ByteArrayInputStream. (.getBytes string charset)))))
+   (when (seq string)
+     (decode (ByteArrayInputStream. (.getBytes string charset))))))
+
+(defmethod decode nil [& _] nil)

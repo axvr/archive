@@ -9,7 +9,8 @@
     [org.enqueue.api.router            :refer [router fallback-routes]]
     [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
                                                wrap-security-headers
-                                               wrap-async]]))
+                                               wrap-async]]
+    [org.enqueue.api.users             :refer [user-routes]]))
 
 
 (defn home-handler [_]
@@ -24,6 +25,7 @@
   (concat
     [["/" {:get {:handler home-handler
                  :middleware [wrap-async]}}]]
+    user-routes
     fallback-routes))
 
 

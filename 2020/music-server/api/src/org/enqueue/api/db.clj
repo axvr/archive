@@ -41,10 +41,16 @@
    (jdbc/execute-one! ds (sql/format sql) opts)))
 
 
-(defn insert [table values]
+(defn insert! [table values]
   (query-first {:insert-into [table]
                 :columns (keys values)
                 :values [(vals values)]}))
+
+
+(defn update! [table where changes]
+  (query-first {:update [table]
+                :set changes
+                :where where}))
 
 
 ;;; -----------------------------------------------------------

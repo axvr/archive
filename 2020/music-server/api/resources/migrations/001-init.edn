@@ -2,10 +2,27 @@
 
 ;; TODO: create indicies
 {:up ["CREATE TABLE users
-         (id             UUID PRIMARY KEY,
-          email_address  VARCHAR(320),
-          password_hash  CHAR(172),
-          created_at     TIMESTAMPTZ,
-          UNIQUE(email_address));"]
+         (id               UUID          PRIMARY KEY,
+          email_address    VARCHAR(320)  NOT NULL,
+          password_hash    CHAR(172)     NOT NULL,
+          created_at       TIMESTAMPTZ   NOT NULL,
+          -- Constraints --
+          UNIQUE(email_address));"
+      "CREATE TABLE agents
+         (id               UUID          PRIMARY KEY,
+          user_id          UUID          REFERENCES users(id) NOT NULL,
+          -- Identifiers --
+          name             VARCHAR(128)  NOT NULL,
+          version          VARCHAR(32)   NOT NULL,
+          platform         VARCHAR(32)   NOT NULL,
+          idiom            VARCHAR(32)   NOT NULL,
+          -- Metadata --
+          created_at       TIMESTAMPTZ   NOT NULL,
+          last_session     TIMESTAMPTZ   NULL,
+          access_revoked   BOOLEAN       NOT NULL,
+          -- Refresh key --
+          refresh_key      CHAR(44)      NULL,  -- Random 32 byte string Base64 encoded to 44 bytes.
+          idempotency_key  UUID          NULL);"]
 
- :down ["DROP TABLE users;"]}
+ :down ["DROP TABLE agents;"
+        "DROP TABLE users;"]}

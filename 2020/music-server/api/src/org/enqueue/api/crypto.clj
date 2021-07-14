@@ -60,14 +60,21 @@
    (.getBytes s charset)))
 
 
-(defn gen-signing-key
-  "Generate a random Base64 encoded signing key for the HMAC-SHA512-256
-  algorithm.  Used by the sign-message and valid-signature? functions."
-  []
-  (-> auth/hmacsha512256-keybytes
+(defn random-bytes
+  "Generates a random string of specified size and returns it encoded in
+  Base64.  Useful for generating cryptographic keys."
+  [size]
+  (-> size
       rb/randombytes
       bytebuffer->string
       (base64-encode "ISO-8859-1")))
+
+
+(defn new-signing-key
+  "Generate a random Base64 encoded signing key for the HMAC-SHA512-256
+  algorithm.  Used by the sign-message and valid-signature? functions."
+  []
+  (random-bytes auth/hmacsha512256-keybytes))
 
 
 (defn sign-message
