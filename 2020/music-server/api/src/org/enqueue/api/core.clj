@@ -10,7 +10,8 @@
     [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
                                                wrap-security-headers
                                                wrap-async]]
-    [org.enqueue.api.users             :refer [user-routes]]))
+    [org.enqueue.api.users             :refer [user-routes]]
+    [org.enqueue.api.agents            :refer [agent-routes]]))
 
 
 (defn home-handler [_]
@@ -26,6 +27,7 @@
     [["/" {:get {:handler home-handler
                  :middleware [wrap-async]}}]]
     user-routes
+    agent-routes
     fallback-routes))
 
 
