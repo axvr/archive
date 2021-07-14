@@ -59,7 +59,7 @@
 (deftest generate-valid-signing-key
   (testing "generates valid signing key"
     (dotimes [_ 10]
-      (let [key (crypto/gen-signing-key)]
+      (let [key (crypto/new-signing-key)]
         ;; Base 64 encoded key is 44 chars long.
         (is (= 44 (count key)))
         ;; Actual key is 32 bytes long.
@@ -68,13 +68,13 @@
         (is (= (crypto/base64-decode key "ISO-8859-1")
                (crypto/base64-decode key "ISO-8859-1")))
         ;; Will not generate same on next run.
-        (is (not (= key (crypto/gen-signing-key))))))))
+        (is (not (= key (crypto/new-signing-key))))))))
 
 
 (deftest generates-verifible-signature
   (testing "generates verifyable signature"
     (dotimes [_ 10]
-      (let [key (crypto/gen-signing-key)
+      (let [key (crypto/new-signing-key)
             msg (rand-unicode-string)
             sig (crypto/sign-message key msg)]
         ;; Base 64 encoded signature is 44 chars long.
@@ -90,7 +90,7 @@
         ;; Signature verification fails on modified message.
         (is (not (crypto/valid-signature? key (rand-unicode-string) sig)))
         ;; Signature verification fails on different key.
-        (is (not (crypto/valid-signature? (crypto/gen-signing-key) msg sig)))
+        (is (not (crypto/valid-signature? (crypto/new-signing-key) msg sig)))
         ;; Signature verification fails on invalid key.
         (is (not (crypto/valid-signature? nil msg sig)))
         ;; Signature verification fails on invalid signature.
