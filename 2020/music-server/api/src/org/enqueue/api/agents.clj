@@ -15,38 +15,18 @@
            [java.time Instant]))
 
 
-;;; TODO: clean up
+(defn- reply [status message]
+  {:status status
+   :headers {"Content-Type" "text/plain; charset=UTF-8"}
+   :body message})
 
 
-(defn- create-agent [user-id {:keys [name version platform idiom]}]
-  ;; TODO: validate agent data.  (Spec?)
-  (let [agent-id (UUID/randomUUID)]
-    (db/insert!
-      :agents
-      {:id         agent-id
-       :user-id    user-id
-       :name       name
-       :version    version
-       :platform   platform
-       :idiom      idiom
-       :created-at (Instant/now)
-       :access-revoked false})
-    agent-id))
-
-
-;; TODO: better name.
-(defn- update-rk-db! [agent-id renewal-key idempotency-key version]
+(defn- update-stored-renewal-key! [agent-id renewal-key idempotency-key version]
   (db/update! :agents [:= :id agent-id]
               {:renewal-key renewal-key
                :idempotency-key idempotency-key
                :version version
                :last-session (Instant/now)}))
-
-
-(defn- reply [status message]
-  {:status status
-   :headers {"Content-Type" "text/plain; charset=UTF-8"}
-   :body message})
 
 
 (defn- create-tokens [agent-id version renewal-key idempotency-key signing-key]
@@ -73,7 +53,7 @@
                       (= nil renewal-key (:agents/renewal_key agent))
                       (eat/generate-renewal-key))]
           (do
-            (update-rk-db! agent-id rk idempotency-key version)
+            (update-stored-renewal-key! agent-id rk idempotency-key version)
             {:status 200
              :headers {"Content-Type" transit/content-type}
              :body (transit/encode (eat/build-token-pair signing-key user-id agent-id rk))})
@@ -81,7 +61,24 @@
     (reply 404 (str "No such agent"))))
 
 
+(defn- create-agent [user-id {:keys [name version platform idiom]}]
+  ;; TODO: validate agent data.  (Spec?)
+  (let [agent-id (UUID/randomUUID)]
+    (db/insert!
+      :agents
+      {:id         agent-id
+       :user-id    user-id
+       :name       name
+       :version    version
+       :platform   platform
+       :idiom      idiom
+       :created-at (Instant/now)
+       :access-revoked false})
+    agent-id))
+
+
 (defn create
+  "Create a new agent and provide initial EAT tokens."
   [{:keys [email-address password]}
    {:keys [version] :as agent}
    idempotency-key
@@ -110,6 +107,7 @@
 
 
 (defn renew
+  "Renew an agent's access by providing a new pair of EAT tokens."
   [{:keys [agent-id renewal-key]}
    {:keys [version]}
    idempotency-key
@@ -125,7 +123,9 @@
     (renew token (:agent body) idempotency-key signing-key)))
 
 
-(defn revoke-access [agent-id]
+(defn revoke-access
+  "Revoke an agent's access.  This is somewhat equivalent to logging-out."
+  [agent-id]
   (db/update! :agents [:= :id agent-id]
               {:access-revoked  true
                :renewal-key     nil

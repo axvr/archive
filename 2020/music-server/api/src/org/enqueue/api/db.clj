@@ -7,11 +7,11 @@
             ragtime.repl))
 
 
-(def ds (jdbc/get-datasource config/db))
-
-
 ;;; -----------------------------------------------------------
 ;;; DB interaction functions
+
+
+(def ds (jdbc/get-datasource config/db))
 
 
 (def sql-format sql/format)
@@ -50,9 +50,10 @@
 
 
 (def ragtime-config
-  {:datastore  (ragtime.jdbc/sql-database config/db)
+  {:datastore  (ragtime.jdbc/sql-database
+                 config/db
+                 {:migrations-table "ragtime_migrations"})
    :migrations (ragtime.jdbc/load-resources "migrations")})
-;; NOTE: default migration history table is "ragtime_migrations"
 
 
 (defn migrate []

@@ -76,7 +76,7 @@
 
   (register "alex.vear@enqueue.org" "password")
 
-  (def tokens
+  (def agent-creation-response
     (agents/create
       {:email-address "alex.vear@enqueue.org"
        :password "password"}
@@ -87,12 +87,15 @@
       idempotency-key
       config/signing-key))
 
+  (def tokens (-> agent-creation-response :body transit/decode))
+
   (agents/renew
-    (eat/read-token config/signing-key
-                    (-> tokens :body transit/decode :eatr))
+    (eat/read-token config/signing-key (tokens :eat-r))
     {:version "1"}
     idempotency-key
     config/signing-key)
+
+  (agents/revoke-access (:agent-id (eat/read-token config/signing-key (tokens :eat-r))))
   )
 
 
