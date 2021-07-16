@@ -17,7 +17,7 @@
 
 (defn home-handler [_]
   {:status 200
-   :headers {"Content-Type" "text/html"}
+   :headers {"Content-Type" "text/html; charset=UTF-8"}
    :body (str "<title>Enqueue API</title>"
               "<h1>Enqueue API</h1>"
               "<p>Your digital music collection, anywhere.</p>")})

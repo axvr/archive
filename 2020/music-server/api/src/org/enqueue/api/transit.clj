@@ -11,7 +11,7 @@
 ;;   Hook middleware into above rules?  If present, then encode/decode.
 
 
-(def content-type "application/transit+json")
+(def content-type "application/transit+json; charset=UTF-8")
 
 
 (def ^:private date-time-format

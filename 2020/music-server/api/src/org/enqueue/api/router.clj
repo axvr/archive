@@ -13,7 +13,7 @@
 (defn- not-found-handler
   ([_]
    {:status 404
-    :headers {"Content-Type" "text/html"}
+    :headers {"Content-Type" "text/html; charset=UTF-8"}
     :body "<h1>404</h1>"})
   ([request respond _]
    (respond (not-found-handler request))))

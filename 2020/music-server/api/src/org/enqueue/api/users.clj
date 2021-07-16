@@ -24,7 +24,7 @@
 
 (defn- reply [status message]
   {:status status
-   :headers ["Content-Type" "text/plain"]
+   :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body message})
 
 

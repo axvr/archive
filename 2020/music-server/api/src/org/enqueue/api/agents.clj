@@ -51,7 +51,7 @@
 
 (defn- reply [status message]
   {:status status
-   :headers ["Content-Type" "text/plain"]
+   :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body message})
 
 
@@ -81,7 +81,7 @@
           (do
             (update-rk-db! agent-id rk idempotency-key version)
             {:status 200
-             :headers ["Content-Type" transit/content-type]
+             :headers {"Content-Type" transit/content-type}
              :body (transit/encode (eat/build-token-pair signing-key user-id agent-id rk))})
           (reply 409 "Refresh key already used"))))
     (reply 404 (str "No such agent"))))
