@@ -8,7 +8,7 @@
             [org.enqueue.api.crypto :as crypto]
             [org.enqueue.api.transit :as transit]
             [org.enqueue.api.agents.eat :as eat]
-            [org.enqueue.api.settings :as settings]
+            [org.enqueue.api.config :as config]
             [org.enqueue.api.agents.middleware :refer [wrap-auth]]
             [org.enqueue.api.router.middleware :refer [wrap-async]])
   (:import [java.util UUID]
@@ -112,7 +112,7 @@
   [request]
   (let [idempotency-key (get-in request [:headers "Idempotency-Key"])
         body            (transit/decode (:body request))]
-    (log-in (:credentials body) (:agent body) idempotency-key settings/signing-key)))
+    (log-in (:credentials body) (:agent body) idempotency-key config/signing-key)))
 
 
 (defn refresh
@@ -124,7 +124,7 @@
 
 
 (defn refresh-handler [request]
-  (let [signing-key     settings/signing-key
+  (let [signing-key     config/signing-key
         token           (eat/extract-token signing-key request)
         idempotency-key (get-in request [:headers "Idempotency-Key"])
         body            (transit/decode (:body request))]

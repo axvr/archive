@@ -70,7 +70,7 @@
 (comment
   (require '[org.enqueue.api.agents :as agents]
            '[org.enqueue.api.agents.eat :as eat]
-           '[org.enqueue.api.settings :as settings])
+           '[org.enqueue.api.config :as config])
 
   (def idempotency-key (UUID/randomUUID))
 
@@ -85,14 +85,14 @@
        :idiom "REPL"
        :version "0"}
       idempotency-key
-      settings/signing-key))
+      config/signing-key))
 
   (agents/refresh
-    (eat/read-token settings/signing-key
+    (eat/read-token config/signing-key
                     (-> tokens :body transit/decode :eatr))
     {:version "1"}
     idempotency-key
-    settings/signing-key)
+    config/signing-key)
   )
 
 

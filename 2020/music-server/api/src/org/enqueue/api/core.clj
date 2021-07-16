@@ -11,7 +11,8 @@
                                                wrap-security-headers
                                                wrap-async]]
     [org.enqueue.api.users             :refer [user-routes]]
-    [org.enqueue.api.agents            :refer [agent-routes]]))
+    [org.enqueue.api.agents            :refer [agent-routes]]
+    [org.enqueue.api.config            :as    config]))
 
 
 (defn home-handler [_]
@@ -31,19 +32,11 @@
     fallback-routes))
 
 
-(def cors-origins #{"https://www.enqueue.org"
-                    "https://enqueue.org"
-                    "https://api.enqueue.org"})
-
-
-(def xss-origins #{"enqueue.org" "*.enqueue.org"})
-
-
 (def app-handler
   (-> build-route-map
-      (router cors-origins)
-      (wrap-security-headers xss-origins)
-      (wrap-resource "public")
+      (router (get-in config/server [:origins :cors]))
+      (wrap-security-headers (get-in config/server [:origins :xss]))
+      (wrap-resource "public")  ;; TODO: use as middleware on :all fallback?
       wrap-content-type
       wrap-not-modified
       wrap-params
@@ -55,6 +48,6 @@
   ;; TODO: other Jetty options (doc run-jetty).
   (run-jetty
     #'app-handler
-    {:port port
+    {:port (or port (config/server :port))
      :async? true
      :send-server-version? false}))

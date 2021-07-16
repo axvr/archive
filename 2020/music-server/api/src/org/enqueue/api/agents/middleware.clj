@@ -1,6 +1,6 @@
 (ns org.enqueue.api.agents.middleware
   (:require [org.enqueue.api.agents.eat :as eat]
-            [org.enqueue.api.settings :as settings]))
+            [org.enqueue.api.config :as config]))
 
 
 (defn wrap-auth
@@ -9,10 +9,10 @@
   [handler]
   (fn
     ([request]
-     (if-let [token (eat/extract-token request settings/signing-key)]
+     (if-let [token (eat/extract-token request config/signing-key)]
        (handler (assoc request :token token))
        {:status 401}))
     ([request respond raise]
-     (if-let [token (eat/extract-token request settings/signing-key)]
+     (if-let [token (eat/extract-token request config/signing-key)]
        (handler (assoc request :token token) respond raise)
        (respond {:status 401})))))

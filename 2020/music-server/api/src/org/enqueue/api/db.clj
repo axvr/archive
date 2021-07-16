@@ -1,21 +1,13 @@
 (ns org.enqueue.api.db
-  (:require [next.jdbc :as jdbc]
+  (:require [org.enqueue.api.config :as config]
+            [next.jdbc :as jdbc]
             next.jdbc.date-time
             [honey.sql :as sql]
             ragtime.jdbc
             ragtime.repl))
 
 
-;; TODO: Get per-environment settings from EDN.
-(def db-spec
-  {:dbtype "postgresql"
-   :dbname "enqueue"
-   :host "localhost"
-   :user "postgres"
-   :password "postgres"})
-
-
-(def ds (jdbc/get-datasource db-spec))
+(def ds (jdbc/get-datasource config/db))
 
 
 ;;; -----------------------------------------------------------
@@ -58,7 +50,7 @@
 
 
 (def ragtime-config
-  {:datastore  (ragtime.jdbc/sql-database db-spec)
+  {:datastore  (ragtime.jdbc/sql-database config/db)
    :migrations (ragtime.jdbc/load-resources "migrations")})
 ;; NOTE: default migration history table is "ragtime_migrations"
 
