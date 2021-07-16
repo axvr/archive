@@ -15,13 +15,7 @@
            [java.time Instant]))
 
 
-;;; TODO: improve naming.
-;;;   - /agents/register
-;;;   - /agents/remove
-;;;   - /agents/renew
-;;;   - /agents
 ;;; TODO: clean up
-;;; TODO: data validation with spec.
 
 
 (defn- create-agent [user-id {:keys [name version platform idiom]}]
@@ -41,9 +35,9 @@
 
 
 ;; TODO: better name.
-(defn- update-rk-db! [agent-id refresh-key idempotency-key version]
+(defn- update-rk-db! [agent-id renewal-key idempotency-key version]
   (db/update! :agents [:= :id agent-id]
-              {:refresh-key refresh-key
+              {:renewal-key renewal-key
                :idempotency-key idempotency-key
                :version version
                :last-session (Instant/now)}))
@@ -55,9 +49,9 @@
    :body message})
 
 
-(defn- create-tokens [agent-id version refresh-key idempotency-key signing-key]
+(defn- create-tokens [agent-id version renewal-key idempotency-key signing-key]
   (if-let [agent (db/query-first
-                   {:select [:user-id :refresh-key :idempotency-key :access-revoked]
+                   {:select [:user-id :renewal-key :idempotency-key :access-revoked]
                     :from [:agents]
                     :where [:= :id agent-id]})]
     (let [user-id         (:agents/user_id agent)
@@ -65,29 +59,29 @@
       (if access-revoked?
         (reply 403 "Access revoked")
         (if-let [rk (cond
-                      ;; If idempotency key (and refresh key) was given and
+                      ;; If idempotency key (and renewal key) was given and
                       ;; matches stored key.
-                      (and refresh-key
+                      (and renewal-key
                            idempotency-key
                            (= idempotency-key (:agents/idempotency_key agent)))
                       (:agents/idempotency_key agent)
-                      ;; If refresh key was given and matches stored key.
-                      (and refresh-key
-                           (= refresh-key (:agents/refresh_key agent)))
-                      (eat/generate-refresh-key)
+                      ;; If renewal key was given and matches stored key.
+                      (and renewal-key
+                           (= renewal-key (:agents/renewal_key agent)))
+                      (eat/generate-renewal-key)
                       ;; If first log in.
-                      (= nil refresh-key (:agents/refresh_key agent))
-                      (eat/generate-refresh-key))]
+                      (= nil renewal-key (:agents/renewal_key agent))
+                      (eat/generate-renewal-key))]
           (do
             (update-rk-db! agent-id rk idempotency-key version)
             {:status 200
              :headers {"Content-Type" transit/content-type}
              :body (transit/encode (eat/build-token-pair signing-key user-id agent-id rk))})
-          (reply 409 "Refresh key already used"))))
+          (reply 409 "Renewal token already used"))))
     (reply 404 (str "No such agent"))))
 
 
-(defn log-in
+(defn create
   [{:keys [email-address password]}
    {:keys [version] :as agent}
    idempotency-key
@@ -101,7 +95,7 @@
       (reply 401 "Invalid credentials"))))
 
 
-(defn log-in-handler
+(defn create-handler
   "Expects request body to be in following format:
     {:agent {:name     \"Enqueue\"
              :platform \"Web\"
@@ -112,42 +106,42 @@
   [request]
   (let [idempotency-key (get-in request [:headers "Idempotency-Key"])
         body            (transit/decode (:body request))]
-    (log-in (:credentials body) (:agent body) idempotency-key config/signing-key)))
+    (create (:credentials body) (:agent body) idempotency-key config/signing-key)))
 
 
-(defn refresh
-  [{:keys [agent-id refresh-key]}
+(defn renew
+  [{:keys [agent-id renewal-key]}
    {:keys [version]}
    idempotency-key
    signing-key]
-  (create-tokens agent-id version refresh-key idempotency-key signing-key))
+  (create-tokens agent-id version renewal-key idempotency-key signing-key))
 
 
-(defn refresh-handler [request]
+(defn renew-handler [request]
   (let [signing-key     config/signing-key
         token           (eat/extract-token signing-key request)
         idempotency-key (get-in request [:headers "Idempotency-Key"])
         body            (transit/decode (:body request))]
-    (refresh token (:agent body) idempotency-key signing-key)))
+    (renew token (:agent body) idempotency-key signing-key)))
 
 
-(defn log-out [agent-id]
+(defn revoke-access [agent-id]
   (db/update! :agents [:= :id agent-id]
               {:access-revoked  true
-               :refresh-key     nil
+               :renewal-key     nil
                :idempotency-key nil}))
 
 
-(defn log-out-handler [request]
+(defn revoke-access-handler [request]
   (let [agent-id (get-in request [:token :agent-id])]
-    (log-out agent-id)
+    (revoke-access agent-id)
     {:status 204}))
 
 
 (def agent-routes
-  [["/agents/register" {:post {:handler log-in-handler
-                               :middleware [wrap-async]}}]
-   ["/agents/refresh"  {:post {:handler refresh-handler
-                               :middleware [wrap-async]}}]
-   ["/agents/remove"   {:post {:handler log-out-handler
-                               :middleware [wrap-async wrap-auth]}}]])
+  [["/agents/create" {:post {:handler create-handler
+                             :middleware [wrap-async]}}]
+   ["/agents/renew"  {:post {:handler renew-handler
+                             :middleware [wrap-async]}}]
+   ["/agents/revoke" {:post {:handler revoke-access-handler
+                             :middleware [wrap-async wrap-auth]}}]])

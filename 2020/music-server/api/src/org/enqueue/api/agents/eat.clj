@@ -3,7 +3,7 @@
 
   The 2 types of tokens are:
     - EAT-A: Access token (TTL 2 hour).
-    - EAT-R: Refresh token (TTL 400 days)"
+    - EAT-R: Renewal token (TTL 400 days)"
   (:require [org.enqueue.api.crypto :as crypto]
             [org.enqueue.api.transit :as transit]
             [org.enqueue.api.helpers :refer [date-compare]]
@@ -17,7 +17,7 @@
   (date-compare > (Instant/now) expires))
 
 
-(defn generate-refresh-key []
+(defn generate-renewal-key []
   (crypto/random-bytes 32))
 
 
@@ -50,12 +50,12 @@
        (sign-token key)))
 
 
-(defn build-token-pair [signing-key user-id agent-id refresh-key]
+(defn build-token-pair [signing-key user-id agent-id renewal-key]
   (let [base-payload {:user-id user-id, :agent-id agent-id}]
     {:eat-a (->> base-payload
                  (build-payload :eat-a)
                  (pack-token signing-key))
-     :eat-r (->> (assoc base-payload :refresh-key refresh-key)
+     :eat-r (->> (assoc base-payload :renewal-key renewal-key)
                  (build-payload :eat-r)
                  (pack-token signing-key))}))
 

@@ -77,7 +77,7 @@
   (register "alex.vear@enqueue.org" "password")
 
   (def tokens
-    (agents/log-in
+    (agents/create
       {:email-address "alex.vear@enqueue.org"
        :password "password"}
       {:name "Enqueue"
@@ -87,7 +87,7 @@
       idempotency-key
       config/signing-key))
 
-  (agents/refresh
+  (agents/renew
     (eat/read-token config/signing-key
                     (-> tokens :body transit/decode :eatr))
     {:version "1"}

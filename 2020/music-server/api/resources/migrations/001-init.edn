@@ -20,8 +20,8 @@
           created_at       TIMESTAMPTZ   NOT NULL,
           last_session     TIMESTAMPTZ   NULL,
           access_revoked   BOOLEAN       NOT NULL,
-          -- Refresh key --
-          refresh_key      CHAR(44)      NULL,  -- Random 32 byte string Base64 encoded to 44 bytes.
+          -- EAT-R --
+          renewal_key      CHAR(44)      NULL,  -- Random 32 byte string Base64 encoded to 44 bytes.
           idempotency_key  UUID          NULL);"]
 
  :down ["DROP TABLE agents;"
