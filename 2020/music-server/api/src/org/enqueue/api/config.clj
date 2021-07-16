@@ -3,7 +3,7 @@
   (:require [clojure.java.io :as io]))
 
 (def read-resource
-  (comp read-string slurp io/resource))
+  (comp eval read-string slurp io/resource))
 
 (def ^:private config
   (read-resource "config.edn"))

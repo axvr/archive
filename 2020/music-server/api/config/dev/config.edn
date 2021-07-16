@@ -1,4 +1,4 @@
-{:env :local
+{:env :dev
  :eat {:signing-key "YgD5sNrVH+JbCyPeih21gZQkk1c/qFBeLtkn0T+BenY="}
  :db  {:dbtype "postgresql"
        :dbname "enqueue"

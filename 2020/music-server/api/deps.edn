@@ -9,11 +9,11 @@
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.674"}
          com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc3"}
          com.cognitect/transit-clj         {:mvn/version "1.0.324"}}
- :aliases {:test {:extra-paths ["test"]
+ :aliases {:dev  {:extra-paths ["config/dev"]}
+           :prod {:extra-paths ["config/prod"]}
+           :run  {:exec-fn org.enqueue.api.core/run}
+           :test {:extra-paths ["test" "config/test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
                                 :sha     "f597341b6ca7bb4cf027e0a34a6710ca9cb969da"}}
-                  :exec-fn cognitect.test-runner.api/test}
-           :run {:exec-fn org.enqueue.api.core/run
-                 :exec-args {:dev? true
-                             :port 3000}}}}
+                  :exec-fn cognitect.test-runner.api/test}}}

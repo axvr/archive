@@ -5,10 +5,16 @@ _An ethical music streaming service._
 
 ## Run server
 
-Start the server:
+Start the server in development mode:
 
 ```
-clojure -X:run
+clojure -X:dev:run
+```
+
+Or in production mode (config.edn file not included):
+
+```
+clojure -X:prod:run
 ```
 
 
