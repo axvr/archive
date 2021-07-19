@@ -90,12 +90,12 @@
   (def tokens (-> agent-creation-response :body transit/decode))
 
   (agents/renew
-    (eat/read-token config/signing-key (tokens :eat-r))
+    (eat/read-token config/signing-key (:eat-r tokens))
     {:version "1"}
     idempotency-key
     config/signing-key)
 
-  (agents/revoke-access (:agent-id (eat/read-token config/signing-key (tokens :eat-r))))
+  (agents/revoke-access (:agent-id (eat/read-token config/signing-key (:eat-r tokens))))
   )
 
 

@@ -48,6 +48,6 @@
   ;; TODO: other Jetty options (doc run-jetty).
   (run-jetty
     #'app-handler
-    {:port (or port (config/server :port))
+    {:port (or port (:port config/server))
      :async? true
      :send-server-version? false}))
