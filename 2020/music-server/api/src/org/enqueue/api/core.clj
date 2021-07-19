@@ -45,6 +45,9 @@
 
 
 (defn run [{:keys [port]}]
+  (when (= config/env :prod)
+    ;; Disable assertions on production environment.
+    (set! *assert* false))
   ;; TODO: other Jetty options (doc run-jetty).
   (run-jetty
     #'app-handler
