@@ -19,7 +19,7 @@
     (is (= "Rm9v" (crypto/base64-encode "Foo")))
     (let [rand-string (rand-unicode-string)]
       (when-not (empty? rand-string)
-        (is (not (= rand-string (crypto/base64-encode rand-string))))))))
+        (is (not= rand-string (crypto/base64-encode rand-string)))))))
 
 
 (deftest base64-decode
@@ -30,8 +30,8 @@
           encoded-str (crypto/base64-encode rand-string "UTF-8")
           decoded-str (crypto/base64-decode encoded-str "UTF-8")]
       (when-not (empty? rand-string)
-        (is (not (= rand-string encoded-str)))
-        (is (not (= encoded-str decoded-str)))
+        (is (not= rand-string encoded-str))
+        (is (not= encoded-str decoded-str))
         (is (= rand-string decoded-str))))))
 
 
@@ -43,8 +43,8 @@
         ;; Base64 encoded password-hash does not end with ASCII NULL characters.
         (is (not (str/ends-with? hashed-password "\u0000")))
         ;; Password hashing didn't return input password.
-        (is (not (= password hashed-password)))
-        (is (not (= (crypto/base64-encode password) hashed-password)))
+        (is (not= password hashed-password))
+        (is (not= (crypto/base64-encode password) hashed-password))
         ;; Base64 encoded password is 172 characters long.
         (is (= 172 (count hashed-password)))
         ;; Hashed password is 128 characters long.
@@ -68,7 +68,7 @@
         (is (= (crypto/base64-decode key "ISO-8859-1")
                (crypto/base64-decode key "ISO-8859-1")))
         ;; Will not generate same on next run.
-        (is (not (= key (crypto/new-signing-key))))))))
+        (is (not= key (crypto/new-signing-key)))))))
 
 
 (deftest generates-verifible-signature
@@ -82,9 +82,9 @@
         ;; Actual signature is 32 bytes long.
         (is (= 32 (count (crypto/base64-decode sig "ISO-8859-1"))))
         ;; Signature is not the key.
-        (is (not (= sig key)))
+        (is (not= sig key))
         ;; Signature is not the message.
-        (is (not (= sig msg)))
+        (is (not= sig msg))
         ;; Signature verification succeeds.
         (is (crypto/valid-signature? key msg sig))
         ;; Signature verification fails on modified message.

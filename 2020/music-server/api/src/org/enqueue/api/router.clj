@@ -67,7 +67,7 @@
 (defn- find-methods-for-path [request route-map]
   (while-nil [[path method-map] route-map]
     (when (route-matches path request)
-      (filter #(not (= :all %))
+      (filter #(not= :all %)
               (keys method-map)))))
 
 
