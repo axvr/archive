@@ -10,19 +10,6 @@
 ;;; <https://github.com/r0man/ring-cors/blob/master/src/ring/middleware/cors.cljc>
 
 
-(defn- not-found-handler
-  ([_]
-   {:status 404
-    :headers {"Content-Type" "text/html; charset=UTF-8"}
-    :body "<h1>404</h1>"})
-  ([request respond _]
-   (respond (not-found-handler request))))
-
-
-(def fallback-routes
-  [["*" {:all {:handler not-found-handler}}]])
-
-
 (defn- apply-middleware
   "Apply middleware to a handler."
   [{:keys [handler middleware]}]
@@ -71,7 +58,7 @@
               (keys method-map)))))
 
 
-(defn- cors-preflight [request route-map allowed-origins]
+(defn- cors-preflight [request route-map allowed-origins not-found-handler]
   (let [methods (find-methods-for-path request route-map)]
     (add-origin
       (if (seq methods)
@@ -124,12 +111,12 @@
 
 
 ;; TODO: make CORS optional?  Disable when run locally.
-(defn router [route-map-builder allowed-origins]
+(defn router [route-map-builder allowed-origins not-found-handler]
   (fn
     ([request]
      (let [route-map (route-map-builder)]
        (if (preflight? request)
-         (cors-preflight request route-map allowed-origins)
+         (cors-preflight request route-map allowed-origins not-found-handler)
          (let [handler (get-handler request route-map)]
            (if (some? (:handler handler))
              (invoke-with-cors (assoc handler :origins allowed-origins))
@@ -138,7 +125,7 @@
     ([request respond raise]
      (let [route-map (route-map-builder)]
        (if (preflight? request)
-         (respond (cors-preflight request route-map allowed-origins))
+         (respond (cors-preflight request route-map allowed-origins not-found-handler))
          (let [handler (get-handler request route-map)]
            (if (some? (:handler handler))
              (invoke-with-cors (assoc handler :origins allowed-origins) respond raise)

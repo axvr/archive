@@ -6,7 +6,7 @@
     [ring.middleware.resource          :refer [wrap-resource]]
     [ring.middleware.content-type      :refer [wrap-content-type]]
     [ring.middleware.not-modified      :refer [wrap-not-modified]]
-    [org.enqueue.api.router            :refer [router fallback-routes]]
+    [org.enqueue.api.router            :refer [router]]
     [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
                                                wrap-security-headers
                                                wrap-async]]
@@ -15,12 +15,29 @@
     [org.enqueue.api.config            :as    config]))
 
 
-(defn home-handler [_]
+(defn- home-handler [_]
   {:status 200
    :headers {"Content-Type" "text/html; charset=UTF-8"}
    :body (str "<title>Enqueue API</title>"
               "<h1>Enqueue API</h1>"
               "<p>Your digital music collection, anywhere.</p>")})
+
+
+(defn- not-found-handler
+  ([_]
+   {:status 404
+    :headers {"Content-Type" "text/html; charset=UTF-8"}
+    :body "<h1>404</h1>"})
+  ([request respond _]
+   (respond (not-found-handler request))))
+
+
+(def fallback-routes
+  [["*" {:get {:handler not-found-handler
+               :middleware [#(wrap-resource % "public")
+                            wrap-content-type
+                            wrap-not-modified]}
+         :all {:handler not-found-handler}}]])
 
 
 (defn- build-route-map []
@@ -34,11 +51,8 @@
 
 (def app-handler
   (-> build-route-map
-      (router (get-in config/server [:origins :cors]))
+      (router (get-in config/server [:origins :cors]) not-found-handler)
       (wrap-security-headers (get-in config/server [:origins :xss]))
-      (wrap-resource "public")  ;; TODO: use as middleware on :all fallback?
-      wrap-content-type
-      wrap-not-modified
       wrap-params
       wrap-multipart-params
       wrap-ignore-trailing-slash))
