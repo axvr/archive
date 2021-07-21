@@ -3,14 +3,14 @@
   with Enqueue through.
 
   An agent using EAT is automatically logged out after 400 days of inactivity."
-  (:require [org.enqueue.api.db :as db]
-            [org.enqueue.api.users :as users]
-            [org.enqueue.api.crypto :as crypto]
-            [org.enqueue.api.transit :as transit]
+  (:require [org.enqueue.api.db         :as db]
+            [org.enqueue.api.users      :as users]
+            [org.enqueue.api.crypto     :as crypto]
             [org.enqueue.api.agents.eat :as eat]
-            [org.enqueue.api.config :as config]
-            [org.enqueue.api.agents.middleware :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware :refer [wrap-async]])
+            [org.enqueue.api.config     :as config]
+            [org.enqueue.api.agents.middleware  :refer [wrap-auth]]
+            [org.enqueue.api.router.middleware  :refer [wrap-async]]
+            [org.enqueue.api.transit.middleware :refer [wrap-transit]])
   (:import [java.util UUID]
            [java.time Instant]))
 
@@ -55,8 +55,7 @@
           (do
             (update-stored-renewal-key! agent-id rk idempotency-key version)
             {:status 200
-             :headers {"Content-Type" transit/content-type}
-             :body (transit/encode (eat/build-token-pair signing-key user-id agent-id rk))})
+             :body   (eat/build-token-pair signing-key user-id agent-id rk)})
           (reply 409 "Renewal token already used"))))
     (reply 404 (str "No such agent"))))
 
@@ -102,7 +101,7 @@
                    :password      \"password\"}}"
   [request]
   (let [idempotency-key (get-in request [:headers "Idempotency-Key"])
-        body            (transit/decode (:body request))]
+        body            (:body request)]
     (create (:credentials body) (:agent body) idempotency-key config/signing-key)))
 
 
@@ -119,7 +118,7 @@
   (let [signing-key     config/signing-key
         token           (eat/extract-token signing-key request)
         idempotency-key (get-in request [:headers "Idempotency-Key"])
-        body            (transit/decode (:body request))]
+        body            (:body request)]
     (renew token (:agent body) idempotency-key signing-key)))
 
 
@@ -140,8 +139,8 @@
 
 (def agent-routes
   [["/agents/create" {:post {:handler create-handler
-                             :middleware [wrap-async]}}]
+                             :middleware [wrap-async wrap-transit]}}]
    ["/agents/renew"  {:post {:handler renew-handler
-                             :middleware [wrap-async]}}]
+                             :middleware [wrap-async wrap-transit]}}]
    ["/agents/revoke" {:post {:handler revoke-access-handler
-                             :middleware [wrap-async wrap-auth]}}]])
+                             :middleware [wrap-async wrap-auth wrap-transit]}}]])
