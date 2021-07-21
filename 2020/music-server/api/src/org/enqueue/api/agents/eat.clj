@@ -4,10 +4,10 @@
   The 2 types of tokens are:
     - EAT-A: Access token (TTL 2 hour).
     - EAT-R: Renewal token (TTL 400 days)"
-  (:require [org.enqueue.api.crypto :as crypto]
+  (:require [org.enqueue.api.crypto  :as crypto]
             [org.enqueue.api.transit :as transit]
             [org.enqueue.api.helpers :refer [date-compare]]
-            [clojure.string :as str])
+            [clojure.string          :as str])
   (:import [java.time Instant Duration]))
 
 

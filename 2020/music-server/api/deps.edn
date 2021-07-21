@@ -1,13 +1,13 @@
 {:paths ["src" "resources"]
  :deps  {org.clojure/clojure               {:mvn/version "1.10.3"}
-         ring/ring-core                    {:mvn/version "1.9.3"}
-         ring/ring-jetty-adapter           {:mvn/version "1.9.3"}
+         ring/ring-core                    {:mvn/version "1.9.4"}
+         ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
          clout/clout                       {:mvn/version "2.2.1"}
          caesium/caesium                   {:mvn/version "0.14.0"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
          org.postgresql/postgresql         {:mvn/version "42.2.23"}
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.674"}
-         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc3"}
+         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc5"}
          com.cognitect/transit-clj         {:mvn/version "1.0.324"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}
@@ -15,5 +15,5 @@
            :test {:extra-paths ["test" "config/test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                :sha     "f597341b6ca7bb4cf027e0a34a6710ca9cb969da"}}
+                                :sha     "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
                   :exec-fn cognitect.test-runner.api/test}}}

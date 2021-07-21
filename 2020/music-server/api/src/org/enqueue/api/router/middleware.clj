@@ -1,6 +1,6 @@
 (ns org.enqueue.api.router.middleware
   (:require [clojure.string :as str]
-            [ring.util.response :refer [header]]
+            [ring.util.response      :refer [header]]
             [org.enqueue.api.helpers :refer [trim-end]]))
 
 

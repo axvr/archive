@@ -1,11 +1,12 @@
 {:env :dev
  :eat {:signing-key "YgD5sNrVH+JbCyPeih21gZQkk1c/qFBeLtkn0T+BenY="}
- :db  {:dbtype "postgresql"
-       :dbname "enqueue"
-       :host "localhost"
-       :user "postgres"
+ :db  {:dbtype   "postgresql"
+       :dbname   "enqueue"
+       :host     "localhost"
+       :user     "postgres"
        :password "postgres"}
- :server {:port 3000
+ :server {:port   3000
+          :async? true
           :origins {:cors #{"https://www.enqueue.org"
                             "https://enqueue.org"
                             "https://api.enqueue.org"

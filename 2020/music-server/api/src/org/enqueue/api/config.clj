@@ -1,7 +1,7 @@
 (ns org.enqueue.api.config
   "Configuration settings for Enqueue."
   (:require [clojure.java.io :as io]
-            [clojure.edn :as edn]))
+            [clojure.edn     :as edn]))
 
 (def read-resource
   (comp eval edn/read-string slurp io/resource))

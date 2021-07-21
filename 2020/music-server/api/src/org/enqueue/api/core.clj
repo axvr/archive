@@ -2,6 +2,7 @@
   (:require
     [ring.adapter.jetty                :refer [run-jetty]]
     [ring.middleware.params            :refer [wrap-params]]
+    [ring.middleware.keyword-params    :refer [wrap-keyword-params]]
     [ring.middleware.multipart-params  :refer [wrap-multipart-params]]
     [ring.middleware.resource          :refer [wrap-resource]]
     [ring.middleware.content-type      :refer [wrap-content-type]]
@@ -16,18 +17,18 @@
 
 
 (defn- home-handler [_]
-  {:status 200
+  {:status  200
    :headers {"Content-Type" "text/html; charset=UTF-8"}
-   :body (str "<title>Enqueue API</title>"
-              "<h1>Enqueue API</h1>"
-              "<p>Your digital music collection, anywhere.</p>")})
+   :body    (str "<title>Enqueue API</title>"
+                 "<h1>Enqueue API</h1>"
+                 "<p>An ethical music streaming service.</p>")})
 
 
 (defn- not-found-handler
   ([_]
-   {:status 404
+   {:status  404
     :headers {"Content-Type" "text/html; charset=UTF-8"}
-    :body "<h1>404</h1>"})
+    :body    "<h1>404</h1>"})
   ([request respond _]
    (respond (not-found-handler request))))
 
@@ -54,17 +55,18 @@
       (router (get-in config/server [:origins :cors]) not-found-handler)
       (wrap-security-headers (get-in config/server [:origins :xss]))
       wrap-params
+      wrap-keyword-params
       wrap-multipart-params
       wrap-ignore-trailing-slash))
 
 
-(defn run [{:keys [port]}]
+(defn run [{:keys [port]
+            :or {port (:port config/server)}}]
   (when (= config/env :prod)
-    ;; Disable assertions on production environment.
-    (set! *assert* false))
-  ;; TODO: other Jetty options (doc run-jetty).
+    (set! *assert* false))  ; Disable assertions on production environment.
+  ;; TODO: configure SSL, HSTS header + automatic redirect.
   (run-jetty
     #'app-handler
-    {:port (or port (:port config/server))
-     :async? true
+    {:port   port
+     :async? (:async? config/server false)
      :send-server-version? false}))

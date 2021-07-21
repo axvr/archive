@@ -1,4 +1,8 @@
 (ns org.enqueue.api.transit.middleware
+  "Middleware for automatically decode Transit request body and encoding
+  response body.
+
+  Partially based on Ring-JSON: <https://github.com/ring-clojure/ring-json>"
   (:require [org.enqueue.api.transit :as transit]
             [clojure.string :as str]))
 

@@ -1,8 +1,8 @@
 (ns org.enqueue.api.crypto
   "Core cryptographic functions for Enqueue."
   (:require [caesium.crypto.pwhash :as pwhash]
-            [caesium.crypto.auth :as auth]
-            [caesium.randombytes :as rb]))
+            [caesium.crypto.auth   :as auth]
+            [caesium.randombytes   :as rb]))
 
 
 (defn base64-encode

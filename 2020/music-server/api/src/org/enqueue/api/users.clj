@@ -1,9 +1,9 @@
 (ns org.enqueue.api.users
-  (:require [org.enqueue.api.db :as db]
+  (:require [org.enqueue.api.db     :as db]
             [org.enqueue.api.crypto :as crypto]
-            [org.enqueue.api.transit :as transit]
-            [org.enqueue.api.agents.middleware :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware :refer [wrap-async]])
+            [org.enqueue.api.agents.middleware  :refer [wrap-auth]]
+            [org.enqueue.api.router.middleware  :refer [wrap-async]]
+            [org.enqueue.api.transit.middleware :refer [wrap-transit]])
   (:import [java.time Instant]
            [java.util UUID]))
 
@@ -41,8 +41,7 @@
 
 
 (defn registration-handler [request]
-  (let [{:keys [email-address password]}
-        (transit/decode (:body request))]
+  (let [{:keys [email-address password]} (:body request)]
     (if (and email-address password)
       (register email-address password)
       (reply 400 "Invalid body"))))
@@ -61,16 +60,17 @@
 
 (defn change-password-handler [request]
   (let [user-id      (get-in request [:token :user-id])
-        body         (transit/decode (:body request))
+        body         (:body request)
         old-password (:old-password body)
         new-password (:new-password body)]
     (change-password user-id old-password new-password)))
 
 
 (comment
-  (require '[org.enqueue.api.agents :as agents]
+  (require '[org.enqueue.api.agents     :as agents]
            '[org.enqueue.api.agents.eat :as eat]
-           '[org.enqueue.api.config :as config])
+           '[org.enqueue.api.config     :as config]
+           '[org.enqueue.api.transit    :as transit])
 
   (def idempotency-key (UUID/randomUUID))
 
@@ -101,6 +101,6 @@
 
 (def user-routes
   [["/user/register" {:post {:handler registration-handler
-                             :middleware [wrap-async]}}]
+                             :middleware [wrap-async wrap-transit]}}]
    ["user/password/change" {:post {:handler change-password-handler
-                                   :middleware [wrap-async wrap-auth]}}]])
+                                   :middleware [wrap-async wrap-auth wrap-transit]}}]])
