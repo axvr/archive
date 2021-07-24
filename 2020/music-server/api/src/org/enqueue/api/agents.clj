@@ -116,10 +116,10 @@
 
 (defn renew-handler [request]
   (let [signing-key     config/signing-key
-        token           (eat/extract-token signing-key request)
+        token           (:token request)
         idempotency-key (get-in request [:headers "Idempotency-Key"])
-        body            (:body request)]
-    (renew token (:agent body) idempotency-key signing-key)))
+        agent           (get-in request [:body :agent])]
+    (renew token agent idempotency-key signing-key)))
 
 
 (defn revoke-access
@@ -142,6 +142,6 @@
   [["/agents/create" {:post {:handler create-handler
                              :middleware [wrap-async wrap-transit]}}]
    ["/agents/renew"  {:post {:handler renew-handler
-                             :middleware [wrap-async wrap-transit]}}]
+                             :middleware [wrap-async wrap-auth wrap-transit]}}]
    ["/agents/revoke" {:post {:handler revoke-access-handler
                              :middleware [wrap-async wrap-auth wrap-transit]}}]])
