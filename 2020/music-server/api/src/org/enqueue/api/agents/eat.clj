@@ -2,19 +2,39 @@
   "EAT (Enqueue authentication tokens)
 
   The 2 types of tokens are:
-    - EAT-A: Access token (TTL 2 hour).
+    - EAT-A: Access token (TTL 2 hours).
     - EAT-R: Renewal token (TTL 400 days)"
   (:require [org.enqueue.api.crypto  :as crypto]
             [org.enqueue.api.transit :as transit]
             [org.enqueue.api.helpers :refer [date-compare]]
-            [clojure.string          :as str])
+            [clojure.string          :as str]
+            [clojure.core.cache.wrapped :as cache])
   (:import [java.time Instant Duration]))
+
+
+(def eat-a-ttl (Duration/ofHours 2))
+(def eat-r-ttl (Duration/ofDays 400))
+
+
+(defonce
+  ^{:doc "Cache of agents with revoked EAT-A tokens (for \"instant log-out\")."}
+  revoked-agents
+  (cache/ttl-cache-factory {} :ttl (.toMillis eat-a-ttl)))
+
+
+(defn revoke-agent-access
+  "Revoke all EAT-A tokens for an agent."
+  [agent-id]
+  (when (uuid? agent-id)
+    (cache/miss revoked-agents agent-id true)))
 
 
 (defn expired?
   "Returns true if an EAT token has expired.  Otherwise returns false."
-  [expires]
-  (date-compare > (Instant/now) expires))
+  [{:keys [expires agent-id type]}]
+  (or (date-compare > (Instant/now) expires)
+      (and (= type :eat-a)
+           (cache/has? revoked-agents agent-id))))
 
 
 (defn generate-renewal-key []
@@ -28,8 +48,8 @@
    (assert (#{:eat-a :eat-r} type) "Unsupported token type.")
    (let [now (Instant/now)
          expires (case type
-                   :eat-a (.plus now (Duration/ofHours 2))
-                   :eat-r (.plus now (Duration/ofDays 400)))]
+                   :eat-a (.plus now eat-a-ttl)
+                   :eat-r (.plus now eat-r-ttl))]
      {:type    type
       :version "1"
       :expires expires
@@ -66,7 +86,7 @@
   (let [[payload sig] (str/split token #":" 2)]
     (when (crypto/valid-signature? key payload sig)
       (let [data (transit/decode (crypto/base64-decode payload))]
-        (when-not (expired? (:expires data))
+        (when-not (expired? data)
           data)))))
 
 

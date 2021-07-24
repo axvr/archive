@@ -4,11 +4,12 @@
          ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
          clout/clout                       {:mvn/version "2.2.1"}
          caesium/caesium                   {:mvn/version "0.14.0"}
+         org.clojure/core.cache            {:mvn/version "1.0.207"}
+         com.cognitect/transit-clj         {:mvn/version "1.0.324"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
          org.postgresql/postgresql         {:mvn/version "42.2.23"}
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.674"}
-         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc5"}
-         com.cognitect/transit-clj         {:mvn/version "1.0.324"}}
+         com.github.seancorfield/honeysql  {:mvn/version "2.0.0-rc5"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}
            :run  {:exec-fn org.enqueue.api.core/run}

@@ -128,7 +128,8 @@
   (db/update! :agents [:= :id agent-id]
               {:access-revoked  true
                :renewal-key     nil
-               :idempotency-key nil}))
+               :idempotency-key nil})
+  (eat/revoke-agent-access agent-id))
 
 
 (defn revoke-access-handler [request]
