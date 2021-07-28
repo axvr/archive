@@ -27,8 +27,8 @@
 (defn- not-found-handler
   ([_]
    {:status  404
-    :headers {"Content-Type" "text/html; charset=UTF-8"}
-    :body    "<h1>404</h1>"})
+    :headers {"Content-Type" "text/plain; charset=UTF-8"}
+    :body    "404"})
   ([request respond _]
    (respond (not-found-handler request))))
 

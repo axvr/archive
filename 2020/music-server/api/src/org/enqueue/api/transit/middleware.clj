@@ -19,20 +19,14 @@
           headers)))
 
 
-(defn- get-charset [content-type]
-  (->> content-type
-       (re-matches #"(?i)^.*?;\s*charset=([\w-]+)$")
-       second))
-
-
 (defn- transit-content-type? [ct]
   (str/starts-with? (.toLowerCase ct) content-type))
 
 
 (defn- decode-body [{:keys [body] :as request}]
   (try
-    (let [content-type (get-in request [:headers "content-type"])
-          charset      (or (get-charset content-type) "UTF-8")]
+    (let [content-type (:content-type request)
+          charset      (:character-encoding request "UTF-8")]
       (if (and body (transit-content-type? content-type))
         (assoc request :body (transit/decode body charset))
         request))

@@ -13,7 +13,7 @@
 (defn- apply-middleware
   "Apply middleware to a handler."
   [{:keys [handler middleware]}]
-  (eval (filter some? (flatten (list '-> handler middleware)))))
+  ((apply comp middleware) handler))
 
 
 (defn- get-handler [request route-map]

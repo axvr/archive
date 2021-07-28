@@ -17,7 +17,8 @@
 
 
 (defonce
-  ^{:doc "Cache of agents with revoked EAT-A tokens (for \"instant log-out\")."}
+  ^{:doc "Cache of agents with revoked EAT-A tokens (for \"instant log-out\")."
+    :private true}
   revoked-agents
   (cache/ttl-cache-factory {} :ttl (.toMillis eat-a-ttl)))
 
@@ -25,8 +26,8 @@
 (defn revoke-agent-access
   "Revoke all EAT-A tokens for an agent."
   [agent-id]
-  (when (uuid? agent-id)
-    (cache/miss revoked-agents agent-id true)))
+  {:pre [(uuid? agent-id)]}
+  (cache/miss revoked-agents agent-id true))
 
 
 (defn expired?
@@ -45,7 +46,7 @@
   "Build token payload of type :eat-a or :eat-r.  Optionally provide additional
   data to store in the token."
   ([type]
-   (assert (#{:eat-a :eat-r} type) "Unsupported token type.")
+   {:pre [(#{:eat-a :eat-r} type)]}
    (let [now (Instant/now)
          expires (case type
                    :eat-a (.plus now eat-a-ttl)
