@@ -8,9 +8,11 @@
             [org.enqueue.api.crypto     :as crypto]
             [org.enqueue.api.agents.eat :as eat]
             [org.enqueue.api.config     :as config]
-            [org.enqueue.api.agents.middleware  :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware  :refer [wrap-async]]
-            [org.enqueue.api.transit.middleware :refer [wrap-transit]])
+            [org.enqueue.api.agents.middleware      :refer [wrap-auth]]
+            [org.enqueue.api.router.middleware      :refer [wrap-async]]
+            [org.enqueue.api.transit.middleware     :refer [wrap-transit]]
+            [org.enqueue.api.idempotency.middleware :refer [wrap-idempotent
+                                                            wrap-idempotency-key]])
   (:import [java.util UUID]
            [java.time Instant]))
 
@@ -100,13 +102,16 @@
      :credentials {:email-address \"example@example.com\"
                    :password      \"password\"}}"
   [request]
-  (let [idempotency-key (get-in request [:headers "Idempotency-Key"])
-        body            (:body request)]
-    (create (:credentials body) (:agent body) idempotency-key config/signing-key)))
+  (let [idempotency-key (:idempotency-key request)
+        body            (:body request)
+        credentials     (:credentials body)
+        agent           (:agent body)]
+    (create credentials agent idempotency-key config/signing-key)))
 
 
 (defn renew
-  "Renew an agent's access by providing a new pair of EAT tokens."
+  "Renew an agent's access by providing the currently active EAT-R token.
+  Returns a new pair of EAT tokens."
   [{:keys [agent-id renewal-key]}
    {:keys [version]}
    idempotency-key
@@ -114,10 +119,17 @@
   (create-tokens agent-id version renewal-key idempotency-key signing-key))
 
 
-(defn renew-handler [request]
+(defn renew-handler
+  "Renew an agent's access by providing the currently active EAT-R token.
+  Returns a new pair of EAT tokens.
+
+  This endpoint has its own idempotency implementation as it has higher
+  reliability and security requirements; don't want the agent to get logged out
+  due to a poor network connection."
+  [request]
   (let [signing-key     config/signing-key
         token           (:token request)
-        idempotency-key (get-in request [:headers "Idempotency-Key"])
+        idempotency-key (:idempotency-key request)
         agent           (get-in request [:body :agent])]
     (renew token agent idempotency-key signing-key)))
 
@@ -140,8 +152,16 @@
 
 (def agent-routes
   [["/agents/create" {:post {:handler create-handler
-                             :middleware [wrap-async wrap-transit]}}]
+                             :middleware [wrap-async
+                                          wrap-transit
+                                          wrap-idempotent]}}]
    ["/agents/renew"  {:post {:handler renew-handler
-                             :middleware [wrap-async wrap-auth wrap-transit]}}]
+                             :middleware [wrap-async
+                                          wrap-auth
+                                          wrap-transit
+                                          wrap-idempotency-key]}}]
    ["/agents/revoke" {:post {:handler revoke-access-handler
-                             :middleware [wrap-async wrap-auth wrap-transit]}}]])
+                             :middleware [wrap-async
+                                          wrap-auth
+                                          wrap-transit
+                                          wrap-idempotent]}}]])

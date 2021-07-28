@@ -1,9 +1,10 @@
 (ns org.enqueue.api.users
   (:require [org.enqueue.api.db     :as db]
             [org.enqueue.api.crypto :as crypto]
-            [org.enqueue.api.agents.middleware  :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware  :refer [wrap-async]]
-            [org.enqueue.api.transit.middleware :refer [wrap-transit]])
+            [org.enqueue.api.agents.middleware      :refer [wrap-auth]]
+            [org.enqueue.api.router.middleware      :refer [wrap-async]]
+            [org.enqueue.api.transit.middleware     :refer [wrap-transit]]
+            [org.enqueue.api.idempotency.middleware :refer [wrap-idempotent]])
   (:import [java.time Instant]
            [java.util UUID]))
 
@@ -100,7 +101,12 @@
 
 
 (def user-routes
-  [["/user/register" {:post {:handler registration-handler
-                             :middleware [wrap-async wrap-transit]}}]
+  [["/user/register"       {:post {:handler registration-handler
+                                   :middleware [wrap-async
+                                                wrap-transit
+                                                wrap-idempotent]}}]
    ["user/password/change" {:post {:handler change-password-handler
-                                   :middleware [wrap-async wrap-auth wrap-transit]}}]])
+                                   :middleware [wrap-async
+                                                wrap-auth
+                                                wrap-transit
+                                                wrap-idempotent]}}]])
