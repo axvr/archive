@@ -10,9 +10,6 @@
   (:import java.time.Duration java.util.UUID))
 
 
-;; TODO: be sure wrap-transit and wrap-auth happen before wrap-idempotent.
-
-
 (defonce
   ^{:doc "Cache to store responses for idempotent requests.  TTL 6 hours."
     :private true}

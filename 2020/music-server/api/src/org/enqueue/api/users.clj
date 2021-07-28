@@ -102,11 +102,11 @@
 
 (def user-routes
   [["/user/register"       {:post {:handler registration-handler
-                                   :middleware [wrap-async
+                                   :middleware [wrap-idempotent
                                                 wrap-transit
-                                                wrap-idempotent]}}]
+                                                wrap-async]}}]
    ["user/password/change" {:post {:handler change-password-handler
-                                   :middleware [wrap-async
-                                                wrap-auth
+                                   :middleware [wrap-idempotent
                                                 wrap-transit
-                                                wrap-idempotent]}}]])
+                                                wrap-auth
+                                                wrap-async]}}]])

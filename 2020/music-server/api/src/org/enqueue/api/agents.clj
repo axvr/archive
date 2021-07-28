@@ -152,16 +152,16 @@
 
 (def agent-routes
   [["/agents/create" {:post {:handler create-handler
-                             :middleware [wrap-async
+                             :middleware [wrap-idempotent
                                           wrap-transit
-                                          wrap-idempotent]}}]
+                                          wrap-async]}}]
    ["/agents/renew"  {:post {:handler renew-handler
-                             :middleware [wrap-async
-                                          wrap-auth
+                             :middleware [wrap-idempotency-key
                                           wrap-transit
-                                          wrap-idempotency-key]}}]
+                                          wrap-auth
+                                          wrap-async]}}]
    ["/agents/revoke" {:post {:handler revoke-access-handler
-                             :middleware [wrap-async
-                                          wrap-auth
+                             :middleware [wrap-idempotent
                                           wrap-transit
-                                          wrap-idempotent]}}]])
+                                          wrap-auth
+                                          wrap-async]}}]])

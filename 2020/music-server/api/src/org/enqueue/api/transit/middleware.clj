@@ -23,13 +23,21 @@
   (str/starts-with? (.toLowerCase ct) content-type))
 
 
-(defn- decode-body [{:keys [body] :as request}]
+(defn- decode-body [request]
   (try
-    (let [content-type (:content-type request)
-          charset      (:character-encoding request "UTF-8")]
-      (if (and body (transit-content-type? content-type))
+    (let [body           (:body request)
+          content-length (:content-length request)
+          content-type   (:content-type request)
+          charset        (:character-encoding request "UTF-8")]
+      (cond
+        (or (zero? content-length)
+            (neg? content-length))
+        (assoc request :body nil)
+
+        (transit-content-type? content-type)
         (assoc request :body (transit/decode body charset))
-        request))
+
+        :else request))
     (catch Exception _)))
 
 
@@ -43,7 +51,7 @@
       response)))
 
 
-(def default-malformed-data-response
+(def ^:private default-malformed-data-response
   "Default response returned when invalid Transit data is sent in request body."
   {:status  400
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
