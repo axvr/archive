@@ -1,0 +1,91 @@
+/* @import url('https://rsms.me/inter/inter.css'); */
+
+body {
+  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  display: grid;
+  grid-template-areas: "header" "content" "footer";
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 10px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  grid-area: content;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+header {
+  grid-area: header;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: -20px;
+}
+
+header h1 a {
+  color: #3170aa;
+  text-decoration: none;
+}
+
+header h1 a:hover {
+  text-decoration: underline;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 5px 15px;
+}
+
+footer {
+  grid-area: footer;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 0.9em;
+}
+
+section {
+  max-width: 60ch;
+}
+
+section aside {
+  float: right;
+  margin-right: -55ch;
+  width: min(500px, 100%);
+  margin-top: -20px;
+}
+
+@media (max-width: 1190px) {
+  section aside {
+    float: none;
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* section h1, */
+section h2,
+section h3 {
+  margin-top: 30px;
+}
+
+section li {
+  margin-top: 2px;
+}
+
+pre, code {
+  overflow-x: auto;
+  white-space: pre;
+  font-family: 'Inconsolata', monospace;
+  background-color: #ececec;
+  border-radius: 4px;
+}
+
+pre { padding: 15px 20px; }
+code { padding: 2px 7px; }
+pre code { padding: 0; }

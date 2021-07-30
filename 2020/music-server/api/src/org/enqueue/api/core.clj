@@ -9,19 +9,19 @@
     [ring.middleware.not-modified      :refer [wrap-not-modified]]
     [org.enqueue.api.router            :refer [router]]
     [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
-                                               wrap-security-headers
-                                               wrap-async]]
+                                               wrap-security-headers]]
     [org.enqueue.api.users             :refer [user-routes]]
     [org.enqueue.api.agents            :refer [agent-routes]]
+    [org.enqueue.api.docs              :refer [doc-routes]]
     [org.enqueue.api.config            :as    config]))
 
 
-(defn- home-handler [_]
-  {:status  200
-   :headers {"Content-Type" "text/html; charset=UTF-8"}
-   :body    (str "<title>Enqueue API</title>"
-                 "<h1>Enqueue API</h1>"
-                 "<p>An ethical music streaming service.</p>")})
+(defn- home-handler
+  ([_]
+   {:status 301
+    :headers {"Location" "/docs"}})
+  ([request respond _]
+   (respond (home-handler request))))
 
 
 (defn- not-found-handler
@@ -35,18 +35,18 @@
 
 (def fallback-routes
   [["*" {:get {:handler not-found-handler
-               :middleware [#(wrap-resource % "public")
-                            wrap-content-type
-                            wrap-not-modified]}
+               :middleware [wrap-content-type
+                            wrap-not-modified
+                            #(wrap-resource % "public")]}
          :all {:handler not-found-handler}}]])
 
 
 (defn- build-route-map []
   (concat
-    [["/" {:get {:handler home-handler
-                 :middleware [wrap-async]}}]]
+    [["/" {:get {:handler home-handler}}]]
     user-routes
     agent-routes
+    doc-routes
     fallback-routes))
 
 
@@ -62,7 +62,7 @@
 
 (defn run [{:keys [port]
             :or {port (:port config/server)}}]
-  (when (= config/env :prod)
+  (when config/prod?
     (set! *assert* false))  ; Disable assertions on production environment.
   ;; TODO: configure SSL, HSTS header + automatic redirect.
   (run-jetty

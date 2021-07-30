@@ -1,0 +1,11 @@
+{:title "Prerequisites"
+ :content
+ [:main
+  [:section
+   [:h1 "Prerequisites"]]
+  [:section
+   [:h2 {:id "unusual"} "An unusual API"]]
+  [:section
+   [:h2 {:id "transit"} "Transit"]]
+  [:section
+   [:h2 {:id "idempotency"} "Idempotency"]]]}

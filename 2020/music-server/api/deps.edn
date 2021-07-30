@@ -5,6 +5,8 @@
          clout/clout                       {:mvn/version "2.2.1"}
          caesium/caesium                   {:mvn/version "0.14.0"}
          org.clojure/core.cache            {:mvn/version "1.0.207"}
+         org.clojure/core.memoize          {:mvn/version "1.0.236"}
+         hiccup/hiccup                     {:mvn/version "1.0.5"}
          com.cognitect/transit-clj         {:mvn/version "1.0.324"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
          org.postgresql/postgresql         {:mvn/version "42.2.23"}

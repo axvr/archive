@@ -14,3 +14,7 @@
 (def db (:db config))
 
 (def signing-key (get-in config [:eat :signing-key]))
+
+(def dev? (= env :dev))
+(def test? (= env :test))
+(def prod? (= env :prod))
