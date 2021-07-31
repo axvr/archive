@@ -9,7 +9,7 @@
 
 (defn- read-doc [n]
   (read-edn-resource
-    (str "docs/" (str/replace n #"\W+" "_") ".edn")
+    (str "docs/" (str/replace n #"[^\w/]+" "_") ".edn")
     :eval? true))
 
 
@@ -58,14 +58,14 @@
     get-docs-response))
 
 
-(defn docs-handler
+(defn- docs-handler
   ([request]
-   (let [page (get-in request [:uri-params :page] "index")]
+   (let [page (get-in request [:uri-params :*] "index")]
      (memo-get-docs-response page)))
   ([request respond _]
    (respond (docs-handler request))))
 
 
 (def doc-routes
-  [["/docs"       {:get {:handler docs-handler}}]
-   ["/docs/:page" {:get {:handler docs-handler}}]])
+  [["/docs"   {:get {:handler docs-handler}}]
+   ["/docs/*" {:get {:handler docs-handler}}]])
