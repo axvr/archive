@@ -1,76 +1,71 @@
 (ns org.enqueue.api.docs
   "Enqueue documentation system."
-  (:require [clojure.java.io :as io]
-            [clojure.edn     :as edn]
-            [clojure.string  :as str]
-            [clojure.core.memoize :as memo]
-            [org.enqueue.api.config :as config]
-            [hiccup.core     :refer [html]]
-            [org.enqueue.api.router.middleware :refer [wrap-async]]))
-
-
-(def ^:private not-found-response
-  {:status  404
-   :headers {"Content-Type" "text/plain; charset=UTF-8"}
-   :body    "404"})
-
-
-(defn- to-fname [n]
-  (str "docs/" (str/replace n #"\W+" "_") ".edn"))
+  (:require [clojure.string          :as str]
+            [clojure.core.memoize    :as memo]
+            [org.enqueue.api.config  :as config]
+            [hiccup.core             :refer [html]]
+            [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 
 (defn- read-doc [n]
-  (some-> n
-          to-fname
-          io/resource
-          slurp
-          edn/read-string))
+  (read-edn-resource
+    (str "docs/" (str/replace n #"\W+" "_") ".edn")
+    :eval? true))
 
 
 (defn- build-page
   [{:keys [title description keywords content]}]
-  (let [title (if title
-                (str title " | Enqueue API Docs")
-                "Enqueue API Docs")]
-    [:html {:lang "en-GB"}
-     [:head
-      [:meta {:charset "utf-8"}]
-      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-      [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
-      [:title title]
-      [:meta {:name "description" :content description}]
-      [:meta {:name "keywords" :content (str/join ", " keywords)}]
-      [:meta {:name "copyright" :content "Copyright © 2021, Alex Vear."}]]
-     [:body
-      [:header
-       [:h1 [:a {:href "/docs"} "Enqueue API"]]]
-      content
-      [:footer
-       [:p
-        "Copyright © 2021, "
-        [:a {:href "https://www.alexvear.com"} "Alex Vear"]
-        ".&emsp;All code snippets are dedicated to the public domain."]]]]))
+  [:html {:lang "en-GB"}
+   [:head
+    [:meta {:charset "utf-8"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
+    [:title (if title
+              (str title " | Enqueue API Docs")
+              "Enqueue API Docs")]
+    [:meta {:name "description" :content description}]
+    [:meta {:name "keywords" :content (str/join ", " keywords)}]
+    [:meta {:name "copyright" :content "Copyright © 2021, Alex Vear."}]]
+   [:body
+    [:header
+     [:h1 [:a {:href "/docs"} "Enqueue API"]]]
+    content
+    [:footer
+     [:p
+      "Copyright © 2021, "
+      [:a {:href "https://www.alexvear.com"} "Alex Vear"]
+      ".&emsp;All code snippets are dedicated to the public domain."]]]])
+
+
+(def ^:private not-found-response
+  "Response returned when no doc page was found."
+  {:status  404
+   :headers {"Content-Type" "text/html; charset=UTF-8"}
+   :body    (html (build-page (read-doc "404")))})
+
+
+(defn- get-docs-response [page]
+  (if-let [doc (read-doc page)]
+    {:status  200
+     :headers {"Content-Type" "text/html; charset=UTF-8"}
+     :body    (html (build-page doc))}
+    not-found-response))
+
+
+(def ^:private memo-get-docs-response
+  (if config/prod?
+    (memo/lru get-docs-response {} :lru/threshold 10)
+    get-docs-response))
 
 
 (defn docs-handler
-  [request]
-  (let [page (get-in request [:uri-params :page] "index")
-        doc  (read-doc page)]
-    (if doc
-      {:status  200
-       :headers {"Content-Type" "text/html; charset=UTF-8"}
-       :body    (html (build-page (eval doc)))}
-      not-found-response)))
-
-
-(def ^:private memo-docs-handler
-  (if config/prod?
-    (memo/lru docs-handler {} :lru/threshold 10)
-    docs-handler))
+  ([request]
+   (let [page (get-in request [:uri-params :page] "index")]
+     (memo-get-docs-response page)))
+  ([request respond _]
+   (respond (docs-handler request))))
 
 
 (def doc-routes
-  [["/docs"       {:get {:handler memo-docs-handler
-                         :middleware [wrap-async]}}]
-   ["/docs/:page" {:get {:handler memo-docs-handler
-                         :middleware [wrap-async]}}]])
+  [["/docs"       {:get {:handler docs-handler}}]
+   ["/docs/:page" {:get {:handler docs-handler}}]])

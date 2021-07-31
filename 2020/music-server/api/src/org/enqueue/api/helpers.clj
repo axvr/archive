@@ -1,5 +1,15 @@
 (ns org.enqueue.api.helpers
-  (:require [clojure.string :as str]))
+  (:require [clojure.string  :as str]
+            [clojure.java.io :as io]
+            [clojure.edn     :as edn]))
+
+
+(defn read-edn-resource
+  "Read an EDN file from JVM resources.  Accepts optional :eval? keyword
+  parameter to toggle evaluation of the EDN (default: false)."
+  [path & {:keys [eval?]}]
+  (let [eval (if eval? eval identity)]
+    (some-> path io/resource slurp edn/read-string eval)))
 
 
 (defn date-compare

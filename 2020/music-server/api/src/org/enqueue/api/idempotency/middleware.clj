@@ -75,14 +75,13 @@
 
 (defn- build-idempotent-request-key
   "Build map used to heuristically detect accidental idempotency key recycles."
-  [{:keys [uri request-method query-string content-type content-length] :as request}]
-  {:uri            uri
-   :request-method request-method
-   :query-string   query-string
-   :content-length content-length
-   :content-type   content-type
-   :agent-id       (get-in request [:token :agent-id])  ; TODO: test this works.
-   :user-id        (get-in request [:token :user-id])})
+  [request]
+  (let [{:keys [agent-id user-id]} (:token request)]
+    (-> request
+        (select-keys
+          [:uri :request-method :query-string :content-type :content-length])
+        (assoc :agent-id agent-id
+               :user-id  user-id))))
 
 
 (defn- wrap-idempotent-sync

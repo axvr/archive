@@ -1,20 +1,18 @@
 (ns org.enqueue.api.config
   "Configuration settings for Enqueue."
-  (:require [clojure.java.io :as io]
-            [clojure.edn     :as edn]))
-
-(def read-resource
-  (comp eval edn/read-string slurp io/resource))
+  (:require [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 (def ^:private config
-  (read-resource "config.edn"))
+  (if-let [conf (read-edn-resource "config.edn" :eval? true)]
+    conf
+    (throw (ex-info "No configuration file found." {:file "config.edn"}))))
 
-(def env (:env config))
-(def server (:server config))
-(def db (:db config))
-
-(def signing-key (get-in config [:eat :signing-key]))
-
-(def dev? (= env :dev))
+(def env   (:env config))
+(def dev?  (= env :dev))
 (def test? (= env :test))
 (def prod? (= env :prod))
+
+(def server (:server config))
+(def db     (:db config))
+
+(def signing-key (get-in config [:eat :signing-key]))
