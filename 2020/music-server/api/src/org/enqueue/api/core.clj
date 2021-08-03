@@ -11,7 +11,7 @@
     [org.enqueue.api.router.middleware :refer [wrap-ignore-trailing-slash
                                                wrap-security-headers]]
     [org.enqueue.api.users             :refer [user-routes]]
-    [org.enqueue.api.agents            :refer [agent-routes]]
+    [org.enqueue.api.clients           :refer [client-routes]]
     [org.enqueue.api.docs              :refer [doc-routes]]
     [org.enqueue.api.config            :as    config]))
 
@@ -45,7 +45,7 @@
   (concat
     [["/" {:get {:handler home-handler}}]]
     user-routes
-    agent-routes
+    client-routes
     doc-routes
     fallback-routes))
 

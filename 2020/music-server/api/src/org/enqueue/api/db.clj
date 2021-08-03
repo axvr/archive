@@ -35,14 +35,14 @@
 
 (defn insert! [table values]
   (query-first {:insert-into [table]
-                :columns (keys values)
-                :values [(vals values)]}))
+                :columns     (keys values)
+                :values      [(vals values)]}))
 
 
 (defn update! [table where changes]
   (query-first {:update [table]
-                :set changes
-                :where where}))
+                :set    changes
+                :where  where}))
 
 
 ;;; -----------------------------------------------------------

@@ -76,11 +76,11 @@
 (defn- build-idempotent-request-key
   "Build map used to heuristically detect accidental idempotency key recycles."
   [request]
-  (let [{:keys [agent-id user-id]} (:token request)]
+  (let [{:keys [client-id user-id]} (:token request)]
     (-> request
         (select-keys
           [:uri :request-method :query-string :content-type :content-length])
-        (assoc :agent-id agent-id
+        (assoc :client-id client-id
                :user-id  user-id))))
 
 

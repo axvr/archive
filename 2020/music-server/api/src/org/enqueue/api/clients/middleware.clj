@@ -1,6 +1,6 @@
-(ns org.enqueue.api.agents.middleware
-  (:require [org.enqueue.api.agents.eat :as eat]
-            [org.enqueue.api.config :as config]))
+(ns org.enqueue.api.clients.middleware
+  (:require [org.enqueue.api.clients.eat :as eat]
+            [org.enqueue.api.config      :as config]))
 
 
 (defn wrap-auth

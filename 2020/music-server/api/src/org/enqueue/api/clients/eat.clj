@@ -1,4 +1,4 @@
-(ns org.enqueue.api.agents.eat
+(ns org.enqueue.api.clients.eat
   "EAT (Enqueue authentication tokens)
 
   The 2 types of tokens are:
@@ -17,25 +17,25 @@
 
 
 (defonce
-  ^{:doc "Cache of agents with revoked EAT-A tokens (for \"instant log-out\")."
+  ^{:doc "Cache of clients with revoked EAT-A tokens (for \"instant log-out\")."
     :private true}
-  revoked-agents
+  revoked-clients
   (cache/ttl-cache-factory {} :ttl (.toMillis eat-a-ttl)))
 
 
-(defn revoke-agent-access
-  "Revoke all EAT-A tokens for an agent."
-  [agent-id]
-  {:pre [(uuid? agent-id)]}
-  (cache/miss revoked-agents agent-id true))
+(defn revoke-client-access
+  "Revoke all EAT-A tokens for an client."
+  [client-id]
+  {:pre [(uuid? client-id)]}
+  (cache/miss revoked-clients client-id true))
 
 
 (defn expired?
   "Returns true if an EAT token has expired.  Otherwise returns false."
-  [{:keys [expires agent-id type]}]
+  [{:keys [expires client-id type]}]
   (or (date-compare > (Instant/now) expires)
       (and (= type :eat-a)
-           (cache/has? revoked-agents agent-id))))
+           (cache/has? revoked-clients client-id))))
 
 
 (defn generate-renewal-key []
@@ -71,8 +71,8 @@
        (sign-token key)))
 
 
-(defn build-token-pair [signing-key user-id agent-id renewal-key]
-  (let [base-payload {:user-id user-id, :agent-id agent-id}]
+(defn build-token-pair [signing-key user-id client-id renewal-key]
+  (let [base-payload {:user-id user-id, :client-id client-id}]
     {:eat-a (->> base-payload
                  (build-payload :eat-a)
                  (pack-token signing-key))

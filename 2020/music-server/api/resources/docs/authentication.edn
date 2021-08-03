@@ -11,8 +11,8 @@
    [:h2 {:id "users"} "User accounts"]
    [:p "Security and support email addresses."]]
   [:section
-   [:h2 {:id "agents"} "Agents"]
-   [:p "Agents."]]
+   [:h2 {:id "clients"} "Clients"]
+   [:p "Clients."]]
   [:section
    [:h2 {:id "eat"} "EAT (Enqueue Authentication Tokens)"]
    [:p "EAT."]]]}
