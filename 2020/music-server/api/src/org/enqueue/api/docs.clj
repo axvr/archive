@@ -23,8 +23,10 @@
     [:title (if title
               (str title " | Enqueue API Docs")
               "Enqueue API Docs")]
-    [:meta {:name "description" :content description}]
-    [:meta {:name "keywords" :content (str/join ", " keywords)}]
+    (when description
+      [:meta {:name "description" :content description}])
+    (when keywords
+      [:meta {:name "keywords" :content (str/join ", " keywords)}])
     [:meta {:name "copyright" :content "Copyright © 2021, Alex Vear."}]]
    [:body
     [:header

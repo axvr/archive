@@ -143,20 +143,25 @@
   Automatically wraps handler with 'wrap-idempotency-key' middleware.
 
   Accepts map of following (optional) options:
+
     :idempotency-key-recycled-response - Returned when an unintentional
-                                         idempotency key reuse is detected."
+                                         idempotency key reuse is detected.
+
+    :invalid-idempotency-key-response  - Returned when an invalid idempotency
+                                         key was given."
   ([handler]
    (wrap-idempotent handler {}))
   ([handler {:keys [idempotency-key-recycled-response]
              :or   {idempotency-key-recycled-response
-                    default-idempotency-key-recycled-response}}]
+                    default-idempotency-key-recycled-response}
+             :as   options}]
    (fn
      ([request]
       (assert (= (:request-method request) :post)
               "Idempotency layer can only be used on POST requests.")
       (if-let [idempotency-key (:idempotency-key request)]
         (wrap-idempotent-sync
-          (wrap-idempotency-key handler)
+          (wrap-idempotency-key handler options)
           request
           idempotency-key
           idempotency-key-recycled-response)
@@ -166,7 +171,7 @@
               "Idempotency layer can only be used on POST requests.")
       (if-let [idempotency-key (:idempotency-key request)]
         (wrap-idempotent-async
-          (wrap-idempotency-key handler)
+          (wrap-idempotency-key handler options)
           request
           respond
           raise

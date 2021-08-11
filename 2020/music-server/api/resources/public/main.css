@@ -6,6 +6,7 @@ body {
   display: grid;
   grid-template-areas: "header" "content" "footer";
   grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
   grid-gap: 10px;
   min-height: 100vh;
   margin: 0;
@@ -24,8 +25,12 @@ header {
   margin-bottom: -20px;
 }
 
+header h1 {
+  font-size: 2em;
+}
+
 header h1 a {
-  color: #3170aa;
+  color: #631c8c;
   text-decoration: none;
 }
 
@@ -57,7 +62,7 @@ section aside {
   float: right;
   margin-right: -55ch;
   width: min(500px, 100%);
-  margin-top: -20px;
+  margin-top: -25px;
 }
 
 @media (max-width: 1190px) {
@@ -68,14 +73,20 @@ section aside {
   }
 }
 
-/* section h1, */
+section h1 {
+  font-size: 1.7em;
+}
 section h2,
 section h3 {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 section li {
-  margin-top: 2px;
+  margin-top: 4px;
+}
+
+section p {
+  line-height: 1.4em;
 }
 
 pre, code {
@@ -89,3 +100,7 @@ pre, code {
 pre { padding: 15px 20px; }
 code { padding: 2px 7px; }
 pre code { padding: 0; }
+
+abbr {
+  cursor: help;
+}
