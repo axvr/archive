@@ -13,8 +13,24 @@
     "UTF-8"))
 
 
+(defn b64-count
+  "Return expected character count of a Base 64 encoded string of
+  'input-length' characters.
+
+  See: <https://stackoverflow.com/questions/13378815/base64-length-calculation>"
+  [input-length]
+  (loop [len (long (Math/ceil (* 4 (/ input-length 3))))]
+    (if (zero? (mod len 4))
+      (do
+        (assert (not= input-length len))
+        (assert (zero? (mod len 4)))
+        (assert (> len input-length))
+        len)
+      (recur (inc len)))))
+
+
 (deftest base64-encode
-  (testing "base64 encoding works"
+  (testing "Can correctly Base64 encode."
     (is (empty? (crypto/base64-encode "")))
     (is (= "Rm9v" (crypto/base64-encode "Foo")))
     (let [rand-string (rand-unicode-string)]
@@ -23,7 +39,7 @@
 
 
 (deftest base64-decode
-  (testing "base64 decoding works"
+  (testing "Can correctly Base64 decode."
     (is (empty? (crypto/base64-decode "")))
     (is (= "Foo" (crypto/base64-decode "Rm9v")))
     (let [rand-string (rand-unicode-string)
@@ -36,7 +52,7 @@
 
 
 (deftest hash-password--hashed+can-verify
-  (testing "password hashing works and is verifiable"
+  (testing "Can hash password and verify password against hash."
     (dotimes [_ 10]
       (let [password (rand-unicode-string)
             hashed-password (crypto/hash-password password)]
@@ -46,7 +62,7 @@
         (is (not= password hashed-password))
         (is (not= (crypto/base64-encode password) hashed-password))
         ;; Base64 encoded password is 172 characters long.
-        (is (= 172 (count hashed-password)))
+        (is (= (b64-count 128) (count hashed-password)))
         ;; Hashed password is 128 characters long.
         (is (= 128 (count (crypto/base64-decode hashed-password "US-ASCII"))))
         ;; Password verification works on correct password.
@@ -56,12 +72,28 @@
                                          (rand-unicode-string))))))))
 
 
+(deftest generate-random-bytes
+  (testing "Can generate random string of bytes."
+    (dotimes [_ 10]
+      (let [size (rand-int (inc 2048))
+            bs   (crypto/random-bytes size)]
+        ;; Base 64 encoded string contains correct number of characters.
+        (is (= (b64-count size) (count bs)))
+        ;; Actual string is 'size' bytes long.
+        (is (= size (count (crypto/base64-decode bs "ISO-8859-1"))))
+        ;; Base64 decodes string to same result every time.
+        (is (= (crypto/base64-decode bs "ISO-8859-1")
+               (crypto/base64-decode bs "ISO-8859-1")))
+        ;; Will not generate same on next run.
+        (is (not= bs (crypto/random-bytes size)))))))
+
+
 (deftest generate-valid-signing-key
-  (testing "generates valid signing key"
+  (testing "Can generate valid signing key."
     (dotimes [_ 10]
       (let [key (crypto/new-signing-key)]
         ;; Base 64 encoded key is 44 chars long.
-        (is (= 44 (count key)))
+        (is (= (b64-count 32) (count key)))
         ;; Actual key is 32 bytes long.
         (is (= 32 (count (crypto/base64-decode key "ISO-8859-1"))))
         ;; Base64 decodes key to same result every time.
@@ -72,13 +104,13 @@
 
 
 (deftest generates-verifible-signature
-  (testing "generates verifyable signature"
+  (testing "Can sign a message and check if the signature is valid or invalid."
     (dotimes [_ 10]
       (let [key (crypto/new-signing-key)
             msg (rand-unicode-string)
             sig (crypto/sign-message key msg)]
         ;; Base 64 encoded signature is 44 chars long.
-        (is (= 44 (count sig)))
+        (is (= (b64-count 32) (count sig)))
         ;; Actual signature is 32 bytes long.
         (is (= 32 (count (crypto/base64-decode sig "ISO-8859-1"))))
         ;; Signature is not the key.
