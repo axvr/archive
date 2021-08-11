@@ -65,13 +65,26 @@
     " or "
     [:em "MessagePack"]
     "."]
-   ;; TODO
-   #_[:p
-      "The API defines and uses a single extension type for Transit, the "
-      [:em "duration"]
-      ".  The duration type represents a span of time, which is most commonly
-      used for song and album running times."]
-   ]
+   [:h3 {:id "transit-extensions"} "Extension types"]
+   [:p
+    "Enqueue defines a single Transit extension type called a "
+    [:em "duration"]
+    ".  A duration represents a span of time in nanoseconds (used for things
+    such as song and album running times).  The duration extension type uses
+    the tag "
+    [:code "dur"]
+    " followed by a (positive) number of nanoseconds."]
+   [:pre
+    "[\"~#dur\",\"86400000000000\"]    ; 86,400 seconds or 1 day.\n"
+    "[\"~#dur\",\"374000000000\"]      ; 374 seconds or 6:14 minutes."]
+   [:p
+    "Some things to note:"]
+   [:ul
+    [:li "Because durations are in nanoseconds you will likely need to
+         store them as 64-bit integers."]
+    [:li "Negative values are invalid and will result in an error 400 if you send one to the API."]
+    [:li "The longest duration allowed is (technically) 9,223,372,036,854,775,807
+         nanoseconds, but stupidly large durations will just be rejected."]]]
   [:section
    [:h2 {:id "idempotency"} "Idempotency"]
    [:p

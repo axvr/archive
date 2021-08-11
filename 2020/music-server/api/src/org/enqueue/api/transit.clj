@@ -31,11 +31,44 @@
    "m" (transit/read-handler #(java.time.Instant/ofEpochMilli (Long/parseLong %)))})
 
 
+(def ^:private duration-writer-handler
+  "Transit writer handler to convert java.time.Duration types to a custom
+  Transit extension with tag 'dur' containing a number of nanoseconds."
+  {java.time.Duration
+   (transit/write-handler
+     (constantly "dur")
+     (fn [^java.time.Duration dur]
+       (.. dur toNanos toString)))})
+
+
+(def ^:private duration-reader-handler
+  "Transit reader handler to convert custom Transit extension with tag 'dur'
+  representing a number of nanoseconds to a java.time.Duration.
+
+  Negative durations are invalid."
+  {"dur"
+   (transit/read-handler
+     (fn [v]
+       (let [nanos (Long/parseLong v)]
+         (if (> nanos 0)
+           (java.time.Duration/ofNanos nanos)
+           (throw (ex-info "Negative durations are invalid."
+                           {:nanoseconds nanos}))))))})
+
+
+(def ^:private writer-handlers
+  {:handlers (merge inst-writer-handlers duration-writer-handler)})
+
+
+(def ^:private reader-handlers
+  {:handlers (merge inst-reader-handlers duration-reader-handler)})
+
+
 (defn encode
   "Encode data with Transit in JSON.  Returns data encoded as a string."
   [data]
   (let [stream (ByteArrayOutputStream.)
-        writer (transit/writer stream :json {:handlers inst-writer-handlers})]
+        writer (transit/writer stream :json writer-handlers)]
     (transit/write writer data)
     (.toString stream)))
 
@@ -46,7 +79,7 @@
 
 (defmethod decode ByteArrayInputStream
   [^ByteArrayInputStream stream]
-  (let [r (transit/reader stream :json {:handlers inst-reader-handlers})]
+  (let [r (transit/reader stream :json reader-handlers)]
     (transit/read r)))
 
 (defmethod decode ByteArrayOutputStream
