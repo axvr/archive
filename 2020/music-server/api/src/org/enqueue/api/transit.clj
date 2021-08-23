@@ -43,17 +43,12 @@
 
 (def ^:private duration-reader-handler
   "Transit reader handler to convert custom Transit extension with tag 'dur'
-  representing a number of nanoseconds to a java.time.Duration.
-
-  Negative durations are invalid."
+  representing a number of nanoseconds to a java.time.Duration."
   {"dur"
    (transit/read-handler
      (fn [v]
        (let [nanos (Long/parseLong v)]
-         (if (> nanos 0)
-           (java.time.Duration/ofNanos nanos)
-           (throw (ex-info "Negative durations are invalid."
-                           {:nanoseconds nanos}))))))})
+           (java.time.Duration/ofNanos nanos))))})
 
 
 (def ^:private writer-handlers

@@ -73,18 +73,15 @@
     such as song and album running times).  The duration extension type uses
     the tag "
     [:code "dur"]
-    " followed by a (positive) number of nanoseconds."]
+    " followed by a number of nanoseconds."]
    [:pre
     "[\"~#dur\",\"86400000000000\"]    ; 86,400 seconds or 1 day.\n"
-    "[\"~#dur\",\"374000000000\"]      ; 374 seconds or 6:14 minutes."]
+    "[\"~#dur\",\"374000000000\"]      ; 374 seconds or 6:14 minutes.\n"
+    "[\"~#dur\",\"-374000000000\"]     ; 374 seconds ago or 6:14 minutes ago.\n"
+    "[\"~#dur\",\"12\"]                ; 12 nanoseconds."]
    [:p
-    "Some things to note:"]
-   [:ul
-    [:li "Because durations are in nanoseconds you will likely need to
-         store them as 64-bit integers."]
-    [:li "Negative values are invalid and will result in an error 400 if you send one to the API."]
-    [:li "The longest duration allowed is (technically) 9,223,372,036,854,775,807
-         nanoseconds, but stupidly large durations will just be rejected."]]]
+    "Note that because durations are sent as nanoseconds they should be stored
+    as 64-bit signed integers."]]
   [:section
    [:h2 {:id "idempotency"} "Idempotency"]
    [:p

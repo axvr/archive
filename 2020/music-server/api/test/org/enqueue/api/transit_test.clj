@@ -44,16 +44,23 @@
 
 (deftest duration-handlers
   (testing "Can encode and decode java.time.Duration types into custom Transit
-           extension type"
+           extension type."
     (let [duration (java.time.Duration/ofMillis (rand-int 1000000000))
           encoded  (transit/encode duration)
           decoded  (transit/decode encoded)]
       (is (= (class decoded) java.time.Duration))
       (is (not= decoded encoded))
       (is (= decoded duration))))
-  (testing "Using correct tag for Transit duration extension type"
+  (testing "Using correct tag for Transit duration extension type."
     (let [decoded (transit/decode "[\"~#dur\",\"86400000000000\"]")]
       (is (= (class decoded) java.time.Duration))
       (is (= decoded (java.time.Duration/ofDays 1)))))
-  (testing "Throws on negative duration"
-    (is (thrown? RuntimeException (transit/decode "[\"~#dur\",\"-374000000000\"]")))))
+  (testing "Decodes zero duration."
+    (let [decoded (transit/decode "[\"~#dur\",\"0\"]")]
+      (is (= (class decoded) java.time.Duration))
+      (is (.isZero decoded))))
+  (testing "Decodes negative durations."
+    (let [decoded (transit/decode "[\"~#dur\",\"-374000000000\"]")]
+      (is (= (class decoded) java.time.Duration))
+      (is (= decoded (java.time.Duration/ofSeconds -374)))
+      (is (.isNegative decoded)))))
