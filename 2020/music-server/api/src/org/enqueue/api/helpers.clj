@@ -12,6 +12,12 @@
     (some-> path io/resource slurp edn/read-string eval)))
 
 
+(defn in?
+  "Returns true if coll contains elm."
+  [coll elm]
+  (some #(= elm %) coll))
+
+
 (defn date-compare
   "Compare date1 to date2 using op.  Example ops: < > <= >= ="
   [op date1 date2]

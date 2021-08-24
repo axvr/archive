@@ -1,1 +1,6 @@
-{:env :test}
+{:env :test
+ :db  {:dbtype   "postgresql"
+       :dbname   "enqueue_test"
+       :host     "localhost"
+       :user     "postgres"
+       :password "postgres"}}

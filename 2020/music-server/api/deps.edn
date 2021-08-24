@@ -18,5 +18,6 @@
            :test {:extra-paths ["test" "config/test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                :sha     "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
-                  :exec-fn cognitect.test-runner.api/test}}}
+                                :git/sha "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
+                  :exec-fn org.enqueue.api.test/run-tests
+                  :exec-args {:run [:unit :integration]}}}}
