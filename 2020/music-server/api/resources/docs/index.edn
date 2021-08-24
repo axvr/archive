@@ -25,7 +25,7 @@
    [:h2 "Support"]
    [:p
     "If you have any questions or encounter incorrect documentation please send an email to "
-    [:a {:href "mailto:dev@enqueue.org"} "dev@enqueue.org"] "."]
+    [:a {:href "mailto:enquiries@enqueue.org"} "enquiries@enqueue.org"] "."]
    [:p
     "We take security " [:em "very"] " seriously; if you believe you have found a
     security vulnerability please send an email to "
