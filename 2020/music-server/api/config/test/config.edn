@@ -1,6 +1,11 @@
 {:env :test
+ :eat {:signing-key "dp0c/EfFRdjffiZgMwp3E+UG2EszQ7BxOW7SBjHUiqY="}
  :db  {:dbtype   "postgresql"
        :dbname   "enqueue_test"
        :host     "localhost"
        :user     "postgres"
-       :password "postgres"}}
+       :password "postgres"}
+ :server {:port   6881
+          :async? true
+          :origins {:cors #{"https://localhost:6881"}
+                    :xss  #{}}}}

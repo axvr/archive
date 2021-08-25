@@ -10,6 +10,6 @@
           :origins {:cors #{"https://www.enqueue.org"
                             "https://enqueue.org"
                             "https://api.enqueue.org"
-                            "http://localhost:3000"}
+                            "http://localhost:7881"}
                     :xss  #{"enqueue.org"
                             "*.enqueue.org"}}}}

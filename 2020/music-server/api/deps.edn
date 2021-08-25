@@ -20,4 +20,4 @@
                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
                                 :git/sha "4e7e1c0dfd5291fa2134df052443dc29695d8cbe"}}
                   :exec-fn org.enqueue.api.test/run-tests
-                  :exec-args {:run [:unit :integration]}}}}
+                  :exec-args {:run [:unit]}}}}

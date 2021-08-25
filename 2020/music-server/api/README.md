@@ -72,15 +72,12 @@ the API.)
 ### Run tests
 
 ```sh
-# Run unit and integration tests.
+# Run unit tests.
 clojure -X:test
 
 # Run unit, integration and E2E tests.
 clojure -X:test :types '[:unit :integration :e2e]'
 ```
-
-(Note: the CI pipeline doesn't have database access, so E2E tests aren't run
-there.)
 
 
 ## Legal
