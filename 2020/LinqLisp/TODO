@@ -3,15 +3,23 @@
   - Cond?
   - IfLet?
   - WhenLet?
-  - Threading macros?
-  - Empty?
   - Except? (opposite of Where)
-  - Bind?
-  - Fold/ForEach?
-  - Not?  E.g. `.Where(Not(string.IsNullOrEmpty))`
+  - ForEach?
+  - WhereIn?
+  - Merge
+  - MergeWith
+  - Reduce (simpler version of .Aggregate)
+  - Macro (expressions?)
+  - Curry
+  - Partial
+  - Amb? (is this even possible?)
+  - Join (.Merge which can update multiple properties on an object.)
   - ...
-- Naming: WhenNot vs. Unless (IfNot?)
+
 - Unit tests.
 - Documentation.
+- XML comments.
 - Add documentation comments.
 - Release first version.
+
+- Make all work on EF Core?

@@ -5,6 +5,7 @@ namespace LinqLisp
     public static partial class Func
     {
         // Makes it possible to execute non-extension methods as if they were extension methods.
+        // Threading macro equivalent.
 
         public static TOut Then<TIn, TOut>(this TIn input,
                 Func<TIn, TOut> f1)
