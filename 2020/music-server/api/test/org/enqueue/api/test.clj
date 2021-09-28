@@ -73,7 +73,8 @@
     (println "Running tests of types:" types)
     (if (in? types :e2e)
       (do
-        (println "Starting server at" server-uri "...")
-        (let [server (future (server/run {}))]
-          (test-runner/test test-options)))
+        (println "Starting server at" server-uri)
+        (let [server (server/run {:block? false})]
+          (test-runner/test test-options)
+          (.stop server)))
       (test-runner/test test-options))))

@@ -60,13 +60,15 @@
       wrap-ignore-trailing-slash))
 
 
-(defn run [{:keys [port]
-            :or {port (:port config/server)}}]
+(defn run [{:keys [port block?]
+            :or {port   (:port config/server)
+                 block? true}}]
   (when config/prod?
     (set! *assert* false))  ; Disable assertions on production environment.
   ;; TODO: configure SSL, HSTS header + automatic redirect.
   (run-jetty
     #'app-handler
     {:port   port
+     :join?  block?
      :async? (:async? config/server false)
      :send-server-version? false}))
