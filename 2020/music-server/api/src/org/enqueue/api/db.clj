@@ -13,24 +13,26 @@
 
 (def ds (jdbc/get-datasource config/db))
 
+(def ^:dynamic *conn* ds)
+
 
 (def sql-format sql/format)
-(def execute! (partial jdbc/execute! ds))
-(def execute-one! (partial jdbc/execute-one! ds))
+(def execute! (partial jdbc/execute! *conn*))
+(def execute-one! (partial jdbc/execute-one! *conn*))
 
 
 (defn query
   ([sql]
-   (jdbc/execute! ds (sql/format sql)))
+   (jdbc/execute! *conn* (sql/format sql)))
   ([sql opts]
-   (jdbc/execute! ds (sql/format sql) opts)))
+   (jdbc/execute! *conn* (sql/format sql) opts)))
 
 
 (defn query-first
   ([sql]
-   (jdbc/execute-one! ds (sql/format sql)))
+   (jdbc/execute-one! *conn* (sql/format sql)))
   ([sql opts]
-   (jdbc/execute-one! ds (sql/format sql) opts)))
+   (jdbc/execute-one! *conn* (sql/format sql) opts)))
 
 
 (defn insert! [table values]
@@ -43,6 +45,22 @@
   (query-first {:update [table]
                 :set    changes
                 :where  where}))
+
+
+(defmacro with-transaction
+  "Perform all database operations in body as a transaction."
+  [& body]
+  `(jdbc/with-transaction [tx# ds]
+      (binding [*conn* tx#]
+        ~@body)))
+
+
+(defmacro with-connection
+  "Perform all database operations in body using a single connection."
+  [& body]
+  `(with-open [conn# (jdbc/get-connection ds)]
+     (binding [*conn* conn#]
+       ~@body)))
 
 
 ;;; -----------------------------------------------------------
