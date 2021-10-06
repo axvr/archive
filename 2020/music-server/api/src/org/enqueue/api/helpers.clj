@@ -39,13 +39,7 @@
   "Execute 'body' for each element 'i' in 'itt' until a non-nil value is
   returned then return it."
   [[i itt] & body]
-  `(loop [j# ~itt]
-     (when (seq j#)
-       (let [~i (first j#)
-             res# (do ~@body)]
-         (if (some? res#)
-           res#
-           (recur (rest j#)))))))
+  `(some (fn [~i] ~@body) ~itt))
 
 
 (defmacro when-let*
