@@ -30,15 +30,16 @@
 
 
 (defn register [email-address password]
-  (if-not (find-user-by :email-address email-address)
-    (let [user-id (UUID/randomUUID)
-          hashed-password (crypto/hash-password password)]
-      (db/insert! :users {:id            user-id
-                          :email-address email-address
-                          :password-hash hashed-password
-                          :created-at    (Instant/now)})
-      (reply 204 "Account created"))
-    (reply 400 "User account with that email address already exists")))
+  (let [email-address (when email-address (.toLowerCase email-address))]
+    (if-not (find-user-by :email-address email-address)
+      (let [user-id (UUID/randomUUID)
+            hashed-password (crypto/hash-password password)]
+        (db/insert! :users {:id            user-id
+                            :email-address email-address
+                            :password-hash hashed-password
+                            :created-at    (Instant/now)})
+        (reply 204 "Account created"))
+      (reply 400 "User account with that email address already exists"))))
 
 
 (defn registration-handler [request]

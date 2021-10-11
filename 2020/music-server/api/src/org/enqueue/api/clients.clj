@@ -84,7 +84,8 @@
    {:keys [version] :as client}
    idempotency-key
    signing-key]
-  (let [user (users/find-user-by :email-address email-address)]
+  (let [email-address (when email-address (.toLowerCase email-address))
+        user (users/find-user-by :email-address email-address)]
     (if (and user
              (crypto/valid-password? (:users/password_hash user) password))
       (let [user-id (:users/id user)
