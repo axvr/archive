@@ -46,12 +46,28 @@
    :body    (html (build-page (read-doc "404")))})
 
 
-(defn- get-docs-response [page]
-  (if-let [doc (read-doc page)]
-    {:status  200
-     :headers {"Content-Type" "text/html; charset=UTF-8"}
-     :body    (html (build-page doc))}
-    not-found-response))
+(def ^:dynamic *request*
+  "Currently active HTTP request."
+  nil)
+
+
+(defn api-uri
+  "Returns the URI for the current API with an optional path on the end."
+  ([] (api-uri nil))
+  ([path]
+   (str (name (:scheme *request*))
+        "://"
+        (get-in *request* [:headers "host"])
+        path)))
+
+
+(defn get-docs-response [page request]
+  (binding [*request* request]
+    (if-let [doc (read-doc page)]
+      {:status  200
+       :headers {"Content-Type" "text/html; charset=UTF-8"}
+       :body    (html (build-page doc))}
+      not-found-response)))
 
 
 (def ^:private memo-get-docs-response
@@ -63,7 +79,7 @@
 (defn- docs-handler
   ([request]
    (let [page (get-in request [:uri-params :*] "index")]
-     (memo-get-docs-response page)))
+     (memo-get-docs-response page request)))
   ([request respond _]
    (respond (docs-handler request))))
 
