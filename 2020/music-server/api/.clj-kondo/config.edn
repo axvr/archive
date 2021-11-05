@@ -1,5 +1,4 @@
 {:linters
- {:unresolved-symbol {:exclude [(org.enqueue.api.helpers/while-nil)
-                                (org.enqueue.api.helpers/when-let*)
+ {:unresolved-symbol {:exclude [(org.enqueue.api.helpers/when-let*)
                                 (org.enqueue.api.db/with-connection)
                                 (org.enqueue.api.db/with-transaction)]}}}

@@ -42,7 +42,7 @@
      {:href "https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types"}
      "MIME type"]
     " used to represent Transit encoded data is:"
-    [:pre org.enqueue.api.transit.middleware/content-type]]
+    [:pre org.enqueue.api.transit.interceptors/content-type]]
    [:p
     "Any HTTP response with a "
     [:code "Content-Type"]

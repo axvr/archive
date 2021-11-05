@@ -5,11 +5,4 @@
        :host     "localhost"
        :user     "postgres"
        :password "postgres"}
- :server {:port   7881
-          :async? true
-          :origins {:cors #{"https://www.enqueue.org"
-                            "https://enqueue.org"
-                            "https://api.enqueue.org"
-                            "http://localhost:7881"}
-                    :xss  #{"enqueue.org"
-                            "*.enqueue.org"}}}}
+ :server {:port 7881}}

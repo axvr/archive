@@ -7,10 +7,12 @@
             [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 
-(defn- read-doc [n]
-  (read-edn-resource
-    (str "docs/" (str/replace n #"[^\w/]+" "_") ".edn")
-    :eval? true))
+(defn- read-doc [path]
+  (as-> path doc
+      (str/replace doc #"[^\w/]+" "_")
+      (str "docs/" doc ".edn")
+      (read-edn-resource doc)
+      (eval doc)))
 
 
 (defn- build-page
@@ -70,20 +72,20 @@
       not-found-response)))
 
 
-(def ^:private memo-get-docs-response
+(def ^:private memo-get-docs-resp
   (if config/prod?
     (memo/lru get-docs-response {} :lru/threshold 10)
     get-docs-response))
 
 
-(defn- docs-handler
-  ([request]
-   (let [page (get-in request [:uri-params :*] "index")]
-     (memo-get-docs-response page request)))
-  ([request respond _]
-   (respond (docs-handler request))))
+(def docs-handler
+  {:name :docs
+   :enter
+   (fn [context]
+     (let [page (get-in context [:request :path-params :doc] "index")]
+       (assoc context :response (memo-get-docs-resp page (:request context)))))})
 
 
-(def doc-routes
-  [["/docs"   {:get {:handler docs-handler}}]
-   ["/docs/*" {:get {:handler docs-handler}}]])
+(def docs-routes
+  #{["/docs" :get docs-handler :route-name :docs-index]
+    ["/docs/*doc" :get docs-handler]})

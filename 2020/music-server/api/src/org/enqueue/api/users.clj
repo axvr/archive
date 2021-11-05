@@ -1,17 +1,15 @@
 (ns org.enqueue.api.users
   (:require [org.enqueue.api.db     :as db]
             [org.enqueue.api.crypto :as crypto]
-            [org.enqueue.api.clients.middleware     :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware      :refer [wrap-async]]
-            [org.enqueue.api.transit.middleware     :refer [wrap-transit]]
-            [org.enqueue.api.idempotency.middleware :refer [wrap-idempotent]])
+            [org.enqueue.api.clients.interceptors     :refer [eat-auth-interceptor]]
+            [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
+            [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]])
   (:import [java.time Instant]
            [java.util UUID]))
 
 
 ;; TODO: data validation with spec (email addresses).
 ;; TODO: send emails.
-;; TODO: make idempotent.
 
 
 (defn find-user-by [& {:keys [id email-address]}]
@@ -30,7 +28,7 @@
 
 
 (defn register [email-address password]
-  (let [email-address (when email-address (.toLowerCase email-address))]
+  (let [email-address (.toLowerCase email-address)]
     (if-not (find-user-by :email-address email-address)
       (let [user-id (UUID/randomUUID)
             hashed-password (crypto/hash-password password)]
@@ -42,11 +40,14 @@
       (reply 400 "User account with that email address already exists"))))
 
 
-(defn registration-handler [request]
-  (let [{:keys [email-address password]} (:body request)]
-    (if (and email-address password)
-      (register email-address password)
-      (reply 400 "Invalid body"))))
+(def registration-handler
+  {:name :register-user
+   :enter
+   (fn [{{{:keys [email-address password]} :body} :request :as context}]
+     (assoc context :response
+            (if (and email-address password)
+              (register email-address password)
+              (reply 400 "Invalid body"))))})
 
 
 (defn change-password [user-id old-password new-password]
@@ -60,12 +61,16 @@
     (reply 404 "User not found")))
 
 
-(defn change-password-handler [request]
-  (let [user-id      (get-in request [:token :user-id])
-        body         (:body request)
-        old-password (:old-password body)
-        new-password (:new-password body)]
-    (change-password user-id old-password new-password)))
+(def change-password-handler
+  {:name :change-password
+   :enter
+   (fn [{:keys [request] :as context}]
+     (let [user-id      (get-in request [:token :user-id])
+           body         (:body request)
+           old-password (:old-password body)
+           new-password (:new-password body)]
+       (assoc context :response
+              (change-password user-id old-password new-password))))})
 
 
 (comment
@@ -102,12 +107,14 @@
 
 
 (def user-routes
-  [["/user/register"       {:post {:handler registration-handler
-                                   :middleware [wrap-idempotent
-                                                wrap-transit
-                                                wrap-async]}}]
-   ["user/password/change" {:post {:handler change-password-handler
-                                   :middleware [wrap-idempotent
-                                                wrap-transit
-                                                wrap-auth
-                                                wrap-async]}}]])
+  #{["/user/register" :post
+     [(idempotency-interceptor)
+      transit-out-interceptor
+      registration-handler]
+     :route-name (:name registration-handler)]
+    ["/user/password/change" :post
+     [(eat-auth-interceptor)
+      (idempotency-interceptor)
+      transit-out-interceptor
+      change-password-handler]
+     :route-name (:name change-password-handler)]})

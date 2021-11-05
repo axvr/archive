@@ -8,11 +8,9 @@
             [org.enqueue.api.crypto      :as crypto]
             [org.enqueue.api.clients.eat :as eat]
             [org.enqueue.api.config      :as config]
-            [org.enqueue.api.clients.middleware     :refer [wrap-auth]]
-            [org.enqueue.api.router.middleware      :refer [wrap-async]]
-            [org.enqueue.api.transit.middleware     :refer [wrap-transit]]
-            [org.enqueue.api.idempotency.middleware :refer [wrap-idempotent
-                                                            wrap-idempotency-key]])
+            [org.enqueue.api.clients.interceptors     :refer [eat-auth-interceptor]]
+            [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
+            [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]])
   (:import [java.util UUID]
            [java.time Instant]))
 
@@ -94,7 +92,7 @@
       (reply 401 "Invalid credentials"))))
 
 
-(defn create-handler
+(def create-handler
   "Expects request body to be in following format:
     {:client {:name     \"Enqueue\"
               :platform \"Web\"
@@ -102,12 +100,15 @@
               :version  \"1\"}
      :credentials {:email-address \"example@example.com\"
                    :password      \"password\"}}"
-  [request]
-  (let [idempotency-key (:idempotency-key request)
-        body            (:body request)
-        credentials     (:credentials body)
-        client          (:client body)]
-    (create credentials client idempotency-key config/signing-key)))
+  {:name :create-client
+   :enter
+   (fn [{:keys [request] :as context}]
+     (let [idempotency-key (:idempotency-key request)
+           body            (:body request)
+           credentials     (:credentials body)
+           client          (:client body)]
+       (assoc context :response
+              (create credentials client idempotency-key config/signing-key))))})
 
 
 (defn renew
@@ -120,19 +121,22 @@
   (create-tokens client-id version renewal-key idempotency-key signing-key))
 
 
-(defn renew-handler
+(def renew-handler
   "Renew an client's access by providing the currently active EAT-R token.
   Returns a new pair of EAT tokens.
 
   This endpoint has its own idempotency implementation as it has higher
   reliability and security requirements; don't want the client to get logged
   out due to a poor network connection."
-  [request]
-  (let [signing-key     config/signing-key
-        token           (:token request)
-        idempotency-key (:idempotency-key request)
-        client          (get-in request [:body :client])]
-    (renew token client idempotency-key signing-key)))
+  {:name :renew-tokens
+   :enter
+   (fn [{:keys [request] :as context}]
+     (let [signing-key     config/signing-key
+           token           (:token request)
+           idempotency-key (get-in request [:headers "idempotency-key"])
+           client          (get-in request [:body :client])]
+       (assoc context :response
+              (renew token client idempotency-key signing-key))))})
 
 
 (defn revoke-access
@@ -145,24 +149,29 @@
   (eat/revoke-client-access client-id))
 
 
-(defn revoke-access-handler [request]
-  (let [client-id (get-in request [:token :client-id])]
-    (revoke-access client-id)
-    {:status 204}))
+(def revoke-access-handler
+  {:name :revoke-client-access
+   :enter
+   (fn [{:keys [request] :as context}]
+     (let [client-id (get-in request [:token :client-id])]
+       (revoke-access client-id)
+       (assoc context :response {:status 204})))})
 
 
 (def client-routes
-  [["/clients/create" {:post {:handler create-handler
-                              :middleware [wrap-idempotent
-                                           wrap-transit
-                                           wrap-async]}}]
-   ["/clients/renew"  {:post {:handler renew-handler
-                              :middleware [wrap-idempotency-key
-                                           wrap-transit
-                                           wrap-auth
-                                           wrap-async]}}]
-   ["/clients/revoke" {:post {:handler revoke-access-handler
-                              :middleware [wrap-idempotent
-                                           wrap-transit
-                                           wrap-auth
-                                           wrap-async]}}]])
+  #{["/clients/create" :post
+     [(idempotency-interceptor)
+      transit-out-interceptor
+      create-handler]
+     :route-name (:name create-handler)]
+    ["/clients/renew" :post
+     [(eat-auth-interceptor)
+      transit-out-interceptor
+      renew-handler]
+     :route-name (:name renew-handler)]
+    ["/clients/revoke" :post
+     [(eat-auth-interceptor)
+      (idempotency-interceptor)
+      transit-out-interceptor
+      revoke-access-handler]
+     :route-name (:name revoke-access-handler)]})

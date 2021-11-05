@@ -3,7 +3,7 @@
   (:require [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 (def ^:private config
-  (if-let [conf (read-edn-resource "config.edn" :eval? true)]
+  (if-let [conf (read-edn-resource "config.edn")]
     conf
     (throw (ex-info "No configuration file found." {:file "config.edn"}))))
 

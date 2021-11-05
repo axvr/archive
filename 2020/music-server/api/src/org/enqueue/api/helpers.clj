@@ -5,11 +5,9 @@
 
 
 (defn read-edn-resource
-  "Read an EDN file from JVM resources.  Accepts optional :eval? keyword
-  parameter to toggle evaluation of the EDN (default: false)."
-  [path & {:keys [eval?]}]
-  (let [eval (if eval? eval identity)]
-    (some-> path io/resource slurp edn/read-string eval)))
+  "Read an EDN file from JVM resources."
+  [path]
+  (some-> path io/resource slurp edn/read-string))
 
 
 (defn in?
@@ -33,13 +31,6 @@
      (subs s 0 (- (count s)
                   (count rem)))
      s)))
-
-
-(defmacro while-nil
-  "Execute 'body' for each element 'i' in 'itt' until a non-nil value is
-  returned then return it."
-  [[i itt] & body]
-  `(some (fn [~i] ~@body) ~itt))
 
 
 (defmacro when-let*

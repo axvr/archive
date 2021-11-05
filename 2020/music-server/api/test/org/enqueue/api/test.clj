@@ -74,7 +74,7 @@
     (if (in? types :e2e)
       (do
         (println "Starting server at" server-uri)
-        (let [server (server/run {:block? false})]
-          (test-runner/test test-options)
-          (.stop server)))
+        (server/run {:join? false})
+        (test-runner/test test-options)
+        (server/stop))
       (test-runner/test test-options))))
