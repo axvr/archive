@@ -9,7 +9,8 @@
     [org.enqueue.api.docs    :refer [docs-routes]]
     [org.enqueue.api.users   :refer [user-routes]]
     [org.enqueue.api.clients :refer [client-routes]]
-    [org.enqueue.api.transit.interceptors :refer [transit-in-interceptor]]))
+    [org.enqueue.api.transit.interceptors :refer [transit-in-interceptor]])
+  (:import [org.eclipse.jetty.server.handler.gzip GzipHandler]))
 
 
 (def root
@@ -24,6 +25,13 @@
     {:name :privacy-headers
      :leave
      #(assoc-in % [:response :headers "Permissions-Policy"] "interest-cohort=()")}))
+
+
+(defn- context-configurator
+  [context]
+  (let [gzip-handler (GzipHandler.)]
+    (.setGzipHandler context gzip-handler)
+    context))
 
 
 (defn build-routes []
@@ -71,7 +79,8 @@
                         :cross-domain-policies-settings "none"
                         :content-security-policy-settings
                         (str "default-src 'self' "
-                             (str/join " " (get-in config/server [:origins :xss])))}}
+                             (str/join " " (get-in config/server [:origins :xss])))}
+                       ::http/container-options {:context-configurator context-configurator}}
                       http/default-interceptors
                       (update ::http/interceptors conj
                               privacy-headers
