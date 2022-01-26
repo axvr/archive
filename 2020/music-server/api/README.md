@@ -39,8 +39,8 @@ the API.)
 # Run unit tests.
 clojure -X:test
 
-# Run unit, integration and E2E tests.
-clojure -X:test :types '[:unit :integration :e2e]'
+# Run unit, component and system tests.
+clojure -X:test :types '[:unit :component :system]'
 ```
 
 

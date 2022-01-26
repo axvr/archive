@@ -33,8 +33,8 @@ jobs:
       - name: Run tests
         run: clojure -X:test :types '[:unit]'
 
-  integration-test:
-    name: Integration test
+  component-test:
+    name: Component test
     runs-on: ubuntu-latest
 
     steps:
@@ -51,11 +51,11 @@ jobs:
       - name: Run tests
         run: |
           ./start_db/test.sh
-          clojure -X:test :types '[:integration]'
+          clojure -X:test :types '[:component]'
           docker stop enqueue-db-test
 
-  e2e-test:
-    name: E2E test
+  system-test:
+    name: System test
     runs-on: ubuntu-latest
 
     steps:
@@ -72,5 +72,5 @@ jobs:
       - name: Run tests
         run: |
           ./start_db/test.sh
-          clojure -X:test :types '[:e2e]'
+          clojure -X:test :types '[:system]'
           docker stop enqueue-db-test

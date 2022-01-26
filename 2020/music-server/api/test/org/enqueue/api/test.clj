@@ -13,7 +13,7 @@
     (db/migrate)))
 
 
-(def test-types #{:unit :integration :e2e})
+(def test-types #{:unit :component :system})
 
 
 (def server-uri
@@ -26,14 +26,14 @@
 
   The `:types` option accepts a collection of test types to run.  The test
   types supported are:
-    - :unit         (selected by default)
-    - :integration  (use database)
-    - :e2e          (use database and local server)
+    - :unit       (selected by default)
+    - :component  (use database)
+    - :system     (use database and local server)
 
-  Tests are considered unit tests unless there is an ^:integration or ^:e2e
+  Tests are considered unit tests unless there is an ^:component or ^:system
   meta data tag attached to them.
 
-  Integration and E2E tests can *only* be run on the :test environment and will
+  Component and system tests can *only* be run on the :test environment and will
   wipe/prepare the database specified in `config/test/config.edn`.
 
   Examples:
@@ -41,28 +41,28 @@
     ;; Run unit tests.
     (org.enqueue.api.test/run-tests)
 
-    ;; Run unit and E2E tests.
-    (org.enqueue.api.test/run-tests {:types [:unit :e2e]})
+    ;; Run unit and system tests.
+    (org.enqueue.api.test/run-tests {:types [:unit :system]})
 
     ;; Run specific tests.  (Using :vars option from the Cognitect test-runner.)
     (org.enqueue.api.test/run-tests
       {:vars [org.enqueue.api.transit-tests/duration-handler
               org.enqueue.api.crypto-test/base64-decode]})
 
-    ;; Run unit, integration and E2E tests from command line.
-    clojure -X:test :types '[:unit :integration :e2e]'
+    ;; Run unit, component and system tests from command line.
+    clojure -X:test :types '[:unit :component :system]'
 
   [1]: https://github.com/cognitect-labs/test-runner"
   [{:keys [types]
     :or   {types [:unit]}
     :as   options}]
-  (when (some #{:integration :e2e} types)
+  (when (some #{:component :system} types)
     (if config/test?
       (do
         (println "Preparing DB...")
         (setup-db))
       (throw
-        (ex-info "Cannot run Integration or E2E tests on non-test environments!  Aborting test execution."
+        (ex-info "Cannot run component or system tests on non-test environments!  Aborting test execution."
                  {:environment config/env
                   :test-types  types}))))
   (let [test-options
@@ -72,7 +72,7 @@
                       {:excludes (remove (set types) test-types)}
                       {:includes (filter (set types) test-types)}))]
     (println "Running tests of types:" types)
-    (if (in? types :e2e)
+    (if (in? types :system)
       (do
         (println "Starting server at" server-uri)
         (server/run {:join? false})
