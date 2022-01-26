@@ -7,7 +7,7 @@
 
 
 (defn setup-db []
-  (if config/test?
+  (when config/test?
     (db/execute! ["DROP SCHEMA public CASCADE;"])
     (db/execute! ["CREATE SCHEMA public;"])
     (db/migrate)))

@@ -37,28 +37,9 @@ jobs:
     name: Integration test
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
       - name: Install libsodium
         run: sudo apt install libsodium-dev
-
-      - name: Create DB tables
-        run: |
-          echo '*:*:*:postgres:postgres' > ~/.pgpass
-          chmod 0600 ~/.pgpass
-          psql -h localhost -U postgres -c "create database enqueue_test ENCODING = 'UTF-8';"
 
       - name: Install Clojure
         uses: DeLaGuardo/setup-clojure@3.5
@@ -68,34 +49,18 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run tests
-        run: clojure -X:test :types '[:integration]'
+        run: |
+          ./start_db/test.sh
+          clojure -X:test :types '[:integration]'
+          docker stop enqueue-db-test
 
   e2e-test:
     name: E2E test
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
     steps:
       - name: Install libsodium
         run: sudo apt install libsodium-dev
-
-      - name: Create DB tables
-        run: |
-          echo '*:*:*:postgres:postgres' > ~/.pgpass
-          chmod 0600 ~/.pgpass
-          psql -h localhost -U postgres -c "create database enqueue_test ENCODING = 'UTF-8';"
 
       - name: Install Clojure
         uses: DeLaGuardo/setup-clojure@3.5
@@ -105,4 +70,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run tests
-        run: clojure -X:test :types '[:e2e]'
+        run: |
+          ./start_db/test.sh
+          clojure -X:test :types '[:e2e]'
+          docker stop enqueue-db-test

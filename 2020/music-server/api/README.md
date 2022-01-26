@@ -11,48 +11,8 @@ Source code of the Enqueue API.
 Install the following dependencies.
 
 - [Clojure CLI tools](https://clojure.org/guides/getting_started#_clojure_installer_and_cli_tools)
-- [PostgreSQL](https://www.postgresql.org/)
-  - [Install on Fedora](https://fedoraproject.org/wiki/PostgreSQL)
+- [Docker](https://www.docker.com/)
 - [libsodium](https://libsodium.gitbook.io/doc/installation)
-
-Then complete the set-up of the local PostgreSQL server and set the password of
-the postgres account in the `config/*/config.edn` files.
-
-On Fedora:
-
-```sh
-# Install dependencies.
-sudo dnf upgrade --refresh
-sudo dnf install libsodium postgresql-server
-
-# Setup PostgreSQL server.
-sudo postgresql-setup --init-db --unit postgresql
-sudo systemctl enable postgresql.service
-
-# Set password for "postgres" account.
-sudo -u postgres psql
-\password postgres
-\quit
-
-# Set all values in the "method" column to "md5".
-sudo -e /var/lib/pgsql/data/pg_hba.conf
-
-# Restart DB server.
-sudo systemctl restart postgresql.service
-```
-
-
-### Create databases
-
-After installing the dependencies you need to create the databases used by
-Enqueue.
-
-```sql
-sudo -u postgres psql
-create database enqueue ENCODING = 'UTF-8';
-create database enqueue_test ENCODING = 'UTF-8';
-\quit
-```
 
 
 ## Usage
@@ -60,6 +20,7 @@ create database enqueue_test ENCODING = 'UTF-8';
 Start the server in development mode:
 
 ```sh
+./start_db/dev.sh
 clojure -X:dev:run
 ```
 
@@ -72,6 +33,9 @@ the API.)
 ### Run tests
 
 ```sh
+# Start test DB
+./start_db/test.sh
+
 # Run unit tests.
 clojure -X:test
 

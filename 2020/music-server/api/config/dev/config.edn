@@ -3,6 +3,9 @@
  :db  {:dbtype   "postgresql"
        :dbname   "enqueue"
        :host     "localhost"
+       :port     5455
        :user     "postgres"
        :password "postgres"}
- :server {:port 7881}}
+ :server {:port    7881
+          :origins {:cors #{"https://localhost:6881"}
+                    :xss  #{}}}}
