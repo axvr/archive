@@ -2,9 +2,6 @@
 
 # Script to start the test DB for Enqueue.
 
-# TODO: run this automatically when running tests?
-# TODO: stop and remove container once tests finish?
-
 process="$(docker ps -qf name=enqueue-db-test)"
 
 if [ -n "$process" ]; then
@@ -12,7 +9,7 @@ if [ -n "$process" ]; then
 else
     docker pull postgres
 
-    docker run -d \
+    docker run -d --rm \
         --name enqueue-db-test \
         -p 5454:5432 \
         -e POSTGRES_USER=postgres \

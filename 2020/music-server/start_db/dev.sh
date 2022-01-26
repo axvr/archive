@@ -18,13 +18,13 @@ if [ -n "$process" ]; then
 else
     docker pull postgres
 
-    docker run -d \
+    docker run -d --rm \
         --name enqueue-db-dev \
         -p 5455:5432 \
         -e POSTGRES_USER=postgres \
         -e POSTGRES_PASSWORD=postgres \
         -e POSTGRES_DB=enqueue \
         -e POSTGRES_INITDB_ARGS='--encoding=UTF-8' \
-        -v enqueue-db-dev-data:/home/postgres/data \
+        -v enqueue-db-dev-data:/var/lib/postgresql/data \
         postgres
 fi
