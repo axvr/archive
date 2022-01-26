@@ -10,9 +10,10 @@ Source code of the Enqueue API.
 
 Install the following dependencies.
 
+- [OpenJDK](https://openjdk.java.net/)
 - [Clojure CLI tools](https://clojure.org/guides/getting_started#_clojure_installer_and_cli_tools)
 - [Docker](https://www.docker.com/)
-- [libsodium](https://libsodium.gitbook.io/doc/installation)
+- [Libsodium](https://libsodium.gitbook.io/doc/installation)
 
 
 ## Usage
@@ -20,8 +21,14 @@ Install the following dependencies.
 Start the server in development mode:
 
 ```sh
+# Start development DB.
 ./start_db/dev.sh
+
+# Run server.
 clojure -X:dev:run
+
+# Stop development DB.
+docker stop enqueue-db-dev
 ```
 
 The server will be started at <http://localhost:7881/>.
@@ -33,7 +40,7 @@ the API.)
 ### Run tests
 
 ```sh
-# Start test DB
+# Start test DB.
 ./start_db/test.sh
 
 # Run unit tests.
@@ -41,9 +48,12 @@ clojure -X:test
 
 # Run unit, component and system tests.
 clojure -X:test :types '[:unit :component :system]'
+
+# Stop test DB.
+docker stop enqueue-db-test
 ```
 
 
 ## Legal
 
-Copyright © 2020–2021, [Alex Vear](https://www.alexvear.com).
+Copyright © 2020–2022, [Alex Vear](https://www.alexvear.com).
