@@ -51,7 +51,7 @@
 
 
 (defn change-password [user-id old-password new-password]
-  (if-let [user (find-user-by :user-id user-id)]
+  (if-let [user (find-user-by :id user-id)]
     (if (crypto/valid-password? (:users/password_hash user) old-password)
       (let [hashed-password (crypto/hash-password new-password)]
         (db/update! :users [:= :id user-id]

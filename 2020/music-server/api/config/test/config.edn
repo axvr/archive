@@ -6,6 +6,5 @@
        :user     "postgres"
        :password "postgres"}
  :server {:port   6881
-          :async? true
           :origins {:cors #{"https://localhost:6881"}
                     :xss  #{}}}}

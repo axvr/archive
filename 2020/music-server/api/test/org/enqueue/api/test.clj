@@ -7,9 +7,10 @@
 
 
 (defn setup-db []
-  (db/execute! ["DROP SCHEMA public CASCADE;"])
-  (db/execute! ["CREATE SCHEMA public;"])
-  (db/migrate))
+  (if config/test?
+    (db/execute! ["DROP SCHEMA public CASCADE;"])
+    (db/execute! ["CREATE SCHEMA public;"])
+    (db/migrate)))
 
 
 (def test-types #{:unit :integration :e2e})

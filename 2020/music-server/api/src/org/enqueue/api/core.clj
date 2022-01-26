@@ -27,6 +27,7 @@
      #(assoc-in % [:response :headers "Permissions-Policy"] "interest-cohort=()")}))
 
 
+;; https://github.com/pedestal/pedestal/blob/master/samples/servlet-filters-gzip/src/gzip/service.clj
 (defn- context-configurator
   [context]
   (let [gzip-handler (GzipHandler.)]
