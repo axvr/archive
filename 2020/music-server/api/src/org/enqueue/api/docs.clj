@@ -4,7 +4,8 @@
             [clojure.core.memoize    :as memo]
             [org.enqueue.api.config  :as config]
             [hiccup.core             :refer [html]]
-            [org.enqueue.api.helpers :refer [read-edn-resource]]))
+            [org.enqueue.api.helpers :refer [read-edn-resource]])
+  (:import java.time.Duration))
 
 
 (defn- read-doc [path]
@@ -36,7 +37,7 @@
     content
     [:footer
      [:p
-      "Copyright © 2021, "
+      "Copyright © 2022, "
       [:a {:href "https://www.alexvear.com"} "Alex Vear"]
       ".&emsp;All code snippets are dedicated to the public domain."]]]])
 
@@ -72,9 +73,10 @@
       not-found-response)))
 
 
-(def ^:private memo-get-docs-resp
+(defonce ^:private memo-get-docs-resp
   (if config/prod?
-    (memo/lru get-docs-response {} :lru/threshold 10)
+    (memo/ttl get-docs-response {}
+      :ttl/threshold (.toMillis (Duration/ofHours 6)))
     get-docs-response))
 
 
