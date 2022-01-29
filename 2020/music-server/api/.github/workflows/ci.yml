@@ -50,7 +50,7 @@ jobs:
 
       - name: Run tests
         run: |
-          ./start_db/test.sh
+          do/database/test/start
           clojure -X:test :types '[:component]'
           docker stop enqueue-db-test
 
@@ -71,6 +71,6 @@ jobs:
 
       - name: Run tests
         run: |
-          ./start_db/test.sh
+          do/database/test/start
           clojure -X:test :types '[:system]'
           docker stop enqueue-db-test

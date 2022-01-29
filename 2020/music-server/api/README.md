@@ -22,7 +22,7 @@ Start the server in development mode:
 
 ```sh
 # Start development DB.
-./start_db/dev.sh
+do/database/dev/start
 
 # Run server.
 clojure -X:dev:run
@@ -41,7 +41,7 @@ the API.)
 
 ```sh
 # Start test DB.
-./start_db/test.sh
+do/database/test/start
 
 # Run unit tests.
 clojure -X:test
