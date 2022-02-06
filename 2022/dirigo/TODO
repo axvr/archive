@@ -3,6 +3,4 @@
 - Path redirect rules and templating.
 - Optimise redirects (if rules point to other rules).
 - Wildcard redirects.
-- Configure AWS.
-  - EC2?  (On-demand or Spot instances.)
 - Automate deployment to AWS.

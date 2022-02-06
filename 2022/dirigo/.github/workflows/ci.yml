@@ -1,0 +1,47 @@
+name: Deploy redirections
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Docker image
+    env:
+      ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+      EC2_IP_ADDRESS: ${{ secrets.EC2_IP_ADDRESS }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Clojure tools
+        uses: DeLaGuardo/setup-clojure@3.6
+        with:
+          cli: '1.10.3.1040'
+
+      # - name: Test
+      #   run: clojure -X:test
+
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1.6.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Build Docker image
+        run: |
+          docker build -t "$ECR_REPOSITORY:latest" .
+          docker build -t "$ECR_REPOSITORY:$(git rev-parse --short HEAD)" .
+
+      - name: Push Docker image
+        run: |
+          aws ecr get-login-password --region eu-west-2 \
+            | docker login --username AWS --password-stdin "$ECR_REPOSITORY"
+          docker push "$ECR_REPOSITORY:latest"
+          docker push "$ECR_REPOSITORY:$(git rev-parse --short HEAD)"
+
+      # - name: Deploy redirections
+      #   run: |
