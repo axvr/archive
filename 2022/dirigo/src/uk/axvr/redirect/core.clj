@@ -14,14 +14,16 @@
   (pprint request)
   (let [host (str (name (:scheme request)) "://" (get-in request [:headers "host"]))
         loc  (get @redirections host)]
-    {:status 301
-     :headers {"Location" loc}}))
+    (if loc
+      {:status 301  ; 302 307 308
+       :headers {"Location" loc}}
+      {:status 404})))
 
 (defn app-handler [request]
   (redirect request))
 
 (defn run [{:keys [port block?]
-            :or   {port   80
+            :or   {port   3000
                    block? true}}]
   (run-jetty
     #'app-handler
