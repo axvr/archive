@@ -1,6 +1,15 @@
-# Web forwarding service
+# uk.axvr.redirect
 
-Powers \*.axvr.uk.
+Micro web-forwarding and link shortener service powering axvr.uk
+infrastructure.
 
-For subdomains, add a CNAME record to `axvr.uk.`  For root domain redirections,
-add an A record pointing to `...`.
+
+## Connect your domain
+
+### Domain root
+
+Create an A record pointing to `35.176.219.154`.
+
+### Subdomain
+
+Create a CNAME record pointing to `axvr.uk.`.
