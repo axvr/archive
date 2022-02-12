@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  reverse-proxy:
+    image: traefik:v2.6
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock
+  uk-axvr-redirect:
+    image: 190323198779.dkr.ecr.eu-west-2.amazonaws.com/uk.axvr.redirect:latest
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.axvr-http-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
+      - 'traefik.http.routers.axvr-https-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
+      - 'traefik.http.routers.axvr-https-router.tls=true'
+      - 'traefik.http.routers.axvr-https-router.tls.certresolver=lets-encrypt'
+      - 'traefik.http.routers.***REMOVED***-http-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
+      - 'traefik.http.routers.***REMOVED***-https-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
+      - 'traefik.http.routers.***REMOVED***-https-router.tls=true'
+      - 'traefik.http.routers.***REMOVED***-https-router.tls.certresolver=lets-encrypt'

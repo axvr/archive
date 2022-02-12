@@ -1,0 +1,29 @@
+global:
+  checkNewVersion: true
+
+log:
+  level: WARN
+
+accessLog:
+  filePath: /etc/traefik/accesslog.txt
+  format: json
+
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+
+providers:
+  docker:
+    exposedByDefault: false
+
+certificatesResolvers:
+  lets-encrypt:
+    acme:
+      storage: /etc/traefik/acme.json
+      # caServer: https://acme-v02.api.letsencrypt.org/directory
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      email: infra@axvr.uk
+      httpChallenge:
+        entrypoint: web
