@@ -4,6 +4,6 @@ COPY src src
 COPY resources resources
 COPY deps.edn .
 
-EXPOSE 3000
+EXPOSE 8080
 
-CMD [ "clojure", "-X:run", ":port", "3000" ]
+CMD [ "clojure", "-X:run", ":port", "8080" ]

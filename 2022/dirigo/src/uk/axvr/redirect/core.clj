@@ -23,7 +23,7 @@
   (redirect request))
 
 (defn run [{:keys [port block?]
-            :or   {port   3000
+            :or   {port   8080
                    block? true}}]
   (run-jetty
     #'app-handler
