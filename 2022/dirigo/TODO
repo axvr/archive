@@ -1,6 +1,16 @@
 - Choose redirect type.
 - Send path and query params.
-- Path redirect rules and templating.
+- Link shortening.
+  - Path redirect rules and templating.
 - Optimise redirects (if rules point to other rules).
-- Wildcard redirects.
-- Automate deployment to AWS.
+- Memoize requests?
+
+- Tests
+  - Run the server and validate that it generates correct responses per defined
+    redirection.
+  - Detect infinite loops.
+  - Spec replacements map.
+
+- axvr.io -> axvr.uk
+
+- Build Epoxy and replace Traefik with it.

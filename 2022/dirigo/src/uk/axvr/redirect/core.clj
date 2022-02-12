@@ -1,5 +1,4 @@
 (ns uk.axvr.redirect.core
-  (:use clojure.pprint)
   (:require [clojure.java.io :as io]
             [clojure.edn :as edn]
             [ring.adapter.jetty :refer [run-jetty]]))
@@ -11,7 +10,6 @@
   (atom (read-edn-resource "redirections.edn")))
 
 (defn redirect [request]
-  (pprint request)
   (let [host (str (name (:scheme request)) "://" (get-in request [:headers "host"]))
         loc  (get @redirections host)]
     (if loc

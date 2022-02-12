@@ -1,4 +1,3 @@
-;; Maybe store these in an S3 bucket?
 {"https://axvr.uk" "https://www.axvr.uk"
  "http://axvr.uk"  "https://www.axvr.uk"
 
@@ -10,9 +9,6 @@
 
  "https://ascribe.axvr.uk" "https://www.alexvear.com/projects/ascribe/"
  "http://ascribe.axvr.uk"  "https://www.alexvear.com/projects/ascribe/"
-
- "https://cereal.axvr.uk" "https://github.com/axvr/cereal"
- "http://cereal.axvr.uk"  "https://github.com/axvr/cereal"
 
  "https://www.***REMOVED***.com" "https://www.***REMOVED***.com/shop/MessyMammoth"
  "http://www.***REMOVED***.com"  "https://www.***REMOVED***.com/shop/MessyMammoth"
