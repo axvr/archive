@@ -1,13 +1,9 @@
-@import url('https://rsms.me/inter/inter.css');
-
 html {
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
 }
 
-* {
-	color: #493f5e;
-}
+* { color: #493f5e; }
 
 body {
 	font-family: 'Inter', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
@@ -18,18 +14,25 @@ body {
 	background-color: #ebecf0;
 }
 
-@media(prefers-color-scheme: dark) {
-	* {
-		color: #ebecf0;
-	}
+@supports (font-variation-settings: normal) {
 	body {
-		background-color: #493f5e;
+		font-family: 'Inter var', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
+	}
+}
+@supports (font-variation-settings: 'slnt' 10) {
+	* { font-variation-settings: 'slnt' 0deg; }
+	.italic { font-variation-settings: 'slnt' 10deg; }
+	body {
+		font-family: 'Inter var experimental', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
 	}
 }
 
-.wrapper {
-	padding: 15%;
+@media (prefers-color-scheme: dark) {
+	* { color: #ebecf0; }
+	body { background-color: #493f5e; }
 }
+
+.wrapper { padding: 15%; }
 
 .content {
 	position: absolute;
