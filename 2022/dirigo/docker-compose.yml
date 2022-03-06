@@ -13,10 +13,14 @@ services:
     image: 190323198779.dkr.ecr.eu-west-2.amazonaws.com/uk.axvr.redirect:latest
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.axvr-http-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
-      - 'traefik.http.routers.axvr-https-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
+      - 'traefik.http.routers.axvr-http-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`, `axvr.io`)'
+      - 'traefik.http.routers.axvr-https-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`, `axvr.io`)'
       - 'traefik.http.routers.axvr-https-router.tls=true'
       - 'traefik.http.routers.axvr-https-router.tls.certresolver=lets-encrypt'
+      - 'traefik.http.routers.enqueue-http-router.rule=Host(`enqueue.org`, `dequeue.org`, `www.dequeue.org`)'
+      - 'traefik.http.routers.enqueue-https-router.rule=Host(`enqueue.org`, `dequeue.org`, `www.dequeue.org`)'
+      - 'traefik.http.routers.enqueue-https-router.tls=true'
+      - 'traefik.http.routers.enqueue-https-router.tls.certresolver=lets-encrypt'
       - 'traefik.http.routers.***REMOVED***-http-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
       - 'traefik.http.routers.***REMOVED***-https-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
       - 'traefik.http.routers.***REMOVED***-https-router.tls=true'
