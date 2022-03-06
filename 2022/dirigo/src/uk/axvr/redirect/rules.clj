@@ -47,11 +47,14 @@
   (-> {"axvr.uk"         [->tls (->host "www.axvr.uk")]
        "www.axvr.uk"     [->tls (->host "www.alexvear.com")]
        "alexvear.com"    [->tls (->host "www.alexvear.com")]
+
        "ascribe.axvr.uk" [->tls (->host "www.alexvear.com") (->path "/projects/ascribe/")]
        "cereal.axvr.uk"  [->tls (->host "github.com") (->path "/axvr/cereal")]
        "halogen.axvr.uk" [->tls (->host "github.com") (->path "/axvr/halogen")]
 
-       "axvr.io" [->tls (->host "axvr.uk")]
+       "axvr.io"         [->tls (->host "axvr.uk")]
+       "www.axvr.io"     [->tls (->host "www.axvr.uk")]
+       "ascribe.axvr.io" [->tls (->host "ascribe.axvr.uk")]
 
        ;; TODO: Buy and move to nq.to
        "enqueue.org"     [->tls (->host "www.enqueue.org")]
