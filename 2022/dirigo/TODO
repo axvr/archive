@@ -1,4 +1,3 @@
-- Optimise redirects (if rules point to other rules).
 - Memoize requests?
 
 - Tests

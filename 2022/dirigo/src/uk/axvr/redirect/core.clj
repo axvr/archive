@@ -23,16 +23,20 @@
      :headers {"Location"
                (.toString
                  (URI. (name scheme) user host (or port -1) path query fragment))}}
-    {:status  421
-     :headers {"Content-Type" "text/plain"}}))
+    {:status 421}))
+
+
+(defn apply-rule [ruleset url]
+  (when-let [rule (get ruleset (:host url))]
+    (rule url)))
 
 
 (defn redirector [request]
-  (let [url  (request->url request)
-        host (:host url)
-        rule (get @rules/ruleset host)
-        loc  (rule url)]
-    (url->response loc)))
+  (let [ruleset @rules/ruleset]
+    (loop [url (request->url request)]
+      (if-let [url (apply-rule ruleset url)]
+        (recur url)
+        (url->response url)))))
 
 
 (defn run
