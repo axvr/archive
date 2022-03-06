@@ -1,10 +1,8 @@
-- Memoize requests?
+- Log requests by time.
 
 - Tests
-  - Run the server and validate that it generates correct responses per defined
-    redirection.
+  - Run the server and validate that it generates correct responses per defined redirection.
   - Detect infinite loops.
-  - Spec replacements map.
 
 - axvr.io -> axvr.uk
 

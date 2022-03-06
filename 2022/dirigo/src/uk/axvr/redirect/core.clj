@@ -1,16 +1,17 @@
 (ns uk.axvr.redirect.core
   (:require [uk.axvr.redirect.rules :as rules]
+            [clojure.core.memoize :as memo]
             [ring.adapter.jetty :refer [run-jetty]])
   (:import java.net.URI))
 
 
 (defn request->url
   [{:keys [scheme server-name uri query-string method]}]
-  {:scheme   scheme
-   :host     server-name
-   :path     uri
-   :query    query-string
-   :method   method})
+  {:scheme scheme
+   :host   server-name
+   :path   uri
+   :query  query-string
+   :method method})
 
 
 (defn url->response
@@ -31,12 +32,21 @@
     (rule url)))
 
 
+(defonce memoized-redirector
+  (memo/lru
+    (fn [ruleset url]
+      (loop [url url]
+        (if-let [url (apply-rule ruleset url)]
+          (recur url)
+          (url->response url))))
+    {}
+    :lru/threshold 32))
+
+
 (defn redirector [request]
-  (let [ruleset @rules/ruleset]
-    (loop [url (request->url request)]
-      (if-let [url (apply-rule ruleset url)]
-        (recur url)
-        (url->response url)))))
+  (memoized-redirector
+    @rules/ruleset
+    (request->url request)))
 
 
 (defn run
