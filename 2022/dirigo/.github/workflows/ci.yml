@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Clojure tools
-        uses: DeLaGuardo/setup-clojure@3.6
+        uses: DeLaGuardo/setup-clojure@4.0
         with:
-          cli: '1.10.3.1040'
+          cli: '1.10.3.1087'
 
       # - name: Test
       #   run: clojure -X:test
