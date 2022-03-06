@@ -1,7 +1,3 @@
-- Choose redirect type.
-- Send path and query params.
-- Link shortening.
-  - Path redirect rules and templating.
 - Optimise redirects (if rules point to other rules).
 - Memoize requests?
 

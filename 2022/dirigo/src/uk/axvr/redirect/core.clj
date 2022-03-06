@@ -1,30 +1,46 @@
 (ns uk.axvr.redirect.core
-  (:require [clojure.java.io :as io]
-            [clojure.edn :as edn]
-            [ring.adapter.jetty :refer [run-jetty]]))
+  (:require [uk.axvr.redirect.rules :as rules]
+            [ring.adapter.jetty :refer [run-jetty]])
+  (:import java.net.URI))
 
-(defn read-edn-resource [f]
-  (some-> f io/resource slurp edn/read-string))
 
-(defonce redirections
-  (atom (read-edn-resource "redirections.edn")))
+(defn request->url
+  [{:keys [scheme server-name uri query-string method]}]
+  {:scheme   scheme
+   :host     server-name
+   :path     uri
+   :query    query-string
+   :method   method})
 
-(defn redirect [request]
-  (let [host (str (name (:scheme request)) "://" (get-in request [:headers "host"]))
-        loc  (get @redirections host)]
-    (if loc
-      {:status 301  ; 302 307 308
-       :headers {"Location" loc}}
-      {:status 404})))
 
-(defn app-handler [request]
-  (redirect request))
+(defn url->response
+  [{:keys [type scheme user host port path query fragment]}]
+  (if (and scheme host)
+    {:status (case type
+               :permanent 301
+               :temporary 302
+               301)
+     :headers {"Location"
+               (.toString
+                 (URI. (name scheme) user host (or port -1) path query fragment))}}
+    {:status  421
+     :headers {"Content-Type" "text/plain"}}))
 
-(defn run [{:keys [port block?]
-            :or   {port   8080
-                   block? true}}]
+
+(defn redirector [request]
+  (let [url  (request->url request)
+        host (:host url)
+        rule (get @rules/ruleset host)
+        loc  (rule url)]
+    (url->response loc)))
+
+
+(defn run
+  [{:keys [port block?]
+    :or   {port   8080
+           block? true}}]
   (run-jetty
-    #'app-handler
+    #'redirector
     {:port   port
      :join?  (not block?)
      :send-server-version? false}))
