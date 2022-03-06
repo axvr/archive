@@ -1,9 +1,3 @@
+- Automate deployment
 - Log requests by time.
-
-- Tests
-  - Run the server and validate that it generates correct responses per defined redirection.
-  - Detect infinite loops.
-
-- axvr.io -> axvr.uk
-
 - Build Epoxy and replace Traefik with it.

@@ -35,10 +35,9 @@
 (defonce memoized-redirector
   (memo/lru
     (fn [ruleset url]
-      (loop [url url]
-        (if-let [url (apply-rule ruleset url)]
-          (recur url)
-          (url->response url))))
+      (if-let [url (apply-rule ruleset url)]
+        (recur ruleset url)
+        (url->response url)))
     {}
     :lru/threshold 32))
 
