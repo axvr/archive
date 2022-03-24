@@ -4,8 +4,7 @@
             [org.enqueue.api.clients.interceptors     :refer [eat-auth-interceptor]]
             [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
             [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]])
-  (:import [java.time Instant]
-           [java.util UUID]))
+  (:import java.time.Instant))
 
 
 ;; TODO: data validation with spec (email addresses).
@@ -30,7 +29,7 @@
 (defn register [email-address password]
   (let [email-address (.toLowerCase email-address)]
     (if-not (find-user-by :email-address email-address)
-      (let [user-id (UUID/randomUUID)
+      (let [user-id (random-uuid)
             hashed-password (crypto/hash-password password)]
         (db/insert! :users {:id            user-id
                             :email-address email-address
@@ -79,7 +78,7 @@
            '[org.enqueue.api.config      :as config]
            '[org.enqueue.api.transit     :as transit])
 
-  (def idempotency-key (UUID/randomUUID))
+  (def idempotency-key (random-uuid))
 
   (register "alex.vear@enqueue.org" "password")
 

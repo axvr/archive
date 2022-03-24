@@ -97,7 +97,7 @@
     [:a {:href "https://en.wikipedia.org/wiki/Universally_unique_identifier"} "UUID"]
     " as its value as shown below."]
    [:pre
-    "Idempotency-Key: " (java.util.UUID/randomUUID)]
+    "Idempotency-Key: " (random-uuid)]
    [:p
     "When a client performs a "
     [:abbr

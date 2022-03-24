@@ -9,7 +9,7 @@
   (:require [clojure.core.cache.wrapped    :as cache]
             [io.pedestal.interceptor       :as interceptor]
             [io.pedestal.interceptor.chain :as chain])
-  (:import java.time.Duration java.util.UUID))
+  (:import java.time.Duration))
 
 
 (defonce
@@ -88,7 +88,7 @@
         (if (= :post (get-in context [:request :request-method]))
           (if-let [idempotency-key (get-in context [:request :headers "idempotency-key"])]
             (try
-              (let [idempotency-key (UUID/fromString idempotency-key)
+              (let [idempotency-key (parse-uuid idempotency-key)
                     context (assoc-in context [:request :idempotency-key] idempotency-key)]
                 (if-let [cached-resp (cache/lookup idempotent-cache idempotency-key)]
                   (chain/terminate

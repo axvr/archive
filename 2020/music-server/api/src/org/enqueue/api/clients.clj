@@ -11,8 +11,7 @@
             [org.enqueue.api.clients.interceptors     :refer [eat-auth-interceptor]]
             [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
             [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]])
-  (:import [java.util UUID]
-           [java.time Instant]))
+  (:import [java.time Instant]))
 
 
 (defn- reply [status message]
@@ -62,7 +61,7 @@
 
 (defn- create-client [user-id {:keys [name version platform idiom]}]
   ;; TODO: validate client data.  (Spec?)
-  (let [client-id (UUID/randomUUID)]
+  (let [client-id (random-uuid)]
     (db/insert!
       :clients
       {:id         client-id

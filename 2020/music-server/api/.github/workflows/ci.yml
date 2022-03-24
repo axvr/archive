@@ -6,12 +6,13 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Setup clj-kondo
         uses: DeLaGuardo/setup-clj-kondo@afc83dbbf4e7e32e04649e29dbf30668d30e9e3e
         with:
-          version: '2021.10.19'
-
-      - uses: actions/checkout@v2
+          version: '2022.03.09'
 
       - name: Run clj-kondo
         run: clj-kondo --lint src
@@ -20,15 +21,16 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Install libsodium
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@3.5
+        uses: DeLaGuardo/setup-clojure@4.0
         with:
-          cli: '1.10.3.1013'
-
-      - uses: actions/checkout@v2
+          cli: '1.10.3.1093'
 
       - name: Run tests
         run: clojure -X:test :types '[:unit]'
@@ -38,15 +40,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Install libsodium
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@3.5
+        uses: DeLaGuardo/setup-clojure@4.0
         with:
-          cli: '1.10.3.1013'
-
-      - uses: actions/checkout@v2
+          cli: '1.10.3.1093'
 
       - name: Run tests
         run: |
@@ -59,15 +62,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Install libsodium
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@3.5
+        uses: DeLaGuardo/setup-clojure@4.0
         with:
-          cli: '1.10.3.1013'
-
-      - uses: actions/checkout@v2
+          cli: '1.10.3.1093'
 
       - name: Run tests
         run: |
