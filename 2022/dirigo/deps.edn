@@ -1,5 +1,5 @@
 {:paths ["src"]
- :deps {org.clojure/clojure      {:mvn/version "1.11.0-rc1"}
+ :deps {org.clojure/clojure      {:mvn/version "1.11.0"}
         ring/ring-core           {:mvn/version "1.9.5"}
         ring/ring-jetty-adapter  {:mvn/version "1.9.5"}
         org.clojure/core.memoize {:mvn/version "1.0.257"}}

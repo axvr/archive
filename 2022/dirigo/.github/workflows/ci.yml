@@ -19,7 +19,7 @@ jobs:
       - name: Install Clojure tools
         uses: DeLaGuardo/setup-clojure@4.0
         with:
-          cli: '1.10.3.1087'
+          cli: '1.10.3.1093'
 
       # - name: Test
       #   run: clojure -X:test
