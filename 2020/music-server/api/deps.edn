@@ -1,5 +1,5 @@
 {:paths ["src" "resources"]
- :deps  {org.clojure/clojure               {:mvn/version "1.11.0"}
+ :deps  {org.clojure/clojure               {:mvn/version "1.11.1"}
          io.pedestal/pedestal.service      {:mvn/version "0.5.10"}
          io.pedestal/pedestal.jetty        {:mvn/version "0.5.10"}
          org.slf4j/slf4j-simple            {:mvn/version "1.7.36"}
@@ -10,7 +10,7 @@
          com.cognitect/transit-clj         {:mvn/version "1.0.329"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
          org.postgresql/postgresql         {:mvn/version "42.3.3"}
-         com.github.seancorfield/next.jdbc {:mvn/version "1.2.772"}
+         com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
          com.github.seancorfield/honeysql  {:mvn/version "2.2.868"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}
