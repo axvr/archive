@@ -1,19 +1,41 @@
 (ns org.enqueue.api.db
   (:require [org.enqueue.api.config :as config]
             [next.jdbc :as jdbc]
+            [next.jdbc.connection :as conn]
             next.jdbc.date-time
             [honey.sql :as sql]
             ragtime.jdbc
-            ragtime.repl))
+            ragtime.repl)
+  (:import [com.zaxxer.hikari HikariDataSource]))
+
+
+;;; -----------------------------------------------------------
+;;; DB connection pool
+
+
+(defn- init-db-conn [conf]
+  (let [conf (if (:username conf)
+               conf
+               ;; HikariCP uses :username instead of :user.
+               (assoc conf :username (:user conf)))
+        ^HikariDataSource ds (conn/->pool HikariDataSource conf)]
+    ;; Initialise the pool and validate config.
+    (when-not config/test?
+      (.close (jdbc/get-connection ds)))
+    ;; Close the connection pool on JVM shutdown.
+    (.addShutdownHook
+      (Runtime/getRuntime)
+      (Thread. #(when ds (.close ds))))
+    ds))
+
+
+(def ds (init-db-conn config/db))
+
+(def ^:dynamic *conn* ds)
 
 
 ;;; -----------------------------------------------------------
 ;;; DB interaction functions
-
-
-(def ds (jdbc/get-datasource config/db))
-
-(def ^:dynamic *conn* ds)
 
 
 (def sql-format sql/format)
@@ -45,6 +67,11 @@
   (query-first {:update [table]
                 :set    changes
                 :where  where}))
+
+
+(defn delete! [table where]
+  (query-first {:delete-from [table]
+                :where       where}))
 
 
 (defmacro with-transaction
