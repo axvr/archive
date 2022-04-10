@@ -40,7 +40,7 @@
 
 
 (def registration-handler
-  {:name :register-user
+  {:name ::register
    :enter
    (fn [{{{:keys [email-address password]} :body} :request :as context}]
      (assoc context :response
@@ -61,7 +61,7 @@
 
 
 (def change-password-handler
-  {:name :change-password
+  {:name ::change-password
    :enter
    (fn [{:keys [request] :as context}]
      (let [user-id      (get-in request [:token :user-id])

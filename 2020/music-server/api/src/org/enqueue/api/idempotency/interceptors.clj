@@ -82,7 +82,7 @@
      :or   {idempotency-key-recycled-response default-idempotency-key-recycled-response
             invalid-idempotency-key-response  default-invalid-idempotency-key-response}}]
    (interceptor/interceptor
-     {:name :idempotent
+     {:name ::idempotent
       :enter
       (fn [context]
         (if (= :post (get-in context [:request :request-method]))

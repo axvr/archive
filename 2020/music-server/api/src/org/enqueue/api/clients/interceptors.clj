@@ -24,7 +24,7 @@
   ([{:keys [unauthorised-response]
      :or   {unauthorised-response default-unauthorised-response}}]
    (interceptor/interceptor
-     {:name :eat-auth-interceptor
+     {:name ::eat-auth
       :enter
       (fn [context]
         (if-let [token (eat/extract-token (:request context) config/signing-key)]

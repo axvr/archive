@@ -14,7 +14,7 @@
 
 
 (def root
-  {:name :root-index
+  {:name ::index
    :enter
    #(assoc % :response {:status 301
                         :headers {"Location" "/docs"}})})
@@ -22,9 +22,8 @@
 
 (def privacy-headers
   (interceptor/interceptor
-    {:name :privacy-headers
-     :leave
-     #(assoc-in % [:response :headers "Permissions-Policy"] "interest-cohort=()")}))
+    {:name  ::privacy-headers
+     :leave #(assoc-in % [:response :headers "Permissions-Policy"] "interest-cohort=()")}))
 
 
 ;; https://github.com/pedestal/pedestal/blob/master/samples/servlet-filters-gzip/src/gzip/service.clj

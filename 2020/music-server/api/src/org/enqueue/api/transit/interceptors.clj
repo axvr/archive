@@ -64,7 +64,7 @@
   ([{:keys [malformed-data-response]
      :or   {malformed-data-response default-malformed-data-response}}]
    (interceptor/interceptor
-     {:name :transit-in
+     {:name ::in
       :enter
       (fn [context]
         (try
@@ -81,5 +81,5 @@
   'application/transit+json'.  If Content-Type header is missing it will
   automatically be set."
   (interceptor/interceptor
-    {:name :transit-out
+    {:name ::out
      :leave #(update % :response encode-body)}))

@@ -99,7 +99,7 @@
               :version  \"1\"}
      :credentials {:email-address \"example@example.com\"
                    :password      \"password\"}}"
-  {:name :create-client
+  {:name ::create
    :enter
    (fn [{:keys [request] :as context}]
      (let [idempotency-key (:idempotency-key request)
@@ -127,7 +127,7 @@
   This endpoint has its own idempotency implementation as it has higher
   reliability and security requirements; don't want the client to get logged
   out due to a poor network connection."
-  {:name :renew-tokens
+  {:name ::renew
    :enter
    (fn [{:keys [request] :as context}]
      (let [signing-key     config/signing-key
@@ -149,7 +149,7 @@
 
 
 (def revoke-access-handler
-  {:name :revoke-client-access
+  {:name ::revoke
    :enter
    (fn [{:keys [request] :as context}]
      (let [client-id (get-in request [:token :client-id])]

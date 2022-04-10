@@ -4,8 +4,7 @@
             [clojure.core.memoize    :as memo]
             [org.enqueue.api.config  :as config]
             [hiccup.core             :refer [html]]
-            [org.enqueue.api.helpers :refer [read-edn-resource]])
-  (:import java.time.Duration))
+            [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 
 (defn- read-doc [path]
@@ -75,19 +74,18 @@
 
 (defonce ^:private memo-get-docs-resp
   (if config/prod?
-    (memo/ttl get-docs-response {}
-      :ttl/threshold (.toMillis (Duration/ofHours 6)))
+    (memo/lru get-docs-response {} :lru/threshold 10)
     get-docs-response))
 
 
 (def docs-handler
-  {:name :docs
+  {:name ::page
    :enter
    (fn [context]
-     (let [page (get-in context [:request :path-params :doc] "index")]
+     (let [page (get-in context [:request :path-params :page] "index")]
        (assoc context :response (memo-get-docs-resp page (:request context)))))})
 
 
 (def docs-routes
-  #{["/docs" :get docs-handler :route-name :docs-index]
-    ["/docs/*doc" :get docs-handler]})
+  #{["/docs" :get docs-handler :route-name ::index]
+    ["/docs/*page" :get docs-handler]})
