@@ -13,7 +13,7 @@
     (db/migrate)))
 
 
-(def test-types #{:unit :component :system})
+(def test-types #{:unit :integration :system})
 
 
 (def server-uri
@@ -26,15 +26,15 @@
 
   The `:types` option accepts a collection of test types to run.  The test
   types supported are:
-    - :unit       (selected by default)
-    - :component  (use database)
-    - :system     (use database and local server)
+    - :unit         (selected by default)
+    - :integration  (use database)
+    - :system       (use database and local server)
 
-  Tests are considered unit tests unless there is an ^:component or ^:system
+  Tests are considered unit tests unless there is an ^:integration or ^:system
   meta data tag attached to them.
 
-  Component and system tests can *only* be run on the :test environment and will
-  wipe/prepare the database specified in `config/test/config.edn`.
+  Integration and system tests can *only* be run on the :test environment and
+  will wipe/prepare the database specified in `config/test/config.edn`.
 
   Examples:
 
@@ -49,20 +49,20 @@
       {:vars [org.enqueue.api.transit-tests/duration-handler
               org.enqueue.api.crypto-test/base64-decode]})
 
-    ;; Run unit, component and system tests from command line.
-    clojure -X:test :types '[:unit :component :system]'
+    ;; Run unit, integration and system tests from command line.
+    clojure -X:test :types '[:unit :integration :system]'
 
   [1]: https://github.com/cognitect-labs/test-runner"
   [{:keys [types]
     :or   {types [:unit]}
     :as   options}]
-  (when (some #{:component :system} types)
+  (when (some #{:integration :system} types)
     (if config/test?
       (do
         (println "Preparing DB...")
         (setup-db))
       (throw
-        (ex-info "Cannot run component or system tests on non-test environments!  Aborting test execution."
+        (ex-info "Cannot run integration or system tests on non-test environments!  Aborting test execution."
                  {:environment config/env
                   :test-types  types}))))
   (let [test-options

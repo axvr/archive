@@ -35,8 +35,8 @@ jobs:
       - name: Run tests
         run: clojure -X:test :types '[:unit]'
 
-  component-test:
-    name: Component test
+  integration-test:
+    name: Integration test
     runs-on: ubuntu-latest
 
     steps:
@@ -54,7 +54,7 @@ jobs:
       - name: Run tests
         run: |
           do/database/test/start
-          clojure -X:test :types '[:component]'
+          clojure -X:test :types '[:integration]'
           docker stop enqueue-db-test
 
   system-test:

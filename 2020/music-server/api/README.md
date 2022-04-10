@@ -46,8 +46,8 @@ do/database/test/start
 # Run unit tests.
 clojure -X:test
 
-# Run unit, component and system tests.
-clojure -X:test :types '[:unit :component :system]'
+# Run unit, integration and system tests.
+clojure -X:test :types '[:unit :integration :system]'
 
 # Stop test DB.
 docker stop enqueue-db-test
