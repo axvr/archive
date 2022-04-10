@@ -19,18 +19,23 @@
           headers)))
 
 
+(defn- media-type [content-type]
+  (some-> content-type
+          (str/split #"\s*;\s*" 2)
+          first
+          str/lower-case))
+
+
 (defn- transit-content-type? [ct]
-  (and ct (str/starts-with? (str/lower-case ct) content-type)))
+  (= (media-type ct) content-type))
 
 
 (defn- decode-body [request]
-  (let [body           (:body request)
-        content-length (:content-length request)
-        content-type   (:content-type request)
-        charset        (:character-encoding request "UTF-8")]
-    (if (and (transit-content-type? content-type)
-             (not (or (zero? content-length)
-                      (neg? content-length))))
+  (let [body         (:body request)
+        content-type (:content-type request)
+        charset      (:character-encoding request "UTF-8")]
+    (if (and (pos? (:content-length request 0))
+             (transit-content-type? content-type))
       (assoc request :body (transit/decode body charset))
       request)))
 
