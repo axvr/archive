@@ -25,11 +25,11 @@
     ;; Close the connection pool on JVM shutdown.
     (.addShutdownHook
       (Runtime/getRuntime)
-      (Thread. #(when ds (.close ds))))
+      (Thread. (bound-fn [] (when ds (.close ds)))))
     ds))
 
 
-(def ds (init-db-conn config/db))
+(def ^:private ds (init-db-conn config/db))
 
 (def ^:dynamic *conn* ds)
 
@@ -38,23 +38,23 @@
 ;;; DB interaction functions
 
 
-(def sql-format sql/format)
+(def ->sql sql/format)
 (def execute! (partial jdbc/execute! *conn*))
 (def execute-one! (partial jdbc/execute-one! *conn*))
 
 
 (defn query
   ([sql]
-   (jdbc/execute! *conn* (sql/format sql)))
+   (execute! (->sql sql)))
   ([sql opts]
-   (jdbc/execute! *conn* (sql/format sql) opts)))
+   (execute! (->sql sql) opts)))
 
 
 (defn query-first
   ([sql]
-   (jdbc/execute-one! *conn* (sql/format sql)))
+   (execute-one! (->sql sql)))
   ([sql opts]
-   (jdbc/execute-one! *conn* (sql/format sql) opts)))
+   (execute-one! (->sql sql) opts)))
 
 
 (defn insert! [table values]
@@ -94,7 +94,7 @@
 ;;; Migrations
 
 
-(def ragtime-config
+(def ^:private ragtime-config
   {:datastore  (ragtime.jdbc/sql-database
                  config/db
                  {:migrations-table "ragtime_migrations"})
