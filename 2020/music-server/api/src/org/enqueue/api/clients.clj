@@ -10,7 +10,8 @@
             [org.enqueue.api.config      :as config]
             [org.enqueue.api.clients.interceptors     :refer [eat-auth-interceptor]]
             [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
-            [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]])
+            [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]]
+            [clojure.string :as str])
   (:import [java.time Instant]))
 
 
@@ -81,7 +82,7 @@
    {:keys [version] :as client}
    idempotency-key
    signing-key]
-  (let [email-address (when email-address (.toLowerCase email-address))
+  (let [email-address (when email-address (str/lower-case email-address))
         user (users/find-user-by :email-address email-address)]
     (if (and user
              (crypto/valid-password? (:users/password_hash user) password))

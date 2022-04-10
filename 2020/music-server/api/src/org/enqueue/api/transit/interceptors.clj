@@ -12,15 +12,15 @@
 
 
 (defn- get-header [headers header]
-  (let [header (.toLowerCase header)]
+  (let [header (str/lower-case header)]
     (some (fn [kv]
-            (when (= (.toLowerCase (first kv)) header)
+            (when (= (str/lower-case (first kv)) header)
               kv))
           headers)))
 
 
 (defn- transit-content-type? [ct]
-  (and ct (str/starts-with? (.toLowerCase ct) content-type)))
+  (and ct (str/starts-with? (str/lower-case ct) content-type)))
 
 
 (defn- decode-body [request]
