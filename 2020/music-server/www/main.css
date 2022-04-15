@@ -19,13 +19,6 @@ body {
 		font-family: 'Inter var', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
 	}
 }
-@supports (font-variation-settings: 'slnt' 10) {
-	* { font-variation-settings: 'slnt' 0deg; }
-	.italic { font-variation-settings: 'slnt' 10deg; }
-	body {
-		font-family: 'Inter var experimental', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
-	}
-}
 
 @media (prefers-color-scheme: dark) {
 	* { color: #ebecf0; }
