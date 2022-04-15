@@ -1,0 +1,14 @@
+{:title "Support"
+ :content
+ [:div
+  [:section
+   [:h1 "Support"]
+   [:p
+    "Please send questions and suggestions to "
+    [:a {:href "mailto:enquiries@enqueue.org"} "enquiries@enqueue.org"] "."]
+   [:p
+    "If you believe you have found a security vulnerability please send an email to "
+    [:a {:href "mailto:security@enqueue.org"} "security@enqueue.org"]
+    "."]
+   [:p "To keep up-to-date on the latest developments, you can subscribe to
+       this mailing list."]]]}

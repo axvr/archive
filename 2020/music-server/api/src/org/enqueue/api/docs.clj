@@ -3,7 +3,7 @@
   (:require [clojure.string          :as str]
             [clojure.core.memoize    :as memo]
             [org.enqueue.api.config  :as config]
-            [hiccup.core             :refer [html]]
+            [hiccup.page             :refer [html5]]
             [org.enqueue.api.helpers :refer [read-edn-resource]]))
 
 
@@ -15,37 +15,51 @@
       (eval doc)))
 
 
-(defn- build-page
-  [{:keys [title description keywords content]}]
+(defn- build-page [{:keys [title description keywords content]}]
   [:html {:lang "en-GB"}
    [:head
     [:meta {:charset "utf-8"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:link {:rel "shortcut icon" :type "image/png" :href "/favicon.png"}]
     [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
-    [:title (if title
-              (str title " | Enqueue API Docs")
-              "Enqueue API Docs")]
+    [:link {:ref "stylesheet" :type "text/css" :href "https://www.enqueue.org/fonts/inter.css"}]
+    [:title (str (when title (str title " | ")) "Enqueue API Docs")]
     (when description
       [:meta {:name "description" :content description}])
     (when keywords
       [:meta {:name "keywords" :content (str/join ", " keywords)}])
-    [:meta {:name "copyright" :content "Copyright © 2021, Alex Vear."}]]
+    [:meta {:name "copyright" :content "Alex Vear"}]]
    [:body
     [:header
-     [:h1 [:a {:href "/docs"} "Enqueue API"]]]
-    content
+     [:a {:id "skip-link" :href "#main-content"} "Skip to content"]
+     [:nav {:class "section"}
+      [:div {:class "branding"}
+       [:a {:href "/docs"}
+        [:img {:src "/logo.svg" :class "logo"}]]
+       [:a {:href "/docs"} [:h1 "Enqueue API"]]]
+      [:ul
+       [:li [:a {:href "/docs"} "Docs"]]
+       [:li [:a {:href "https://github.com/nq-music" :rel "nofollow"} "Code"]]
+       [:li [:a {:href "/docs/support" :rel "nofollow"} "Support"]]
+       [:li [:a {:href "https://www.enqueue.org" :title "Go to Enqueue" :rel "nofollow"} "Enqueue ➜"]]]]]
+    [:main {:id "main-content"}
+     [:div {:class "section"}
+      (when title
+        [:section
+         [:p [:a {:href "/docs"} "\u27F5 back"]]])
+      content]]
     [:footer
-     [:p
-      "Copyright © 2022, "
-      [:a {:href "https://www.alexvear.com"} "Alex Vear"]
-      ".&emsp;All code snippets are dedicated to the public domain."]]]])
+     [:div {:class "section"}
+      [:span
+       "© 2022 " [:a {:href "https://www.alexvear.com"} "Alex Vear"]]
+      [:span [:a {:title "Back to top of page" :href "#top" :rel "nofollow"} "Going up?"]]]]]])
 
 
 (def ^:private not-found-response
   "Response returned when no doc page was found."
   {:status  404
    :headers {"Content-Type" "text/html; charset=UTF-8"}
-   :body    (html (build-page (read-doc "404")))})
+   :body    (html5 (build-page (read-doc "404")))})
 
 
 (def ^:dynamic *request*
@@ -68,7 +82,7 @@
     (if-let [doc (read-doc page)]
       {:status  200
        :headers {"Content-Type" "text/html; charset=UTF-8"}
-       :body    (html (build-page doc))}
+       :body    (html5 (build-page doc))}
       not-found-response)))
 
 

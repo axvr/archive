@@ -1,6 +1,6 @@
 {:title "404"
  :content
- [:main
+ [:div
   [:section
    [:h1 "404"]
    [:p "Page not found."]]]}

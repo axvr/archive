@@ -1,16 +1,17 @@
 {:content
- [:main
+ [:div
   [:section
+   [:h1 "Docs"]
    [:p
-    "This is the developer documentation for the Enqueue API.  Here you will
-    find all the information needed on how to develop compatible "
-    [:a {:href "https://en.wikipedia.org/wiki/Client_%28computing%29"} "clients"]
+    "This is the developer documentation for Enqueue.  Here you will find all
+    the information you need to build a compatible "
+    [:a {:href "https://en.wikipedia.org/wiki/Client_%28computing%29"} "client"]
     "."]
    [:ul
     [:li [:a {:href "/docs/prerequisites"} "Prerequisites"]]
     [:ul
      [:li [:a {:href "/docs/prerequisites#charset"} "Character encoding"]]
-     [:li "Compression" #_[:a {:href "/docs/prerequisites#compression"} "Compression"]]
+     [:li [:a {:href "/docs/prerequisites#compression"} "Compression"]]
      [:li [:a {:href "/docs/prerequisites#transit"} "Transit"]]
      [:li [:a {:href "/docs/prerequisites#idempotency"} "Idempotency"]]]
     [:li [:a {:href "/docs/authentication"} "Authentication"]]
@@ -20,14 +21,6 @@
      [:li [:a {:href "/docs/authentication#eat"} "EAT (Enqueue Authentication Tokens)"]]]
     [:li "Payments"]
     [:li "Library"]
-    [:li "Streaming"]]]
-  [:section
-   [:h2 "Support"]
-   [:p
-    "If you have any questions or encounter incorrect documentation please send an email to "
-    [:a {:href "mailto:enquiries@enqueue.org"} "enquiries@enqueue.org"] "."]
-   [:p
-    "We take security " [:em "very"] " seriously; if you believe you have found a
-    security vulnerability please send an email to "
-    [:a {:href "mailto:security@enqueue.org"} "security@enqueue.org"]
-    " as soon as possible."]]]}
+    [:li "Streaming"]
+    [:li "MPD"]
+    [:li "Store"]]]]}

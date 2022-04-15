@@ -1,6 +1,6 @@
 {:title "Authentication"
  :content
- [:main
+ [:div
   [:section
    [:h1 "Authentication"]
    [:p "Account management, authentication and clients."]]

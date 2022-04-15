@@ -1,12 +1,12 @@
 {:title "Prerequisites"
  :content
- [:main
+ [:div
   [:section
    [:h1 "Prerequisites"]
    [:p
-    "This section of the Enqueue API Docs details everything you "
+    "This section of the API docs covers everything you "
     [:em "need"]
-    " to know before interacting with the API."]]
+    " to know before interacting with this API."]]
   [:section
    [:h2 {:id "charset"} "Character encoding"]
    [:p
@@ -20,10 +20,10 @@
      {:href "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type"}
      [:code "Content-Type"]]
     " header), UTF-8 is assumed."]]
-  ;; TODO
-  #_[:section
-     [:h2 {:id "compression"} "Compression"]
-     [:p "Gzip compressed.  WIP."]]
+  [:section
+   [:h2 {:id "compression"} "Compression"]
+   ;; TODO
+   [:p "Gzip compressed.  WIP."]]
   [:section
    [:h2 {:id "transit"} "Transit"]
    [:p
