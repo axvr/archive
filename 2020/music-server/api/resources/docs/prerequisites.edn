@@ -21,15 +21,11 @@
      [:code "Content-Type"]]
     " header), UTF-8 is assumed."]]
   [:section
-   [:h2 {:id "compression"} "Compression"]
-   ;; TODO
-   [:p "Gzip compressed.  WIP."]]
-  [:section
    [:h2 {:id "transit"} "Transit"]
    [:p
     "Enqueue uses "
     [:a {:href "https://github.com/cognitect/transit-format"} "Transit"]
-    " (on top of JSON), rather than plain JSON.  There are "
+    " (upon JSON), instead of plain JSON.  There are "
     [:a {:href "https://github.com/cognitect/transit-format#implementations"} "official"]
     " and "
     [:a
@@ -40,27 +36,22 @@
     "The "
     [:a
      {:href "https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types"}
-     "MIME type"]
-    " used to represent Transit encoded data is:"
-    [:pre org.enqueue.api.transit.interceptors/content-type]]
+     "media (MIME) type"]
+    " for Transit encoded data is: "
+    [:code org.enqueue.api.transit.interceptors/content-type]
+    "."]
    [:p
     "Any HTTP response with a "
     [:code "Content-Type"]
-    " header set to this MIME type contains Transit encoded data in the
-    body.  Likewise, when sending Transit data in the body of an HTTP request,
-    you need to set the "
+    " header set to this media type contains Transit encoded data in the body.
+    Likewise, to send Transit data in the body of an HTTP request, you need to
+    set the "
     [:code "Content-Type"]
-    " header to the same."]
+    " header in the request to the same."]
    [:p
-    "You can assume that all request bodies must be, and all response bodies
-    are Transit encoded.  Any exceptions will be mentioned in the relevant part
-    of the docs."]
-   [:p
-    "Note that the Enqueue API "
-    [:strong "only"]
-    " supports Transit over "
-    [:em "JSON"]
-    ".  It " [:strong "does not"] " support "
+    "The Enqueue API "
+    [:strong "does not"]
+    " support other Transit formats such as "
     [:em "JSON-Verbose"]
     " or "
     [:em "MessagePack"]
@@ -69,7 +60,9 @@
    [:p
     "Enqueue defines a single Transit extension type called a "
     [:em "duration"]
-    ".  A duration represents a span of time in nanoseconds (used for things
+    ".  A duration represents a span of time in "
+    [:a {:href "https://en.wikipedia.org/wiki/Nanosecond"} "nanoseconds"]
+    " (used for things
     such as song and album running times).  The duration extension type uses
     the tag "
     [:code "dur"]
@@ -80,14 +73,34 @@
     "[\"~#dur\",\"-374000000000\"]     ; 374 seconds ago or 6:14 minutes ago.\n"
     "[\"~#dur\",\"12\"]                ; 12 nanoseconds."]
    [:p
-    "Note that because durations are sent as nanoseconds they should be stored
-    as 64-bit signed integers."]]
+    "(As durations are sent as nanoseconds they should be stored as 64-bit
+    signed integers.)"]]
+  [:section
+   [:h2 {:id "compression"} "Compression"]
+   [:p
+    "The Enqueue API supports optional "
+    [:a {:href "https://www.gnu.org/software/gzip/"} "gzip"]
+    " compression and decompression."]
+   [:p
+    "To indicate that your client supports gzip decompression set the "
+    [:a {:href "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding"} [:code "Accept-Encoding"]]
+    " header to "
+    [:code "gzip"]
+    ".  If the response is gzip encoded, it will contain the "
+    [:a {:href "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding"} [:code "Content-Encoding"]]
+    " header set to "
+    [:code "gzip"]
+    "."]
+   [:p
+    "To send gzip compressed data to the API, attach the "
+    [:code "Content-Encoding"]
+    " header set to "
+    [:code "gzip"]
+    "."]]
   [:section
    [:h2 {:id "idempotency"} "Idempotency"]
    [:p
-    "All HTTP request methods in Enqueue "
-    [:em "except"]
-    " "
+    "All HTTP request methods in Enqueue except "
     [:a {:href "https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.3"} "POST"]
     " are "
     [:a {:href "https://en.wikipedia.org/wiki/Idempotence"} "idempotent"]
@@ -95,25 +108,21 @@
     [:code "Idempotency-Key"]
     " header with a "
     [:a {:href "https://en.wikipedia.org/wiki/Universally_unique_identifier"} "UUID"]
-    " as its value as shown below."]
-   [:pre
-    "Idempotency-Key: " (random-uuid)]
+    " as its value.  For example:"]
+   [:pre "Idempotency-Key: " (random-uuid)]
    [:p
     "When a client performs a "
     [:abbr
      {:title "When the response contains an HTTP status code within the 200 range."}
      "successful"]
-    " POST request with an idempotency key,
-    the result is cached for (up to) 6 hours.  The client can then safely retry
-    the request (with the same idempotency key) as the API will just return the
-    previous response."]
+    " POST request with an idempotency key, the result is cached for (up to)
+    6 hours.  The client can safely retry the request by passing the same
+    idempotency key."]
    [:p
-    "If a "
-    [:abbr {:title "Different path, query parameters, body, etc."} "different"]
-    " request is made using a previously used idempotency key (or
-    an invalid UUID), an error "
+    "If a client attempts to reuse an already used itempotency key on a different
+    request, the server will respond with error code "
     [:a {:href "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1"} "400"]
-    " response will be returned."]
+    "."]
    [:p
     "To learn more about idempotency refer to these resources:"]
    [:ul

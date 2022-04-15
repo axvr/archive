@@ -4,15 +4,15 @@
    [:h1 "Docs"]
    [:p
     "This is the developer documentation for Enqueue.  Here you will find all
-    the information you need to build a compatible "
-    [:a {:href "https://en.wikipedia.org/wiki/Client_%28computing%29"} "client"]
+    the information you need to build compatible "
+    [:a {:href "https://en.wikipedia.org/wiki/Client_%28computing%29"} "clients"]
     "."]
    [:ul
     [:li [:a {:href "/docs/prerequisites"} "Prerequisites"]]
     [:ul
      [:li [:a {:href "/docs/prerequisites#charset"} "Character encoding"]]
-     [:li [:a {:href "/docs/prerequisites#compression"} "Compression"]]
      [:li [:a {:href "/docs/prerequisites#transit"} "Transit"]]
+     [:li [:a {:href "/docs/prerequisites#compression"} "Compression"]]
      [:li [:a {:href "/docs/prerequisites#idempotency"} "Idempotency"]]]
     [:li [:a {:href "/docs/authentication"} "Authentication"]]
     [:ul

@@ -4,11 +4,11 @@
   [:section
    [:h1 "Support"]
    [:p
-    "Please send questions and suggestions to "
-    [:a {:href "mailto:enquiries@enqueue.org"} "enquiries@enqueue.org"] "."]
-   [:p
-    "If you believe you have found a security vulnerability please send an email to "
-    [:a {:href "mailto:security@enqueue.org"} "security@enqueue.org"]
-    "."]
-   [:p "To keep up-to-date on the latest developments, you can subscribe to
-       this mailing list."]]]}
+    "Please let me know if you have any issues, I'll be happy to help."]
+   [:ul
+    [:li "Questions, bug reports and suggestions: "
+     [:a {:href "mailto:enquiries@enqueue.org"} "enquiries@enqueue.org"]]
+    [:li "Anything security related: "
+     [:a {:href "mailto:security@enqueue.org"} "security@enqueue.org"]]]
+   #_[:p "To keep up-to-date on the latest developments, you can subscribe to
+       the anouncements mailing list."]]]}
