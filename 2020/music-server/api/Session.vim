@@ -2,7 +2,7 @@ set path=,,src/**,resources/**,test/**
 
 augroup repl_close
     autocmd!
-    autocmd ExitPre * silent! call zepl#send("\<CR>\<C-d>\<CR>", 1)
+    autocmd ExitPre * silent! call zepl#send("\<CR>\<C-d>\<CR>", 1) | sleep 20m
 augroup END
 
 if !filereadable('.clj_port')
@@ -22,7 +22,7 @@ else
 
     if bufname('%') =~# '.clj$'
         call clojure#ChangeNs()
-        sleep 10m
+        sleep 20m
         ReplClear
     endif
 endif
