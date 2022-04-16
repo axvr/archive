@@ -18,7 +18,7 @@
         where (cond id [:= :id id]
                     email-address [:= :email-address email-address])]
     (when where
-      (db/query-first (assoc query :where where)))))
+      (db/exec1! (assoc query :where where)))))
 
 
 (defn- reply [status message]

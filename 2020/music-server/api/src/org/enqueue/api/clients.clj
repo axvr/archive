@@ -30,7 +30,7 @@
 
 
 (defn- create-tokens [client-id version renewal-key idempotency-key signing-key]
-  (if-let [client (db/query-first
+  (if-let [client (db/exec1!
                    {:select [:user-id :renewal-key :idempotency-key :access-revoked]
                     :from   [:clients]
                     :where  [:= :id client-id]})]

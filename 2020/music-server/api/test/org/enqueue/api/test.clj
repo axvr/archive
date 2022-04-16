@@ -8,8 +8,9 @@
 
 (defn setup-db []
   (when config/test?
-    (db/execute! ["DROP SCHEMA public CASCADE;"])
-    (db/execute! ["CREATE SCHEMA public;"])
+    (db/with-transaction
+      (db/exec1! ["DROP SCHEMA public CASCADE;"])
+      (db/exec1! ["CREATE SCHEMA public;"]))
     (db/migrate)))
 
 

@@ -1,4 +1,5 @@
-{:linters
+{:lint-as {org.enqueue.api.db/def-db-fn clojure.core/def}
+ :linters
  {:unresolved-symbol {:exclude [(org.enqueue.api.helpers/when-let*)
                                 (org.enqueue.api.db/with-connection)
                                 (org.enqueue.api.db/with-transaction)]}}}
