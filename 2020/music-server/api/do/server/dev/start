@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Start the API in dev-mode.
+# NOTE: only works with axvr's config.
+
+do/database/dev/start
+clj-socket -X:axvr:dev:run "$@"

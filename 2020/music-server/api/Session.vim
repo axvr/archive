@@ -6,27 +6,23 @@ augroup repl_close
 augroup END
 
 if !filereadable('.clj_port')
-    echo 'Starting server and REPL...'
-    let buf = term_start('clj-socket -X:axvr:dev:run', {
-                \   'term_name': 'Server',
-                \   'term_kill': 'int',
-                \   'norestore': 1,
-                \   'hidden': 1
-                \ })
-    call term_wait(buf, 4000)
+    echohl ErrorMsg
+    echom 'REPL server has not been started...'
+    echohl NONE
 else
-    echo 'Starting REPL...'
-endif
+    if empty(execute('args'))
+        edit src/org/enqueue/api/core.clj
+    endif
 
-if winwidth('%') < 200
-    16 Repl clj-socket
-else
-    botright vert 80 Repl clj-socket
-endif
+    if winwidth('%') < 160
+        keep 16 Repl clj-socket
+    else
+        keep botright vertical 80 Repl clj-socket
+    endif
 
-call clojure#ChangeNs('org.enqueue.api.core')
-sleep 2
-ReplClear
-ReplSend ;; Note: server may still be starting.
-wincmd p
-edit src/org/enqueue/api/core.clj
+    if bufname('%') =~# '.clj$'
+        call clojure#ChangeNs()
+        sleep 10m
+        ReplClear
+    endif
+endif
