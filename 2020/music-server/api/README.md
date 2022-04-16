@@ -24,6 +24,9 @@ Start the server in development mode:
 # Start development DB.
 do/database/dev/start
 
+# Migrate DB.
+clojure -X:dev:migrate
+
 # Run server.
 clojure -X:dev:run
 

@@ -4,4 +4,5 @@
 # NOTE: only works with axvr's config.
 
 do/database/dev/start
+clojure -X:dev:migrate
 clj-socket -X:axvr:dev:run "$@"

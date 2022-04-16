@@ -124,19 +124,9 @@
    :migrations (ragtime.jdbc/load-resources "migrations")})
 
 
-(defn migrate []
+(defn migrate [& _]
   (ragtime.repl/migrate ragtime-config))
 
 
-(defn rollback []
+(defn rollback [& _]
   (ragtime.repl/rollback ragtime-config))
-
-
-(comment
-  (require 'org.enqueue.api.db)
-
-  ;; Run migration.
-  (org.enqueue.api.db/migrate)
-
-  ;; Rollback migration.
-  (org.enqueue.api.db/rollback))
