@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Rollback migration to dev DB.
+
+set -ex
+
+do/database/dev/start
+clojure -X:dev:rollback

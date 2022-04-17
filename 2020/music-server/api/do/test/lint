@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Lint code with Clj-kondo.
+
+set -x
+
+clojure \
+    -Sdeps '{:deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}}' \
+    -M -m clj-kondo.main \
+    --lint src

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Stop dev DB.
+
+set -x
+
+docker stop enqueue-db-dev

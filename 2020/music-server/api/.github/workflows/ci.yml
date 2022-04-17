@@ -9,13 +9,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup clj-kondo
-        uses: DeLaGuardo/setup-clj-kondo@afc83dbbf4e7e32e04649e29dbf30668d30e9e3e
+      - name: Install Clojure
+        uses: DeLaGuardo/setup-clojure@5.1
         with:
-          version: '2022.04.08'
+          cli: '1.11.1.1107'
 
       - name: Run clj-kondo
-        run: clj-kondo --lint src
+        run: do/test/lint
 
   unit-test:
     name: Unit test
@@ -33,7 +33,7 @@ jobs:
           cli: '1.11.1.1107'
 
       - name: Run tests
-        run: clojure -X:test :types '[:unit]'
+        run: do/test/unit
 
   integration-test:
     name: Integration test
@@ -52,10 +52,7 @@ jobs:
           cli: '1.11.1.1107'
 
       - name: Run tests
-        run: |
-          do/database/test/start
-          clojure -X:test :types '[:integration]'
-          docker stop enqueue-db-test
+        run: do/test/integration
 
   system-test:
     name: System test
@@ -74,7 +71,4 @@ jobs:
           cli: '1.11.1.1107'
 
       - name: Run tests
-        run: |
-          do/database/test/start
-          clojure -X:test :types '[:system]'
-          docker stop enqueue-db-test
+        run: do/test/system

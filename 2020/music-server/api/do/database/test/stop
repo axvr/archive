@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Stop test DB.
+
+docker stop enqueue-db-test

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Run system tests.
+
+set -ex
+
+do/database/test/start
+trap do/database/test/stop EXIT
+clojure -X:test :types '[:system]'

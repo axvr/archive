@@ -21,17 +21,7 @@ Install the following dependencies.
 Start the server in development mode:
 
 ```sh
-# Start development DB.
-do/database/dev/start
-
-# Migrate DB.
-clojure -X:dev:migrate
-
-# Run server.
-clojure -X:dev:run
-
-# Stop development DB.
-docker stop enqueue-db-dev
+do/server/dev/start
 ```
 
 The server will be started at <http://localhost:7881/>.
@@ -43,17 +33,11 @@ the API.)
 ### Run tests
 
 ```sh
-# Start test DB.
-do/database/test/start
-
 # Run unit tests.
-clojure -X:test
+do/test/unit
 
 # Run unit, integration and system tests.
-clojure -X:test :types '[:unit :integration :system]'
-
-# Stop test DB.
-docker stop enqueue-db-test
+do/test/all
 ```
 
 
