@@ -1,0 +1,98 @@
+* Phase 0 [2022]: Initial API and landing page.
+
+  - API documentation
+    - Use #= reader macro instead of eval for doc generation.
+    - Tests to ensure that all doc pages can be generated.
+  - Authentication
+    - Store client-id + idempotency-key as idempotency key.
+    - Option for clients to choose authentication mechanism.
+    - Store hash alogrithm with password.
+    - Store passwords in BYTEA column type?
+    - Reduce renewal token lifetime from 400 days to 180?
+    - Check client id, platform, idiom match for token renewal?
+  - Error messages
+    - Standardise error message response format.
+      - Middleware to check for ex-info and extract values into an error response + log?
+        - Don't throw?
+        - Wrap other exceptions as error 500s.
+  - Validation
+    - Validate inputs with Spec.
+      - Don't use spec for validation on non-authenticated endpoints?
+  - System tests.
+    - Testing tool (REPL-based Postman alternative using clj-http).
+  - Emails
+    - Store templates in resources/emails/
+    - Force email address confirmation to avoid poor bounce rates.
+      - https://news.ycombinator.com/item?id=27275422
+    - Send emails via AWS SES.
+    - Create optional mock email integration for :dev?
+      - Spec/assert inputs.
+    - Uses:
+      - Email address verification?
+      - New client added to account.
+      - Client is removed from account.
+      - Forgot password.
+      - Account deletion.
+
+
+* Phase 1 [2022]: Website, music management.
+
+  - Email enhancements
+    - Monitor and handle email bounces.
+    - Subscription lists.
+      - Unsubscribe.
+  - HTTP
+    - HTTP POST form params are sent in body meaning they can be Transit encoded?
+      - https://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request
+  - File upload, download and storage.
+    - S3 (or Linode Object Storage)
+    - Create mock storage system for dev which dumps files into /resources/media/audio/wav/pools/{start-of-hash}/
+    - Restrict and monitor storage available per-account.
+    - Distribute media across S3 buckets.  (Hash-pool.)
+    - Monitor usage.
+  - Music management
+    - Metadata tagging.
+    - Audio file upload.
+  - Website
+    - ClojureScript?
+  - Logging
+    - Also get logging and errors to appear in AWS.  (Pedestal does some of this?)
+    - https://github.com/ptaoussanis/timbre
+    - https://github.com/clojure/tools.logging
+
+
+* Phase 2 [2022]: Music playback.  (Web)
+
+  - Streaming.
+
+
+* Phase 3 [2023]: MPD proxy, Stripe payments, alpha launch.
+
+  - Permissions on access tokens/agents (+ middleware).
+  - 2FA, OAuth and app passwords.
+  - MPD proxy server.
+  - Stripe payments.
+  - Usage restrictions.
+  - Auto-tagging AI
+    - Bayesian statistics.
+    - Scrape data from Wikipedia to verify title correctness.
+    - Use Discogs data.
+    - Pull album art from Apple Music.
+    - Tag normaliser.
+  - Alpha launch.
+
+
+* Phase 4 [2024]: iOS app, and other enhancements.
+
+  - iOS app.
+  - Multi-lingual/locales.
+  - Use DNSimple?
+  - Web-shortener service nq.to?
+  - Recommendation/suggestion engine.
+    - Hierarchical genre tags.
+    - Hierarchical artist tags.
+
+
+* Phase 5 [2024]: Android app.
+* Phase 6 [2025]: Podcasts.  (Podqueue?)
+* Phase 7 [2025]: Store.
