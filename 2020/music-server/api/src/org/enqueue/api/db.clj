@@ -72,7 +72,7 @@
 (def-db-fn exec1! jdbc/execute-one!)
 (def-db-fn plan jdbc/plan)
 (def-db-fn select! jdbc-plan/select!)
-(def-db-fn select-one! jdbc-plan/select-one!)
+(def-db-fn select1! jdbc-plan/select-one!)
 
 
 (defn insert!

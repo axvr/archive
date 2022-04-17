@@ -1,5 +1,5 @@
 (ns org.enqueue.api.idempotency.interceptors
-  "Idepotency layer of the Enqueue API.
+  "Idempotency layer of the Enqueue API.
 
   Inspired by Stripe's implementation [1] and a blog post by Ilija Eftimov [2].
   More information can be found in the doc-strings.

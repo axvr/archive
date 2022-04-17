@@ -54,8 +54,6 @@ footer .section {
   justify-content: space-between;
 }
 
-/* TODO: rewrite much of this CSS. */
-
 a { color: var(--fg-link); }
 a:hover { color: var(--fg-link-alt); }
 

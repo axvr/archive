@@ -9,10 +9,10 @@
 
 (defn- read-doc [path]
   (as-> path doc
-      (str/replace doc #"[^\w/]+" "_")
-      (str "docs/" doc ".edn")
-      (read-edn-resource doc)
-      (eval doc)))
+    (str/replace doc #"[^\w/]+" "_")
+    (str "docs/" doc ".edn")
+    (read-edn-resource doc)
+    (eval doc)))
 
 
 (defn- build-page [{:keys [title description keywords content]}]

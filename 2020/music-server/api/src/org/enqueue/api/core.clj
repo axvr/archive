@@ -61,7 +61,7 @@
           join? true}}]
    (when config/prod?
      (set! *assert* false))  ; Disable assertions on production environment.
-   ;; TODO: configure SSL, HSTS header + automatic redirect.
+   ;; TODO: configure TLS, HSTS header + automatic redirect.
    ;; - <http://pedestal.io/reference/service-map>
    ;; - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/strict-transport-security>
    (reset! server (-> {::http/routes routes
