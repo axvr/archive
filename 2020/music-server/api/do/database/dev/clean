@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Clear development database.
-
-set -ex
-
-do/database/dev/stop
-sleep 1
-docker volume rm enqueue-db-dev-data

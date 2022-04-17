@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-# Start an instance of the development server.
+# Start an instance of the dev server with integration for axvr's config.
 
 set -ex
 
 do/database/dev/start
-trap do/database/dev/stop EXIT
 sleep 2
-do/database/dev/migrate
-clojure -X:dev:run "$@"
+clojure -X:dev:migrate
+clj-socket -X:axvr:dev:run "$@"

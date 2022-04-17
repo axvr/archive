@@ -22,5 +22,5 @@
                                org.clojure/test.check {:mvn/version "1.1.1"}}
                   :exec-fn org.enqueue.api.test/run-tests
                   :exec-args {:types [:unit]}}
-           :migrate {:exec-fn org.enqueue.api.db/migrate}
+           :migrate  {:exec-fn org.enqueue.api.db/migrate}
            :rollback {:exec-fn org.enqueue.api.db/rollback}}}

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Run unit tests.
-
-set -x
-
-clojure -X:test :types '[:unit]'

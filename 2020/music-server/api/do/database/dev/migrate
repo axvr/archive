@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Migrate dev DB.
-
-set -ex
-
-do/database/dev/start
-clojure -X:dev:migrate
