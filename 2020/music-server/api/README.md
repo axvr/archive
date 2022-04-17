@@ -46,11 +46,19 @@ the API.)
 # Start test DB.
 do/database/test/start
 
-# Run unit tests.
+# Run all tests.
 clojure -X:test
 
-# Run unit, integration and system tests.
+# Run specific test types.
+clojure -X:test:unit
+clojure -X:test:integration
+clojure -X:test:system
+
+# Run multiple types at once.
 clojure -X:test :types '[:unit :integration :system]'
+
+# Run linter.
+clojure -M:lint
 
 # Stop test DB.
 docker stop enqueue-db-test

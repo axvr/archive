@@ -33,7 +33,7 @@ jobs:
           cli: '1.11.1.1107'
 
       - name: Run tests
-        run: clojure -X:test :types '[:unit]'
+        run: clojure -X:test:unit
 
   integration-test:
     name: Integration test
@@ -54,7 +54,7 @@ jobs:
       - name: Run tests
         run: |
           do/database/test/start
-          clojure -X:test :types '[:integration]'
+          clojure -X:test:integration
           docker stop enqueue-db-test
 
   system-test:
@@ -76,5 +76,5 @@ jobs:
       - name: Run tests
         run: |
           do/database/test/start
-          clojure -X:test :types '[:system]'
+          clojure -X:test:system
           docker stop enqueue-db-test

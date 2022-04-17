@@ -21,6 +21,11 @@
                                {:git/tag "v0.5.0" :git/sha "48c3c67"}
                                org.clojure/test.check {:mvn/version "1.1.1"}}
                   :exec-fn org.enqueue.api.test/run-tests
-                  :exec-args {:types [:unit]}}
+                  :exec-args {:types [:unit :integration :system]}}
+           :unit        {:exec-args {:types [:unit]}}
+           :integration {:exec-args {:types [:integration]}}
+           :system      {:exec-args {:types [:system]}}
+           :lint {:extra-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
+                  :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
            :migrate  {:exec-fn org.enqueue.api.db/migrate}
            :rollback {:exec-fn org.enqueue.api.db/rollback}}}

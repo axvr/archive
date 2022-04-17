@@ -47,7 +47,7 @@
 
     ;; Run specific tests.  (Using :vars option from the Cognitect test-runner.)
     (org.enqueue.api.test/run-tests
-      {:vars [org.enqueue.api.transit-tests/duration-handler
+      {:vars [org.enqueue.api.transit-test/duration-handler
               org.enqueue.api.crypto-test/base64-decode]})
 
     ;; Run unit, integration and system tests from command line.
