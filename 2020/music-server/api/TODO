@@ -1,7 +1,6 @@
-* Phase 0 [2022]: Initial API and landing page.
+* Phase 0 [2022]: Initial API and landing page
 
   - API documentation
-    - Use #= reader macro instead of eval for doc generation.
     - Tests to ensure that all doc pages can be generated.
   - Authentication
     - Store client-id + idempotency-key as idempotency key.
@@ -20,10 +19,10 @@
       - Don't use spec for validation on non-authenticated endpoints?
   - System tests.
     - Testing tool (REPL-based Postman alternative using clj-http).
+      - Integrate into the test source?
   - Emails
     - Store templates in resources/emails/
     - Force email address confirmation to avoid poor bounce rates.
-      - https://news.ycombinator.com/item?id=27275422
     - Send emails via AWS SES.
     - Create optional mock email integration for :dev?
       - Spec/assert inputs.
@@ -35,10 +34,11 @@
       - Account deletion.
 
 
-* Phase 1 [2022]: Website, music management.
+* Phase 1 [2022]: Website, music management
 
   - Email enhancements
     - Monitor and handle email bounces.
+      - https://news.ycombinator.com/item?id=27275422
     - Subscription lists.
       - Unsubscribe.
   - HTTP
@@ -59,14 +59,15 @@
     - Also get logging and errors to appear in AWS.  (Pedestal does some of this?)
     - https://github.com/ptaoussanis/timbre
     - https://github.com/clojure/tools.logging
+  - First deployment.
 
 
-* Phase 2 [2022]: Music playback.  (Web)
+* Phase 2 [2022]: Music playback (web)
 
   - Streaming.
 
 
-* Phase 3 [2023]: MPD proxy, Stripe payments, alpha launch.
+* Phase 3 [2023]: MPD proxy, Stripe payments, alpha launch
 
   - Permissions on access tokens/agents (+ middleware).
   - 2FA, OAuth and app passwords.
@@ -82,7 +83,7 @@
   - Alpha launch.
 
 
-* Phase 4 [2024]: iOS app, and other enhancements.
+* Phase 4 [2024]: iOS app
 
   - iOS app.
   - Multi-lingual/locales.
@@ -93,6 +94,13 @@
     - Hierarchical artist tags.
 
 
-* Phase 5 [2024]: Android app.
-* Phase 6 [2025]: Podcasts.  (Podqueue?)
-* Phase 7 [2025]: Store.
+* Phase 5 [2024]: Android app
+
+  - Start work on Android app.
+
+
+* Phase 6 [2025]: Store and podcasts
+
+  - Store
+  - Podcasts
+    - Separate subdomain/apps?  (Podqueue?)

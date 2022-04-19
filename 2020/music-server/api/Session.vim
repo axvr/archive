@@ -15,7 +15,7 @@ else
     endif
 
     if winwidth('%') < 160
-        keep 16 Repl clj-socket
+        keep 12 Repl clj-socket
     else
         keep botright vertical 80 Repl clj-socket
     endif

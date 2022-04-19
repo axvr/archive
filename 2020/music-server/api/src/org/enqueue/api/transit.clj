@@ -94,7 +94,7 @@
          (recur (.read buf-reader))))
      (decode out-stream))))
 
-(defmethod decode java.lang.String
+(defmethod decode String
   ([^String string]
    (decode string "UTF-8"))
   ([^String string charset]

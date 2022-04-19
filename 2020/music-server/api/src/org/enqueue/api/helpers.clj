@@ -1,13 +1,16 @@
 (ns org.enqueue.api.helpers
   (:require [clojure.string  :as str]
             [clojure.java.io :as io]
-            [clojure.edn     :as edn]))
+            [clojure.edn     :as edn])
+  (:import [java.io PushbackReader]))
 
 
 (defn read-edn-resource
   "Read an EDN file from JVM resources."
   [path]
-  (some-> path io/resource slurp edn/read-string))
+  (when-let [res (some-> path io/resource)]
+    (with-open [rdr (io/reader res)]
+      (edn/read (PushbackReader. rdr)))))
 
 
 (defn in?
@@ -36,11 +39,8 @@
 (defmacro when-let*
   "Short circuiting when-let on multiple binding forms."
   [bindings & body]
-  (let [form (first bindings)
-        tst  (second bindings)
-        rst  (subvec bindings 2)]
-    (if (seq rst)
-      `(when-let [~form ~tst]
-         (when-let* [~@rst] ~@body))
-      `(when-let [~form ~tst]
-         ~@body))))
+  (let [[form tst & rst] bindings]
+    `(when-let [~form ~tst]
+       ~(if (seq rst)
+          `(when-let* ~rst ~@body)
+          `(do ~@body)))))

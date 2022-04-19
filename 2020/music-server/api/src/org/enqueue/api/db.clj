@@ -36,7 +36,7 @@
 
 
 ;;; -----------------------------------------------------------
-;;; DB interaction functions
+;;; DB interaction
 
 
 (defmacro ^:private def-db-fn
@@ -45,6 +45,7 @@
   [fn-name fn-base]
   `(let [meta# (meta #'~fn-base)
          args# (:arglists meta#)
+         ;; Get index that HoneySQL parameter may be passed in at.
          sql-idx# (some #(let [i# (.indexOf % (symbol "sql-params"))]
                            (when-not (neg? i#) (dec i#)))
                         args#)
@@ -64,6 +65,7 @@
          ~fn-base
          *conn*
          (if sql-idx#
+           ;; If HoneySQL was passed in, compile it.
            (update (vec params#) sql-idx# #(if (map? %) (sql/format %) %))
            params#)))))
 
@@ -76,8 +78,7 @@
 
 
 (defn insert!
-  "Insert a record into the specified DB table.  Values is a hash-map of
-  column-names to their corresponding values."
+  "Insert a record into the specified DB table."
   [table values]
   (exec1! {:insert-into [table]
            :columns     (keys values)
@@ -85,32 +86,52 @@
 
 
 (defn update!
-  "Update a value in the specified DB table.  Where is a "
+  "Update values in the specified DB table."
   [table where changes]
   (exec1! {:update [table]
            :set    changes
            :where  where}))
 
 
-(defn delete! [table where]
+(defn delete!
+  "Delete values in the specified DB table."
+  [table where]
   (exec1! {:delete-from [table]
            :where       where}))
 
 
+(defn- jdbc-opt-body
+  "For next.jdbc macros, extract the body and options from the parameter list.
+  If there is more than one parameter, the first item will be treated as an
+  options map if it is a map."
+  [[opts & body :as params]]
+  (if (and (seq body) (map? opts))
+    [opts body]
+    [{} params]))
+
+
 (defmacro with-transaction
-  "Perform all database operations in body as a transaction."
+  "Perform all database operations in body as a transaction.
+
+  If the first parameter is a map (and more than 1 param was given), it will be
+  passed as options to next.jdbc/with-transaction."
   [& body]
-  `(jdbc/with-transaction [tx# ds]
-      (binding [*conn* tx#]
-        ~@body)))
+  (let [[opts body] (jdbc-opt-body body)]
+    `(jdbc/with-transaction [tx# ds ~opts]
+       (binding [*conn* tx#]
+         ~@body))))
 
 
 (defmacro with-connection
-  "Perform all database operations in body using a single connection."
+  "Perform all database operations in body using a single connection.
+
+  If the first parameter is a map (and more than 1 param was given), it will be
+  passed as options to next.jdbc/get-connection."
   [& body]
-  `(with-open [conn# (jdbc/get-connection ds)]
-     (binding [*conn* conn#]
-       ~@body)))
+  (let [[opts body] (jdbc-opt-body body)]
+    `(with-open [conn# (jdbc/get-connection ds ~opts)]
+       (binding [*conn* conn#]
+         ~@body))))
 
 
 ;;; -----------------------------------------------------------
