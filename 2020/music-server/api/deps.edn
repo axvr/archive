@@ -9,16 +9,16 @@
          hiccup/hiccup                     {:mvn/version "1.0.5"}
          com.cognitect/transit-clj         {:mvn/version "1.0.329"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
-         org.postgresql/postgresql         {:mvn/version "42.3.4"}
+         org.postgresql/postgresql         {:mvn/version "42.3.6"}
          com.zaxxer/HikariCP               {:mvn/version "5.0.1"}
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
-         com.github.seancorfield/honeysql  {:mvn/version "2.2.868"}}
+         com.github.seancorfield/honeysql  {:mvn/version "2.2.891"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}
            :run  {:exec-fn org.enqueue.api.core/run}
            :test {:extra-paths ["test" "config/test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
-                               {:git/tag "v0.5.0" :git/sha "48c3c67"}
+                               {:git/tag "v0.5.1" :git/sha "dfb30dd"}
                                org.clojure/test.check {:mvn/version "1.1.1"}}
                   :exec-fn org.enqueue.api.test/run-tests
                   :exec-args {:types [:unit :integration :system]}}

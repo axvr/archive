@@ -36,8 +36,8 @@ docker stop enqueue-db-dev
 
 The server will be started at <http://localhost:7881/>.
 
-(Note: you will need to use a REPL server (such as a socket REPL) to connect to
-the API.)
+> **Note** you will need to use a REPL server (such as a socket REPL) to
+> connect to the API.
 
 
 ### Run tests
