@@ -4,7 +4,7 @@ Micro web-forwarding and link shortener service powering axvr.uk
 infrastructure.
 
 
-## Connect your domain
+## Connect your domain name
 
 ### Domain root
 

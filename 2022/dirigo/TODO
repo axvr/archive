@@ -1,3 +1,11 @@
-- Automate deployment
-- Log requests by time.
+- Host static sites on same server?
+  - and/or act as proxy for static sites in Linode Object Storage.
+  - www.alexvear.com and www.enqueue.org
+  - Set additional HTTP security headers.
+- git.axvr.uk redirects.
+  - Bare domain -> github.com/axvr
+  - git.axvr.uk/dynamock -> github.com/axvr/dynamock
+  - Support other Git hosting services too.
 - Build Epoxy and replace Traefik with it.
+- Log requests by time.
+- Automate deployment
