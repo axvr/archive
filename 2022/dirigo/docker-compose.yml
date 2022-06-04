@@ -16,7 +16,6 @@ services:
       - reverse-proxy
     labels:
       traefik.enable: 'true'
-      traefik.enable: 'true'
       traefik.http.routers.axvr-http-router.rule: 'Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
       traefik.http.routers.axvr-https-router.rule: 'Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
       traefik.http.routers.axvr-https-router.tls: 'true'
