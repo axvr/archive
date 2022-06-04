@@ -1,7 +1,7 @@
-version: '3.8'
+version: '3.9'
 services:
   reverse-proxy:
-    image: traefik:v2.6
+    image: traefik:v2.7
     restart: always
     ports:
       - '80:80'
@@ -10,22 +10,9 @@ services:
       - ./traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock
   uk-axvr-redirect:
-    image: 190323198779.dkr.ecr.eu-west-2.amazonaws.com/uk.axvr.redirect:latest
+    build:
+      context: .
+    depends_on:
+      - reverse-proxy
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.axvr-http-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
-      - 'traefik.http.routers.axvr-https-router.rule=Host(`axvr.uk`, `www.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)'
-      - 'traefik.http.routers.axvr-https-router.tls=true'
-      - 'traefik.http.routers.axvr-https-router.tls.certresolver=lets-encrypt'
-      - 'traefik.http.routers.axvrio-http-router.rule=Host(`axvr.io`, `www.axvr.io`, `ascribe.axvr.io`)'
-      - 'traefik.http.routers.axvrio-https-router.rule=Host(`axvr.io`, `www.axvr.io`, `ascribe.axvr.io`)'
-      - 'traefik.http.routers.axvrio-https-router.tls=true'
-      - 'traefik.http.routers.axvrio-https-router.tls.certresolver=lets-encrypt'
-      - 'traefik.http.routers.enqueue-http-router.rule=Host(`enqueue.org`, `dequeue.org`, `www.dequeue.org`)'
-      - 'traefik.http.routers.enqueue-https-router.rule=Host(`enqueue.org`, `dequeue.org`, `www.dequeue.org`)'
-      - 'traefik.http.routers.enqueue-https-router.tls=true'
-      - 'traefik.http.routers.enqueue-https-router.tls.certresolver=lets-encrypt'
-      - 'traefik.http.routers.***REMOVED***-http-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
-      - 'traefik.http.routers.***REMOVED***-https-router.rule=Host(`***REMOVED***.com`, `www.***REMOVED***.com`)'
-      - 'traefik.http.routers.***REMOVED***-https-router.tls=true'
-      - 'traefik.http.routers.***REMOVED***-https-router.tls.certresolver=lets-encrypt'
+      traefik.enable: 'true'

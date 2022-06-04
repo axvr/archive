@@ -15,8 +15,8 @@ entryPoints:
     address: :443
 
 providers:
-  docker:
-    exposedByDefault: false
+  file:
+    filename: /etc/traefik/dynamic.yml
 
 certificatesResolvers:
   lets-encrypt:
