@@ -1,3 +1,4 @@
+- Test configured redirects don't infinitely loop?
 - Host static sites on same server?
   - and/or act as proxy for static sites in Linode Object Storage.
   - www.alexvear.com and www.enqueue.org
