@@ -4,7 +4,6 @@
             [ring.adapter.jetty :refer [run-jetty]])
   (:import java.net.URI))
 
-
 (defn request->url
   [{:keys [scheme server-name uri query-string method]}]
   {:scheme scheme
@@ -12,7 +11,6 @@
    :path   uri
    :query  query-string
    :method method})
-
 
 (defn url->response
   [{:keys [type scheme user host port path query fragment]}]
@@ -26,11 +24,9 @@
                  (URI. (name scheme) user host (or port -1) path query fragment))}}
     {:status 421}))
 
-
 (defn apply-rule [ruleset url]
   (when-let [rule (get ruleset (:host url))]
     (rule url)))
-
 
 (defonce memoized-redirector
   (memo/lru
@@ -41,12 +37,10 @@
     {}
     :lru/threshold 32))
 
-
 (defn redirector [request]
   (memoized-redirector
     @rules/ruleset
     (request->url request)))
-
 
 (defn run
   [{:keys [port block?]

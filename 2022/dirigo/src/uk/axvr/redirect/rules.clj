@@ -1,27 +1,21 @@
 (ns uk.axvr.redirect.rules)
 
-
 (defn ->host [to]
   #(assoc % :host to))
-
 
 (defn ->port [to]
   #(assoc % :port to))
 
-
 (defn ->path [to]
   #(assoc % :path to))
 
-
 (defn ->scheme [to]
   #(assoc % :scheme to))
-
 
 (defn ->tls [uri]
   (if (= :http (:scheme uri))
     ((->scheme :https) uri)
     uri))
-
 
 (defn ->type [redir-type]
   #(assoc % :type redir-type))
@@ -29,10 +23,8 @@
 (def ->temp (->type :temporary))
 (def ->perm (->type :permanent))
 
-
 (defn !path [url]
   (dissoc url :path))
-
 
 (defn rules->ruleset [rules]
   (update-vals
@@ -41,7 +33,6 @@
       (if (coll? v)
         (apply comp v)
         v))))
-
 
 (defonce ruleset
   (-> {"axvr.uk"         [->tls (->host "www.axvr.uk")]
