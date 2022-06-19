@@ -1,8 +1,8 @@
 (ns org.enqueue.api.test
-  (:require [org.enqueue.api.core :as server]
-            [org.enqueue.api.db :as db]
-            [org.enqueue.api.config :as config]
-            [org.enqueue.api.helpers :refer [in?]]
+  (:require [org.enqueue.api.core      :as server]
+            [org.enqueue.api.db        :as db]
+            [org.enqueue.api.config    :as config]
+            [uk.axvr.refrain           :as r]
             [cognitect.test-runner.api :as test-runner]))
 
 
@@ -69,11 +69,11 @@
   (let [test-options
         (merge-with into
                     options
-                    (if (in? types :unit)
+                    (if (r/in? types :unit)
                       {:excludes (remove (set types) test-types)}
                       {:includes (filter (set types) test-types)}))]
     (println "Running tests of types:" types)
-    (if (in? types :system)
+    (if (r/in? types :system)
       (do
         (println "Starting server at" server-uri)
         (server/run {:join? false})

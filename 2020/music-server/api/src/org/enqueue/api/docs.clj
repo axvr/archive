@@ -1,17 +1,17 @@
 (ns org.enqueue.api.docs
   "Enqueue documentation system."
-  (:require [clojure.string          :as str]
-            [clojure.core.memoize    :as memo]
-            [org.enqueue.api.config  :as config]
-            [hiccup.page             :refer [html5]]
-            [org.enqueue.api.helpers :refer [read-edn-resource]]))
+  (:require [clojure.string         :as str]
+            [clojure.core.memoize   :as memo]
+            [org.enqueue.api.config :as config]
+            [uk.axvr.refrain        :as r]
+            [hiccup.page            :refer [html5]]))
 
 
 (defn- read-doc [path]
   (as-> path doc
     (str/replace doc #"[^\w/]+" "_")
     (str "docs/" doc ".edn")
-    (read-edn-resource doc)
+    (r/read-edn-resource doc)
     (eval doc)))
 
 

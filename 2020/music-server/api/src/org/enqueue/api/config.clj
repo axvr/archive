@@ -1,9 +1,9 @@
 (ns org.enqueue.api.config
   "Configuration settings for Enqueue."
-  (:require [org.enqueue.api.helpers :refer [read-edn-resource]]))
+  (:require [uk.axvr.refrain :as r]))
 
 (def ^:private config
-  (if-let [conf (read-edn-resource "config.edn")]
+  (if-let [conf (r/read-edn-resource "config.edn")]
     conf
     (throw (ex-info "No configuration file found." {:file "config.edn"}))))
 

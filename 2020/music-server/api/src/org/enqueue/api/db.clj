@@ -1,11 +1,11 @@
 (ns org.enqueue.api.db
   (:require [org.enqueue.api.config :as config]
-            [org.enqueue.api.helpers :refer [in?]]
-            [next.jdbc :as jdbc]
-            [next.jdbc.connection :as conn]
-            [next.jdbc.plan :as jdbc-plan]
+            [uk.axvr.refrain        :as r]
+            [honey.sql              :as sql]
+            [next.jdbc              :as jdbc]
+            [next.jdbc.connection   :as conn]
+            [next.jdbc.plan         :as jdbc-plan]
             next.jdbc.date-time
-            [honey.sql :as sql]
             ragtime.jdbc
             ragtime.repl)
   (:import [com.zaxxer.hikari HikariDataSource]))
@@ -58,7 +58,7 @@
                   args# "\n\n  "
                   (:doc meta#))
         :arglists (->> args#
-                       (filter #(in? % (symbol "connectable")))
+                       (filter #(r/in? % (symbol "connectable")))
                        (map (comp vec rest)))}
        [& params#]
        (apply
@@ -100,23 +100,13 @@
            :where       where}))
 
 
-(defn- jdbc-opt-body
-  "For next.jdbc macros, extract the body and options from the parameter list.
-  If there is more than one parameter, the first item will be treated as an
-  options map if it is a map."
-  [[opts & body :as params]]
-  (if (and (seq body) (map? opts))
-    [opts body]
-    [{} params]))
-
-
 (defmacro with-transaction
   "Perform all database operations in body as a transaction.
 
   If the first parameter is a map (and more than 1 param was given), it will be
   passed as options to next.jdbc/with-transaction."
   [& body]
-  (let [[opts body] (jdbc-opt-body body)]
+  (let [[opts body] (r/macro-body-opts body)]
     `(jdbc/with-transaction [tx# ds ~opts]
        (binding [*conn* tx#]
          ~@body))))
@@ -128,7 +118,7 @@
   If the first parameter is a map (and more than 1 param was given), it will be
   passed as options to next.jdbc/get-connection."
   [& body]
-  (let [[opts body] (jdbc-opt-body body)]
+  (let [[opts body] (r/macro-body-opts body)]
     `(with-open [conn# (jdbc/get-connection ds ~opts)]
        (binding [*conn* conn#]
          ~@body))))

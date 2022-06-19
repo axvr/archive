@@ -4,10 +4,10 @@
   The 2 types of tokens are:
     - EAT-A: Access token (TTL 2 hours).
     - EAT-R: Renewal token (TTL 400 days)"
-  (:require [org.enqueue.api.crypto  :as crypto]
-            [org.enqueue.api.transit :as transit]
-            [org.enqueue.api.helpers :refer [date-compare]]
-            [clojure.string          :as str]
+  (:require [org.enqueue.api.crypto     :as crypto]
+            [org.enqueue.api.transit    :as transit]
+            [uk.axvr.refrain            :as r]
+            [clojure.string             :as str]
             [clojure.core.cache.wrapped :as cache])
   (:import [java.time Instant Duration]))
 
@@ -33,7 +33,7 @@
 (defn expired?
   "Returns true if an EAT token has expired.  Otherwise returns false."
   [{:keys [expires client-id type]}]
-  (or (date-compare > (Instant/now) expires)
+  (or (r/date-compare > (Instant/now) expires)
       (and (= type :eat-a)
            (cache/has? revoked-clients client-id))))
 
