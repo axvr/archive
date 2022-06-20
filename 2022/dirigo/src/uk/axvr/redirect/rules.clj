@@ -1,4 +1,5 @@
-(ns uk.axvr.redirect.rules)
+(ns uk.axvr.redirect.rules
+  (:require [clojure.string :as str]))
 
 (defn ->host [to]
   #(assoc % :host to))
@@ -26,6 +27,19 @@
 (defn !path [url]
   (dissoc url :path))
 
+(def forges
+  {:github {:root {:host "github.com" :path "/axvr"}
+            :repo {:host "github.com" :path "/axvr/%s.git"}}
+   :sr.ht  {:root {:host "sr.ht"      :path "/~axvr"}
+            :repo {:host "git.sr.ht"  :path "/~axvr/%s"}}})
+
+(defn ->git [forge]
+  (fn [url]
+    (let [repo  (str/replace (:path url) #"(^/|\.git$)" "")
+          forge (forges (or forge :github))
+          {:keys [host path]} ((if (seq repo) :repo :root) forge)]
+      (assoc url :host host :path (format path repo)))))
+
 (defn rules->ruleset [rules]
   (update-vals
     rules
@@ -40,8 +54,8 @@
        "alexvear.com"    [->tls (->host "www.alexvear.com")]
 
        "ascribe.axvr.uk" [->tls (->host "www.alexvear.com") (->path "/projects/ascribe/")]
-       "cereal.axvr.uk"  [->tls (->host "github.com") (->path "/axvr/cereal")]
-       "halogen.axvr.uk" [->tls (->host "github.com") (->path "/axvr/halogen")]
+
+       "git.axvr.uk"     [->tls (->git :github)]
 
        "axvr.io"         [->tls (->host "axvr.uk")]
        "www.axvr.io"     [->tls (->host "www.axvr.uk")]
