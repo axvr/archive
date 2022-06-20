@@ -28,5 +28,5 @@ chmod 600 traefik/acme.json
 Then switch the CA server used in the `traefik/traefik.yml` file and run:
 
 ```
-docker compose up -d
+docker compose up -d --build
 ```

@@ -52,9 +52,7 @@
   (-> {"axvr.uk"         [->tls (->host "www.axvr.uk")]
        "www.axvr.uk"     [->tls (->host "www.alexvear.com")]
        "alexvear.com"    [->tls (->host "www.alexvear.com")]
-
        "ascribe.axvr.uk" [->tls (->host "www.alexvear.com") (->path "/projects/ascribe/")]
-
        "git.axvr.uk"     [->tls (->git :github)]
 
        "axvr.io"         [->tls (->host "axvr.uk")]
