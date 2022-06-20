@@ -9,7 +9,7 @@ services:
     volumes:
       - ./traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock
-  uk-axvr-redirect:
+  dirigo:
     build:
       context: .
     depends_on:

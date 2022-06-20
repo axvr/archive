@@ -1,4 +1,4 @@
-# uk.axvr.redirect
+# Dirigo
 
 Micro web-forwarding and link shortener service powering axvr.uk
 infrastructure.

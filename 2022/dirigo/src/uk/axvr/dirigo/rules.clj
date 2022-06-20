@@ -1,4 +1,4 @@
-(ns uk.axvr.redirect.rules
+(ns uk.axvr.dirigo.rules
   (:require [clojure.string :as str]))
 
 (defn ->host [to]

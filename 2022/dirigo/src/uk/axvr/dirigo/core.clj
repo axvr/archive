@@ -1,5 +1,5 @@
-(ns uk.axvr.redirect.core
-  (:require [uk.axvr.redirect.rules :as rules]
+(ns uk.axvr.dirigo.core
+  (:require [uk.axvr.dirigo.rules :as rules]
             [clojure.core.memoize :as memo]
             [ring.adapter.jetty :refer [run-jetty]])
   (:import java.net.URI))
