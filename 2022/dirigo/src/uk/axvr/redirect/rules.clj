@@ -27,18 +27,21 @@
 (defn !path [url]
   (dissoc url :path))
 
-(def forges
+(def forge-details
   {:github {:root {:host "github.com" :path "/axvr"}
-            :repo {:host "github.com" :path "/axvr/%s.git"}}
+            :repo {:host "github.com" :path "/axvr/%s"}}
    :sr.ht  {:root {:host "sr.ht"      :path "/~axvr"}
             :repo {:host "git.sr.ht"  :path "/~axvr/%s"}}})
 
-(defn ->git [forge]
-  (fn [url]
-    (let [repo  (str/replace (:path url) #"(^/|\.git$)" "")
-          forge (forges (or forge :github))
-          {:keys [host path]} ((if (seq repo) :repo :root) forge)]
-      (assoc url :host host :path (format path repo)))))
+(defn repo->forge [repo]
+  (case repo
+    :github))
+
+(defn ->git [url]
+  (let [repo  (str/replace (:path url) #"(^/|\.git$)" "")
+        forge (forge-details (repo->forge repo))
+        {:keys [host path]} ((if (seq repo) :repo :root) forge)]
+    (assoc url :host host :path (format path repo))))
 
 (defn rules->ruleset [rules]
   (update-vals
@@ -53,7 +56,7 @@
        "www.axvr.uk"     [->tls (->host "www.alexvear.com")]
        "alexvear.com"    [->tls (->host "www.alexvear.com")]
        "ascribe.axvr.uk" [->tls (->host "www.alexvear.com") (->path "/projects/ascribe/")]
-       "git.axvr.uk"     [->tls (->git :github)]
+       "git.axvr.uk"     [->tls ->git]
 
        "axvr.io"         [->tls (->host "axvr.uk")]
        "www.axvr.io"     [->tls (->host "www.axvr.uk")]
