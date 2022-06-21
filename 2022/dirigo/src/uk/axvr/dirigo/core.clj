@@ -12,6 +12,14 @@
    :query  query-string
    :method method})
 
+(def default-headers
+  (atom
+    {"Server"                    "Dirigo"
+     "Permissions-Policy"        "interest-cohort=()"
+     "Strict-Transport-Security" "max-age=31536000; includeSubDomains"
+     "Content-Security-Policy"   "default-src 'self'"
+     "X-XSS-Protection"          "1; mode=block"}))
+
 (defn url->response
   [{:keys [type scheme user host port path query fragment]}]
   (if (and scheme host)
@@ -19,10 +27,12 @@
                :permanent 301
                :temporary 302
                301)
-     :headers {"Location"
-               (.toString
-                 (URI. (name scheme) user host (or port -1) path query fragment))}}
-    {:status 421}))
+     :headers (assoc @default-headers
+                     "Location"
+                     (.toString
+                       (URI. (name scheme) user host (or port -1) path query fragment)))}
+    {:status  421
+     :headers @default-headers}))
 
 (defn apply-rule [ruleset url]
   (when-let [rule (get ruleset (:host url))]
