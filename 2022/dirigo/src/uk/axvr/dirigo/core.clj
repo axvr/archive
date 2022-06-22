@@ -2,7 +2,7 @@
   (:require [uk.axvr.dirigo.rules :as rules]
             [clojure.core.memoize :as memo]
             [ring.adapter.jetty :refer [run-jetty]])
-  (:import java.net.URI))
+  (:import [java.net URI]))
 
 (defn request->url
   [{:keys [scheme server-name uri query-string method]}]
@@ -12,7 +12,7 @@
    :query  query-string
    :method method})
 
-(def default-headers
+(defonce default-headers
   (atom
     {"Server"                    "Dirigo"
      "Permissions-Policy"        "interest-cohort=()"
