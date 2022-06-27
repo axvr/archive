@@ -14,7 +14,7 @@
          com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
          com.github.seancorfield/honeysql  {:mvn/version "2.2.891"}
          uk.axvr/refrain
-         {:git/sha "d005de46b689c7bacf9bd59b6c68b0d8bcb93e74"
+         {:git/tag "v0.1" :git/sha "008716e"
           :git/url "https://github.com/axvr/refrain.git"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}

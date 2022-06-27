@@ -33,7 +33,7 @@
 (defn expired?
   "Returns true if an EAT token has expired.  Otherwise returns false."
   [{:keys [expires client-id type]}]
-  (or (r/date-compare > (Instant/now) expires)
+  (or (r/contrast > (Instant/now) expires)
       (and (= type :eat-a)
            (cache/has? revoked-clients client-id))))
 
