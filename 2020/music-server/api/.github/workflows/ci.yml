@@ -30,7 +30,7 @@ jobs:
       - name: Install Clojure
         uses: DeLaGuardo/setup-clojure@7.0
         with:
-          cli: 1.11.1.1139
+          cli: 1.11.1.1149
 
       - name: Run tests
         run: clojure -X:test:unit
@@ -49,7 +49,7 @@ jobs:
       - name: Install Clojure
         uses: DeLaGuardo/setup-clojure@7.0
         with:
-          cli: 1.11.1.1139
+          cli: 1.11.1.1149
 
       - name: Run tests
         run: |
@@ -71,7 +71,7 @@ jobs:
       - name: Install Clojure
         uses: DeLaGuardo/setup-clojure@7.0
         with:
-          cli: 1.11.1.1139
+          cli: 1.11.1.1149
 
       - name: Run tests
         run: |
