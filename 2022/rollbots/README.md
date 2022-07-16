@@ -1,8 +1,11 @@
 # Rollbots
 
-A Game made in 48 hours for the [GMTK Game Jam 2022][gmtk].  This was our first
-time creating a video game.  It'll probably be terrible and incredibly
+A "game" made in 48 hours for the [GMTK Game Jam 2022][gmtk].  This was our
+first time creating a video game.  It'll probably be terrible and incredibly
 unfinished.
+
+Rollbots is a 2-player smash-bros like game, where every round you roll 3 dice
+to choose your stats.
 
 [gmtk]: https://itch.io/jam/gmtk-jam-2022
 
