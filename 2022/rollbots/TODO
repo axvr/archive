@@ -1,0 +1,15 @@
+- Refactor code.
+- Don't reset health on round end.
+- Player 1 stat dice need to be red.
+- Deplete power + connect up progress bars.
+- Fix player movement.
+- Add more things into the level.
+- Build the home screen.
+- Build the stat picker screen.
+- Build the game over screen.
+- Build an instructions screen.
+- Build a pause screen?
+- Add app icon.
+- More player animations.
+- Export, publish and submit game.
+- Add sounds?

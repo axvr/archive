@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red.png-f4a699c27ac8ac51d8b3d763e831eec5.stex"
+path="res://.import/Blue.png-6065ebfdfa91579f4a36fd82ea9b7702.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/Die/Red.png"
-dest_files=[ "res://.import/Red.png-f4a699c27ac8ac51d8b3d763e831eec5.stex" ]
+source_file="res://Controls/ProgressBar/Blue.png"
+dest_files=[ "res://.import/Blue.png-6065ebfdfa91579f4a36fd82ea9b7702.stex" ]
 
 [params]
 

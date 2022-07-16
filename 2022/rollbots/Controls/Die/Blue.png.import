@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Red.png-60b83fb356d48b36364863b13fd2117e.stex"
+path="res://.import/Blue.png-d156502a2e169035f2d86ef281087aa7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/HealthBar/Red.png"
-dest_files=[ "res://.import/Red.png-60b83fb356d48b36364863b13fd2117e.stex" ]
+source_file="res://Controls/Die/Blue.png"
+dest_files=[ "res://.import/Blue.png-d156502a2e169035f2d86ef281087aa7.stex" ]
 
 [params]
 

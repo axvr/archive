@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blue.png-4e6a53506a6b568df185ce3a033a7de5.stex"
+path="res://.import/Background.png-f2b071f4d28033874e5787f80a40a886.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/HealthBar/Blue.png"
-dest_files=[ "res://.import/Blue.png-4e6a53506a6b568df185ce3a033a7de5.stex" ]
+source_file="res://Level/Background.png"
+dest_files=[ "res://.import/Background.png-f2b071f4d28033874e5787f80a40a886.stex" ]
 
 [params]
 

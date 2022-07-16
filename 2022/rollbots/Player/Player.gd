@@ -62,7 +62,7 @@ func _on_Hurtbox_area_entered(area):
 	if area.get_id() == "HITBOX" && area.get_secondary_id() != player_id:
 		take_hit(area.hitbox_damage)
 
-const ATTACK_COOLDOWN = 200
+const ATTACK_COOLDOWN = 400
 const CLEAR_ATTACK_ANIMATION_AFTER = 100
 var _can_attack = true
 var _attack_cooldown_at

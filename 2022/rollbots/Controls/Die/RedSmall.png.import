@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blue.png-7b75909d15a09c608cfa431eb1ca6a20.stex"
+path="res://.import/RedSmall.png-fe6f913d614076d2643888f6e4d8d425.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/Die/Blue.png"
-dest_files=[ "res://.import/Blue.png-7b75909d15a09c608cfa431eb1ca6a20.stex" ]
+source_file="res://Controls/Die/RedSmall.png"
+dest_files=[ "res://.import/RedSmall.png-fe6f913d614076d2643888f6e4d8d425.stex" ]
 
 [params]
 
