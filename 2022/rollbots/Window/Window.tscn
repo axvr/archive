@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Window/Window.gd" type="Script" id=2]
 [ext_resource path="res://Window/Background.png" type="Texture" id=3]
 [ext_resource path="res://Window/Die/Die.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Window/HealthBar/HealthBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=1]
+default_font = SubResource( 2 )
 
 [node name="Window" type="Node2D"]
 script = ExtResource( 2 )
@@ -28,5 +36,13 @@ position = Vector2( 208, 264 )
 
 [node name="HealthBar2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 328, 264 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 121.0
+margin_top = 260.0
+margin_right = 177.0
+margin_bottom = 300.0
+theme = SubResource( 1 )
+text = "Health"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
