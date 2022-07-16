@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Window/Window.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Window/Die/Die.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Window/HealthBar/HealthBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Window/Black.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=2]
 size = 8
@@ -16,6 +17,11 @@ default_font = SubResource( 2 )
 
 [node name="Window" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="Background3" type="Sprite" parent="."]
+position = Vector2( 288, 267 )
+scale = Vector2( 32, 3 )
+texture = ExtResource( 7 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 256, 120 )
