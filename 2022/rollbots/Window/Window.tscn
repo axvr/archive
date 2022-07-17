@@ -73,6 +73,8 @@ font_data = ExtResource( 6 )
 [node name="Window" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+
 [node name="HomeScreen" type="Node2D" parent="."]
 
 [node name="Title" type="Label" parent="HomeScreen"]
@@ -425,7 +427,6 @@ text = "Menu"
 
 [node name="PauseScreen" type="Node2D" parent="."]
 visible = false
-script = ExtResource( 10 )
 
 [node name="Fade" type="Sprite" parent="PauseScreen"]
 position = Vector2( 256, 144 )
