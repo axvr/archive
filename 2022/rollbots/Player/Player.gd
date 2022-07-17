@@ -18,6 +18,7 @@ func reset():
 	HEALTH = 100
 	DEFENCE = 0
 	ATTACK = 2
+	POWER = 100
 	_hurtbox.hurtbox_secondary_id = player_id
 	_hitbox.hitbox_secondary_id = player_id
 	_hitbox.hitbox_damage = ATTACK
@@ -43,20 +44,18 @@ func set_colour(colour):
 var HEALTH
 var DEFENCE
 var ATTACK
-var FUEL
+var POWER
 
 func set_stats(stats):
 	DEFENCE = stats["DEFENCE"]
 	ATTACK = stats["ATTACK"]
-	FUEL = stats["FUEL"]
+	POWER = stats["POWER"]
 	_hitbox.hitbox_damage = ATTACK
 
 func take_hit(damage):
 	HEALTH -= (damage + 1) - DEFENCE
-	print(">>>", HEALTH)
 	if HEALTH <= 0:
 		print("Dead!")
-		emit_signal("dead", player_id)
 
 func _on_Hurtbox_area_entered(area):
 	if area.get_id() == "HITBOX" && area.get_secondary_id() != player_id:
@@ -133,8 +132,7 @@ func _next_input_velocity(current_velocity, delta):
 	return current_velocity.move_toward(vector, ACCELERATION * delta)
 
 func _set_velocity(new_velocity):
-	move_and_slide(new_velocity)
-	_velocity = new_velocity
+	_velocity = move_and_slide(new_velocity)
 
 
 func _process(delta):
