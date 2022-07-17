@@ -42,12 +42,15 @@ func set_colour(colour):
 var HEALTH = 100
 var DEFENCE = 1
 var ATTACK = 2
-var POWER = 100
+var POWER = 0
+const MAX_POWER = 100
+var _currentPower = 0
+var POWER_DURATION = 1
 
 func set_stats(stats):
 	DEFENCE = stats["DEFENCE"]
 	ATTACK = stats["ATTACK"]
-	POWER = stats["POWER"]
+	POWER_DURATION = stats["POWER"]
 	_hitbox.hitbox_damage = ATTACK
 
 func take_hit(damage):
@@ -121,7 +124,6 @@ const THRUST = 400
 
 var _velocity = Vector2.ZERO
 
-# FIXME: this code is slightly glitchy and not perfect.
 func _next_input_velocity(current_velocity, delta):
 	var vector = Vector2.ZERO
 	vector.x = _get_x_input() * MAX_SPEED
@@ -136,6 +138,11 @@ var _movementAllowed = true
 
 func set_movement(enabled):
 	_movementAllowed = enabled
+
+
+func second_passed():
+	if _velocity.y >= 0 && POWER < MAX_POWER && !Input.is_physical_key_pressed(THRUST_BTN):
+		POWER += min(MAX_POWER, POWER_DURATION * 5)
 
 
 func _process(delta):

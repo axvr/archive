@@ -52,3 +52,7 @@ func _process(_delta):
 	player2_health = _player2.HEALTH
 	player1_power = _player1.POWER
 	player2_power = _player2.POWER
+
+func second_passed():
+	_player1.second_passed()
+	_player2.second_passed()

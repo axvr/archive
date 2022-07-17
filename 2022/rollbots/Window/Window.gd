@@ -125,7 +125,6 @@ func back_home():
 
 func _on_Timer_timeout():
 	_secondsPassed += 1
-	
 	if _roundScreen.visible:
 		if _secondsPassed >= ROUND_SCREEN_DURATION:
 			_roundScreen.visible = false
@@ -133,7 +132,7 @@ func _on_Timer_timeout():
 			_level.set_player_movement(true)
 	elif !_gameOverScreen.visible:
 		_update_counter()
-
+		_level.second_passed()
 		if _level.player1_health <= 0 || _level.player2_health <= 0:
 			_gameOverScreen.set_winner("Red" if _level.player2_health <= 0 else "Blue")
 			_gameOverScreen.visible = true

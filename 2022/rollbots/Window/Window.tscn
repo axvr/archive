@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Window/Window.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Fonts/DefaultFont.tres" type="Theme" id=8]
 [ext_resource path="res://Window/RoundScreen.gd" type="Script" id=9]
 [ext_resource path="res://Window/GameOverScreen.gd" type="Script" id=10]
+[ext_resource path="res://Window/Background.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
@@ -74,6 +75,8 @@ font_data = ExtResource( 6 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 256, 144 )
+texture = ExtResource( 11 )
 
 [node name="HomeScreen" type="Node2D" parent="."]
 
@@ -525,8 +528,8 @@ Perhaps the next one will be better...
 
 
 Programming: Alex Vear
-Artwork: Ed Vear
-Design: Ed and Alex Vear"
+Artwork:     Ed Vear
+Design:      Ed and Alex Vear"
 
 [node name="BackToMenuButton2" type="Button" parent="CreditsScreen"]
 margin_left = 24.0
