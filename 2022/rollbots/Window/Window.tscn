@@ -504,10 +504,43 @@ Enter  Attack"
 [node name="CreditsScreen" type="Node2D" parent="."]
 visible = false
 
+[node name="Title2" type="Label" parent="CreditsScreen"]
+margin_left = 130.0
+margin_top = 20.0
+margin_right = 514.0
+margin_bottom = 68.0
+theme = SubResource( 10 )
+text = "Credits"
+
+[node name="Description2" type="Label" parent="CreditsScreen"]
+margin_left = 24.0
+margin_top = 80.0
+margin_right = 488.0
+margin_bottom = 216.0
+theme = SubResource( 14 )
+text = "Thank you for playing Rollbots.  This was our first game,
+and was made in just 48 hours for the GMTK Game Jam 2022.
+Perhaps the next one will be better...
+
+
+Programming: Alex Vear
+Artwork: Ed Vear
+Design: Ed and Alex Vear"
+
+[node name="BackToMenuButton2" type="Button" parent="CreditsScreen"]
+margin_left = 24.0
+margin_top = 240.0
+margin_right = 96.0
+margin_bottom = 264.0
+theme = SubResource( 16 )
+text = "Back"
+
 [connection signal="pressed" from="HomeScreen/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HomeScreen/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="HomeScreen/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="timeout" from="GameScreen/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="GameOverScreen/RematchButton" to="." method="_on_RematchButton_pressed"]
 [connection signal="pressed" from="GameOverScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]
 [connection signal="pressed" from="PauseScreen/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="PauseScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]
+[connection signal="pressed" from="CreditsScreen/BackToMenuButton2" to="." method="_on_BackToMenuButton_pressed"]

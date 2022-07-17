@@ -8,6 +8,8 @@ var _gameScreen
 var _roundScreen
 var _gameOverScreen
 var _pauseScreen
+var _creditsScreen
+var _homeScreen
 
 var _player1attackdie
 var _player1defencedie
@@ -33,6 +35,8 @@ func _ready():
 	_timer = get_node("GameScreen/Timer")
 	_countdown = get_node("GameScreen/Countdown")
 
+	_homeScreen = get_node("HomeScreen")
+	_homeScreen.visible = true
 	_level = get_node("GameScreen/Level")
 	_gameScreen = get_node("GameScreen")
 	_gameScreen.visible = false
@@ -42,6 +46,8 @@ func _ready():
 	_gameOverScreen.visible = false
 	_pauseScreen = get_node("PauseScreen")
 	_pauseScreen.visible = false
+	_creditsScreen = get_node("CreditsScreen")
+	_creditsScreen.visible = false
 
 	_player1attackdie = get_node("GameScreen/Player1Stats/AttackDie")
 	_player1defencedie = get_node("GameScreen/Player1Stats/DefenceDie")
@@ -114,6 +120,8 @@ func back_home():
 	_gameOverScreen.visible = false
 	_roundScreen.visible = false
 	_pauseScreen.visible = false
+	_creditsScreen.visible = false
+	_homeScreen.visible = true
 
 func _on_Timer_timeout():
 	_secondsPassed += 1
@@ -166,3 +174,7 @@ func _on_BackToMenuButton_pressed():
 
 func _on_RematchButton_pressed():
 	start_game()
+
+func _on_CreditsButton_pressed():
+	_homeScreen.visible = false
+	_creditsScreen.visible = true
