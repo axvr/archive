@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Window/Window.gd" type="Script" id=2]
@@ -10,6 +10,33 @@
 [ext_resource path="res://Fonts/DefaultFont.tres" type="Theme" id=8]
 [ext_resource path="res://Window/RoundScreen.gd" type="Script" id=9]
 [ext_resource path="res://Window/GameOverScreen.gd" type="Script" id=10]
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=11]
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=12]
+default_font = SubResource( 11 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=16]
+default_font = SubResource( 15 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -48,7 +75,102 @@ script = ExtResource( 2 )
 
 [node name="HomeScreen" type="Node2D" parent="."]
 
+[node name="Title" type="Label" parent="HomeScreen"]
+margin_left = 130.0
+margin_top = 20.0
+margin_right = 514.0
+margin_bottom = 68.0
+theme = SubResource( 10 )
+text = "Rollbots"
+
+[node name="Description" type="Label" parent="HomeScreen"]
+margin_left = 24.0
+margin_top = 80.0
+margin_right = 352.0
+margin_bottom = 121.0
+theme = SubResource( 14 )
+text = "A 2-player game, fight against each
+other."
+
+[node name="RedControls" type="Node2D" parent="HomeScreen"]
+
+[node name="Title" type="Label" parent="HomeScreen/RedControls"]
+margin_left = 391.0
+margin_top = 108.0
+margin_right = 447.0
+margin_bottom = 132.0
+theme = SubResource( 12 )
+text = "Red"
+
+[node name="Controls" type="Label" parent="HomeScreen/RedControls"]
+margin_left = 352.0
+margin_top = 134.0
+margin_right = 488.0
+margin_bottom = 175.0
+theme = SubResource( 14 )
+text = "    W  Thrusters
+    A  Move left
+    D  Move right
+Space  Attack"
+
+[node name="BlueControls" type="Node2D" parent="HomeScreen"]
+
+[node name="Title" type="Label" parent="HomeScreen/BlueControls"]
+margin_left = 384.0
+margin_top = 196.0
+margin_right = 448.0
+margin_bottom = 220.0
+theme = SubResource( 12 )
+text = "Blue"
+
+[node name="Controls" type="Label" parent="HomeScreen/BlueControls"]
+margin_left = 351.0
+margin_top = 223.0
+margin_right = 487.0
+margin_bottom = 264.0
+theme = SubResource( 14 )
+text = "    ↑  Thrusters
+    ←  Move left
+    →  Move right
+Enter  Attack"
+
+[node name="OtherControls" type="Label" parent="HomeScreen"]
+margin_left = 368.0
+margin_top = 80.0
+margin_right = 504.0
+margin_bottom = 121.0
+theme = SubResource( 14 )
+text = "Esc  Pause"
+
+[node name="StartButton" type="Button" parent="HomeScreen"]
+margin_left = 24.0
+margin_top = 240.0
+margin_right = 96.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="HomeScreen"]
+margin_left = 216.0
+margin_top = 240.0
+margin_right = 288.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Quit"
+
+[node name="CreditsButton" type="Button" parent="HomeScreen"]
+margin_left = 120.0
+margin_top = 240.0
+margin_right = 192.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Credits"
+
 [node name="GameScreen" type="Node2D" parent="."]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -283,6 +405,109 @@ theme = ExtResource( 8 )
 custom_fonts/font = SubResource( 3 )
 text = "Blue Wins"
 
-[node name="CreditsScreen" type="Node2D" parent="."]
+[node name="RematchButton" type="Button" parent="GameOverScreen"]
+margin_left = 24.0
+margin_top = 240.0
+margin_right = 96.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Rematch"
 
+[node name="BackToMenuButton" type="Button" parent="GameOverScreen"]
+margin_left = 120.0
+margin_top = 240.0
+margin_right = 192.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Menu"
+
+[node name="PauseScreen" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 10 )
+
+[node name="Fade" type="Sprite" parent="PauseScreen"]
+position = Vector2( 256, 144 )
+scale = Vector2( 1, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="PauseLabel" type="Label" parent="PauseScreen"]
+margin_left = 160.0
+margin_top = 20.0
+margin_right = 480.0
+margin_bottom = 52.0
+theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 2 )
+text = "Paused"
+
+[node name="ResumeButton" type="Button" parent="PauseScreen"]
+margin_left = 24.0
+margin_top = 240.0
+margin_right = 96.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Resume"
+
+[node name="BackToMenuButton" type="Button" parent="PauseScreen"]
+margin_left = 120.0
+margin_top = 240.0
+margin_right = 192.0
+margin_bottom = 264.0
+focus_mode = 0
+theme = SubResource( 16 )
+text = "Menu"
+
+[node name="RedControls" type="Node2D" parent="PauseScreen"]
+
+[node name="Title" type="Label" parent="PauseScreen/RedControls"]
+margin_left = 103.0
+margin_top = 104.0
+margin_right = 159.0
+margin_bottom = 128.0
+theme = SubResource( 12 )
+text = "Red"
+
+[node name="Controls" type="Label" parent="PauseScreen/RedControls"]
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 200.0
+margin_bottom = 177.0
+theme = SubResource( 14 )
+text = "    W  Thrusters
+    A  Move left
+    D  Move right
+Space  Attack"
+
+[node name="BlueControls" type="Node2D" parent="PauseScreen"]
+
+[node name="Title" type="Label" parent="PauseScreen/BlueControls"]
+margin_left = 345.0
+margin_top = 104.0
+margin_right = 409.0
+margin_bottom = 128.0
+theme = SubResource( 12 )
+text = "Blue"
+
+[node name="Controls" type="Label" parent="PauseScreen/BlueControls"]
+margin_left = 312.0
+margin_top = 136.0
+margin_right = 448.0
+margin_bottom = 177.0
+theme = SubResource( 14 )
+text = "    ↑  Thrusters
+    ←  Move left
+    →  Move right
+Enter  Attack"
+
+[node name="CreditsScreen" type="Node2D" parent="."]
+visible = false
+
+[connection signal="pressed" from="HomeScreen/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="HomeScreen/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="GameScreen/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="GameOverScreen/RematchButton" to="." method="_on_RematchButton_pressed"]
+[connection signal="pressed" from="GameOverScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]
+[connection signal="pressed" from="PauseScreen/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="PauseScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]

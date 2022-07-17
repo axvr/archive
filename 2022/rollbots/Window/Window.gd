@@ -7,6 +7,7 @@ var _level
 var _gameScreen
 var _roundScreen
 var _gameOverScreen
+var _pauseScreen
 
 var _player1attackdie
 var _player1defencedie
@@ -39,6 +40,8 @@ func _ready():
 	_roundScreen.visible = false
 	_gameOverScreen = get_node("GameOverScreen")
 	_gameOverScreen.visible = false
+	_pauseScreen = get_node("PauseScreen")
+	_pauseScreen.visible = false
 
 	_player1attackdie = get_node("GameScreen/Player1Stats/AttackDie")
 	_player1defencedie = get_node("GameScreen/Player1Stats/DefenceDie")
@@ -57,8 +60,6 @@ func _ready():
 	_player1power = get_node("GameScreen/Player1Vitals/PowerBar")
 	_player2power = get_node("GameScreen/Player2Vitals/PowerBar")
 	_set_colour("BLUE", [_player1power, _player2power])
-
-	start_game()
 
 
 const NUM_ROUNDS = 3
@@ -86,6 +87,7 @@ func _randomise_player_stats(keep_health = false):
 	}, keep_health)
 
 func start_game():
+	_gameScreen.visible = true
 	_currentRound = 0
 	_gameOverScreen.visible = false
 	_gameScreen.visible = true
@@ -93,7 +95,6 @@ func start_game():
 	start_round()
 
 const ROUND_SCREEN_DURATION = 2
-const GAME_OVER_SCREEN_DURATION = 4
 
 func start_round():
 	_level.set_player_movement(false)
@@ -112,6 +113,7 @@ func back_home():
 	_gameScreen.visible = false
 	_gameOverScreen.visible = false
 	_roundScreen.visible = false
+	_pauseScreen.visible = false
 
 func _on_Timer_timeout():
 	_secondsPassed += 1
@@ -121,10 +123,7 @@ func _on_Timer_timeout():
 			_roundScreen.visible = false
 			_secondsPassed = 0
 			_level.set_player_movement(true)
-	elif _gameOverScreen.visible:
-		if _secondsPassed >= GAME_OVER_SCREEN_DURATION:
-			back_home()
-	else:
+	elif !_gameOverScreen.visible:
 		_update_counter()
 
 		if _level.player1_health <= 0 || _level.player2_health <= 0:
@@ -134,10 +133,36 @@ func _on_Timer_timeout():
 		if _secondsPassed >= ROUND_DURATION:
 			start_round()
 
+func pause_game():
+	_level.set_player_movement(false)
+	_timer.stop()
+	_pauseScreen.visible = true
+
+func resume_game():
+	_pauseScreen.visible = false
+	if !_roundScreen.visible:
+		_level.set_player_movement(true)
+	_timer.start()
+
 func _process(_delta):
 	_player1health.set_progress(100 - _level.player1_health)
 	_player2health.set_progress(100 - _level.player2_health)
 	_player1power.set_progress(100 - _level.player1_power)
 	_player2power.set_progress(100 - _level.player2_power)
-	if _gameScreen.visible && Input.is_physical_key_pressed(KEY_ESCAPE):
-		back_home()
+	if _gameScreen.visible && !_gameOverScreen.visible && Input.is_physical_key_pressed(KEY_ESCAPE):
+		pause_game()
+
+func _on_StartButton_pressed():
+	start_game()
+
+func _on_QuitButton_pressed():
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+
+func _on_ResumeButton_pressed():
+	resume_game()
+
+func _on_BackToMenuButton_pressed():
+	back_home()
+
+func _on_RematchButton_pressed():
+	start_game()
