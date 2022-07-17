@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-const red_texture = preload("res://Controls/Die/RedSmall.png")
-const blue_texture = preload("res://Controls/Die/BlueSmall.png")
+const red_texture = preload("res://Controls/Die/Red.png")
+const blue_texture = preload("res://Controls/Die/Blue.png")
 
 var _sprite
 
