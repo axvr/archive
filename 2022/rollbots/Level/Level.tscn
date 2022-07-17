@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Level/HeadPlatform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/Level.gd" type="Script" id=3]
 [ext_resource path="res://Level/WallBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level/Background.png" type="Texture" id=5]
+[ext_resource path="res://Level/ArmPlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Level/CranePlatformBlock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Level/CranePlatformHook.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
@@ -313,20 +316,20 @@ position = Vector2( 88, 88 )
 
 [node name="Platform2" type="Node2D" parent="."]
 
-[node name="WallBlock" parent="Platform2" instance=ExtResource( 4 )]
-position = Vector2( 424, 88 )
+[node name="CranePlatformBlock" parent="Platform2" instance=ExtResource( 7 )]
+position = Vector2( 488, 88 )
 
-[node name="WallBlock2" parent="Platform2" instance=ExtResource( 4 )]
-position = Vector2( 440, 88 )
-
-[node name="WallBlock3" parent="Platform2" instance=ExtResource( 4 )]
-position = Vector2( 456, 88 )
-
-[node name="WallBlock4" parent="Platform2" instance=ExtResource( 4 )]
+[node name="CranePlatformBlock2" parent="Platform2" instance=ExtResource( 7 )]
 position = Vector2( 472, 88 )
 
-[node name="WallBlock5" parent="Platform2" instance=ExtResource( 4 )]
-position = Vector2( 488, 88 )
+[node name="CranePlatformBlock3" parent="Platform2" instance=ExtResource( 7 )]
+position = Vector2( 456, 88 )
+
+[node name="CranePlatformBlock4" parent="Platform2" instance=ExtResource( 7 )]
+position = Vector2( 440, 88 )
+
+[node name="CranePlatformHook" parent="Platform2" instance=ExtResource( 8 )]
+position = Vector2( 424, 88 )
 
 [node name="Platform3" type="Node2D" parent="."]
 
@@ -348,8 +351,16 @@ position = Vector2( 288, 128 )
 [node name="HeadPlatform" parent="." instance=ExtResource( 1 )]
 position = Vector2( 304, 208 )
 
+[node name="ArmPlatform2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 384, 219 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+
 [node name="Player1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 96, 176 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 416, 176 )
+
+[node name="ArmPlatform" parent="." instance=ExtResource( 6 )]
+position = Vector2( 56, 75 )

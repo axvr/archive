@@ -94,8 +94,17 @@ margin_top = 80.0
 margin_right = 352.0
 margin_bottom = 121.0
 theme = SubResource( 14 )
-text = "A 2-player game, fight against each
-other."
+text = "A 2-player game where you fight against
+each other.
+
+Every 30 seconds a new round starts and
+you'll be given new bonuses for your
+attack, defence and power.  (Displayed
+as dice).
+
+Will you keep your distance or go on
+the offensive?  Each round will force
+you to rethink your strategy."
 
 [node name="RedControls" type="Node2D" parent="HomeScreen"]
 

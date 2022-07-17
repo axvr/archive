@@ -32,6 +32,7 @@ func _set_colour(colour, objs):
 
 
 func _ready():
+	randomize()
 	_timer = get_node("GameScreen/Timer")
 	_countdown = get_node("GameScreen/Countdown")
 

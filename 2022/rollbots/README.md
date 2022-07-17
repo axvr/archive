@@ -9,7 +9,12 @@ to choose your stats.
 
 [gmtk]: https://itch.io/jam/gmtk-jam-2022
 
-![Screenshot of Rollbots in action](Screenshot.png)
+![Screenshot of Rollbots in action](Screenshot1.png)
+![Screenshot of Rollbots in action](Screenshot2.png)
+![Screenshot of Rollbots in action](Screenshot3.png)
+![Screenshot of Rollbots in action](Screenshot4.png)
+![Screenshot of Rollbots in action](Screenshot5.png)
+![Screenshot of Rollbots in action](Screenshot6.png)
 
 - Copyright © 2022 Alex Vear
 - Copyright © 2022 Ed Vear
