@@ -1,21 +1,57 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Window/Window.gd" type="Script" id=2]
+[ext_resource path="res://Window/Fade.png" type="Texture" id=3]
 [ext_resource path="res://Controls/Die/Die.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Controls/ProgressBar/ProgressBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Window/PanelBackground.png" type="Texture" id=7]
 [ext_resource path="res://Fonts/DefaultFont.tres" type="Theme" id=8]
+[ext_resource path="res://Window/RoundScreen.gd" type="Script" id=9]
+[ext_resource path="res://Window/GameOverScreen.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 6 )
 
 [node name="Window" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="HomeScreen" type="Node2D" parent="."]
+
 [node name="GameScreen" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Background" type="Sprite" parent="GameScreen"]
 position = Vector2( 288, 267 )
@@ -62,6 +98,7 @@ margin_top = 277.0
 margin_right = 32.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Atk"
 
 [node name="DefenceLabel" type="Label" parent="GameScreen/Player1Stats"]
@@ -70,6 +107,7 @@ margin_top = 277.0
 margin_right = 65.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Def"
 
 [node name="PowerLabel" type="Label" parent="GameScreen/Player1Stats"]
@@ -78,6 +116,7 @@ margin_top = 277.0
 margin_right = 107.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Pwr"
 
 [node name="Player2Stats" type="Node2D" parent="GameScreen"]
@@ -101,6 +140,7 @@ margin_top = 277.0
 margin_right = 440.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Atk"
 
 [node name="DefenceLabel" type="Label" parent="GameScreen/Player2Stats"]
@@ -109,6 +149,7 @@ margin_top = 277.0
 margin_right = 473.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Def"
 
 [node name="PowerLabel" type="Label" parent="GameScreen/Player2Stats"]
@@ -117,6 +158,7 @@ margin_top = 277.0
 margin_right = 515.0
 margin_bottom = 288.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Pwr"
 
 [node name="Player1Vitals" type="Node2D" parent="GameScreen"]
@@ -137,6 +179,7 @@ margin_top = 252.0
 margin_right = 167.0
 margin_bottom = 260.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "HP"
 
 [node name="PowerLabel" type="Label" parent="GameScreen/Player1Vitals"]
@@ -145,6 +188,7 @@ margin_top = 271.0
 margin_right = 166.0
 margin_bottom = 279.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 6 )
 text = "Pwr"
 
 [node name="Player2Vitals" type="Node2D" parent="GameScreen"]
@@ -165,6 +209,7 @@ margin_top = 252.0
 margin_right = 435.0
 margin_bottom = 260.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "HP"
 
 [node name="PowerLabel" type="Label" parent="GameScreen/Player2Vitals"]
@@ -173,6 +218,71 @@ margin_top = 271.0
 margin_right = 434.0
 margin_bottom = 279.0
 theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 8 )
 text = "Pwr"
+
+[node name="RoundScreen" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Fade" type="Sprite" parent="RoundScreen"]
+position = Vector2( 256, 144 )
+scale = Vector2( 1, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="RoundLabel" type="Label" parent="RoundScreen"]
+margin_left = 130.0
+margin_top = 84.0
+margin_right = 450.0
+margin_bottom = 116.0
+theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 2 )
+text = "Round 01"
+
+[node name="BonusLabel" type="Label" parent="RoundScreen"]
+margin_left = 125.0
+margin_top = 139.0
+margin_right = 437.0
+margin_bottom = 163.0
+theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 3 )
+text = "New Bonuses"
+
+[node name="GameOverScreen" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Fade" type="Sprite" parent="GameOverScreen"]
+position = Vector2( 256, 144 )
+scale = Vector2( 1, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="GameOverLabel" type="Label" parent="GameOverScreen"]
+margin_left = 114.0
+margin_top = 84.0
+margin_right = 434.0
+margin_bottom = 116.0
+theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 2 )
+text = "Game Over"
+
+[node name="WinnerLabel" type="Label" parent="GameOverScreen"]
+margin_left = 155.0
+margin_top = 139.0
+margin_right = 467.0
+margin_bottom = 163.0
+theme = ExtResource( 8 )
+custom_fonts/font = SubResource( 3 )
+text = "Blue Wins"
+
+[node name="CreditsScreen" type="Node2D" parent="."]
 
 [connection signal="timeout" from="GameScreen/Timer" to="." method="_on_Timer_timeout"]

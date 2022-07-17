@@ -14,11 +14,9 @@ func _ready():
 
 var player_id = 1
 
-func reset():
-	HEALTH = 100
-	DEFENCE = 0
-	ATTACK = 2
-	POWER = 100
+func reset(keep_health = false):
+	if !keep_health:
+		HEALTH = 100
 	_hurtbox.hurtbox_secondary_id = player_id
 	_hitbox.hitbox_secondary_id = player_id
 	_hitbox.hitbox_damage = ATTACK
@@ -41,10 +39,10 @@ func set_colour(colour):
 	_sprite.set_texture(red_texture if colour == "RED" else blue_texture)
 
 
-var HEALTH
-var DEFENCE
-var ATTACK
-var POWER
+var HEALTH = 100
+var DEFENCE = 1
+var ATTACK = 2
+var POWER = 100
 
 func set_stats(stats):
 	DEFENCE = stats["DEFENCE"]
@@ -53,9 +51,8 @@ func set_stats(stats):
 	_hitbox.hitbox_damage = ATTACK
 
 func take_hit(damage):
-	HEALTH -= (damage + 1) - DEFENCE
-	if HEALTH <= 0:
-		print("Dead!")
+	HEALTH -= (damage - (damage * ((DEFENCE + 2) / 10)))
+	if HEALTH <= 0: set_movement(false)
 
 func _on_Hurtbox_area_entered(area):
 	if area.get_id() == "HITBOX" && area.get_secondary_id() != player_id:
@@ -135,7 +132,14 @@ func _set_velocity(new_velocity):
 	_velocity = move_and_slide(new_velocity)
 
 
+var _movementAllowed = true
+
+func set_movement(enabled):
+	_movementAllowed = enabled
+
+
 func _process(delta):
-	_set_velocity(_next_input_velocity(_velocity, delta))
-	set_direction(_next_direction(direction))
-	handle_attack()
+	if _movementAllowed:
+		_set_velocity(_next_input_velocity(_velocity, delta))
+		set_direction(_next_direction(direction))
+		handle_attack()

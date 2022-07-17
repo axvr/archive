@@ -30,21 +30,22 @@ func _ready():
 		"THRUST": KEY_UP,
 		"ATTACK": KEY_ENTER
 	})
-	reset()
 
-func _reset_player1():
-	_player1.reset()
+func set_player_movement(enable):
+	_player1.set_movement(enable)
+	_player2.set_movement(enable)
+
+func reset_player1(stats, keep_health = false):
+	_player1.reset(keep_health)
 	_player1.set_direction(Direction.Right)
 	_player1.set_position(Vector2(96, 176))
+	_player1.set_stats(stats)
 
-func _reset_player2():
-	_player2.reset()
+func reset_player2(stats, keep_health = false):
+	_player2.reset(keep_health)
 	_player2.set_direction(Direction.Left)
 	_player2.set_position(Vector2(416, 176))
-
-func reset():
-	_reset_player1()
-	_reset_player2()
+	_player2.set_stats(stats)
 
 func _process(_delta):
 	player1_health = _player1.HEALTH
