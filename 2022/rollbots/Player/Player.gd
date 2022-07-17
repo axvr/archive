@@ -22,6 +22,7 @@ func reset(keep_health = false):
 	_hitbox.hitbox_damage = ATTACK
 	end_punch()
 	_can_attack = true
+	POWER = MAX_POWER
 
 
 var LEFT_BTN
@@ -44,13 +45,13 @@ var DEFENCE = 1
 var ATTACK = 2
 var POWER = 0
 const MAX_POWER = 100
-var _currentPower = 0
-var POWER_DURATION = 1
+var POWER_RECHARGE = 1
 
 func set_stats(stats):
 	DEFENCE = stats["DEFENCE"]
 	ATTACK = stats["ATTACK"]
-	POWER_DURATION = stats["POWER"]
+	POWER_RECHARGE = stats["POWER"]
+	POWER = MAX_POWER
 	_hitbox.hitbox_damage = ATTACK
 
 func take_hit(damage):
@@ -127,7 +128,9 @@ var _velocity = Vector2.ZERO
 func _next_input_velocity(current_velocity, delta):
 	var vector = Vector2.ZERO
 	vector.x = _get_x_input() * MAX_SPEED
-	vector.y = GRAVITY - (THRUST if Input.is_physical_key_pressed(THRUST_BTN) else 0)
+	vector.y = GRAVITY - (THRUST if Input.is_physical_key_pressed(THRUST_BTN) && POWER > 2 else 0)
+	if Input.is_physical_key_pressed(THRUST_BTN) && POWER > 2:
+		POWER = max(0, POWER - (60 * delta))
 	return current_velocity.move_toward(vector, ACCELERATION * delta)
 
 func _set_velocity(new_velocity):
@@ -142,7 +145,8 @@ func set_movement(enabled):
 
 func second_passed():
 	if _velocity.y >= 0 && POWER < MAX_POWER && !Input.is_physical_key_pressed(THRUST_BTN):
-		POWER += min(MAX_POWER, POWER_DURATION * 5)
+		print("POWER", (5 * ((10 * (POWER_RECHARGE / 10.0)) + 2)))
+		POWER = min(MAX_POWER, POWER + (2 * ((10 * (POWER_RECHARGE / 10.0)) + 3)))
 
 
 func _process(delta):
