@@ -1,11 +1,16 @@
 # Rollbots
 
-A "game" made in 48 hours for the [GMTK Game Jam 2022][gmtk].  This was our
-first time creating a video game.  It'll probably be terrible and incredibly
-unfinished.
+A 2-player game where you fight against each other.  Every 30 seconds a new
+round starts and new bonuses for your attack, defence and power will be rolled.
+(Displayed as dice).
 
-Rollbots is a 2-player smash-bros like game, where every round you roll 3 dice
-to choose your stats.
+Will you keep your distance or go on the offensive?  Each round will force you
+to rethink your strategy.
+
+This was our first game, and was made in just 48 hours for the
+[GMTK Game Jam 2022][gmtk].  Perhaps the next one will be better...
+
+Built using Godot.
 
 [gmtk]: https://itch.io/jam/gmtk-jam-2022
 
