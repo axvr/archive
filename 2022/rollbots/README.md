@@ -14,6 +14,7 @@ Built using Godot.
 
 [gmtk]: https://itch.io/jam/gmtk-jam-2022
 
+
 ![Screenshot of Rollbots in action](Screenshot1.png)
 ![Screenshot of Rollbots in action](Screenshot2.png)
 ![Screenshot of Rollbots in action](Screenshot3.png)
@@ -21,5 +22,13 @@ Built using Godot.
 ![Screenshot of Rollbots in action](Screenshot5.png)
 ![Screenshot of Rollbots in action](Screenshot6.png)
 
+
+## Legal
+
 - Copyright © 2022 Alex Vear
 - Copyright © 2022 Ed Vear
+
+The Rollbots source code is available under the terms of the _[Expat (MIT)][MIT]_
+licence.  A full copy of the licence terms can be found in the `LICENCE` file.
+
+[MIT]: https://directory.fsf.org/wiki/License:MIT
