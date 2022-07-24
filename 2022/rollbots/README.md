@@ -1,5 +1,7 @@
 # Rollbots
 
+([Play it on itch.io!](https://axvr.itch.io/rollbots))
+
 A 2-player game where you fight against each other.  Every 30 seconds a new
 round starts and new bonuses for your attack, defence and power will be rolled.
 (Displayed as dice).
