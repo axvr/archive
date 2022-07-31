@@ -1,4 +1,4 @@
-FROM clojure:openjdk-17-tools-deps-alpine
+FROM clojure:tools-deps
 
 COPY src src
 COPY deps.edn .
