@@ -9,20 +9,19 @@
          hiccup/hiccup                     {:mvn/version "1.0.5"}
          com.cognitect/transit-clj         {:mvn/version "1.0.329"}
          ragtime/ragtime                   {:mvn/version "0.8.1"}
-         org.postgresql/postgresql         {:mvn/version "42.4.0"}
+         org.postgresql/postgresql         {:mvn/version "42.4.1"}
          com.zaxxer/HikariCP               {:mvn/version "5.0.1"}
-         com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
-         com.github.seancorfield/honeysql  {:mvn/version "2.2.891"}
-         uk.axvr/refrain
-         {:git/tag "v0.1" :git/sha "008716e"
-          :git/url "https://github.com/axvr/refrain.git"}}
+         com.github.seancorfield/next.jdbc {:mvn/version "1.2.796"}
+         com.github.seancorfield/honeysql  {:mvn/version "2.3.911"}
+         uk.axvr/refrain                   {:mvn/version "0.1"}}
  :aliases {:dev  {:extra-paths ["config/dev"]}
            :prod {:extra-paths ["config/prod"]}
            :run  {:exec-fn org.enqueue.api.core/run}
            :test {:extra-paths ["test" "config/test"]
                   :extra-deps {io.github.cognitect-labs/test-runner
                                {:git/tag "v0.5.1" :git/sha "dfb30dd"}
-                               org.clojure/test.check {:mvn/version "1.1.1"}}
+                               org.clojure/test.check {:mvn/version "1.1.1"}
+                               uk.axvr/dynamock       {:mvn/version "0.4"}}
                   :exec-fn org.enqueue.api.test/run-tests
                   :exec-args {:types [:unit :integration :system]}}
            :unit        {:exec-args {:types [:unit]}}

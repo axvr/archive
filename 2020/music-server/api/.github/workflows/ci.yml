@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup clj-kondo
-        uses: DeLaGuardo/setup-clojure@7.0
+        uses: DeLaGuardo/setup-clojure@9.3
         with:
           clj-kondo: latest
 
@@ -28,9 +28,9 @@ jobs:
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@7.0
+        uses: DeLaGuardo/setup-clojure@9.3
         with:
-          cli: 1.11.1.1149
+          cli: 1.11.1.1155
 
       - name: Run tests
         run: clojure -X:test:unit
@@ -47,9 +47,9 @@ jobs:
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@7.0
+        uses: DeLaGuardo/setup-clojure@9.3
         with:
-          cli: 1.11.1.1149
+          cli: 1.11.1.1155
 
       - name: Run tests
         run: |
@@ -69,9 +69,9 @@ jobs:
         run: sudo apt install libsodium-dev
 
       - name: Install Clojure
-        uses: DeLaGuardo/setup-clojure@7.0
+        uses: DeLaGuardo/setup-clojure@9.3
         with:
-          cli: 1.11.1.1149
+          cli: 1.11.1.1155
 
       - name: Run tests
         run: |
