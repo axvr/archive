@@ -6,10 +6,8 @@
             [io.pedestal.interceptor.chain :as chain]
             [clojure.string :as str]))
 
-
 (def content-type "application/transit+json")
 (def content-type+charset (str content-type "; charset=UTF-8"))
-
 
 (defn- get-header [headers header]
   (let [header (str/lower-case header)]
@@ -18,17 +16,14 @@
               kv))
           headers)))
 
-
 (defn- media-type [content-type]
   (some-> content-type
           (str/split #"\s*;\s*" 2)
           first
           str/lower-case))
 
-
 (defn- transit-content-type? [ct]
   (= (media-type ct) content-type))
-
 
 (defn- decode-body [request]
   (let [body         (:body request)
@@ -36,9 +31,8 @@
         charset      (:character-encoding request "UTF-8")]
     (if (and (pos? (:content-length request 0))
              (transit-content-type? content-type))
-      (assoc request :body (transit/decode body charset))
+      (assoc request :body (transit/decode body {:charset charset}))
       request)))
-
 
 (defn- encode-body [{:keys [body] :as response}]
   (let [ct-header      (get-header (:headers response) "Content-Type")
@@ -49,13 +43,11 @@
           (assoc-in [:headers ct-header-name] content-type))
       response)))
 
-
 (def ^:private default-malformed-data-response
   "Default response returned when invalid Transit data is sent in request body."
   {:status  400
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    "Malformed Transit data in request body"})
-
 
 (defn transit-in-interceptor
   "Interceptor to automatically decode the body of a Transit request.  Will
@@ -77,7 +69,6 @@
           (catch Exception _
             (chain/terminate
               (assoc context :response malformed-data-response)))))})))
-
 
 (def transit-out-interceptor
   "Interceptor to automatically encode the body of a Transit response.
