@@ -3,9 +3,8 @@
   (:require [uk.axvr.refrain :as r]))
 
 (def ^:private config
-  (if-let [conf (r/read-edn-resource "config.edn")]
-    conf
-    (throw (ex-info "No configuration file found." {:file "config.edn"}))))
+  (or (r/read-edn-resource "config.edn")
+      (throw (ex-info "No configuration file found." {:file "config.edn"}))))
 
 (def env   (:env config))
 (def dev?  (= env :dev))

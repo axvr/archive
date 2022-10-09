@@ -9,8 +9,7 @@
   (:require [clojure.core.cache.wrapped    :as cache]
             [io.pedestal.interceptor       :as interceptor]
             [io.pedestal.interceptor.chain :as chain])
-  (:import java.time.Duration))
-
+  (:import [java.time Duration]))
 
 (defonce
   ^{:doc "Cache to store responses for idempotent requests.  TTL 6 hours."
@@ -18,13 +17,11 @@
   idempotent-cache
   (cache/ttl-cache-factory {} :ttl (.toMillis (Duration/ofHours 6))))
 
-
 (def ^:private default-invalid-idempotency-key-response
   "Default response for when the provided idempotency key is invalid."
   {:status  400
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    "Invalid idempotency key.  Must be a valid UUID."})
-
 
 (def ^:private default-idempotency-key-recycled-response
   "Default response returned when an idempotency key was already used and the
@@ -33,12 +30,10 @@
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    "Possible idempotency key recycling detected"})
 
-
 (defn- successful-response?
   "Returns true if the HTTP status of a response map is in the 200 range."
   [response]
   (<= 200 (:status response 200) 299))
-
 
 (defn- build-request-id
   "Build map used to heuristically detect accidental idempotency key recycles."
@@ -49,7 +44,6 @@
           [:uri :request-method :query-string :content-type :content-length])
         (assoc :client-id client-id
                :user-id   user-id))))
-
 
 (defn idempotency-interceptor
   "Wrap request in an idempotency layer.  Activates when an idempotency key is

@@ -10,10 +10,8 @@
             ragtime.repl)
   (:import [com.zaxxer.hikari HikariDataSource]))
 
-
 ;;; -----------------------------------------------------------
 ;;; DB connection pool
-
 
 (defn- init-db-conn [conf]
   (let [conf (if (:username conf)
@@ -26,18 +24,15 @@
       (.close (jdbc/get-connection ds)))
     ;; Close the connection pool on JVM shutdown.
     (.addShutdownHook
-      (Runtime/getRuntime)
-      (Thread. (bound-fn [] (when ds (.close ds)))))
+     (Runtime/getRuntime)
+     (Thread. (bound-fn [] (when ds (.close ds)))))
     ds))
-
 
 (defonce ds (init-db-conn config/db))
 (defonce ^:dynamic *conn* ds)
 
-
 ;;; -----------------------------------------------------------
 ;;; DB interaction
-
 
 (defmacro ^:private def-db-fn
   "Macro that generates a wrapper function around a next.jdbc function to
@@ -62,13 +57,12 @@
                        (map (comp vec rest)))}
        [& params#]
        (apply
-         ~fn-base
-         *conn*
-         (if sql-idx#
+        ~fn-base
+        *conn*
+        (if sql-idx#
            ;; If HoneySQL was passed in, compile it.
-           (update (vec params#) sql-idx# #(if (map? %) (sql/format %) %))
-           params#)))))
-
+          (update (vec params#) sql-idx# #(if (map? %) (sql/format %) %))
+          params#)))))
 
 (def-db-fn exec! jdbc/execute!)
 (def-db-fn exec1! jdbc/execute-one!)
@@ -76,14 +70,12 @@
 (def-db-fn select! jdbc-plan/select!)
 (def-db-fn select1! jdbc-plan/select-one!)
 
-
 (defn insert!
   "Insert a record into the specified DB table."
-  [table values]
+  [table data]
   (exec1! {:insert-into [table]
-           :columns     (keys values)
-           :values      [(vals values)]}))
-
+           :columns     (keys data)
+           :values      [(vals data)]}))
 
 (defn update!
   "Update values in the specified DB table."
@@ -92,52 +84,44 @@
            :set    changes
            :where  where}))
 
-
 (defn delete!
   "Delete values in the specified DB table."
   [table where]
   (exec1! {:delete-from [table]
            :where       where}))
 
-
 (defmacro with-transaction
   "Perform all database operations in body as a transaction.
 
   If the first parameter is a map (and more than 1 param was given), it will be
-  passed as options to next.jdbc/with-transaction."
+  passed as options to `next.jdbc/with-transaction`."
   [& body]
   (let [[opts body] (r/macro-body-opts body)]
     `(jdbc/with-transaction [tx# ds ~opts]
        (binding [*conn* tx#]
          ~@body))))
 
-
 (defmacro with-connection
   "Perform all database operations in body using a single connection.
 
   If the first parameter is a map (and more than 1 param was given), it will be
-  passed as options to next.jdbc/get-connection."
+  passed as options to `next.jdbc/get-connection`."
   [& body]
   (let [[opts body] (r/macro-body-opts body)]
     `(with-open [conn# (jdbc/get-connection ds ~opts)]
        (binding [*conn* conn#]
          ~@body))))
 
-
 ;;; -----------------------------------------------------------
 ;;; Migrations
 
-
 (def ^:private ragtime-config
-  {:datastore  (ragtime.jdbc/sql-database
-                 config/db
-                 {:migrations-table "ragtime_migrations"})
+  {:datastore  (ragtime.jdbc/sql-database config/db
+                                          {:migrations-table "ragtime_migrations"})
    :migrations (ragtime.jdbc/load-resources "migrations")})
-
 
 (defn migrate [& _]
   (ragtime.repl/migrate ragtime-config))
-
 
 (defn rollback [& _]
   (ragtime.repl/rollback ragtime-config))

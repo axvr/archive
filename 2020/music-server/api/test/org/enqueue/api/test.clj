@@ -5,7 +5,6 @@
             [uk.axvr.refrain           :as r]
             [cognitect.test-runner.api :as test-runner]))
 
-
 (defn setup-db []
   (when config/test?
     (db/with-transaction
@@ -13,13 +12,10 @@
       (db/exec1! ["CREATE SCHEMA public;"]))
     (db/migrate)))
 
-
 (def test-types #{:unit :integration :system})
-
 
 (def server-uri
   (str "http://localhost:" (:port config/server)))
-
 
 (defn run-tests
   "Wrapper around Cognitect's test-runner[1] adding an option to choose test

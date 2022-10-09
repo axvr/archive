@@ -6,12 +6,11 @@
     [io.pedestal.http.route  :as route]
     [io.pedestal.interceptor :as interceptor]
     [org.enqueue.api.config  :as config]
-    [org.enqueue.api.docs    :refer [docs-routes]]
-    [org.enqueue.api.users   :refer [user-routes]]
-    [org.enqueue.api.clients :refer [client-routes]]
+    [org.enqueue.api.docs    :as docs]
+    [org.enqueue.api.users   :as users]
+    [org.enqueue.api.clients :as clients]
     [org.enqueue.api.transit.interceptors :refer [transit-in-interceptor]])
   (:import [org.eclipse.jetty.server.handler.gzip GzipHandler]))
-
 
 (def root
   {:name ::index
@@ -19,12 +18,10 @@
    #(assoc % :response {:status 301
                         :headers {"Location" "/docs"}})})
 
-
 (def privacy-headers
   (interceptor/interceptor
     {:name  ::privacy-headers
      :leave #(assoc-in % [:response :headers "Permissions-Policy"] "interest-cohort=()")}))
-
 
 ;; https://github.com/pedestal/pedestal/blob/master/samples/servlet-filters-gzip/src/gzip/service.clj
 (defn- context-configurator
@@ -33,15 +30,13 @@
     (.setGzipHandler context gzip-handler)
     context))
 
-
 (defn build-routes []
   (route/expand-routes
     (set/union
-      #{["/" :get root]}
-      user-routes
-      client-routes
-      docs-routes)))
-
+     #{["/" :get root]}
+     users/routes
+     clients/routes
+     docs/routes)))
 
 (if config/prod?
   (do
@@ -49,9 +44,7 @@
     (defn routes [] @route-atom))
   (defn routes [] (build-routes)))
 
-
 (defonce server (atom nil))
-
 
 (defn run
   ([]
@@ -87,7 +80,6 @@
                               (transit-in-interceptor))
                       http/create-server))
    (http/start @server)))
-
 
 (defn stop []
   (http/stop @server))

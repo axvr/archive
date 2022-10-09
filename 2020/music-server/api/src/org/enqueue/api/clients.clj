@@ -14,12 +14,10 @@
             [clojure.string :as str])
   (:import [java.time Instant]))
 
-
 (defn- reply [status message]
   {:status  status
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    message})
-
 
 (defn- update-stored-renewal-key! [client-id renewal-key idempotency-key version]
   (db/update! :clients [:= :id client-id]
@@ -27,7 +25,6 @@
                :idempotency-key idempotency-key
                :version         version
                :last-session    (Instant/now)}))
-
 
 (defn- create-tokens [client-id version renewal-key idempotency-key signing-key]
   (if-let [client (db/exec1!
@@ -59,7 +56,6 @@
           (reply 409 "Renewal token already used"))))
     (reply 404 (str "No such client"))))
 
-
 (defn- create-client [user-id {:keys [name version platform idiom]}]
   ;; TODO: validate client data.  (Spec?)
   (let [client-id (random-uuid)]
@@ -75,7 +71,6 @@
        :access-revoked false})
     client-id))
 
-
 (defn create
   "Create a new client and provide initial EAT tokens."
   [{:keys [email-address password]}
@@ -90,7 +85,6 @@
             client-id (create-client user-id client)]
         (create-tokens client-id version nil idempotency-key signing-key))
       (reply 401 "Invalid credentials"))))
-
 
 (def create-handler
   "Expects request body to be in following format:
@@ -110,7 +104,6 @@
        (assoc context :response
               (create credentials client idempotency-key config/signing-key))))})
 
-
 (defn renew
   "Renew an client's access by providing the currently active EAT-R token.
   Returns a new pair of EAT tokens."
@@ -119,7 +112,6 @@
    idempotency-key
    signing-key]
   (create-tokens client-id version renewal-key idempotency-key signing-key))
-
 
 (def renew-handler
   "Renew an client's access by providing the currently active EAT-R token.
@@ -138,7 +130,6 @@
        (assoc context :response
               (renew token client idempotency-key signing-key))))})
 
-
 (defn revoke-access
   "Revoke a client's access.  This is somewhat equivalent to logging-out."
   [client-id]
@@ -148,7 +139,6 @@
                :idempotency-key nil})
   (eat/revoke-client-access client-id))
 
-
 (def revoke-access-handler
   {:name ::revoke
    :enter
@@ -157,8 +147,7 @@
        (revoke-access client-id)
        (assoc context :response {:status 204})))})
 
-
-(def client-routes
+(def routes
   #{["/clients/create" :post
      [(idempotency-interceptor)
       transit-out-interceptor

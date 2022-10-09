@@ -4,13 +4,11 @@
             [io.pedestal.interceptor       :as interceptor]
             [io.pedestal.interceptor.chain :as chain]))
 
-
 (def ^:private default-unauthorised-response
   "Default response for when the provided authentication token is invalid."
   {:status  401
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    "Invalid EAT token"})
-
 
 (defn eat-auth-interceptor
   "Add EAT token to context map.

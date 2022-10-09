@@ -9,7 +9,8 @@
                      InputStreamReader
                      BufferedReader
                      File
-                     FileInputStream]))
+                     FileInputStream]
+            [java.time Instant Duration]))
 
 (def ^:private default-charset "UTF-8")
 
@@ -20,10 +21,10 @@
 (def ^:private inst-writer-handlers
   "Transit writer handlers to convert java.time.Instant types to Transit
   dates."
-  {java.time.Instant
+  {Instant
    (transit/write-handler
      (constantly "t")
-     (fn [^java.time.Instant inst]
+     (fn [^Instant inst]
        (.format
          date-time-format
          (java.util.Date/from inst))))})
@@ -31,15 +32,15 @@
 (def ^:private inst-reader-handlers
   "Transit reader handlers to convert Transit dates to java.time.Instants."
   {"t" (transit/read-handler #(.toInstant (.parse date-time-format %)))
-   "m" (transit/read-handler #(java.time.Instant/ofEpochMilli (Long/parseLong %)))})
+   "m" (transit/read-handler #(Instant/ofEpochMilli (Long/parseLong %)))})
 
 (def ^:private duration-writer-handler
   "Transit writer handler to convert java.time.Duration types to a custom
   Transit extension with tag 'dur' containing a number of nanoseconds."
-  {java.time.Duration
+  {Duration
    (transit/write-handler
      (constantly "dur")
-     (fn [^java.time.Duration dur]
+     (fn [^Duration dur]
        (.. dur toNanos toString)))})
 
 (def ^:private duration-reader-handler
@@ -49,7 +50,7 @@
    (transit/read-handler
      (fn [v]
        (let [nanos (Long/parseLong v)]
-         (java.time.Duration/ofNanos nanos))))})
+         (Duration/ofNanos nanos))))})
 
 (def ^:private writer-handlers
   {:handlers (merge inst-writer-handlers duration-writer-handler)})

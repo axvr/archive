@@ -2,15 +2,12 @@
   (:require [clojure.test :refer :all]
             [org.enqueue.api.transit :as transit]))
 
-
 (def date-pattern
   (.. (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:MM:ss'.'SSSZ")
       (withZone (java.time.ZoneId/of "Europe/London"))))
 
-
 (defn format-date [date]
   (.format date-pattern date))
-
 
 (deftest instant-handlers
   (testing "Can encode a java.time.Instant type and decode back again."
@@ -26,7 +23,6 @@
       (is (= decoded (java.time.Instant/parse "2021-08-11T15:26:09.014Z")))
       (is (= encoded (transit/encode decoded))))))
 
-
 (deftest date-handlers
   (testing "Can encode a java.util.Date type and decode it back to
            a java.time.Instant type."
@@ -40,7 +36,6 @@
           decoded (transit/decode encoded)]
       (is (= (class decoded) java.time.Instant))
       (is (= decoded (java.time.Instant/ofEpochMilli 1628695522236))))))
-
 
 (deftest duration-handlers
   (testing "Can encode and decode java.time.Duration types into custom Transit

@@ -5,12 +5,10 @@
             [org.enqueue.api.transit.interceptors     :refer [transit-out-interceptor]]
             [org.enqueue.api.idempotency.interceptors :refer [idempotency-interceptor]]
             [clojure.string :as str])
-  (:import java.time.Instant))
-
+  (:import [java.time Instant]))
 
 ;; TODO: data validation with spec (email addresses).
 ;; TODO: send emails.
-
 
 (defn find-user-by [& {:keys [id email-address]}]
   (let [query {:select [:id :email-address :password-hash]
@@ -20,12 +18,10 @@
     (when where
       (db/exec1! (assoc query :where where)))))
 
-
 (defn- reply [status message]
   {:status  status
    :headers {"Content-Type" "text/plain; charset=UTF-8"}
    :body    message})
-
 
 (defn register [email-address password]
   (let [email-address (str/lower-case email-address)]
@@ -39,7 +35,6 @@
         (reply 204 "Account created"))
       (reply 400 "User account with that email address already exists"))))
 
-
 (def registration-handler
   {:name ::register
    :enter
@@ -48,7 +43,6 @@
             (if (and email-address password)
               (register email-address password)
               (reply 400 "Invalid body"))))})
-
 
 (defn change-password [user-id old-password new-password]
   (if-let [user (find-user-by :id user-id)]
@@ -60,7 +54,6 @@
       (reply 401 "Invalid credentials"))
     (reply 404 "User not found")))
 
-
 (def change-password-handler
   {:name ::change-password
    :enter
@@ -71,7 +64,6 @@
            new-password (:new-password body)]
        (assoc context :response
               (change-password user-id old-password new-password))))})
-
 
 (comment
   (require '[org.enqueue.api.clients     :as clients]
@@ -105,8 +97,7 @@
   (clients/revoke-access (:client-id (eat/read-token config/signing-key (:eat-r tokens))))
   )
 
-
-(def user-routes
+(def routes
   #{["/user/register" :post
      [(idempotency-interceptor)
       transit-out-interceptor

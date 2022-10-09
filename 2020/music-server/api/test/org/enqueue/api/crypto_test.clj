@@ -3,7 +3,6 @@
             [org.enqueue.api.crypto :as crypto]
             [clojure.string :as str]))
 
-
 (defn rand-unicode-string []
   (String.
     (.getBytes
@@ -11,7 +10,6 @@
              (map char (take (rand-int 300)
                              (repeatedly #(rand-int 65536))))))
     "UTF-8"))
-
 
 (defn b64-count
   "Return expected character count of a Base 64 encoded string of
@@ -28,7 +26,6 @@
         len)
       (recur (inc len)))))
 
-
 (deftest base64-encode
   (testing "Can correctly Base64 encode."
     (is (empty? (crypto/base64-encode "")))
@@ -36,7 +33,6 @@
     (let [rand-string (rand-unicode-string)]
       (when-not (empty? rand-string)
         (is (not= rand-string (crypto/base64-encode rand-string)))))))
-
 
 (deftest base64-decode
   (testing "Can correctly Base64 decode."
@@ -49,7 +45,6 @@
         (is (not= rand-string encoded-str))
         (is (not= encoded-str decoded-str))
         (is (= rand-string decoded-str))))))
-
 
 (deftest hash-password--hashed+can-verify
   (testing "Can hash password and verify password against hash."
@@ -71,7 +66,6 @@
         (is (not (crypto/valid-password? hashed-password
                                          (rand-unicode-string))))))))
 
-
 (deftest generate-random-bytes
   (testing "Can generate random string of bytes."
     (dotimes [_ 10]
@@ -87,7 +81,6 @@
         ;; Will not generate same on next run.
         (is (not= bs (crypto/random-bytes size)))))))
 
-
 (deftest generate-valid-signing-key
   (testing "Can generate valid signing key."
     (dotimes [_ 10]
@@ -101,7 +94,6 @@
                (crypto/base64-decode key "ISO-8859-1")))
         ;; Will not generate same on next run.
         (is (not= key (crypto/new-signing-key)))))))
-
 
 (deftest generates-verifible-signature
   (testing "Can sign a message and check if the signature is valid or invalid."

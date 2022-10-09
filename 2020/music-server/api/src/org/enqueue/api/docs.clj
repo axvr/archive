@@ -6,14 +6,12 @@
             [uk.axvr.refrain        :as r]
             [hiccup.page            :refer [html5]]))
 
-
 (defn- read-doc [path]
   (as-> path doc
     (str/replace doc #"[^\w/]+" "_")
     (str "docs/" doc ".edn")
     (r/read-edn-resource doc)
     (eval doc)))
-
 
 (defn- build-page [{:keys [title description keywords content]}]
   [:html {:lang "en-GB"}
@@ -54,18 +52,15 @@
        "© 2022 " [:a {:href "https://www.alexvear.com"} "Alex Vear"]]
       [:span [:a {:title "Back to top of page" :href "#top" :rel "nofollow"} "Going up?"]]]]]])
 
-
 (def ^:private not-found-response
   "Response returned when no doc page was found."
   {:status  404
    :headers {"Content-Type" "text/html; charset=UTF-8"}
    :body    (html5 (build-page (read-doc "404")))})
 
-
 (def ^:dynamic *request*
   "Currently active HTTP request."
   nil)
-
 
 (defn api-uri
   "Returns the URI for the current API with an optional path on the end."
@@ -76,7 +71,6 @@
         (get-in *request* [:headers "host"])
         path)))
 
-
 (defn get-docs-response [page request]
   (binding [*request* request]
     (if-let [doc (read-doc page)]
@@ -85,21 +79,18 @@
        :body    (html5 (build-page doc))}
       not-found-response)))
 
-
 (defonce ^:private memo-get-docs-resp
   (if config/prod?
     (memo/lru get-docs-response {} :lru/threshold 10)
     get-docs-response))
 
-
-(def docs-handler
+(def handler
   {:name ::page
    :enter
    (fn [context]
      (let [page (get-in context [:request :path-params :page] "index")]
        (assoc context :response (memo-get-docs-resp page (:request context)))))})
 
-
-(def docs-routes
-  #{["/docs" :get docs-handler :route-name ::index]
-    ["/docs/*page" :get docs-handler]})
+(def routes
+  #{["/docs" :get handler :route-name ::index]
+    ["/docs/*page" :get handler]})

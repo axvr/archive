@@ -11,10 +11,8 @@
             [clojure.core.cache.wrapped :as cache])
   (:import [java.time Instant Duration]))
 
-
 (def eat-a-ttl (Duration/ofHours 2))
 (def eat-r-ttl (Duration/ofDays 400))
-
 
 (defonce
   ^{:doc "Cache of clients with revoked EAT-A tokens (for \"instant log-out\")."
@@ -22,13 +20,11 @@
   revoked-clients
   (cache/ttl-cache-factory {} :ttl (.toMillis eat-a-ttl)))
 
-
 (defn revoke-client-access
   "Revoke all EAT-A tokens for an client."
   [client-id]
   {:pre [(uuid? client-id)]}
   (cache/miss revoked-clients client-id true))
-
 
 (defn expired?
   "Returns true if an EAT token has expired.  Otherwise returns false."
@@ -37,10 +33,8 @@
       (and (= type :eat-a)
            (cache/has? revoked-clients client-id))))
 
-
 (defn generate-renewal-key []
   (crypto/random-bytes 32))
-
 
 (defn build-payload
   "Build token payload of type :eat-a or :eat-r.  Optionally provide additional
@@ -59,17 +53,14 @@
   ([type data]
    (merge data (build-payload type))))
 
-
 (defn sign-token [key payload]
   (str payload ":" (crypto/sign-message key payload)))
-
 
 (defn pack-token [key payload]
   (->> payload
        transit/encode
        crypto/base64-encode
        (sign-token key)))
-
 
 (defn build-token-pair [signing-key user-id client-id renewal-key]
   (let [base-payload {:user-id user-id, :client-id client-id}]
@@ -80,7 +71,6 @@
                  (build-payload :eat-r)
                  (pack-token signing-key))}))
 
-
 (defn read-token
   "Reads an EAT token and checks if it has expired."
   [key token]
@@ -89,7 +79,6 @@
       (let [data (transit/decode (crypto/base64-decode payload))]
         (when-not (expired? data)
           data)))))
-
 
 (defn extract-token
   "Pulls an EAT token out of the Authorization header and read it."
