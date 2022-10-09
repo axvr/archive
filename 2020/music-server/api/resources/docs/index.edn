@@ -18,7 +18,9 @@
     [:ul
      [:li [:a {:href "/docs/authentication#users"} "User accounts"]]
      [:li [:a {:href "/docs/authentication#clients"} "Clients"]]
-     [:li [:a {:href "/docs/authentication#eat"} "EAT (Enqueue Authentication Tokens)"]]]
+     [:li [:a {:href "/docs/authentication#eat"} "EAT (Enqueue Authentication Tokens)"]]
+     [:li "Password reset"]
+     [:li "Change account details"]]
     [:li "Payments"]
     [:li "Library"]
     [:li "Streaming"]

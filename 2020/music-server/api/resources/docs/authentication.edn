@@ -13,7 +13,7 @@
     [:pre
      "(require '[clj-http.client :as http])
 
-(http/post \"" (org.enqueue.api.docs/api-uri "/user/register") "\"
+(http/post \"" (str org.enqueue.api.docs/*root-url* "/user/register") "\"
   {:body {:email-address \"example@example.com\"
           :password      \"xxxxxx\"}})
 

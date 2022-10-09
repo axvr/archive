@@ -12,7 +12,7 @@
                      FileInputStream]
             [java.time Instant Duration]))
 
-(def ^:private default-charset "UTF-8")
+(def ^:private ^:const default-charset "UTF-8")
 
 (def ^:private date-time-format
   "Default date format used by Transit."

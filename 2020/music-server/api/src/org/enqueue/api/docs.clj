@@ -58,21 +58,14 @@
    :headers {"Content-Type" "text/html; charset=UTF-8"}
    :body    (html5 (build-page (read-doc "404")))})
 
-(def ^:dynamic *request*
-  "Currently active HTTP request."
+(def ^:dynamic *root-url*
+  "Root URL of the API."
   nil)
 
-(defn api-uri
-  "Returns the URI for the current API with an optional path on the end."
-  ([] (api-uri nil))
-  ([path]
-   (str (name (:scheme *request*))
-        "://"
-        (get-in *request* [:headers "host"])
-        path)))
-
 (defn get-docs-response [page request]
-  (binding [*request* request]
+  (binding [*root-url* (format "%s://%s"
+                               (name (:scheme request))
+                               (get-in request [:headers "host"]))]
     (if-let [doc (read-doc page)]
       {:status  200
        :headers {"Content-Type" "text/html; charset=UTF-8"}
