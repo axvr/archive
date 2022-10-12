@@ -72,7 +72,7 @@
     (if (r/in? types :system)
       (do
         (println "Starting server at" server-uri)
-        (server/run {:join? false})
+        (server/start {:join? false})
         (test-runner/test test-options)
         (server/stop))
       (test-runner/test test-options))))

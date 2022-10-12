@@ -33,6 +33,9 @@ clojure -X:dev:run
 # Run with nREPL server.
 clojure -X:nrepl:dev:run
 
+# Start REPL without starting server.
+clj -X:dev:run :server? false
+
 # Stop development DB.
 docker stop enqueue-db-dev
 ```
