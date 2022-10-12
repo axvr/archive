@@ -44,16 +44,31 @@
     (defn routes [] @route-atom))
   (defn routes [] (build-routes)))
 
+(defn- start-nrepl-server
+  "Start an nREPL server if the required dependencies are in the class."
+  []
+  (if (try
+        (require 'org.enqueue.api.nrepl)
+        true
+        (catch Exception _ false))
+    (let [start! (ns-resolve 'org.enqueue.api.nrepl 'start!)]
+      (start! {}))
+    (throw (ex-info "Cannot start nREPL server, API not started with `:nrepl` alias." {}))))
+
 (defonce server (atom nil))
 
 (defn run
   ([]
    (run {}))
-  ([{:keys [port join?]
+  ([{:keys [port join? nrepl?]
      :or {port  (:port config/server)
-          join? true}}]
+          join? (:join? config/server true)}}]
    (when config/prod?
-     (set! *assert* false))  ; Disable assertions on production environment.
+     ;; Disable assertions on production environment.
+     (set! *assert* false))
+   (when nrepl?
+     ;; Start local nREPL server for editors to connect to.
+     (start-nrepl-server))
    ;; TODO: configure TLS, HSTS header + automatic redirect.
    ;; - <http://pedestal.io/reference/service-map>
    ;; - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/strict-transport-security>

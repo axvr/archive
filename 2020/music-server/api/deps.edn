@@ -30,4 +30,7 @@
            :lint {:extra-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
                   :main-opts  ["-m" "clj-kondo.main" "--lint" "src"]}
            :migrate  {:exec-fn org.enqueue.api.db/migrate}
-           :rollback {:exec-fn org.enqueue.api.db/rollback}}}
+           :rollback {:exec-fn org.enqueue.api.db/rollback}
+           :nrepl {:extra-deps {nrepl/nrepl       {:mvn/version "RELEASE"}
+                                cider/cider-nrepl {:mvn/version "RELEASE"}}
+                   :exec-args  {:nrepl? true}}}}

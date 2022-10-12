@@ -30,14 +30,14 @@ clojure -X:dev:migrate
 # Run server.
 clojure -X:dev:run
 
+# Run with nREPL server.
+clojure -X:nrepl:dev:run
+
 # Stop development DB.
 docker stop enqueue-db-dev
 ```
 
-The server will be started at <http://localhost:7881/>.
-
-> **Note** you will need to use a REPL server (such as a socket REPL) to
-> connect to the API.
+By default, the server will be started at <http://localhost:7881/>.
 
 
 ### Run tests
