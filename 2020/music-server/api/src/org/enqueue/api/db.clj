@@ -1,5 +1,6 @@
 (ns org.enqueue.api.db
   (:require [org.enqueue.api.config :as config]
+            [org.enqueue.api.utils  :as u]
             [uk.axvr.refrain        :as r]
             [honey.sql              :as sql]
             [next.jdbc              :as jdbc]
@@ -14,22 +15,19 @@
 ;;; DB connection pool
 
 (defn- init-db-conn [conf]
-  (let [conf (if (:username conf)
-               conf
-               ;; HikariCP uses :username instead of :user.
-               (assoc conf :username (:user conf)))
-        ^HikariDataSource ds (conn/->pool HikariDataSource conf)]
+  (let [^HikariDataSource ds
+        (conn/->pool HikariDataSource
+                     ;; HikariCP uses `:username` instead of `:user`.
+                     (assoc conf :username (:user conf)))]
     ;; Initialise the pool and validate config.
     (when-not config/test?
       (.close (jdbc/get-connection ds)))
     ;; Close the connection pool on JVM shutdown.
-    (.addShutdownHook
-     (Runtime/getRuntime)
-     (Thread. (bound-fn [] (when ds (.close ds)))))
+    (u/on-shutdown! (when ds (.close ds)))
     ds))
 
-(defonce ds (init-db-conn config/db))
-(defonce ^:dynamic *conn* ds)
+(defonce data-source (init-db-conn config/db))
+(defonce ^:dynamic *conn* data-source)
 
 ;;; -----------------------------------------------------------
 ;;; DB interaction
@@ -49,9 +47,7 @@
        {:doc (str "\n  This is a wrapper function around `" fqn# "` that automatically"
                   "\n  injects the DB connection source and compiles HoneySQL expressions."
                   "\n\n-------------------------\n"
-                  fqn# "\n"
-                  args# "\n\n  "
-                  (:doc meta#))
+                  fqn# "\n" args# "\n\n  " (:doc meta#))
         :arglists (->> args#
                        (filter #(r/in? % (symbol "connectable")))
                        (map (comp vec rest)))}
@@ -97,7 +93,7 @@
   passed as options to `next.jdbc/with-transaction`."
   [& body]
   (let [[opts body] (r/macro-body-opts body)]
-    `(jdbc/with-transaction [tx# ds ~opts]
+    `(jdbc/with-transaction [tx# data-source ~opts]
        (binding [*conn* tx#]
          ~@body))))
 
@@ -108,7 +104,7 @@
   passed as options to `next.jdbc/get-connection`."
   [& body]
   (let [[opts body] (r/macro-body-opts body)]
-    `(with-open [conn# (jdbc/get-connection ds ~opts)]
+    `(with-open [conn# (jdbc/get-connection data-source ~opts)]
        (binding [*conn* conn#]
          ~@body))))
 
