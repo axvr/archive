@@ -6,10 +6,10 @@
   (or (r/read-edn-resource "config.edn")
       (throw (ex-info "No configuration file found." {:file "config.edn"}))))
 
-(def env   (:env config))
-(def dev?  (= env :dev))
-(def test? (= env :test))
-(def prod? (= env :prod))
+(def env    (:env config))
+(def local? (= env :local))
+(def test?  (= env :test))
+(def prod?  (= env :prod))
 
 (def server (:server config))
 (def db     (:db config))

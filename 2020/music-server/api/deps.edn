@@ -14,16 +14,16 @@
          com.github.seancorfield/next.jdbc {:mvn/version "1.3.834"}
          com.github.seancorfield/honeysql  {:mvn/version "2.3.928"}
          uk.axvr/refrain                   {:mvn/version "0.1"}}
- :aliases {:dev  {:extra-paths ["config/dev"]}
-           :prod {:extra-paths ["config/prod"]}
-           :run  {:exec-fn org.enqueue.api.main/run}
-           :test {:extra-paths ["test" "config/test"]
-                  :extra-deps {io.github.cognitect-labs/test-runner
-                               {:git/tag "v0.5.1" :git/sha "dfb30dd"}
-                               org.clojure/test.check {:mvn/version "1.1.1"}
-                               uk.axvr/dynamock       {:mvn/version "0.4"}}
-                  :exec-fn org.enqueue.api.test/run-tests
-                  :exec-args {:types [:unit :integration :system]}}
+ :aliases {:local {:extra-paths ["config/local"]}
+           :prod  {:extra-paths ["config/prod"]}
+           :run   {:exec-fn org.enqueue.api.main/run}
+           :test  {:extra-paths ["test" "config/test"]
+                   :extra-deps {io.github.cognitect-labs/test-runner
+                                {:git/tag "v0.5.1" :git/sha "dfb30dd"}
+                                org.clojure/test.check {:mvn/version "1.1.1"}
+                                uk.axvr/dynamock       {:mvn/version "0.4"}}
+                   :exec-fn org.enqueue.api.test/run-tests
+                   :exec-args {:types [:unit :integration :system]}}
            :unit        {:exec-args {:types [:unit]}}
            :integration {:exec-args {:types [:integration]}}
            :system      {:exec-args {:types [:system]}}

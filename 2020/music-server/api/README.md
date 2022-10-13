@@ -18,26 +18,26 @@ Install the following dependencies.
 
 ## Usage
 
-Start the server in development mode:
+Start the server in local development mode:
 
 ```sh
-# Start development DB.
-do/database/dev/start
+# Start local DB.
+do/database/local/start
 
 # Migrate DB.
-clojure -X:dev:migrate
+clojure -X:local:migrate
 
 # Run server.
-clojure -X:dev:run
+clojure -X:local:run
 
 # Run with nREPL server.
-clojure -X:nrepl:dev:run
+clojure -X:nrepl:local:run
 
 # Start REPL without starting server.
-clj -X:dev:run :server? false
+clj -X:local:run :server? false
 
-# Stop development DB.
-docker stop enqueue-db-dev
+# Stop local development DB.
+docker stop enqueue-db-local
 ```
 
 By default, the server will be started at <http://localhost:7881/>.
