@@ -16,7 +16,8 @@
          uk.axvr/refrain                   {:mvn/version "0.1"}}
  :aliases {:local {:extra-paths ["config/local"]}
            :prod  {:extra-paths ["config/prod"]}
-           :run   {:exec-fn org.enqueue.api.main/run}
+           :run   {:exec-fn   org.enqueue.api.main/run
+                   :main-opts ["-m" "org.enqueue.api.main"]}
            :test  {:extra-paths ["test" "config/test"]
                    :extra-deps {io.github.cognitect-labs/test-runner
                                 {:git/tag "v0.5.1" :git/sha "dfb30dd"}

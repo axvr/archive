@@ -21,6 +21,9 @@ Install the following dependencies.
 Start the server in local development mode:
 
 ```sh
+# Start local server + DB + nREPL server.
+do/server/local/start
+
 # Start local DB.
 do/database/local/start
 

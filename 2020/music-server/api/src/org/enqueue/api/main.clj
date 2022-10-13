@@ -3,7 +3,7 @@
             [org.enqueue.api.config :as config]
             [org.enqueue.api.server :as server]))
 
-(defn- start-nrepl-server
+(defn- start-nrepl-server!
   "Start an nREPL server if the required dependencies are in the class."
   []
   (if (try
@@ -25,7 +25,14 @@
      (set! *assert* false))
    (when nrepl?
      ;; Start local nREPL server for editors to connect to.
-     (start-nrepl-server))
+     (start-nrepl-server!))
    (if server?
      (server/start! opts)
      (main/repl))))
+
+(defn -main
+  "Main entrypoint used for editor nREPL jack-in.  Not intended to be used from
+   the CLI."
+  [& _args]
+  (run {:nrepl?  true
+        :server? false}))
