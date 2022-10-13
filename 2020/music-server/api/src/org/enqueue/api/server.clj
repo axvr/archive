@@ -1,6 +1,5 @@
-(ns org.enqueue.api.core
-  (:require [clojure.main            :as main]
-            [clojure.set             :as set]
+(ns org.enqueue.api.server
+  (:require [clojure.set             :as set]
             [clojure.string          :as str]
             [io.pedestal.http        :as http]
             [io.pedestal.http.route  :as route]
@@ -44,21 +43,9 @@
     (defn routes [] @route-atom))
   (defn routes [] (build-routes)))
 
-(defn- start-nrepl-server
-  "Start an nREPL server if the required dependencies are in the class."
-  []
-  (if (try
-        (require 'org.enqueue.api.nrepl)
-        true
-        (catch Exception _ false))
-    (let [start! (ns-resolve 'org.enqueue.api.nrepl 'start!)]
-      (start! {}))
-    (throw (ex-info "Cannot start nREPL server, API not started with `:nrepl` alias." {}))))
-
-
 (defonce server (atom nil))
 
-(defn start
+(defn start!
   [{:keys [port join?]
     :or   {port  (:port config/server)
            join? (:join? config/server true)}}]
@@ -93,21 +80,5 @@
                http/create-server
                http/start))))
 
-(defn stop []
+(defn stop! []
   (swap! server #(and (http/stop %) nil)))
-
-(defn run
-  ([]
-   (run {}))
-  ([{:keys [nrepl? server?]
-     :or {server? true}
-     :as opts}]
-   (when config/prod?
-     ;; Disable assertions on production environment.
-     (set! *assert* false))
-   (when nrepl?
-     ;; Start local nREPL server for editors to connect to.
-     (start-nrepl-server))
-   (if server?
-     (start opts)
-     (main/repl))))

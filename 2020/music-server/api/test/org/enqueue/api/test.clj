@@ -1,11 +1,11 @@
 (ns org.enqueue.api.test
-  (:require [org.enqueue.api.core      :as server]
+  (:require [org.enqueue.api.server    :as server]
             [org.enqueue.api.db        :as db]
             [org.enqueue.api.config    :as config]
             [uk.axvr.refrain           :as r]
             [cognitect.test-runner.api :as test-runner]))
 
-(defn setup-db []
+(defn setup-db! []
   (when config/test?
     (db/with-transaction
       (db/exec1! ["DROP SCHEMA public CASCADE;"])
@@ -57,7 +57,7 @@
     (if config/test?
       (do
         (println "Preparing DB...")
-        (setup-db))
+        (setup-db!))
       (throw
         (ex-info "Cannot run integration or system tests on non-test environments!  Aborting test execution."
                  {:environment config/env
@@ -72,7 +72,7 @@
     (if (r/in? types :system)
       (do
         (println "Starting server at" server-uri)
-        (server/start {:join? false})
+        (server/start! {:join? false})
         (test-runner/test test-options)
-        (server/stop))
+        (server/stop!))
       (test-runner/test test-options))))
