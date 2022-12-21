@@ -58,6 +58,6 @@
            block? true}}]
   (run-jetty
     #'redirector
-    {:port   port
-     :join?  (not block?)
+    {:port  port
+     :join? (not block?)
      :send-server-version? false}))

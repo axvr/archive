@@ -64,11 +64,6 @@
        "www.axvr.io"     [->tls (->host "www.axvr.uk")]
        "ascribe.axvr.io" [->tls (->host "ascribe.axvr.uk")]
 
-       ;; TODO: Buy and move to nq.to
-       "enqueue.org"     [->tls (->host "www.enqueue.org")]
-       "dequeue.org"     [->tls (->host "www.dequeue.org") ->temp]
-       "www.dequeue.org" [->tls (->host "www.enqueue.org") ->temp]
-
        "***REMOVED***.com"     [->tls (->host "www.***REMOVED***.com")]
        "www.***REMOVED***.com" [->tls (->host "www.***REMOVED***.com") (->path "/shop/MessyMammoth")]}
       rules->ruleset
