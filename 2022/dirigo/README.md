@@ -8,8 +8,7 @@ infrastructure.
 
 ### Domain root
 
-- Create an A record pointing to `213.52.130.150`.
-- Create an AAAA record pointing to `2a01:7e00::f03c:93ff:fed5:363f`.
+- Create an A record pointing to `18.132.100.149`.
 
 ### Subdomain
 
