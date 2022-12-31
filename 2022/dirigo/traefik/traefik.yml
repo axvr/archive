@@ -1,5 +1,5 @@
 global:
-  checkNewVersion: true
+  checkNewVersion: false
 
 log:
   level: WARN
