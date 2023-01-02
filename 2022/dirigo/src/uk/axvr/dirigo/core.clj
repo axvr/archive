@@ -61,3 +61,8 @@
     {:port  port
      :join? (not block?)
      :send-server-version? false}))
+
+;; Domain names that need TLS.
+;; Host(`axvr.uk`, `www.axvr.uk`, `git.axvr.uk`, `ascribe.axvr.uk`, `alexvear.com`)
+;; Host(`axvr.io`, `www.axvr.io`, `ascribe.axvr.io`)
+;; Host(`***REMOVED***.com`, `www.***REMOVED***.com`)
