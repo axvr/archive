@@ -1,7 +1,6 @@
-- Test configured redirects don't infinitely loop?
-- Host static sites on same server?
-  - and/or act as proxy for static sites in Linode Object Storage.
-  - Set additional HTTP security headers.
-- Build Epoxy and replace Traefik with it.
-- Log requests by time.
+- Rewrite in Go with <https://github.com/caddyserver/certmagic>
+  - Removes need for Traefik and Docker!
+  - Write a Systemd service file for automatic start up
+- Log requests
 - Automate deployment
+  - GH Actions SSH
