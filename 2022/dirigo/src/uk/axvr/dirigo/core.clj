@@ -45,7 +45,7 @@
         (recur ruleset url)
         (url->response url)))
     {}
-    :lru/threshold 32))
+    :lru/threshold 256))
 
 (defn redirector [request]
   (memoized-redirector

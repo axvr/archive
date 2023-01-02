@@ -1,5 +1,7 @@
 # Dirigo
 
+> [I direct to a place, guide, steer](https://en.wiktionary.org/wiki/dirigo#Latin)
+
 Micro web-forwarding and link shortener service powering axvr.uk
 infrastructure.
 
@@ -17,15 +19,6 @@ Create a CNAME record pointing to `axvr.uk.`.
 
 ## Running
 
-If running for the first time, you may need to run these commands:
-
-```
-git checkout HEAD -- traefik/acme.json
-chmod 600 traefik/acme.json
-```
-
-Then switch the CA server used in the `traefik/traefik.yml` file and run:
-
-```
-docker compose up -d --build
+```sh
+clojure -X:run
 ```

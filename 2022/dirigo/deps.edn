@@ -2,5 +2,8 @@
  :deps {org.clojure/clojure      {:mvn/version "1.11.1"}
         ring/ring-core           {:mvn/version "1.9.6"}
         ring/ring-jetty-adapter  {:mvn/version "1.9.6"}
-        org.clojure/core.memoize {:mvn/version "1.0.257"}}
+        org.clojure/core.memoize {:mvn/version "1.0.257"}
+        jarohen/chime            {:mvn/version "0.3.3"}
+        org.shredzone.acme4j/acme4j-client {:mvn/version "2.15"}
+        org.shredzone.acme4j/acme4j-utils  {:mvn/version "2.15"}}
  :aliases {:run {:exec-fn uk.axvr.dirigo.core/run}}}
