@@ -2,6 +2,7 @@
   - Removes need for Traefik and Docker!
   - Write a Systemd service file for automatic start up
 - Activate socket REPL at start up for manual ACME config
+- Logging
 - Log requests
 - Automate deployment
   - GH Actions SSH
@@ -10,3 +11,5 @@
     - git checkout `commit-hash`
     - systemctl restart dirigo.service
 - Make repo public?
+- Host at <goto.axvr.uk>?
+- AWS health check

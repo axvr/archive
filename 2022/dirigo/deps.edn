@@ -6,4 +6,4 @@
         jarohen/chime            {:mvn/version "0.3.3"}
         org.shredzone.acme4j/acme4j-client {:mvn/version "2.15"}
         org.shredzone.acme4j/acme4j-utils  {:mvn/version "2.15"}}
- :aliases {:run {:exec-fn uk.axvr.dirigo.core/run}}}
+ :aliases {:run {:exec-fn uk.axvr.dirigo.server/run}}}

@@ -1,4 +1,4 @@
-(ns uk.axvr.dirigo.core
+(ns uk.axvr.dirigo.server
   (:require [uk.axvr.dirigo.rules :as rules]
             [clojure.core.memoize :as memo]
             [ring.adapter.jetty :refer [run-jetty]])
@@ -12,13 +12,12 @@
    :query  query-string
    :method method})
 
-(defonce default-headers
-  (atom
-    {"Server"                    "Dirigo"
-     "Permissions-Policy"        "interest-cohort=()"
-     "Strict-Transport-Security" "max-age=31536000; includeSubDomains"
-     "Content-Security-Policy"   "default-src 'self'"
-     "X-XSS-Protection"          "1; mode=block"}))
+(def ^:private default-headers
+  {"Server"                    "Dirigo"
+   "Permissions-Policy"        "interest-cohort=()"
+   "Strict-Transport-Security" "max-age=31536000; includeSubDomains"
+   "Content-Security-Policy"   "default-src 'self'"
+   "X-XSS-Protection"          "1; mode=block"})
 
 (defn url->response
   [{:keys [type scheme user host port path query fragment]}]
@@ -27,12 +26,12 @@
                :permanent 301
                :temporary 302
                301)
-     :headers (assoc @default-headers
+     :headers (assoc default-headers
                      "Location"
                      (.toString
                        (URI. (name scheme) user host (or port -1) path query fragment)))}
     {:status  421
-     :headers @default-headers}))
+     :headers default-headers}))
 
 (defn apply-rule [ruleset url]
   (when-let [rule (get ruleset (:host url))]
@@ -45,12 +44,13 @@
         (recur ruleset url)
         (url->response url)))
     {}
-    :lru/threshold 256))
+    :lru/threshold 512))
 
-(defn redirector [request]
-  (memoized-redirector
+(defn redirector [request respond _raise]
+  (respond
+   (memoized-redirector
     @rules/ruleset
-    (request->url request)))
+    (request->url request))))
 
 (defn run
   [{:keys [port block?]
@@ -58,8 +58,9 @@
            block? true}}]
   (run-jetty
     #'redirector
-    {:port  port
+    {:port port
      :join? (not block?)
+     :async? true
      :send-server-version? false}))
 
 ;; Domain names that need TLS.
