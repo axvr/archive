@@ -1,0 +1,46 @@
+#+TITLE: Router v3
+
+* Route map
+
+#+BEGIN_SRC clojure
+[{:route "/account"
+  :redirect "/accounts"}
+ {:route "/"}]
+#+END_SRC
+
+
+#+BEGIN_SRC clojure
+;; Automatically wrap asynchronous requests to be synchronous?
+(defroute delete-account2 "/account/delete2"
+  ([request respond raise]
+   (respond {:status 200
+             :headers {"Content-Type" "text/html"}
+             :body "<h1>Account deleted</h1>"})))
+
+(defroute delete-account "/account/delete"
+  :redirect delete-account2)
+
+(def account-routes
+  [delete-account
+   delete-account2])
+#+END_SRC
+
+
+
+#+BEGIN_SRC clojure
+(defroute delete-account2 "/account/delete2"
+  :get ([request respond raise]
+        (respond {:status 200
+                  :headers {"Content-Type" "text/html"}
+                  :body "<h1>Account deleted</h1>"}))
+  :post ([request respond raise]
+         (respond {:status 401})))
+
+(def delete-account2
+  ["/account/delete2" {:get {:handler (letfn [(handler [request respond raise] (respond {:status 200
+                                                                                         :headers {"Content-Type" "text/html"}
+                                                                                         :body "<h1>Account deleted</h1>"}))]
+                                        (fn
+                                          ([request respond raise] (handler request respond raise))
+                                          ([request] (handler request (,,,) (,,,)))))}}])
+#+END_SRC

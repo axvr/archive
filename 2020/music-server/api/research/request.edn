@@ -1,0 +1,24 @@
+{:ssl-client-cert nil
+ :protocol HTTP/1.1
+ :remote-addr [0:0:0:0:0:0:0:1]
+ :params {foo hi}
+ :headers {accept */*
+           user-agent curl/7.76.1
+           host localhost:3000
+           content-length 26
+           content-type application/transit+json}
+ :server-port 3000
+ :content-length 26
+ :form-params {}
+ :query-params {foo hi}
+ :content-type application/transit+json
+ :character-encoding nil
+ :uri /agents/create
+ :server-name localhost
+ :uri-params {}
+ :query-string foo=hi
+ :body {:foo 1
+        :bar 2}
+ :multipart-params {}
+ :scheme :http
+ :request-method :post}

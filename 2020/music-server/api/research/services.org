@@ -1,0 +1,47 @@
+#+TITLE: Services and expenditure
+
+* AWS
+
+  - API:   EC2 or Lightsail
+  - DB:    RDS for PostgreSQL (T3 micro)
+  - WWW:   S3
+  - Blob:  S3
+  - Email: SES
+  - +Cache: ElasticCache (Memcached T3 micro)+
+
+** Minimum price
+
+  (per Year is rounded up to nearest £10.)
+  (per Month is rounded up to nearest £1.)
+
+  |        | per Month | per Year |
+  |--------+-----------+----------|
+  | Before |       £32 |     £380 |
+  | After  |       £25 |     £300 |
+
+  £21/month
+  £260/year
+
+  Free tier: [[https://aws.amazon.com/free/]]
+
+* Other
+
+  - Domains (enqueue.org)
+  - DNSimple?
+  - GitHub Pro?
+  - FastMail
+  - Figma
+  - Apple Developer Licence  ~ £75/year
+
+  - Incorporate business
+  - Trademark registration (logo, not name)
+
+  - Macbook Pro ~ £1700
+  - Google Play Store licence ~ £25
+
+  - Fund/sponsor developers.  (later on)
+
+Initial operating costs (excl. my pay): £600/year (req. 13 customers).
+
+
+https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ssh-best-practices/

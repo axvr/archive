@@ -51,7 +51,7 @@
     :or   {port  (:port config/server)
            join? (:join? config/server true)}}]
   (when @server
-    (throw (ex-info "Server already running." @server))) 
+    (throw (ex-info "Server already running." @server)))
   (swap! server
          (fn [_]
            ;; TODO: configure TLS, HSTS header + automatic redirect.

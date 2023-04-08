@@ -4,6 +4,9 @@
             [nrepl.server :as nrepl]
             [org.enqueue.api.utils :as u]))
 
+;; agent or ref?
+(defonce server2 (agent nil))
+
 (defonce server (atom nil))
 
 (defn start! [opts]

@@ -1,0 +1,99 @@
+#+TITLE: Enqueue plan
+
+/Your digital record collection, anywhere.../
+
+
+* Initial thoughts
+
+Store your music collection online and stream it to your devices.
+
+Lots of categorisation options.
+- Mark albums as compilations.
+- Store multiple versions of tracks.
+- Create custom albums (e.g. original Binaral setlist, singles.)
+- Mark bonus tracks (not part of original release).
+- Mark hidden tracks and the time they start at.
+- Group albums together?
+- Set multiple genres.
+- Upload different quality versions of the same track.  (Or just upload highest
+  and let nq downscale it to preferred quality -- keeping the original
+  obviously.)
+- Download your collection (with tags) in the quality you request (no
+  higher than what you originally uploaded).  Including proper folder
+  structure, and extra assets included (e.g. artist art, lyric files).
+- Store lyrics.
+- Create playlists.
+- Album art (+ alternative album art)
+- Artist art.
+- Online streaming player.
+- Live tracks.
+  - Where performed.
+  - Date performed.
+  - ...
+- Upload videos + music videos?
+- Write notes about tracks, artists and albums.
+- Arbitrary sorting of everything.
+- Give names to each disc of a multiple disc album.
+- Highlight A-side vs B-side.
+- Can set track release and recorded dates.
+- Automatically fetch data to avoid having to manually enter all tags.
+- Allow downloading backups.
+- Family accounts?  Share tracks with family members (like you would a CD).
+- Set individual track to mono playback (or global mono, and individual stereo).
+
+Can self-host or pay for hosting on enqueue.org.  (library.enqueue.org?)
+
+AGPL?
+
+Write API in Clojure.  Website in ClojureScript?
+
+Private for-profit entity.
+
+Digital version of your record collection.  Digital record store.
+
+DRM free.
+
+Nq store prices are about CD price.  (Include CDs and Vinyl in purchase?)
+
+Lend/borrow music?
+
+Interactive WYSIWYG interface with good UX and semi-decent UI.  Lots of drag
+and drop?
+
+Subscription based-model.  Once subscription has expired, if you don't pay
+again, you can still download your collection.
+
+Suggest albums, artists, etc. to play (like Lollypop does).
+
+Full Unicode support.
+
+
+| Domain name         | Purpose         | MVP |
+|---------------------+-----------------+-----|
+| enqueue.org         | Brochure site   | no  |
+| api.enqueue.org     | API             | yes |
+| library.enqueue.org | Your collection | yes |
+| store.enqueue.org   | Buy music       | no  |
+| merch.enqueue.org   | Buy Nq merch    | no  |
+
+Expand out to mobile apps once web-client is complete.
+
+Allow playing via MPD?  So that MPD clients can be used for playback.
+
+
+* Repos
+
+- enqueue.api
+- enqueue.library
+- enqueue.android
+- enqueue.ios
+- enqueue.store
+- enqueue.mpd
+- enqueue.podcasts
+
+https://api.enqueue.org
+https://library.enqueue.org
+https://store.enqueue.org
+https://podcasts.enqueue.org
+
+Need a separate API for media download/upload functions.

@@ -1,0 +1,27 @@
+;;; types: page, text (default), code, info, warning, error, ...
+
+{:type  :page
+ :title "Prerequisites"
+ :id    "prereq"
+ :sections
+ [{:type    :text
+   :content [:p "This section of the Enqueue API Docs detail everything you
+                need to know before interacting with the API."]}
+  {:type    :text
+   :title   "Character encoding"
+   :id      "charenc"
+   :content [:p ""]}
+  {:type    :text
+   :title   "Compression"
+   :id      "compress"
+   :content []}
+  {:type    :text
+   :title   "Transit"
+   :id      "transit"
+   :content [[:p ""]
+             {:type    :code
+              :content "application/transit+json"}
+             [:p ""]
+             {:type    :info
+              :content "The Enqueue API only supports Transit over JSON.  It
+                       does not support JSON-Verbose or MessagePack."}]}]}

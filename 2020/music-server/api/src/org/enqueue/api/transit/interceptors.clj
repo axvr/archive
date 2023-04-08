@@ -9,6 +9,7 @@
 (def content-type "application/transit+json")
 (def content-type+charset (str content-type "; charset=UTF-8"))
 
+;;; TODO: remove this!
 (defn- get-header [headers header]
   (let [header (str/lower-case header)]
     (some (fn [kv]
@@ -70,6 +71,7 @@
             (chain/terminate
               (assoc context :response malformed-data-response)))))})))
 
+;; TODO: is this needed?
 (def transit-out-interceptor
   "Interceptor to automatically encode the body of a Transit response.
 

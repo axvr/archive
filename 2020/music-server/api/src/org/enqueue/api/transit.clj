@@ -115,3 +115,44 @@
              opts))))
 
 (defmethod decode nil [& _] nil)
+
+
+
+
+;; (defprotocol TransitDecode
+;;   (decode [this charset] "Decode Transit+JSON encoded data.  Returns decoded data."))
+
+;; (extend-protocol TransitDecode
+;;   nil (decode [_ _] nil)
+;;   ByteArrayInputStream
+;;     (decode [stream _]
+;;       (let [r (transit/reader stream :json reader-handlers)]
+;;         (transit/read r)))
+;;   ByteArrayOutputStream
+;;     (decode [stream charset]
+;;       (decode (ByteArrayInputStream. (.toByteArray stream)) charset))
+;;   InputStream
+;;     (decode [stream charset]
+;;       (with-open)))
+
+
+
+
+;; (let [in (PipedInputStream.)]
+;;     ;; NOTE: Stream writing is done in a separate thread to prevent deadlocking.
+;;     (future
+;;       (with-open [out     (PipedOutputStream. in)
+;;                   swriter (OutputStreamWriter. out (:charset opts))
+;;                   bwriter (BufferedWriter. swriter)]
+;;         (json/generate-stream body bwriter opts)))
+;;     in)
+
+;; (defmethod decode InputStream
+;;   ([^InputStream stream]
+;;    (decode stream "UTF-8"))
+;;   ([^InputStream stream charset]
+;;    (with-open [in  (InputStreamReader. stream charset)
+;;                buf (BufferedReader. in)
+;;                out (ByteArrayOutputStream.)]
+;;      (io/copy buf out :encoding "UTF-8")
+;;      (decode out))))
