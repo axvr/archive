@@ -1,4 +1,5 @@
 (ns uk.axvr.dirigo.acme
+  "Dirigo ACME (Automatic Certificate Management Environment) integration."
   (:require [clojure.java.io :as io])
   (:import  [java.security Security]
             [java.io FileWriter FileReader]
@@ -15,7 +16,7 @@
 ;; https://shredzone.org/maven/acme4j/usage/session.html
 (defonce session
   (doto (Session. let's-encrypt-staging)
-    (.setLocale session java.util.Locale/UK)))
+    (.setLocale java.util.Locale/UK)))
 
 (comment
   (.getTermsOfService (.getMetadata session)))
@@ -70,5 +71,5 @@
 (defn order [account domains]
   (.. account
       (newOrder)
-      (domains ["axvr.uk"])
+      (domains ["axvr.uk" "ascribe.axvr.uk"])
       (create)))
