@@ -73,3 +73,7 @@
       (newOrder)
       (domains ["axvr.uk" "ascribe.axvr.uk"])
       (create)))
+
+(defn http01-challenge-handler [request]
+  {:headers {"Content-Type" "text/plain"}
+   :body nil})

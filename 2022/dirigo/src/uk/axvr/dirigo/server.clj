@@ -1,7 +1,9 @@
 (ns uk.axvr.dirigo.server
   (:require [uk.axvr.dirigo.rules :as rules]
+            [uk.axvr.dirigo.acme :as acme]
             [clojure.core.memoize :as memo]
-            [ring.adapter.jetty :refer [run-jetty]])
+            [ring.adapter.jetty :refer [run-jetty]]
+            [clojure.string :as str])
   (:import [java.net URI]))
 
 (defn request->url
@@ -48,9 +50,10 @@
 
 (defn redirector [request respond _raise]
   (respond
-   (memoized-redirector
-    @rules/ruleset
-    (request->url request))))
+   (let [url (request->url request)]
+     (if (str/starts-with? (:path url) "/.well-known/acme-challenge/")
+       (acme/http01-challenge-handler request)
+       (memoized-redirector @rules/ruleset url)))))
 
 (defn run
   [{:keys [port block?]

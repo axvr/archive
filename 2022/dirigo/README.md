@@ -10,7 +10,7 @@ infrastructure.
 
 ### Domain root
 
-- Create an A record pointing to `18.132.100.149`.
+Create an A record pointing to `18.132.100.149`.
 
 ### Subdomain
 
