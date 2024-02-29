@@ -31,10 +31,10 @@ Influenced by many languages and systems including: [Clojure][], [Bel][], [Small
 
 ### Out of scope
 
-- Compile to Verilog, SystemVerilog or VHDL.  (Use [Clash][] instead.)
+- Compile to Verilog, SystemVerilog, VHDL or SystemC.  (Use [Clash][] instead.)
 - Textual interface/language.
 - Backwards compatibility with other systems and tools.
-- Support for a wide range of FPGAs.
+- Support a wide range of FPGAs.
 
 [Clash]: https://clash-lang.org
 
