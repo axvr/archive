@@ -1,0 +1,47 @@
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+* { color: #493f5e; }
+
+body {
+	font-family: 'Inter', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #ebecf0;
+}
+
+@supports (font-variation-settings: normal) {
+	body {
+		font-family: 'Inter var', 'Inter', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	* { color: #ebecf0; }
+	body { background-color: #493f5e; }
+}
+
+.wrapper { padding: 15%; }
+
+.content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+
+	max-width: 200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
