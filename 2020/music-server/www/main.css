@@ -16,7 +16,7 @@ body {
 
 @supports (font-variation-settings: normal) {
 	body {
-		font-family: 'Inter var', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
+		font-family: 'Inter var', 'Inter', 'IBM Plex Sans', 'Helvetica', 'Arial', sans-serif;
 	}
 }
 
