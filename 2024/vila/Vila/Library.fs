@@ -1,4 +1,4 @@
-﻿namespace Vila
+namespace Vila
 
 module Say =
     let hello name =
