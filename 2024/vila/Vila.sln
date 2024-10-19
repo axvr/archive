@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Vila", "Vila\Vila.fsproj", "{798A5422-5D50-490E-B28E-3AD88165313D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Vila.REPL", "Vila.REPL\Vila.REPL.fsproj", "{ADA972BA-E74E-4DDB-B4FB-FCB4AD278ECD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{798A5422-5D50-490E-B28E-3AD88165313D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{798A5422-5D50-490E-B28E-3AD88165313D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{798A5422-5D50-490E-B28E-3AD88165313D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{798A5422-5D50-490E-B28E-3AD88165313D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA972BA-E74E-4DDB-B4FB-FCB4AD278ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA972BA-E74E-4DDB-B4FB-FCB4AD278ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA972BA-E74E-4DDB-B4FB-FCB4AD278ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA972BA-E74E-4DDB-B4FB-FCB4AD278ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
