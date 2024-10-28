@@ -9,11 +9,11 @@ for my language are:
 
 | Target | VM | JIT | GC | Runtime | Tooling\* | Dynamic | Performant |
 |--------|----|-----|----|---------|-----------|---------|------------|
-| [JVM][] ([OpenJDK][] HotSpot)  | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [CLR][]/[CLI][] ([.NET][])         | ✅ | ✅ | ✅ | ✅ | ✅ |    | ✅ |
-| [SBCL][]                   |    |    | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [BEAM][]                   | ✅ |    | ✅ | ✅ | ✅ | ✅ |    |
-| [MoarVM][]                 | ✅ | ✅ | ✅ |    |    | ✅ |    |
+| [JVM][] ([OpenJDK][]) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [CLR][]/[CLI][] ([.NET][]) | ✅ | ✅ | ✅ | ✅ | ✅ | | ✅ |
+| [SBCL][] | | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [BEAM][] | ✅ | | ✅ | ✅ | ✅ | ✅ | |
+| [MoarVM][] | ✅ | ✅ | ✅ | | | ✅ | |
 | [WebAssembly][] ([Wasmtime][]) | ✅ | ✅ | ✅ | [Lunatic][]? | | ? | |
 
 \* Tooling = effective profilers, decompilers, benchmarking tools, etc.
@@ -38,54 +38,11 @@ While Julia has shown that it is possible to use low-level compiler backends
 (e.g. [LLVM][] and [MIR][]) for high performance dynamic languages, these are
 far too low level for me (e.g. no garbage collector or runtime).
 
-
-## Why not BEAM?
-
-[BEAM][] and [Erlang/OTP][] are excellent pieces of engineering (and is exactly
-what I'm trying to achieve), but it unfortunately hasn't seen anywhere near the
-support and effort that its counterparts (the JVM and CLR) have received into
-tooling and making it fast.
-
-BEAM is bad at numeric computation and copies data between processes.  The
-latter is the biggest issue; I believe the combination of a faster VM and
-persistent immutable data structures will easily be able to significantly
-outperform BEAM in every aspect.  Every other guaranatee that Erlang/OTP and
-BEAM provide can be implemented a top of the JVM or CLR and should be
-reasonably straightforward as I intend to severely limit (and wrap) the VM
-capabilities directly available to programs written in my language to achieve
-isolation and powerful hot reloading.
+[MIR]: https://github.com/vnmakarov/mir
+[LLVM]: https://llvm.org/
 
 
-## Why not WASM?
-
-[WebAssembly][] is still new and has not reached maturity yet.  While there are
-some excellent projects in this area, such as [Cranelift][], [Wasmtime][] and
-[Lunatic][] they are still very far behind the JVM, CLR, BEAM and SBCL.  The
-WebAssembly GC being optional is also an issue for my language as that implies
-that it'll be even less mature.  Even browser vendors don't care very much
-about WASM.  As a final note on this, something doesn't sit right with me about
-using Web technologies outside of the Web.
-
-
-## Why not MoarVM?
-
-[MoarVM][] is designed for the [Raku][] programming language; a highly dynamic
-and flexible language.  This dynamism is reflected in MoarVM, which makes it
-a compelling choice.  Unfortunately though, it is still very young and sees
-little development activity, hence its poor performance.  The final nail in the
-coffin for targetting MoarVM is the lack of stable bytecode for it.
-
-
-## SBCL
-
-Condition system would make things easier.
-
-Decent low-level performance.
-
-Supports TCO.
-
-
-## JVM vs. CLR
+## The JVM and the CLR
 
 The main VM competitors available are the [JVM][] ([OpenJDK][] Hotspot) and [CLR][] ([.NET][]).
 
@@ -199,6 +156,53 @@ won't work for me since it requires AOT compilation.
 Tradeoffs!
 
 
+## BEAM
+
+[BEAM][] and [Erlang/OTP][] are excellent pieces of engineering (and is exactly
+what I'm trying to achieve), but it unfortunately hasn't seen anywhere near the
+support and effort that its counterparts (the JVM and CLR) have received into
+tooling and making it fast.
+
+BEAM is bad at numeric computation and copies data between processes.  The
+latter is the biggest issue; I believe the combination of a faster VM and
+persistent immutable data structures will easily be able to significantly
+outperform BEAM in every aspect.  Every other guaranatee that Erlang/OTP and
+BEAM provide can be implemented a top of the JVM or CLR and should be
+reasonably straightforward as I intend to severely limit (and wrap) the VM
+capabilities directly available to programs written in my language to achieve
+isolation and powerful hot reloading.
+
+
+## WebAssembly
+
+[WebAssembly][] is still new and has not reached maturity yet.  While there are
+some excellent projects in this area, such as [Cranelift][], [Wasmtime][] and
+[Lunatic][] they are still very far behind the JVM, CLR, BEAM and SBCL.  The
+WebAssembly GC being optional is also an issue for my language as that implies
+that it'll be even less mature.  Even browser vendors don't care very much
+about WASM.  As a final note on this, something doesn't sit right with me about
+using Web technologies outside of the Web.
+
+
+## MoarVM
+
+[MoarVM][] is designed for the [Raku][] programming language; a highly dynamic
+and flexible language.  This dynamism is reflected in MoarVM, which makes it
+a compelling choice.  Unfortunately though, it is still very young and sees
+little development activity, hence its poor performance.  The final nail in the
+coffin for targetting MoarVM is the lack of stable bytecode for it.
+
+
+## SBCL
+
+Condition system would make things easier.
+
+Decent low-level performance.
+
+Supports TCO.
+
+Has a new parallel garbage collector.
+
 
 ## Verdict
 
@@ -208,7 +212,6 @@ JVM HotSpot or .NET.
 [Graal JIT]: https://www.graalvm.org/latest/reference-manual/compiler/operations/
 [.NET TC]: https://github.com/dotnet/runtime/blob/main/docs/design/features/tiered-compilation.md
 [JVM]: https://en.wikipedia.org/wiki/Java_virtual_machine
-[MIR]: https://github.com/vnmakarov/mir
 [OpenJDK]: https://openjdk.org/
 [CLR]: https://learn.microsoft.com/en-us/dotnet/standard/clr
 [CLI]: https://en.wikipedia.org/wiki/Common_Language_Infrastructure
