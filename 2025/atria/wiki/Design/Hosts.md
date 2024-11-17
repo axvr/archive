@@ -1,0 +1,344 @@
+---
+Author: Alex Vear
+Last updated: 2024-11-17
+---
+
+# Host comparison
+
+There are a decent number of pre-built host platforms available for building
+programming languages and programming environments upon.  The top options for
+Enqueue are:
+
+| Target | VM | JIT | GC | Runtime | Tooling\* | Dynamic | Performant |
+|--------|----|-----|----|---------|-----------|---------|------------|
+| [JVM][] ([OpenJDK][]) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [CLR][]/[CLI][] ([.NET][]) | ✅ | ✅ | ✅ | ✅ | ✅ | | ✅ |
+| [SBCL][] | | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [BEAM][] | ✅ | | ✅ | ✅ | ✅ | ✅ | |
+| [MoarVM][] | ✅ | ✅ | ✅ | | | ✅ | |
+| [WebAssembly][] (via [Wasmtime][]) | ✅ | ✅ | WIP | [Lunatic][]? | | ? | |
+
+\* Tooling = effective profilers, decompilers, micro-benchmarking tools, etc.
+
+Of these, the JVM and CLR are likely the best suited for Enqueue, but let's
+explore the available options further...
+
+
+## Why host on an existing platform?
+
+Being heavily inspried by Clojure, it should come as no surprise that like
+Clojure, Enqueue is intended to run upon an existing platform.  Through
+hosting, the platform's VM, JIT compiler, garbage collector and already built
+libraries and tooling can all be used by Enqueue.
+
+However, unlike many other hosted languages (such as Clojure and F#) that have
+[mutualistic][mutualism] relationships with their respective hosts, Enqueue
+will have a [commensalistic][commensalism] relationship with its, as it
+benefits from the host, but the host gets nothing in return.  This is due to
+the [isolationary](Isolation.md) nature of Enqueue.
+
+### What about performance?
+
+Languages aiming for maximum raw performance (e.g. Rust, Zig, C++, etc.) are
+designed for AOT compilation; they _tend_ to be highly static (to assist the
+compiler) and defer much of the complicated busy work to the programmer
+(e.g. manual memory management).  While AOT compilation of a dynamic language
+is possible, it almost universally results in worse performance than JIT
+compilation does.  In the case of a dynamic high level language like Enqueue,
+simply using an existing powerful JIT and GC can provide *almost* the same
+performance practically for free.  In particular, the JVM and CLR are extremely
+fast; OpenJDK HotSpot is even designed for long running servers, and its ZGC
+garbage collector can perform sub 10ms garbage collections with a heap size in
+the terabytes!
+
+It would be a waste of my time to even attempt to build a competitive GC, JIT
+compiler and runtime completely from scratch when many experts have already
+spent huge amounts of time in doing it far better than I ever could, and for
+free!  Obviously some languages do manage to attact compiler experts to help
+optimise them, but it'd be foolish to expect any new language to become popular
+enough (if at all) to rely on that happening.
+
+Finally, by utilising an existing host platform's facilities, I can keep
+language development more focused on the important parts that move it towards
+my ambitious goals.  Not every programming language needs to reinvent the
+wheel.  Why reinvent the wheel if you're only going to invent the flat tyre.
+
+[mutualism]: https://en.wikipedia.org/wiki/Mutualism_(biology)
+[commensalism]: https://en.wikipedia.org/wiki/Commensalism
+
+
+## The JVM and the CLR
+
+The main VM competitors available are the [JVM][] ([OpenJDK][] Hotspot) and [CLR][] ([.NET][]).
+
+HotSpot C1/C2 JIT is superior to .NET [Tiered Compilation][.NET TC] (TC) JIT,
+although .NET's is getting better slowly.  A future option for HotSpot is to
+use the [Graal JIT][] which is even faster than C1/C2.  .NET has PGO (Profile
+Guided Optimisation) but once again it is a more limited compared to HotSpot's
+profiling optimiser.
+
+HotSpot has the ZGC garbage collector, capable of terabytes of garbage
+collection with sub 1ms pauses, which makes it far more capable than any other
+language.  .NET GC by comparison is much simpler, but is by no means bad.
+
+CLR bytecode is much better than JVM bytecode as are the modules and assembly
+formats.  Similarly CLR bytecode features more types (e.g. non-signed bytes and
+signed integers) and reified generics.  .NET also has lower level constructs,
+e.g. "spans" and "buffers".
+
+Both VMs effectively lack tail-call optimisation (TCO).  While the CLR has the
+`tail.` bytecode, it is really just a suggestion to the JIT (less of
+a suggestion on "Production" builds) and stack overflows can still occur.  The
+JVM *still* has no TCO support, it is still potentially possible using the ASM
+library.
+
+In terms of AOT support on the JVM and CLR, they are both no-gos as they
+destroy runtime tangibility and dynamism.
+
+Overall, the comparative limitations of the .NET JIT and GC are avoided by
+smarter compilers and type systems along with use of lower level tools.  The
+OpenJDK HotSpot VM almost does the inverse by using its magic JIT and GC to
+overcome compiler limitations.  All this is to say that the JVM makes
+implementing a performant dynamic language on the JVM far easier than on the
+CLR, but it is not impossible on the CLR, but the result will very likely be
+slower than the JVM equivalent unless much of the language is written in C#.
+
+If only there were some middle ground.
+
+> What was particularly interesting for me in implementing Clojure, was how
+> much runtime tangibility and situated sensibilities were in the JVM design.
+> The JVM is actually a very dynamic thing.  As much as Java looks like, say C#
+> or C++, the JVM was written with the idea of we're going to embed these
+> programs on set-top boxes, network them and need to send code around [to]
+> update their capabilities.  That's like it's situated everywhere you turn,
+> and the runtime has got a ton of excellent support for that.  Which makes it
+> a great platform for languages like Clojure.  Thank goodness that the work
+> that the people did on Self didn't die; that it actually carried through
+> here.  Not everything did, but it's quite important and it'll be a sad day
+> when someone says "let's just replace the JVM with some static compilation
+> technology".  And I'll tell you, targeting the JVM and the CLR, it's plain.
+> The CLR is static thinking, and the JVM is dynamic thinking.
+>
+> — Rich Hickey, 2017, [Effective Programs - 10 Years of Clojure](https://www.youtube.com/watch?v=2V1FtfBDsLU)
+
+
+> The focus difference between Java and .NET couldn't be more different.  Even
+> though the platforms from a high level look very similar, they have a very
+> different focus in terms of optimisation and priorities for development.
+> HotSpot is all about dynamic stuff, other Java VMs are necessarily doing the
+> same things, because the patterns of core match with the whole ecosystems and
+> traditions in the Java space.  Then there's [...] all the dynamic languages
+> now coming online (or already online) with even more now with `invokedynamic`
+> on the Java virtual machines.  Whereas .NET focuses very much on static
+> compilation; not doing any runtime optimisations [sic. not true any more with
+> .NET Tiered Compilation] other than straight JITing and straight inlining and
+> stuff like that.  No HotSpot type of recompilation or things like that.  They
+> really focus on getting the working set down [...], instead of trying to make
+> it run as fast as possible.  They try to make it as efficient in memory usage
+> and in terms of how many pages are touched when you start up a process.
+> I think this difference is primarily caused by the fact that Java became
+> popular on the server, whereas Microsoft is still focused a lot on the
+> client.  On the server it makes sense to spend some extra time optimising
+> your process because it's usually a long running process, whereas on the
+> client you start up lots of different applications and you also have
+> multiuser systems.  [...] So this is why reified generics are very important,
+> because if you don't have any HotSpot type optimisation where you can get rid
+> of the cost of the erased generics that Java has, you need real generics to
+> get rid of that cost.
+>
+> — Jeroen Frijters, 2019, [Inspiration from the Other Side](https://www.youtube.com/watch?v=ETg8oRXXhD8)
+
+
+> Java has a lot of security vulnerabilities [...].  .NET also has its share,
+> but they have an interesting concept here and I think Java can learn from
+> this.  They separate their code into "transparent code" and "critical code"
+> in terms of security [...].  "Safe critical code" is the bridge between the
+> two.  You cannot call from _transparent code_ into _critical code_, and
+> _critical code_ is the only code that can do trusted operations.  This
+> separation means that when you audit your code you know where to look,
+> because you just look for the _safe critical_ annotation and when you see
+> that, you know you have to do a security audit on this code.
+>
+> — Jeroen Frijters, 2019, [Inspiration from the Other Side](https://www.youtube.com/watch?v=ETg8oRXXhD8)
+
+
+> The ECMA CLI in general benefited from the lessons learned from Java and
+> fixed a few issues. While the JVM bytecodes were designed to be easy to
+> interpret, by the time the CLR came around it was already well understood
+> that interpreters were cute but any VM worth using was going to use a JIT, so
+> the instruction set does reflect this design. For example there is a single
+> "add" opcode in the CLR and it requires the JIT compiler to track the types
+> on the stack to ensure that the types are compatible at the time the
+> operation is performed. The JVM on the other hand has type-specific add
+> instructions (`fadd`, `dadd`, `iadd`, `ladd`).
+>
+> Some other features include:
+>
+> - Unsigned data types
+> - Checked arithmetic (on overflow, they throw an exception)
+> - Support for tail calls (for Lisp, F# and other functional languages)
+> - Value types, these are structs that are not wrapped in an object
+> - VM-level support for generics
+> - Platform-invoke allows developers to call native code without having to
+>   write any glue in C++ using JNI, it can all be done in the managed
+>   language.
+> - The Common Language Specification: a spec that set the rules for
+>   interoperability across programming languages (for example: the rules for
+>   public identifier casing, handling of int vs uint and so on).
+> - Delegates allow user to keep a reference to a method or an instance method
+>   and invoke it. The VM also can turn any delegate invocation into an
+>   asynchronous invocation, so you can turn any method into an async method,
+>   like this: mySortFunc.BeginInvoke (array)
+> - Support for dynamic code generation through the Reflection.Emit API.
+> - A database file format allows for efficient reading of the metadata from
+>   assemblies. It does not require decompression and the database format is
+>   suitable for lazy loading.
+> - Attributes were special objects that could annotate most elements in the
+>   virtual machine, you could annotate classes, methods, parameters, local
+>   variables, and at runtime the VM or the runtime could do interesting things
+>   with it.
+> - Unsafe code (pointers) was added to support C++, Cobol and Fortran
+>   compilers running on the CLI.
+> - [...]
+> - 64-bit arrays (although part of the spec, only Mono implements this).
+>
+> Generics in C# and the CLR are a pleasure to use compared to Java due to the
+> native generic support for it. The explanation is straight forward, while the
+> path that Java took ("type erasure") meant that everything became just too
+> hard. This is what has lead to Java generics becoming almost impenetrable and
+> a FAQ that makes Wikipedia seems small by comparison.
+>
+> For instance, you can not write code like this in Java generics:
+>
+>     class Stack<T> {
+>         T [] items;
+>     }
+>
+> Since Java does not allow a `T` array to be declared as an instance
+> variable. You must use an `object []` and cast.
+>
+> With .NET 4 a few * Covariance and contravariance introduced with .NET 4 make
+> even more generic cases a pleasure to use.
+>
+> The major differences happen at the class library level and at the language
+> level (like lambda and iterator support) and that is a list too long to write
+> up.
+>
+> — Miguel de Icaza, 2010, [Reddit: What are the technical differences between the CLR and JVM?](https://old.reddit.com/r/programming/comments/cys02/askproggit_what_are_the_technical_differences/c0wadup/)
+
+
+
+.NET GC supports server and workstation modes.  .NET has better documentation and
+standardised documentation XML formats.
+
+Profiling and benchmarking tools.  BenchmarkDotNet.
+
+The JVM now has lightweight (green) threads in fibres.
+
+.NET has better SIMD API.
+
+.NET means that some code could be reused in a GUI built with Godot .NET.
+
+Both implement IEEE-754 floating point maths.  Bad!  But largely have better
+alternatives built in.
+
+More competition between JVM languages than CLR languages.
+
+GraalVM makes me slightly worried about future Java development on HotSpot
+potentially ceasing.
+
+.NET can be statically compiled for use on a Docker `FROM scratch` image,
+whereas OpenJDK can't.
+
+.NET is simpler, much better designed and more secure than OpenJDK too.
+
+Both are fully cross platform and work on ARM and x64.
+
+.NET can run in the browser via WASM compilation without losing dynamism.
+GraalVM can too, but that won't work for me since it requires AOT compilation.
+
+Trade-offs!
+
+Microbenchmark with BenchmarkDotNet on .NET and JMH (Java Microbenchmarking
+Harness) on JVM.
+
+.NET would be better suited for local machines, containerisation and
+multi-user/application systems.
+
+Translating Bifurican data structures to .NET would likely result in
+performance wins over JVM Bifurican at the cost of development speed.
+
+
+## BEAM
+
+[BEAM][] and [Erlang/OTP][] are excellent pieces of engineering (and is exactly
+what I'm trying to achieve), but it unfortunately hasn't seen anywhere near the
+support and effort that its counterparts (the JVM and CLR) have received into
+tooling and making it fast.
+
+BEAM is bad at numeric computation and copies data between processes.  The
+latter is the biggest issue; I believe the combination of a faster VM and
+persistent immutable data structures will easily be able to significantly
+outperform BEAM in every aspect.  Every other guaranatee that Erlang/OTP and
+BEAM provide can be implemented a top of the JVM or CLR and should be
+reasonably straightforward as I intend to severely limit (and wrap) the VM
+capabilities directly available to programs written in my language to achieve
+isolation and powerful hot reloading.
+
+[BEAM]: https://en.wikipedia.org/wiki/BEAM_VM
+[Erlang/OTP]: https://erlang.org/
+
+
+## WebAssembly
+
+[WebAssembly][] is still new and has not reached maturity yet.  While there are
+some excellent projects in this area, such as [Cranelift][], [Wasmtime][] and
+[Lunatic][] they are still very far behind the JVM, CLR, BEAM and SBCL.  The
+WebAssembly GC being optional is also an issue for my language as that implies
+that it'll be even less mature.  Even browser vendors don't care very much
+about WASM.  As a final note on this, something doesn't sit right with me about
+using Web technologies outside of the Web.
+
+[Cranelift]: https://cranelift.dev/
+[Wasmtime]: https://github.com/bytecodealliance/wasmtime
+[WebAssembly]: https://webassembly.org/
+[Lunatic]: https://lunatic.solutions/
+
+
+## MoarVM
+
+[MoarVM][] is designed for the [Raku][] programming language; a highly dynamic
+and flexible language.  This dynamism is reflected in MoarVM, which makes it
+a compelling choice.  Unfortunately though, it is still very young and sees
+little development activity, hence its poor performance.  The final nail in the
+coffin for targeting MoarVM is the lack of stable bytecode for it.
+
+[MoarVM]: https://www.moarvm.org/
+[Raku]: https://raku.org/
+
+
+## SBCL
+
+Condition system would make things easier.
+
+Decent low-level performance.
+
+Supports TCO.
+
+Has a new parallel garbage collector.
+
+[SBCL]: https://sbcl.org/
+
+
+## Verdict
+
+HotSpot or .NET.
+
+
+[Graal JIT]: https://www.graalvm.org/latest/reference-manual/compiler/operations/
+[.NET TC]: https://github.com/dotnet/runtime/blob/main/docs/design/features/tiered-compilation.md
+[JVM]: https://en.wikipedia.org/wiki/Java_virtual_machine
+[OpenJDK]: https://openjdk.org/
+[CLR]: https://learn.microsoft.com/en-us/dotnet/standard/clr
+[CLI]: https://en.wikipedia.org/wiki/Common_Language_Infrastructure
+[.NET]: https://dotnet.microsoft.com/
