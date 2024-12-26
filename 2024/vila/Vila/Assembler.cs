@@ -1,4 +1,3 @@
-using System.Buffers;
 using System.Text;
 
 namespace Vila.Assembler;
@@ -84,11 +83,9 @@ internal static class Reader
         _ => throw new NotImplementedException()
     };
 
-    static Token ReadString(LocationAwareStreamReader sr, Uri src, ArrayPool<char> ap)
+    static Token ReadString(LocationAwareStreamReader sr, Uri src)
     {
-        var chars = ap.Rent(256);  // FIXME: does not auto-expand.
-
-        int idx = 0;
+        StringBuilder str = new();
 
         // Consume first delimiter.
         sr.Read();
@@ -100,30 +97,26 @@ internal static class Reader
         {
             var c = (char)sr.Read();
             if (c == '"') break;
-            chars[idx++] = c;
+            str.Append(c);
         }
 
         var token = new Token
         {
-            Text = new string(chars.AsSpan(start: 0, length: idx)),
+            Text = str.ToString(),
             Type = TokenType.String,
             Loc = new TokenLocation(src, line, col)
         };
 
-        ap.Return(chars, clearArray: false);
-
         return token;
     }
 
-    static Token ReadSymbol(LocationAwareStreamReader sr, Uri src, ArrayPool<char> ap)
+    static Token ReadSymbol(LocationAwareStreamReader sr, Uri src)
     {
-        var chars = ap.Rent(8);  // FIXME: does not auto-expand?
-
-        int idx = 0;
+        StringBuilder str = new();
 
         // Consume and store first char.
         var c = (char)sr.Read();
-        chars[idx++] = c;
+        str.Append(c);
 
         // Save initial line and col.
         uint line = sr.Line, col = sr.Col;
@@ -131,17 +124,15 @@ internal static class Reader
         while (! (sr.EndOfStream || char.IsWhiteSpace((char)sr.Peek())))
         {
             c = (char)sr.Read();
-            chars[idx++] = c;
+            str.Append(c);
         }
 
         var token = new Token
         {
-            Text = new string(chars.AsSpan(start: 0, length: idx)),
+            Text = str.ToString(),
             Type = TokenType.Symbol,
             Loc = new TokenLocation(src, line, col)
         };
-
-        ap.Return(chars, clearArray: false);
 
         return token;
     }
@@ -170,21 +161,21 @@ internal static class Reader
 
     internal static IEnumerable<Token> ReadTokens(LocationAwareStreamReader sr, Uri source)
     {
-        var ap = ArrayPool<char>.Shared;
-
         while (! sr.EndOfStream)
         {
             var peekCh = (char)sr.Peek();
 
             if (char.IsWhiteSpace(peekCh)) { sr.Read(); continue; }
 
+            // TODO: need something continuation-like, i.e. try this, if fail, try next (+ pass collected state)?
+
             // TODO: tokenise comments.
             yield return peekCh switch
             {
                 '{' or '}' => ReadScopeDelim(sr, source),
                 ',' => ReadComma(sr, source),
-                '"' => ReadString(sr, source, ap),
-                _ => ReadSymbol(sr, source, ap)
+                '"' => ReadString(sr, source),
+                _ => ReadSymbol(sr, source)
             };
         }
     }
