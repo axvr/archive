@@ -2,13 +2,7 @@ using System.Text;
 
 namespace Vila.Assembler;
 
-internal record Token
-{
-    public required string? Text { get; init; }
-    public required TokenType Type { get; init; }
-    public required TokenLocation Loc { get; init; }
-}
-
+internal record Token(TokenType Type, string? Text, TokenLocation Loc);
 internal record TokenLocation(Uri Source, uint Line, uint Col);
 
 internal enum TokenType
@@ -17,8 +11,7 @@ internal enum TokenType
     BeginParams, EndParams, Comma,
     String, Integer, Float, Boolean, Null,
     Comment, BeginComment, EndComment,
-    Declaration, Label,
-    Symbol
+    Declaration, Label, Symbol
 }
 
 internal class LocationAwareStreamReader : StreamReader
@@ -93,12 +86,10 @@ internal static class Reader
             str.Append(c);
         }
 
-        var token = new Token
-        {
-            Text = str.ToString(),
-            Type = TokenType.String,
-            Loc = new TokenLocation(src, line, col)
-        };
+        var token = new Token(
+            Type: TokenType.String,
+            Text: str.ToString(),
+            Loc: new TokenLocation(src, line, col));
 
         return token;
     }
@@ -120,12 +111,10 @@ internal static class Reader
             str.Append(c);
         }
 
-        var token = new Token
-        {
-            Text = str.ToString(),
-            Type = TokenType.Symbol,
-            Loc = new TokenLocation(src, line, col)
-        };
+        var token = new Token(
+            Type: TokenType.String,
+            Text: str.ToString(),
+            Loc: new TokenLocation(src, line, col));
 
         return token;
     }
@@ -133,23 +122,19 @@ internal static class Reader
     static Token ReadScopeDelim(LocationAwareStreamReader sr, Uri src)
     {
         var c = (char)sr.Read();
-        return new Token
-        {
-            Text = c.ToString(),
-            Type = c == '{' ? TokenType.BeginScope : TokenType.EndScope,
-            Loc = new TokenLocation(src, sr.Line, sr.Col)
-        };
+        return new Token(
+            Type: c == '{' ? TokenType.BeginScope : TokenType.EndScope,
+            Text: c.ToString(),
+            Loc: new TokenLocation(src, sr.Line, sr.Col));
     }
 
     static Token ReadComma(LocationAwareStreamReader sr, Uri src)
     {
         var c = (char)sr.Read();
-        return new Token
-        {
-            Text = ",",
-            Type = TokenType.Comma,
-            Loc = new TokenLocation(src, sr.Line, sr.Col)
-        };
+        return new Token(
+            Type: TokenType.Comma,
+            Text: ",",
+            Loc: new TokenLocation(src, sr.Line, sr.Col));
     }
 
     internal static IEnumerable<Token> ReadTokens(LocationAwareStreamReader sr, Uri source)
@@ -157,7 +142,6 @@ internal static class Reader
         while (!sr.EndOfStream)
         {
             var peekCh = (char)sr.Peek();
-
             if (char.IsWhiteSpace(peekCh)) { sr.Read(); continue; }
 
             // TODO: need something continuation-like, i.e. try this, if fail, try next (+ pass collected state)?
