@@ -26,7 +26,7 @@ internal class LocationAwareStreamReader : StreamReader
     public uint Line { get; private set; } = 1;
     public uint Col { get; private set; } = 0;
 
-    // FIXME: Terrible location tracking.  Doesn't work with Async, Block of Linewise reading.
+    // FIXME: Terrible location tracking.  Doesn't work with Async, Block or Linewise reading.
     public override int Read()
     {
         var c = base.Read();
@@ -35,43 +35,36 @@ internal class LocationAwareStreamReader : StreamReader
         return c;
     }
 
+    // Remove other "Read" implementations that won't work with location tracking.
+    public override int Read(Span<char> buffer) => throw new NotImplementedException();
+    public override int Read(char[] buffer, int index, int count) => throw new NotImplementedException();
+    public override ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public override Task<int> ReadAsync(char[] buffer, int index, int count) => throw new NotImplementedException();
+    public override int ReadBlock(Span<char> buffer) => throw new NotImplementedException();
+    public override int ReadBlock(char[] buffer, int index, int count) => throw new NotImplementedException();
+    public override ValueTask<int> ReadBlockAsync(Memory<char> buffer, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public override Task<int> ReadBlockAsync(char[] buffer, int index, int count) => throw new NotImplementedException();
+    public override string? ReadLine() => throw new NotImplementedException();
+    public override Task<string?> ReadLineAsync() => throw new NotImplementedException();
+    public override ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+    public override string ReadToEnd() => throw new NotImplementedException();
+    public override Task<string> ReadToEndAsync() => throw new NotImplementedException();
+    public override Task<string> ReadToEndAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+
     // Default constructors.
-
-    public LocationAwareStreamReader(Stream stream) : base(stream) {}
-
-    public LocationAwareStreamReader(string path) : base(path) {}
-
-    public LocationAwareStreamReader(Stream stream, bool detectEncodingFromByteOrderMarks)
-        : base(stream, detectEncodingFromByteOrderMarks) {}
-
-    public LocationAwareStreamReader(Stream stream, Encoding encoding)
-        : base(stream, encoding) {}
-
-    public LocationAwareStreamReader(string path, bool detectEncodingFromByteOrderMarks)
-        : base(path, detectEncodingFromByteOrderMarks) {}
-
-    public LocationAwareStreamReader(string path, FileStreamOptions options)
-        : base(path, options) {}
-
-    public LocationAwareStreamReader(string path, Encoding encoding) : base(path, encoding) {}
-
-    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks)
-        : base(stream, encoding, detectEncodingFromByteOrderMarks) {}
-
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
-        : base(path, encoding, detectEncodingFromByteOrderMarks) {}
-
-    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize)
-        : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize) {}
-
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize)
-        : base(path, encoding, detectEncodingFromByteOrderMarks, bufferSize) {}
-
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, FileStreamOptions options)
-        : base(path, encoding, detectEncodingFromByteOrderMarks, options) {}
-
-    public LocationAwareStreamReader(Stream stream, Encoding? encoding = null, bool detectEncodingFromByteOrderMarks = true, int bufferSize = -1, bool leaveOpen = false)
-        : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize, leaveOpen) {}
+    public LocationAwareStreamReader(Stream stream) : base(stream) { }
+    public LocationAwareStreamReader(string path) : base(path) { }
+    public LocationAwareStreamReader(Stream stream, bool detectEncodingFromByteOrderMarks) : base(stream, detectEncodingFromByteOrderMarks) { }
+    public LocationAwareStreamReader(Stream stream, Encoding encoding) : base(stream, encoding) { }
+    public LocationAwareStreamReader(string path, bool detectEncodingFromByteOrderMarks) : base(path, detectEncodingFromByteOrderMarks) { }
+    public LocationAwareStreamReader(string path, FileStreamOptions options) : base(path, options) { }
+    public LocationAwareStreamReader(string path, Encoding encoding) : base(path, encoding) { }
+    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks) : base(stream, encoding, detectEncodingFromByteOrderMarks) { }
+    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks) : base(path, encoding, detectEncodingFromByteOrderMarks) { }
+    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize) : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize) { }
+    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize) : base(path, encoding, detectEncodingFromByteOrderMarks, bufferSize) { }
+    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, FileStreamOptions options) : base(path, encoding, detectEncodingFromByteOrderMarks, options) { }
+    public LocationAwareStreamReader(Stream stream, Encoding? encoding = null, bool detectEncodingFromByteOrderMarks = true, int bufferSize = -1, bool leaveOpen = false) : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize, leaveOpen) { }
 }
 
 internal static class Reader
@@ -93,7 +86,7 @@ internal static class Reader
         // Save initial line and col.
         uint line = sr.Line, col = sr.Col;
 
-        while (! sr.EndOfStream)
+        while (!sr.EndOfStream)
         {
             var c = (char)sr.Read();
             if (c == '"') break;
@@ -121,7 +114,7 @@ internal static class Reader
         // Save initial line and col.
         uint line = sr.Line, col = sr.Col;
 
-        while (! (sr.EndOfStream || char.IsWhiteSpace((char)sr.Peek())))
+        while (!(sr.EndOfStream || char.IsWhiteSpace((char)sr.Peek())))
         {
             c = (char)sr.Read();
             str.Append(c);
@@ -161,7 +154,7 @@ internal static class Reader
 
     internal static IEnumerable<Token> ReadTokens(LocationAwareStreamReader sr, Uri source)
     {
-        while (! sr.EndOfStream)
+        while (!sr.EndOfStream)
         {
             var peekCh = (char)sr.Peek();
 
