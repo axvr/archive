@@ -1,7 +1,7 @@
 // Hello world in CIL.
 
 .assembly Hello {}
-.assembly extern mscorlib {}
+.assembly extern mscorlib {}  // FIXME: different name in new .NET
 
 .method static void Main()
 {
