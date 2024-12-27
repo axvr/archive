@@ -19,8 +19,8 @@ internal class CharReader(StreamReader sr, Uri source)
 {
     public uint Line { get; private set; } = 1;
     public uint Col { get; private set; } = 0;
-    public bool EndOfStream { get => sr.EndOfStream; }
-    public Uri Source { get => source; }
+    public bool EndOfStream => sr.EndOfStream;
+    public Uri Source => source;
 
     // TODO: cast to char.
     public int Read()
