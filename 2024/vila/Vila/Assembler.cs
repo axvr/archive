@@ -14,62 +14,41 @@ internal enum TokenType
     Declaration, Label, Symbol
 }
 
-internal class LocationAwareStreamReader : StreamReader
+// TODO: support peeking multiple chars ahead?
+internal class CharReader(StreamReader sr, Uri source)
 {
     public uint Line { get; private set; } = 1;
     public uint Col { get; private set; } = 0;
+    public bool EndOfStream { get => sr.EndOfStream; }
+    public Uri Source { get => source; }
 
-    // FIXME: Terrible location tracking.  Doesn't work with Async, Block or Linewise reading.
-    public override int Read()
+    // TODO: cast to char.
+    public int Read()
     {
-        var c = base.Read();
-        if ((char)c == '\n') { ++Line; Col = 0; }
-        else if (c >= 0) ++Col;
+        var c = sr.Read();
+        if (c == -1) return c;
+        var ch = (char)c;
+        if (ch == '\n') { ++Line; Col = 0; }
+        else ++Col;
         return c;
     }
 
-    // Remove other "Read" implementations that won't work with location tracking.
-    public override int Read(Span<char> buffer) => throw new NotImplementedException();
-    public override int Read(char[] buffer, int index, int count) => throw new NotImplementedException();
-    public override ValueTask<int> ReadAsync(Memory<char> buffer, CancellationToken cancellationToken = default) => throw new NotImplementedException();
-    public override Task<int> ReadAsync(char[] buffer, int index, int count) => throw new NotImplementedException();
-    public override int ReadBlock(Span<char> buffer) => throw new NotImplementedException();
-    public override int ReadBlock(char[] buffer, int index, int count) => throw new NotImplementedException();
-    public override ValueTask<int> ReadBlockAsync(Memory<char> buffer, CancellationToken cancellationToken = default) => throw new NotImplementedException();
-    public override Task<int> ReadBlockAsync(char[] buffer, int index, int count) => throw new NotImplementedException();
-    public override string? ReadLine() => throw new NotImplementedException();
-    public override Task<string?> ReadLineAsync() => throw new NotImplementedException();
-    public override ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
-    public override string ReadToEnd() => throw new NotImplementedException();
-    public override Task<string> ReadToEndAsync() => throw new NotImplementedException();
-    public override Task<string> ReadToEndAsync(CancellationToken cancellationToken) => throw new NotImplementedException();
+    // TODO: read multiple chars into internal buffer and commit once done?
+    //  ^ auto-capture the initial position.
 
-    // Default constructors.
-    public LocationAwareStreamReader(Stream stream) : base(stream) { }
-    public LocationAwareStreamReader(string path) : base(path) { }
-    public LocationAwareStreamReader(Stream stream, bool detectEncodingFromByteOrderMarks) : base(stream, detectEncodingFromByteOrderMarks) { }
-    public LocationAwareStreamReader(Stream stream, Encoding encoding) : base(stream, encoding) { }
-    public LocationAwareStreamReader(string path, bool detectEncodingFromByteOrderMarks) : base(path, detectEncodingFromByteOrderMarks) { }
-    public LocationAwareStreamReader(string path, FileStreamOptions options) : base(path, options) { }
-    public LocationAwareStreamReader(string path, Encoding encoding) : base(path, encoding) { }
-    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks) : base(stream, encoding, detectEncodingFromByteOrderMarks) { }
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks) : base(path, encoding, detectEncodingFromByteOrderMarks) { }
-    public LocationAwareStreamReader(Stream stream, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize) : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize) { }
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int bufferSize) : base(path, encoding, detectEncodingFromByteOrderMarks, bufferSize) { }
-    public LocationAwareStreamReader(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, FileStreamOptions options) : base(path, encoding, detectEncodingFromByteOrderMarks, options) { }
-    public LocationAwareStreamReader(Stream stream, Encoding? encoding = null, bool detectEncodingFromByteOrderMarks = true, int bufferSize = -1, bool leaveOpen = false) : base(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize, leaveOpen) { }
+    public int Peek() => sr.Peek();
 }
 
 internal static class Reader
 {
     // TODO: the reader shouldn't open the stream?
-    internal static LocationAwareStreamReader UriToStreamReader(Uri u) => u.Scheme switch
+    internal static StreamReader UriToStreamReader(Uri u) => u.Scheme switch
     {
-        "file" => new LocationAwareStreamReader(u.AbsolutePath),
+        "file" => new StreamReader(u.AbsolutePath),
         _ => throw new NotImplementedException()
     };
 
-    static Token ReadString(LocationAwareStreamReader sr, Uri src)
+    static Token ReadString(CharReader sr)
     {
         StringBuilder str = new();
 
@@ -89,12 +68,12 @@ internal static class Reader
         var token = new Token(
             Type: TokenType.String,
             Text: str.ToString(),
-            Loc: new TokenLocation(src, line, col));
+            Loc: new TokenLocation(sr.Source, line, col));
 
         return token;
     }
 
-    static Token ReadSymbol(LocationAwareStreamReader sr, Uri src)
+    static Token ReadSymbol(CharReader sr)
     {
         StringBuilder str = new();
 
@@ -114,45 +93,47 @@ internal static class Reader
         var token = new Token(
             Type: TokenType.String,
             Text: str.ToString(),
-            Loc: new TokenLocation(src, line, col));
+            Loc: new TokenLocation(sr.Source, line, col));
 
         return token;
     }
 
-    static Token ReadScopeDelim(LocationAwareStreamReader sr, Uri src)
+    static Token ReadScopeDelim(CharReader sr)
     {
         var c = (char)sr.Read();
         return new Token(
             Type: c == '{' ? TokenType.BeginScope : TokenType.EndScope,
             Text: c.ToString(),
-            Loc: new TokenLocation(src, sr.Line, sr.Col));
+            Loc: new TokenLocation(sr.Source, sr.Line, sr.Col));
     }
 
-    static Token ReadComma(LocationAwareStreamReader sr, Uri src)
+    static Token ReadComma(CharReader sr)
     {
-        var c = (char)sr.Read();
+        sr.Read();  // Consume char.
         return new Token(
             Type: TokenType.Comma,
             Text: ",",
-            Loc: new TokenLocation(src, sr.Line, sr.Col));
+            Loc: new TokenLocation(sr.Source, sr.Line, sr.Col));
     }
 
-    internal static IEnumerable<Token> ReadTokens(LocationAwareStreamReader sr, Uri source)
+    internal static IEnumerable<Token> ReadTokens(StreamReader sr, Uri source)
     {
-        while (!sr.EndOfStream)
+        CharReader sr2 = new(sr, source);
+
+        while (!sr2.EndOfStream)
         {
-            var peekCh = (char)sr.Peek();
-            if (char.IsWhiteSpace(peekCh)) { sr.Read(); continue; }
+            var peekCh = (char)sr2.Peek();
+            if (char.IsWhiteSpace(peekCh)) { sr2.Read(); continue; }
 
             // TODO: need something continuation-like, i.e. try this, if fail, try next (+ pass collected state)?
 
             // TODO: tokenise comments.
             yield return peekCh switch
             {
-                '{' or '}' => ReadScopeDelim(sr, source),
-                ',' => ReadComma(sr, source),
-                '"' => ReadString(sr, source),
-                _ => ReadSymbol(sr, source)
+                '{' or '}' => ReadScopeDelim(sr2),
+                ',' => ReadComma(sr2),
+                '"' => ReadString(sr2),
+                _ => ReadSymbol(sr2)
             };
         }
     }
