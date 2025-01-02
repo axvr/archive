@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -ex
+
+find . -type f \
+    | grep -v '\(^./.git\|/\(bin\|obj\)/\)' \
+    | xargs dos2unix --remove-bom --add-eol --quiet
+
+dotnet format
