@@ -7,7 +7,7 @@ Last updated: 2025-01-08
 
 There are a decent number of pre-built host platforms available for building
 programming languages and programming environments upon.  The top options for
-Enqueue are:
+Catalyst are:
 
 | Target | VM | JIT | GC | Runtime | Tooling\* | Dynamic | Performant |
 |--------|----|-----|----|---------|-----------|---------|------------|
@@ -20,22 +20,22 @@ Enqueue are:
 
 \* Tooling = effective profilers, decompilers, micro-benchmarking tools, etc.
 
-Of these, the JVM and CLR are likely the best suited for Enqueue, but let's
+Of these, the JVM and CLR are likely the best suited for Catalyst, but let's
 explore the available options further...
 
 
 ## Why host on an existing platform?
 
 Being heavily inspried by Clojure, it should come as no surprise that like
-Clojure, Enqueue is intended to run upon an existing platform.  Through
+Clojure, Catalyst is intended to run upon an existing platform.  Through
 hosting, the platform's VM, JIT compiler, garbage collector and already built
-libraries and tooling can all be used by Enqueue.
+libraries and tooling can all be used by Catalyst.
 
 Unlike many other hosted languages (such as Clojure and F#) that have
-[mutualistic][mutualism] relationships with their respective hosts, Enqueue
+[mutualistic][mutualism] relationships with their respective hosts, Catalyst
 will have a [commensalistic][commensalism] relationship with its, as it
 benefits from the host, but the host gets nothing in return.  This is due to
-the [isolationary](Isolation.md) nature of Enqueue.
+the [isolationary](Isolation.md) nature of Catalyst.
 
 [mutualism]: https://en.wikipedia.org/wiki/Mutualism_(biology)
 [commensalism]: https://en.wikipedia.org/wiki/Commensalism
@@ -47,7 +47,7 @@ _designed for_ AOT compilation; they _tend_ to be highly static (to assist the
 compiler) and often defer much of the complicated busy work to the programmer
 (e.g. manual memory management).  While AOT compilation of a dynamic language
 is possible, it almost universally results in worse performance than JIT
-compilation does.  In the case of a dynamic high level language like Enqueue,
+compilation does.  In the case of a dynamic high level language like Catalyst,
 simply using an existing powerful JIT and GC can provide excellent performance
 practically for free.  In particular, the JVM and CLR are extremely fast;
 OpenJDK HotSpot is designed for long running servers, and its ZGC garbage
@@ -255,20 +255,20 @@ whereas OpenJDK can't.  .NET would be better suited for local machines,
 containerisation and multi-user/application systems.
 
 More competition among JVM languages than .NET languages.  Might be less
-expectation that .NET libs would work on a .NET hosted Enqueue, than Java libs
-on a JVM hosted Enqueue?
+expectation that .NET libs would work on a .NET hosted Catalyst, than Java libs
+on a JVM hosted Catalyst?
 
 `invokedynamic` isn't even used by Clojure, so perhaps the more static CLR isn't
 an issue?  Need to investigate the DLR vs. `invokedynamic` further.  (I
 probably wouldn't even use the DLR anyway.)  Similar to how Julia optimises for
 static LLVM.
 
-Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Enqueue
+Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Catalyst
 too, whether it is on the JVM or CLR.  On the JVM one solution is
 `invokedynamic` or "safe points".  How can this be worked around in .NET?
 Perhaps something akin to Smalltalk's `become:`?  For the most part since
-Enqueue will wrap basically everything, `invokedynamic` may not actually be all
-that useful?
+Catalyst will wrap basically everything, `invokedynamic` may not actually be
+all that useful?
 
 
 ## BEAM
