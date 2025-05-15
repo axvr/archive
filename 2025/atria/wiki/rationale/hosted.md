@@ -1,9 +1,19 @@
----
-Author: Alex Vear
-Last updated: 2025-01-08
----
+# Rationale: why host on an existing platform?
 
-# Host comparison
+Like Clojure, Catalyst is intended to run on an existing platform.  With
+hosting, I can utilise the platform's powerful VM, JIT compiler, garbage
+collector and libraries/tooling.  Many existing platforms have had huge amounts
+of work put into them by experts for free!  It would be foolish to believe that
+I could build a competitive GC, JIT compiler and runtime from scratch, or that
+my language would become popular enough to attract those who could.
+
+With this freed time, I can focus language development on what I consider to be
+the more critical parts.  While each platform will have design choices counter
+to Catalyst's, I believe the trade-off will be worth it.  Remember that not
+every programming language needs to completely reinvent the wheel.
+
+
+## Host comparison
 
 There are a decent number of pre-built host platforms available for building
 programming languages and programming environments upon.  The top options for
@@ -24,52 +34,14 @@ Of these, the JVM and CLR are likely the best suited for Catalyst, but let's
 explore the available options further...
 
 
-## Why host on an existing platform?
-
-Being heavily inspried by Clojure, it should come as no surprise that like
-Clojure, Catalyst is intended to run upon an existing platform.  Through
-hosting, the platform's VM, JIT compiler, garbage collector and already built
-libraries and tooling can all be used by Catalyst.
-
-Unlike many other hosted languages (such as Clojure and F#) that have
-[mutualistic][mutualism] relationships with their respective hosts, Catalyst
-will have a [commensalistic][commensalism] relationship with its, as it
-benefits from the host, but the host gets nothing in return.  This is due to
-the [isolationary](Isolation.md) nature of Catalyst.
-
-[mutualism]: https://en.wikipedia.org/wiki/Mutualism_(biology)
-[commensalism]: https://en.wikipedia.org/wiki/Commensalism
-
-### What about performance?
-
-Languages aiming for maximum raw performance (e.g. Rust, Zig, C++, etc.) are
-_designed for_ AOT compilation; they _tend_ to be highly static (to assist the
-compiler) and often defer much of the complicated busy work to the programmer
-(e.g. manual memory management).  While AOT compilation of a dynamic language
-is possible, it almost universally results in worse performance than JIT
-compilation does.  In the case of a dynamic high level language like Catalyst,
-simply using an existing powerful JIT and GC can provide excellent performance
-practically for free.  In particular, the JVM and CLR are extremely fast;
-OpenJDK HotSpot is designed for long running servers, and its ZGC garbage
-collector can perform sub 10ms garbage collections with a heap size in the
-terabytes!
-
-It would be a waste of my time to even attempt to build a competitive GC, JIT
-compiler and runtime completely from scratch when many experts have already
-spent huge amounts of time in doing it far better than I ever could, and for
-free!  Some languages do manage to become popular enough to attact compiler
-experts to help optimise, but it'd be foolish to expect my language to become
-popular enough (if at all) to rely on that happening.
-
-Finally, by utilising an existing host platform's facilities, I can keep
-language development more focused on the important parts that move it towards
-my ambitious goals.  Not every programming language needs to try to reinvent
-the wheel.
-
-## The JVM and the CLR
+### The JVM and the CLR
 
 The big two cross-language VMs are the [JVM][] ([OpenJDK][] Hotspot) and
 [CLR][] ([.NET][]) which are fully cross-platform and work on x86 and ARM.
+
+OpenJDK HotSpot is designed for long running servers, and its ZGC garbage
+collector can perform sub 10ms garbage collections with a heap size in the
+terabytes!
 
 .NET has made incredible strides in catching up with the JVM in the last few
 years and now it even overtakes it in some areas.
@@ -81,7 +53,7 @@ and it looks to become even better with [Graal JIT][].  Similarly .NET's PGO
 While the .NET GC is simpler than the JVM GCs it is still excellent.  Since
 there is only one garbage collector in .NET it integrates well with the rest of
 the .NET ecosystem as the runtime is designed to avoid GC pressure.  This
-simplicty offers better security.
+simplicity offers better security.
 
 CLR bytecode is generally superior to JVM bytecode as are the modules and
 assembly formats.  CLR bytecode includes more types (e.g. non-signed bytes and
@@ -125,7 +97,7 @@ which would allow code reuse if I want to build an IDE for it.
 [Godot]: https://godotengine.org/
 [.NET API docs]: https://github.com/dotnet/dotnet-api-docs
 
-### Expert opinions
+#### Expert opinions
 
 > What was particularly interesting for me in implementing Clojure, was how
 > much runtime tangibility and situated sensibilities were in the JVM design.
@@ -271,7 +243,7 @@ Catalyst will wrap basically everything, `invokedynamic` may not actually be
 all that useful?
 
 
-## BEAM
+### BEAM
 
 [BEAM][] and [Erlang/OTP][] are excellent pieces of engineering (and is exactly
 what I'm trying to achieve), but it unfortunately hasn't seen anywhere near the
@@ -281,7 +253,7 @@ tooling and making it fast.
 BEAM is bad at numeric computation and copies data between processes.  The
 latter is the biggest issue; I believe the combination of a faster VM and
 persistent immutable data structures will easily be able to significantly
-outperform BEAM in every aspect.  Every other guaranatee that Erlang/OTP and
+outperform BEAM in every aspect.  Every other guarantee that Erlang/OTP and
 BEAM provide can be implemented a top of the JVM or CLR and should be
 reasonably straightforward as I intend to severely limit (and wrap) the VM
 capabilities directly available to programs written in my language to achieve
@@ -291,7 +263,7 @@ isolation and powerful hot reloading.
 [Erlang/OTP]: https://erlang.org/
 
 
-## WebAssembly
+### WebAssembly
 
 [WebAssembly][] is still new and has not reached maturity yet.  While there are
 some excellent projects in this area, such as [Cranelift][], [Wasmtime][] and
@@ -307,7 +279,7 @@ using Web technologies outside of the Web.
 [Lunatic]: https://lunatic.solutions/
 
 
-## MoarVM
+### MoarVM
 
 [MoarVM][] is designed for the [Raku][] programming language; a highly dynamic
 and flexible language.  This dynamism is reflected in MoarVM, which makes it
@@ -319,7 +291,7 @@ coffin for targeting MoarVM is the lack of stable bytecode for it.
 [Raku]: https://raku.org/
 
 
-## SBCL
+### SBCL
 
 Condition system would make things easier.
 
@@ -332,7 +304,7 @@ Has a new parallel garbage collector.
 [SBCL]: https://sbcl.org/
 
 
-## Verdict
+### Verdict
 
 HotSpot or .NET.
 
