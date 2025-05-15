@@ -1,2 +1,2 @@
-set path=,,src/**,test/**,resources/**,build/**,perf/**,bench/**,wiki/**,do/**
-let g:conjure#client#clojure#nrepl#connection#auto_repl#cmd = 'clojure -M:devel:repl/nrepl'
+set path=,,src/**,test/**,resources/**,build/**,devel/**,bench/**,docs/**,do/**
+let g:conjure#client#clojure#nrepl#connection#auto_repl#cmd = 'do/clj -M:devel:repl/nrepl'

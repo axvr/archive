@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <name>catalyst</name>
-  <description>The Catalyst programming environment.</description>
+  <description>Catalyst is a "batteries included" programming language and environment specialised for the rapid construction and easy maintenance of simple, safe and dynamic server systems by both individuals and teams.</description>
   <url>https://catalyst.enqueue.org</url>
   <licenses>
     <license>

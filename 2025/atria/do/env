@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Run given command with extra environment variables set.
+
+set -e
+
+jvm_opts=(
+    '-Duser.timezone=UTC'
+    '-Dfile.encoding=UTF-8'
+    '-Dclojure.compiler.direct-linking=true'
+)
+
+JDK_JAVA_OPTIONS="${jvm_opts[@]}" \
+    exec "$@"

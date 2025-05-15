@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run `java` command with extra environment variables.
+
+set -e
+exec do/env java "$@"

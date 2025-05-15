@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Run `clj` command with extra environment variables.
+
+set -e
+
+mkdir -p target/classes  # Required for jmh-clojure.
+
+[ "$(command -v rlwrap)" ] && cmd=clj || cmd=clojure
+exec do/env "$cmd" "$@"

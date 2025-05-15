@@ -1,8 +1,8 @@
 # Catalyst
 
-Catalyst is a batteries included ___programming environment___ specialised for
-the rapid construction and easy maintenance of __simple__, __safe__ and
-__dynamic systems__ software for servers by both individuals and teams.
+Catalyst is a "batteries included" ___programming language and environment___
+specialised for the rapid construction and easy maintenance of __simple__,
+__safe__ and __dynamic__ server systems by both individuals and teams.
 
 Inspired by: [Clojure][], [Smalltalk-72][Smalltalk], [Erlang/OTP][Erlang], [Common Lisp][] and [Bass][].
 
@@ -16,13 +16,14 @@ Inspired by: [Clojure][], [Smalltalk-72][Smalltalk], [Erlang/OTP][Erlang], [Comm
 
 
 > [!IMPORTANT]
-> Not much here yet!  I'm still trying to figure out exactly what I want Catalyst
-> to be.  Maybe check out the [design documents](wiki/Design/README.md)?
+> Not much here yet as I am still designing Catalyst.  Maybe check out the
+> [design documents](wiki/Design/README.md).
 
 
 ## Legal
 
-Copyright © 2024 [Alex Vear](https://www.alexvear.com).
+Copyright © 2025 [Alex Vear](https://www.alexvear.com).
 
-Catalyst is available under the terms of the [Mozilla Public License v2.0](https://www.mozilla.org/en-US/MPL/2.0/).
-A full copy of the MPL 2.0 can be found in the accompanying [`LICENCE`](/LICENCE) file.
+While the source code is available to view, this project is **not** currently
+Open Source.  External code contributions to this project will not be accepted.
+Use of this code for AI training is not permitted.
