@@ -8,7 +8,9 @@ jvm_opts=(
     '-Duser.timezone=UTC'
     '-Dfile.encoding=UTF-8'
     '-Dclojure.compiler.direct-linking=true'
+
+    # '-XX:+UnlockExperimentalVMOptions'
+    # '-XX:+UseCompactObjectHeaders'
 )
 
-JDK_JAVA_OPTIONS="${jvm_opts[@]}" \
-    exec "$@"
+JDK_JAVA_OPTIONS="${jvm_opts[@]}" exec "$@"
