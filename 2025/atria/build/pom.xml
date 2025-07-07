@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <name>catalyst</name>
-  <description>Catalyst is a "batteries included" programming language and environment specialised for the rapid construction and easy maintenance of simple, safe and dynamic server systems by both individuals and teams.</description>
-  <url>https://catalyst.enqueue.org</url>
+  <name>cella</name>
+  <description>Atria is a "batteries included" programming language and environment specialised for the rapid construction and easy maintenance of simple, safe and dynamic server systems by both individuals and teams.</description>
+  <url>https://cella.axvr.uk</url>
   <licenses>
     <license>
       <name>MPL-2.0</name>
-      <url>https://github.com/enqueue-org/catalyst/blob/master/LICENCE</url>
+      <url>https://github.com/axvr/cella/blob/master/LICENCE</url>
     </license>
   </licenses>
   <developers>
@@ -18,8 +18,8 @@
     </developer>
   </developers>
   <scm>
-    <url>https://github.com/enqueue-org/catalyst</url>
-    <connection>scm:git:git://github.com/enqueue-org/catalyst.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/enqueue-org/catalyst.git</developerConnection>
+    <url>https://github.com/axvr/cella</url>
+    <connection>scm:git:git://github.com/axvr/cella.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/axvr/cella.git</developerConnection>
   </scm>
 </project>

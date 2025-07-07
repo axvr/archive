@@ -1,23 +1,23 @@
 # Rationale: why host on an existing platform?
 
-Like Clojure, Catalyst is intended to run on an existing platform.  With
-hosting, I can utilise the platform's powerful VM, JIT compiler, garbage
-collector and libraries/tooling.  Many existing platforms have had huge amounts
-of work put into them by experts for free!  It would be foolish to believe that
-I could build a competitive GC, JIT compiler and runtime from scratch, or that
-my language would become popular enough to attract those who could.
+Like Clojure, Cella is intended to run on an existing platform.  With hosting,
+I can utilise the platform's powerful VM, JIT compiler, garbage collector and
+libraries/tooling.  Many existing platforms have had huge amounts of work put
+into them by experts for free!  It would be foolish to believe that I could
+build a competitive GC, JIT compiler and runtime from scratch, or that my
+language would become popular enough to attract those who could.
 
 With this freed time, I can focus language development on what I consider to be
 the more critical parts.  While each platform will have design choices counter
-to Catalyst's, I believe the trade-off will be worth it.  Remember that not
-every programming language needs to completely reinvent the wheel.
+to Cella's, I believe the trade-off will be worth it.  Remember that not every
+programming language needs to completely reinvent the wheel.
 
 
 ## Host comparison
 
 There are a decent number of pre-built host platforms available for building
 programming languages and programming environments upon.  The top options for
-Catalyst are:
+Cella are:
 
 | Target | VM | JIT | GC | Runtime | Tooling\* | Dynamic | Performant |
 |--------|----|-----|----|---------|-----------|---------|------------|
@@ -30,7 +30,7 @@ Catalyst are:
 
 \* Tooling = effective profilers, decompilers, micro-benchmarking tools, etc.
 
-Of these, the JVM and CLR are likely the best suited for Catalyst, but let's
+Of these, the JVM and CLR are likely the best suited for Cella, but let's
 explore the available options further...
 
 
@@ -227,20 +227,20 @@ whereas OpenJDK can't.  .NET would be better suited for local machines,
 containerisation and multi-user/application systems.
 
 More competition among JVM languages than .NET languages.  Might be less
-expectation that .NET libs would work on a .NET hosted Catalyst, than Java libs
-on a JVM hosted Catalyst?
+expectation that .NET libs would work on a .NET hosted Cella, than Java libs on
+a JVM hosted Cella?
 
 `invokedynamic` isn't even used by Clojure, so perhaps the more static CLR isn't
 an issue?  Need to investigate the DLR vs. `invokedynamic` further.  (I
 probably wouldn't even use the DLR anyway.)  Similar to how Julia optimises for
 static LLVM.
 
-Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Catalyst
+Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Cella
 too, whether it is on the JVM or CLR.  On the JVM one solution is
 `invokedynamic` or "safe points".  How can this be worked around in .NET?
-Perhaps something akin to Smalltalk's `become:`?  For the most part since
-Catalyst will wrap basically everything, `invokedynamic` may not actually be
-all that useful?
+Perhaps something akin to Smalltalk's `become:`?  For the most part since Cella
+will wrap basically everything, `invokedynamic` may not actually be all that
+useful?
 
 
 ### BEAM

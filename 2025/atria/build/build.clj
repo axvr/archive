@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [compile])
   (:require [clojure.tools.build.api :as b]))
 
-(def lib 'org.enqueue/catalyst)
+(def lib 'uk.axvr/cella)
 (def version "local")
 (def basis (b/create-basis {:project "deps.edn"}))
 (def class-dir "target/classes")

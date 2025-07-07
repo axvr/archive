@@ -1,6 +1,6 @@
-# Catalyst
+# Cella
 
-Catalyst is a "batteries included" ___programming language and environment___
+Cella is a "batteries included" ___programming language and environment___
 specialised for the rapid construction and easy maintenance of __simple__,
 __safe__ and __dynamic__ server systems by both individuals and teams.
 
