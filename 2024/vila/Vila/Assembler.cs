@@ -22,15 +22,14 @@ internal class CharReader(StreamReader sr, Uri source)
     public bool EndOfStream => sr.EndOfStream;
     public Uri Source => source;
 
-    // TODO: cast to char.
-    public int Read()
+    public char Next()
     {
         var c = sr.Read();
-        if (c == -1) return c;
+        if (c == -1) throw new EndOfStreamException();
         var ch = (char)c;
         if (ch == '\n') { ++Line; Col = 0; }
         else ++Col;
-        return c;
+        return ch;
     }
 
     // TODO: read multiple chars into internal buffer and commit once done?
@@ -53,14 +52,14 @@ internal static class Reader
         StringBuilder str = new();
 
         // Consume first delimiter.
-        sr.Read();
+        sr.Next();
 
         // Save initial line and col.
         uint line = sr.Line, col = sr.Col;
 
         while (!sr.EndOfStream)
         {
-            var c = (char)sr.Read();
+            var c = sr.Next();
             if (c == '"') break;
             str.Append(c);
         }
@@ -78,7 +77,7 @@ internal static class Reader
         StringBuilder str = new();
 
         // Consume and store first char.
-        var c = (char)sr.Read();
+        var c = sr.Next();
         str.Append(c);
 
         // Save initial line and col.
@@ -86,7 +85,7 @@ internal static class Reader
 
         while (!(sr.EndOfStream || char.IsWhiteSpace((char)sr.Peek())))
         {
-            c = (char)sr.Read();
+            c = sr.Next();
             str.Append(c);
         }
 
@@ -100,7 +99,7 @@ internal static class Reader
 
     static Token ReadScopeDelim(CharReader sr)
     {
-        var c = (char)sr.Read();
+        var c = sr.Next();
         return new Token(
             Type: c == '{' ? TokenType.BeginScope : TokenType.EndScope,
             Text: c.ToString(),
@@ -109,7 +108,7 @@ internal static class Reader
 
     static Token ReadComma(CharReader sr)
     {
-        sr.Read();  // Consume char.
+        sr.Next();  // Consume char.
         return new Token(
             Type: TokenType.Comma,
             Text: ",",
@@ -123,7 +122,7 @@ internal static class Reader
         while (!sr2.EndOfStream)
         {
             var peekCh = (char)sr2.Peek();
-            if (char.IsWhiteSpace(peekCh)) { sr2.Read(); continue; }
+            if (char.IsWhiteSpace(peekCh)) { sr2.Next(); continue; }
 
             // TODO: need something continuation-like, i.e. try this, if fail, try next (+ pass collected state)?
 
