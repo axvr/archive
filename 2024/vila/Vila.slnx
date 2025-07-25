@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Vila/Vila.csproj" />
+  <Project Path="Vila.Test/Vila.Test.csproj" />
+</Solution>
