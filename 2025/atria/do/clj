@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env -S execlineb -W
 
 # Run `clj` command with extra environment variables.
 
-set -e
+envfile java.env
+foreground { mkdir -p target/classes }  # Required for jmh-clojure.
 
-mkdir -p target/classes  # Required for jmh-clojure.
-
-[ "$(command -v rlwrap)" ] && cmd=clj || cmd=clojure
-exec do/env "$cmd" "$@"
+backtick -E has_rlwrap { command -v rlwrap }
+elgetpositionals
+ifte { clj $@ } { clojure $@ } test -n $has_rlwrap
