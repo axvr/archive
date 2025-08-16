@@ -1,0 +1,6 @@
+- Design the internal data layout of the network.
+  - Do not limit the names of modules and collections.
+    - IDs for collections need to be unique though.
+    - So perhaps they should be restricted to reverse domain names?
+    - Otherwise you could maliciously make the ID the same as another.
+- Create a function to add a new module to a network.

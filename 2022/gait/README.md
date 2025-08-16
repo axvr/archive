@@ -1,0 +1,46 @@
+# Gait
+
+_2022-11-27 – 2023-10-26_
+
+An experiment in creating an interactive, object-oriented [hardware description language (HDL)][HDL].
+
+> **Warning**<br>
+> This is a **very** work-in-progress prototype.
+
+Influenced by many languages and systems including: [Clojure][], [Bel][], [Smalltalk][], [GRAIL][], [SystemVerilog][] and [Bass][].
+
+[HDL]: https://en.wikipedia.org/wiki/Hardware_description_language
+[Clojure]: https://clojure.org
+[Bel]: http://www.paulgraham.com/bel.html
+[Smalltalk]: https://en.wikipedia.org/wiki/Smalltalk
+[GRAIL]: https://en.wikipedia.org/wiki/RAND_Tablet
+[SystemVerilog]: https://en.wikipedia.org/wiki/SystemVerilog
+[Bass]: https://github.com/vito/bass
+
+
+## Road map
+
+- [ ] Initial simulator (machine API)
+- [ ] Module collections (i.e. namespaces)
+- [ ] Simulator server (message passing with RSocket over WebSockets + CBOR?)
+- [ ] External libraries (+ package management?)
+- [ ] IDE (C# Godot?  Something else?)
+- [ ] Standard library
+- [ ] Optimiser
+- [ ] Netlist generation
+- [ ] Load onto an FPGA
+
+
+### Out of scope
+
+- Compile to Verilog, SystemVerilog, VHDL or SystemC.  (Use [Clash][] instead.)
+- Textual interface/language.
+- Backwards compatibility with other systems and tools.
+- Support a wide range of FPGAs.
+
+[Clash]: https://clash-lang.org
+
+
+## Legal
+
+_Public domain.  No rights reserved._

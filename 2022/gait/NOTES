@@ -1,0 +1,37 @@
+Entrypoint.
+
+Everything (module names, IO, etc.) should have IDs and display names.
+
+Graph diff algorithms will be required.  Should be a fun challenge.
+
+WYSIWYG/rich documentation on modules and collections.  Links to websites,
+files and other modules.  Attach docs to collections, modules, module IO
+and wires.  Call docs "notes"?
+
+Distancing Gait from textual limitations, we unlock many things that would be
+really difficult to represent 1 dimensionally as text.  E.g. we can attach
+"notes" (smarter comments) to many more things, even logic.  Names can use
+any special characters.  RTL text is basically a non-issue.  Renaming is quick
+and reliable.
+
+Handling of different collection versions?  Later challenge, or consider
+from the start?  Collections depend on specific versions of other
+collections.
+
+Use CBOR + extensions as the serialisation format for Gait files and server messages.
+Would want custom read/write handlers to convert into record objects.
+
+How to handle cyclical collection dependencies?
+
+Module vs. package vs. collection vs. component vs. assembly vs. system.
+Thunks, Modules, Instances, Collections, Networks.
+
+Should input evaluation order matter?  Probably not.  Assume the simulator
+will and can perform evaluation however it likes even concurrently.
+
+Module instances are only required when they are impure.
+Instances can be implemented purely by extending a module with hidden IO.
+
+Simulator should be entirely in control, to enable concurrent and parallel
+reactions, snapshotting, time travel, optimisations and refactoring
+suggestions.
