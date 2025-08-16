@@ -3,7 +3,7 @@
 _2024-10-19 – 2025-07-08_
 
 > [!WARNING]
-> Very incomplete.
+> Very incomplete/barely started.
 
 ___An interactive, runtime focused .NET CIL assembler.___
 
