@@ -1,0 +1,10 @@
+#!/usr/bin/env -S execlineb -W
+
+foreground
+{
+    pipeline { find . -type f }
+    pipeline { grep -v "\\(^./.git\\|/\\(bin\\|obj\\)/\\)" }
+    xargs dos2unix --remove-bom --add-eol --quiet
+}
+
+dotnet format
