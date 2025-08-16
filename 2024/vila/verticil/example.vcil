@@ -1,0 +1,5 @@
+define .method Main ^private ^hidebysig ^static ^void
+  [ string[] ] ^cil ^managed
+  {
+    2(i4)
+  }
