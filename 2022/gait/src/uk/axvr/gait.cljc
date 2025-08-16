@@ -1,4 +1,63 @@
-(ns uk.axvr.gait)
+(ns uk.axvr.gait
+  (:require [clj-cbor.core :as cbor]))
+
+;; NOTE: these are records to provide faster key-value access and better read,
+;; write and space efficiency on binary storage of collections.
+
+(defrecord Wire
+  ;; Models a connection between an input and several output points on and/or
+  ;; across modules.
+  [id name doc from-term to-terms])
+
+(defrecord Terminal
+  ;; Represents a connection point on a module.
+  [id name doc])
+
+(defrecord Module
+  ;; The fundamental primitive of Gait.
+  [id name doc ins outs instants network])
+
+(defrecord Collection
+  ;; A group of modules are packaged into a collection.
+  [id name doc version modules authors read-only? source])
+
+;; TODO: Track dependencies?
+(defrecord Network
+  [collections])
+
+;; TODO: Is this needed?
+;; (defrecord Doc
+;;   [id title description examples tests assertions external])
+
+;; TODO: Can modules emulate buses?
+;; (mod ControlBus {:in [a b] :out [a' b']} (a' a) (b' b))
+
+(defn +term [])
+
+(defn +mod [name {:as _io :keys [in out]} net]
+  (->Module
+   (random-uuid)
+   (mapv +term in)
+   (mapv +term out)
+   ))
+
+(comment
+  (+mod "Foo"
+        {:in [] :out []}
+        '())
+
+  (+mod "NAND"
+        {:in  {:a "a", :b "b"}
+         :out {:q "q"}})
+
+  #uk.axvr.gait.Terminal {:name "foo"}
+  )
+
+;; Store collections as separate binary files and dynamically load as required.
+;; Include Gait version in files.
+;; codec.cbor/encode
+;; (defprotocol CborCodec
+;;   (encode [this] ""))
 
 (def genkey
   "`clojure.core/gensym` but returns a keyword."
@@ -11,8 +70,6 @@
                (mapcat (juxt identity (comp genkey name)))
                syms)
      ~@body))
-
-(defrecord Module [in out mods cons])
 
 (def network
   "Initial example network.  This is complicated, but not intended to be

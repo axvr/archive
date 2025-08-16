@@ -41,6 +41,6 @@ Influenced by many languages and systems including: [Clojure][], [Bel][], [Small
 
 ## Legal
 
-Copyright © [Alex Vear](https://www.alexvear.com).
+Copyright © 2023 [Alex Vear](https://www.alexvear.com).
 
 Gait is available under the terms of the [Mozilla Public License v2.0](https://www.mozilla.org/en-US/MPL/2.0/).  A full copy of the MPL 2.0 can be found in the accompanying [`LICENCE`](/LICENCE) file.
