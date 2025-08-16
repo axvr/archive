@@ -8,12 +8,11 @@ connected together into a pipeline.  The concept arose from my work on
 [Dirigo](../dirigo) and frustrations with setting up existing reverse proxy
 tools.
 
-- Add more thorough plan and emphasise symplicity and security.
-- inetd implementation using named pipes rather than standard streams.
-- Replace HTTP server in your application with streams.  Your app doesn't
-  need to know anything about networking.
-- Master pipe tekking listener about new named pipes. Or use inotify?
-- Enqueue Epoxy Protocol
+- [ ] Add more thorough plan and emphasise symplicity and security.
+- [ ] inetd implementation using named pipes or socketpairs rather than standard streams.
+- [ ] Replace HTTP server in your application with streams.  Your app doesn't need to know anything about networking.
+- [ ] Master pipe telling listener about new named pipes. Or use inotify?
+- [ ] Enqueue Epoxy Protocol
 
 
 ## Rationale
@@ -32,7 +31,7 @@ tools.
 
 ### Need to get faster
 
-- named pipes solve latency issues and reduce traffic on the network stack.
+- named pipes or socket pairs solve latency issues and reduce traffic on the network stack.
 - important if running lots of little reverse proxies.
 
 
@@ -129,7 +128,7 @@ http://www.example.com/index.html
 
 Many existing proxies (e.g. Caddy, Traefik, nginx, Envoy, etc.) are highly
 complex and packed full of functionality that most users will likely never
-need.  The pointless layers of abstraction, while useful, make them extremely
+need.  The extra layers of abstraction, while useful, make them extremely
 difficult to understand, especially when compared to how simple the underlying
 concepts really are.
 
@@ -169,6 +168,10 @@ simplicity, security, reliability and composability.
   - https://stackoverflow.com/questions/29583985/reading-continuous-data-from-a-named-pipe
   - https://unix.stackexchange.com/questions/68146/what-are-guarantees-for-concurrent-writes-into-a-named-pipe
   - https://www.digitalocean.com/community/tutorials/how-to-share-data-between-docker-containers
+
+- Socket pairs
+  - https://man7.org/linux/man-pages/man2/socketpair.2.html
+  - https://stackoverflow.com/questions/1583005/is-there-any-difference-between-socketpair-and-pair-of-unnamed-pipes
 
 - POSIX signals
   - https://github.com/pyr/signal
@@ -249,7 +252,7 @@ simplicity, security, reliability and composability.
 - HTTPS redirection.
 - Manifold/Aleph (see Everything will Flow talk.)
 - Bernstein chaining.
-- Write in Go or Common Lisp?
+- Write in Go, Zig, Common Lisp or CHICKEN Scheme?  (Edit 2025: CHICKEN 6 will have CRUNCH)
   - Self-contained (reasonably small and fast) binaries.
   - Use s-expr for config?
   - May need Golang 1.17+ for better crypto/tls lib.
