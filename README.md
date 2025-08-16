@@ -6,8 +6,8 @@ ranging from experiments to fully functioning programs.
 
 ## Mildly interesting
 
-- [Timeline of my archived projects](timeline.md).
-- [My open source contributions](contributions.md).
+- [Timeline of my archived projects outside this repo](timeline.md).
+- [Some of my open source contributions](contributions.md).
 - My favourite bits of code in this repo:
   - [Adding non-determinism to Clojure](2025/nondeterm-try).
   - [Extending O'Doyle rules engine](2024/en-rule).
