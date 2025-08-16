@@ -1,0 +1,82 @@
+* NANDC
+
+Logic design tool. Interactive. Using s-expressions as the language underneath.
+
+*** Separate hdl language from ui?
+*** AppImage
+*** Timing circuits
+*** Zoom in and out of abstraction levels.
+*** Design for parallel computing
+*** Emulate
+**** Custom 8-bit computer
+**** Apple I
+**** Burroughs B5000
+*** Interactive
+
+Language(s) not designed to be written by humans.
+
+Intuitive, exploratory and easy.
+
+*** Import/export modules
+*** Optimisations
+*** FPGA support
+**** Fast FPGA compile times
+*** Go more lisp-like?
+**** Fundamentals
+
+(nand ...)
+(component name ...)
+
+-----------------
+
+(component not [a]
+  (nand a a))
+
+(component and [& vals]
+  (not (nand vals)))
+
+(component or [a b & vals]
+  (nand (not a) (not b)))
+
+    0 1
+0  0 1
+1  1 1
+
+    0 1
+0  0 0
+1  0 1
+
+    0 1
+0  1 1
+1  1 0
+
+    0 1
+0  1 0
+1  0 0
+
+*** Simulate circuit
+**** Handle recursive circuits through short circuiting
+*** Nandc can version control project
+
+Set git diff tool for nandc files in ~.gitattributes~ file to the nandc GUI to view changes.
+
+*** Nandc intentionally GPL?
+
+Hardware tools are already too locked down so we will lock ours down too for user freedom.
+
+*** Create the original joke NANDC compiler
+
+Easter egg in actual nandc compiler
+
+*** Emulate through hardware?
+
+E.g. PSX emulator which plugs into your computer...
+
+Similar to how Apple used to emulate older machines for backwards compatibility.
+
+Whether it is done through software or hardware this makes it possible to solve the backwards compatibility problem as both systems are independent and once the old system/feature isn't used anymore it can be safely removed.
+
+Implement a PSX on an FPGA...
+
+*** Nandc contains a simulator, not an emulator as it simulates the internals.
+*** Nandc could synthesise both hardware and software emulators

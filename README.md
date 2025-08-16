@@ -8,9 +8,11 @@ ranging from experiments to fully functioning programs.
 
 - [Timeline of my archived projects outside this repo](timeline.md).
 - [Some of my open source contributions](contributions.md).
-- My favourite bits of code in this repo:
+- My favourite bits of code/ideas in this repo:
   - [Adding non-determinism to Clojure](2025/nondeterm-try).
-  - [Extending O'Doyle rules engine](2024/en-rule).
+  - [Epoxy: composable reverse proxies](2022/epoxy).
+  - [En-rule: extending O'Doyle rules engine](2024/en-rule).
+  - [NANDC: esoteric logic gate simulation language](2019/nandc) and [Gait](2022/gait).
   - [CLI tool to open the Common Lisp Hyperspec for a given symbol](2022/clhs-lookup).
   - [Turing machine simulator](2021/turing).
   - [OmniSharp-Roslyn installation script](2018/omnisharp).

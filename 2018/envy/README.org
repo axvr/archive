@@ -1,0 +1,334 @@
+* The Envy Linux distro and desktop concept
+
+/Circa 2018 (exact dates unknown)./
+
+This was a concept I had for a (hopefully) simpler Linux distro and desktop
+based on concepts I liked, particularly those by DJB.  Nothing was ever built.
+
+What follows is the original document.
+
+** Envy
+
+The Envy project is aiming to create a portable (between Unix-like OSs), simple and easy to use desktop stack.
+
+The existing desktop stacks have proven to be unreliable, slow and over engineered, complex beasts which reject the idea of portability. (e.g. GNOME and KDE). The other extreme is finding replacements for each of the tools and manually configuring all of them on each system (e.g. i3 and other Window Managers). The Envy project finds both of these options to be unacceptable so is attempting to combine the best of all worlds while rewriting the entire stack to be significantly more stable and efficient.
+
+Eventually all of the Envy tools will be packaged into a single OS called EnvyOS, the tools will remain available for all other systems as portability is critical to the project.
+
+*** Sif
+
+Sif (System interface) will form the backbone for the rest of the Envy desktop stack. It provides a consistent interface to core system functionalities and does so in a portable manner.
+
+Sif will be written in C and will provide a huge set of libraries and CLI tools (wrappers around the libraries) which can be used by other tools to control and get info on the system.
+
+The goal will be that packages can be created to contain the minimal interfaces required for the intended system resulting in smaller binaries.
+
+_Functionality examples_
+
+- Brightness control for displays (See =brightnessctl= and [[https://gitlab.com/lmcnulty/setbrightness/blob/master/setbrightness.c][setbrightness.c]])
+- Brightness control for keyboards (no fancy colours)
+- Shutdown ([[https://unix.stackexchange.com/questions/205464/whats-the-difference-between-poweroff-and-halt][difference between power off and halt]])
+- Hibernate
+- Log out
+- Reboot
+- Init system detection
+- Audio controls (maybe replace or act a a wrapper around ALSA and Jack, and others)
+- Network controls (maybe replace iproute2 and ifconfig)
+- Laptop lid close detection
+
+*** Relay
+
+Programmable, simple, general-purpose, ([[https://en.wikipedia.org/wiki/Pipeline_(Unix)][pipeline]]-like)
+[[https://en.wikipedia.org/wiki/Inter-process_communication][inter-process communication]] tool for Unix-like operating systems.
+
+Modern reimplementation of Plan 9's [[https://en.wikipedia.org/wiki/Plumber_(program)][Plumber]], but designed specifically
+to run on the Unix userland, making use of [[https://en.wikipedia.org/wiki/Unix_domain_socket][Unix Domain Sockets]], and
+pipelines.
+
+Provide functionality to work as both a [[https://en.wikipedia.org/wiki/Unicast][unicast]] and [[https://en.wikipedia.org/wiki/Multicast][multicast]]
+pipe-style IPC.
+
+(A simple compatibility layer system?)
+
+Relay would have it's own minimal and simple, text-based IPC message
+format.  This IPC message format, would aid in reducing the
+performance issues caused by having a huge amount of regular
+expressions, while also preventing rule conflicts. The way the format
+would achieve this is by providing a mechanism for "rule-namespaces".
+
+Relay could either perform IO using "standard input" and "standard
+output", or use files on the file system, for true message queuing.
+
+The user would be able to create sets of rules which Relay will use to
+determine how to handle the data it receives, this could include an
+option to let Relay know if the data is multi-line.
+
+_Potential implementations_
+
+1. A daemon (Relayer) and controller (Relay)
+2. Stand-alone tool (Relay)
+
+_Example flow_
+
+1. Input
+2. /Parse IPC message or check which rules to use/
+3. /Intermediate Data Processing/
+4. /Perform operation/
+
+If Relay is designed to also accept arbitrary text as input, it may be
+beneficial to use Plan 9's "[[http://doc.cat-v.org/bell_labs/structural_regexps/][structural regular expressions]]".
+
+_Useful links_
+
+- [[https://9p.io/wiki/plan9/Using_plumbing/index.html][Plan 9 - using plumbing]]
+
+**** Example use-cases
+***** File managers
+
+By integrating Relay into a file manager, the file manager would be
+able to open different file types in the appropriate applications
+(e.g. ~.pdf~, ~.mp3~, ~.png~, etc.).
+
+***** Terminal emulators
+
+In a terminal emulator, text could be selected and sent to Relay,
+which could perform the appropriate actions, such as opening a file in
+=$EDITOR=, at the correct line, from an error message.
+
+This could also make links "clickable", such as URLs (e.g. ~http://~, ~ssh://~,
+~ftp://~, etc.), and manual page references (e.g. [[man:grep(1)][grep(1)]]).
+
+***** Window managers
+
+If window managers were to integrate Relay, they would gain
+superpowers.
+
+The user would be able to set their own default applications, in their
+configuration files, and be capable of interacting with any tool on
+the system, so long as the appropriate rules have been created.
+
+Rules could be defined which control various aspects of the system
+such as:
+
+- Screen and keyboard backlight brightness.
+- Speaker and headphone volume.
+- Microphone gain/sensitivity.
+- Music playback.
+- Network.
+
+As well as simply controlling the system, the window manager could
+request information, such as currently playing music, and network
+information.
+
+All of this would also allow the user to have a larger part of their
+configuration which is portable between window managers.
+
+***** Replace other IPCs
+
+Relay may be able to completely replace other IPCs such as [[https://en.wikipedia.org/wiki/D-Bus][D-Bus]],
+through the creation of custom rules (which could potentially contain
+less code than the actual D-Bus implementation), and an intermediate
+tool to translate, intercept and send the IPC messages.
+
+_Useful links_
+
+- [[https://dbus.freedesktop.org/doc/dbus-tutorial.html][D-Bus Tutorial]]
+- [[https://linoxide.com/how-tos/d-bus-ipc-mechanism-linux/][Understanding D-Bus]]
+
+**** Similar tools/concepts
+
+SmallTalk-style objects
+Lisp-style data objects
+D-bus
+JSON RPC
+9P/Acme
++Unix text streams+
+Swaymsg
+Tmux
+
+*** Elegance
+
+Elegance is the desktop environment for the Envy project. It'll perfectly couple with the rest of the Envy ecosystem and provide a consistent experience.
+
+Elegance will be highly focused on maintaining and extending the traditional desktop paradigm that all users understand.
+
+Elegance will try to make GTK and Qt applications look like they belong while its self being written in a Gait-like toolkit.
+
+The applications used by Elegance are part of the Elegance (sub-)project.
+
+**** Unix desktop environment
+
+Write a simple, minimal and powerful desktop environment which
+combines all of the best parts of [[https://www.gnome.org/gnome-3/][GNOME Shell]], [[https://www.kde.org/plasma-desktop][KDE Plasma]] and
+[[https://en.wikipedia.org/wiki/Aqua_(user_interface)][Apple Aqua]].
+
+The desktop environment must be portable to all Unix-like operating
+systems.
+
+It must not get in the way of the user or distract them from their
+work.
+
+***** Features
+
+- Global menu (with search).
+- Dark theme by default.
+- Excellent [[https://www.gtk.org/][GTK+]] and [[https://www.qt.io/][Qt]] integration (and styling).
+- Few applications (e.g. no software store).
+- Minimal codebase and few dependencies (avoids hard dependencies).
+- Stable, fast and low memory usage.
+- Calendar and cloud storage integration (e.g. Nextcloud, Office365, iCloud,
+  etc.).
+
+***** Design choices
+
+- Bar on the top of the screen.
+- Desktop icons off by default (or not at all).
+- Android-like notification system (group by application).
+- No useless features, applications or configuration options.
+- No shell extensions (or web technologies such as JavaScript).
+- Has a configuration file (& maybe a settings application).
+- Defaults to "natural" scrolling and two finger scrolling.
+- No hamburger menus.
+- Error messages will be informative.
+
+***** Still to be decided
+
+- Should it be written in [[https://www.gtk.org/][GTK+]], [[https://www.qt.io/][Qt]] or an alternative?
+- Should it work with [[https://www.x.org/wiki/][X.org]] and/or [[https://wayland.freedesktop.org/][Wayland]]? If it will run on Wayland use
+  [[https://github.com/swaywm/wlroots][wlroots]].
+- Should there be a system tray?
+- Which language should it be written in (this depends on which GUI toolkit is
+  chosen).
+
+***** Related links
+
+- [[https://medium.com/@probonopd/make-it-simple-linux-desktop-usability-part-1-5fa0fb369b42][Make. It. Simple. Linux Desktop Usability]]
+- [[https://www.over-yonder.net/~fullermd/rants/winstupid/1][Why Windows Causes Stupidity]]
+- [[https://www.over-yonder.net/~fullermd/rants/userfriendly/1][Are you user friendly?]]
+
+*** EnvyOS
+**** Linux distribution
+
+Aim to be the [[https://www.openbsd.org/][OpenBSD]] of [[https://www.kernel.org/][Linux]] distributions, and as [[https://pubs.opengroup.org/onlinepubs/9699919799/][POSIX]] as
+possible.
+
+Inspired by OpenBSD, Void Linux, Unix, Plan 9, and the Suckless
+project.
+
+Focus on being minimal and simple in terms of implementation and
+design. Strive
+for excellent documentation, and upstreaming any changes.
+
+Use [[https://voidlinux.org/xbps/][XBPS]] as the package manager, but all package definitions must be
+written in POSIX shell, and aim towards reproducible builds. ~-devel~
+packages should also be provided.
+
+Use [[http://smarden.org/runit/][runit]] as the init system.
+
+Doesn't follow arbitrary standards such as those from [[https://www.freedesktop.org/][freedesktop.org]],
+which tend to be overly complex, bloated and full of bad design
+decisions.
+
+There would be minimal and desktop variants of the distribution. The
+minimal version contains almost no software or desktop
+environment. The desktop variant comes with a desktop environment
+(eventually my own one), and a few useful tools for desktop users.
+
+Like with OpenBSD, if a particular piece of software is determined to
+be too complex, an alternative will either be used or created.
+
+This distribution could either be created from scratch or be based on
+[[https://voidlinux.org/][Void Linux]].
+
+**** EnvyOS turn off overcommit in the Linux kernel
+*** Package manager
+
+package/
+- base/
+  - coreutils/
+  - bash/
+  - readline/
+- desktop/
+  - elegance/
+    - 1.0/
+- utilities/
+  - screen/
+  - man/
+  - texinfo/
+  - git/
+
+First class support for AppImages?
+
+Chroot and containerisation.
+
+How to handle dependencies (and dependencies of a specific version)
+
+*** Envy
+**** Begin some design mockups for my DE
+
+Base them off of what is mentioned in [[https://medium.com/@probonopd/make-it-simple-linux-desktop-usability-part-1-5fa0fb369b42][Make. It. Simple. Linux Desktop Usability]].
+
+Fully controllable using keybindings or the mouse.
+
+Some basic tiling functionality.
+
+Dynamic workspaces like those in GNOME 3
+
+ Look into Mercury OS.
+
+**** Create a custom GUI toolkit
+**** Minimal customisation
+
+Only be able to customise the minimum required. Sane defaults. Make life easier.
+
+DE should only have dark and light variants.
+
+Don't hide stuff.
+
+Make it as simple as possible to understand how the OS works.
+
+**** Simple, minimal, fast, efficient, stable, secure and correct
+
+Unix DE using Wayland
+
+Build good command line tools, and add UIs on top.
+
+If a tool/component is sub-par it will either be reimplemented, forked or patches will be sent upstream
+
+The back-end tools should work fine on their own
+
+#+BEGIN_QUOTE
+We should be improving the back-end and extending it into usable front-ends, not the other way round.
+#+END_QUOTE
+
+Mathew Fuller - [[http://www.over-yonder.net]]
+
+**** Replacement file system hierarchy using djb's ideas
+
+Create a package manager which installs packages to the correct directories e.g. /package and then symlinks them.
+
+Also install HTML documentation. Maybe convert man pages to HTML or open a man viewer?
+
+Base on xbps-src
+
+***** Distro could make use of GoboHide
+***** Do away with the FHS
+***** Create =pack-dir= tool
+
+Which converts a directory into a djb-style package
+
+**** Envy OS combine appimage and DJB-style packages with some slight tweaks.
+
+Maybe use [[https://en.wikipedia.org/wiki/Chroot][chroot]] in a similar manner to [[https://bedrocklinux.org/][Bedrock Linux]]
+
+**** Maybe use GNU Stow with /package
+
+
+** Chroot style tool for =make install= which compiles to native Envy package.
+
+Chroot wrapper?
+Similar to spftools?
+Better than AppImage?
+
+Observe which files get created/moved, or build package from chroot.
+
