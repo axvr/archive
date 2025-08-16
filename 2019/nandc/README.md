@@ -25,6 +25,6 @@ Since 2020, the idea sat at the back of my mind, gradually evolving as I learnt 
 
 As of 2022-10-24, the implementation process began.  Originally Machina, now [Gait][], it is intended to become a highly interactive, object-oriented (in the Smalltalk sense), Lisp-like HDL and eventually gain that visual IDE.
 
-[Gait]: https://github.com/axvr/gait
+[Gait]: ../../2022/gait/
 
 _Public domain.  No rights reserved._
