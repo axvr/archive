@@ -1,0 +1,3 @@
+{:paths ["."]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        io.github.judepayne/dictim {:git/tag "0.8.8" :git/sha "75723f0"}}}
