@@ -1,5 +1,10 @@
 # Vila 🧚‍♀️
 
+_2024-10-19 – 2025-07-08_
+
+> [!WARNING]
+> Very incomplete.
+
 ___An interactive, runtime focused .NET CIL assembler.___
 
 Vila (Virtual-(C)IL Assembler) is an attempt at a [.NET][] CIL ([Common Intermediate Language][CIL])
@@ -17,10 +22,7 @@ assembler designed for use at runtime, usually interactively.
 
 ## Legal
 
-Copyright © 2024 [Alex Vear](https://www.alexvear.com).
-
-Vila is available under the terms of the [Mozilla Public License v2.0](https://www.mozilla.org/en-US/MPL/2.0/).
-A full copy of the MPL 2.0 can be found in the accompanying [`LICENCE`](/LICENCE) file.
+_Public domain.  No rights reserved._
 
 
 <!-- Links -->
