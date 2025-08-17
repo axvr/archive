@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo 'Perform all checks against all Clojure files...'
+
+do/code/format
+do/code/lint
+
+echo "Checking for reflection in Clojure code"
+lein check

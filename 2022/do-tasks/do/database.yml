@@ -1,0 +1,49 @@
+database:
+  help: Database helper commands.
+  deps:
+    - do/docker.sh
+
+database local start:
+  help: Start an instance of the local development DB.
+  do: |
+    docker_volume_create 'my-service-local-database-data'
+
+    if docker_container_exists 'my-service-local-database'; then
+        docker start 'my-service-local-database'
+    fi
+
+    if ! docker_process_exists 'my-service-local-database'; then
+        docker run -d \
+            --name 'my-service-local-database' \
+            -p 5683:5432 \
+            -e POSTGRES_USER="$POSTGRES_USER" \
+            -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
+            -e POSTGRES_DB="$POSTGRES_DB" \
+            -v my-service-local-database-data:/var/lib/postgresql/data \
+            postgres:12.7-alpine
+    fi
+
+database local stop:
+  help: Stop the local development DB.
+  do: |
+    if docker_process_exists 'my-service-local-database'; then
+        docker stop 'my-service-local-database'
+    fi
+
+database local remove:
+  help: Completely remove the local DB.
+  do: |
+    do database local stop
+
+    if docker_container_exists 'my-service-local-database'; then
+        docker rm 'my-service-local-database'
+    fi
+
+    if docker_volume_exists 'my-service-local-database-data'; then
+        docker volume rm 'my-service-local-database-data'
+    fi
+
+# database test start:
+#   help: Start a local DB for tests.
+#   do: |
+# TODO: CI server should get postgres image from AWS ECR.

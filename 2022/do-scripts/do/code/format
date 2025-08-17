@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Formatting Clojure code"
+cljfmt fix .
+
+echo "Formatting Terraform"
+terraform fmt # ...

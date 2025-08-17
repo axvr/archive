@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# List "do" tasks.
+
+tree do -C --prune --noreport

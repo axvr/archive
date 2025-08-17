@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Linting Clojure code"
+clj-kondo --parallel --lint src:test

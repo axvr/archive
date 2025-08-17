@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Default pre-commit tasks.
+
+do/code/check
+do/test

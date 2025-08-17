@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. do/.lib/util.sh
+
+do/database/local/stop
+
+echo "Removing local DB"
+db="my-service-local-database"
+vol="$db-data"
+has_db_container $db && docker rm $db
+has_db_volume $vol && docker volume rm $vol

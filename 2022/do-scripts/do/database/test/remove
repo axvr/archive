@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. do/.lib/util.sh
+
+do/database/test/stop
+
+echo "Removing test DB"
+db="my-service-test-database"
+has_db_container $db && docker rm $db

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo "Starting test DB."
+
+. do/.lib/util.sh
+
+db="my-service-test-database"
+vol="$db-data"
+
+if ! is_db_running $db; then
+    if has_db_container $db; then
+        docker start $db
+    else
+        docker run -d --name $db \
+            -p 5683:5432 \
+            -e POSTGRES_USER= -e POSTGRES_PASSWORD= -e POSTGRES_DB= \
+            -v $vol:/var/lib/postgresql/data \
+            postgres:12.7-alpine
+    fi
+fi

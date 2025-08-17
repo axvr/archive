@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. do/.lib/util.sh
+echo "Stopping local DB"
+db="my-service-local-database"
+is_db_running $db && docker stop $db
