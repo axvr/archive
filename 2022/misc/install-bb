@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Install Babashka.  (Circa 2022-01-31)
+
+set -e
+
+trim_v() { echo "$1" | sed -e 's,^[vV],,'; }
+
+bin="$HOME/.local/bin/bb"
+
+[ -n "$1" ] && version="$(trim_v "$1")" || version="0.7.4"
+
+url="https://raw.githubusercontent.com/babashka/babashka/v$version/install"
+
+current_version() { "$bin" --version | sed -e 's,^babashka v,,'; }
+
+if [ ! -x "$bin" ] || [ ! "$(current_version)" = "$version" ]; then
+    installer="/tmp/bb-installer"
+
+    touch "$installer"
+    chmod +x "$installer"
+    curl --fail --silent --show-error --location "$url" > "$installer"
+
+    bash "$installer" --dir "$(dirname "$bin")" --version "$version"
+fi

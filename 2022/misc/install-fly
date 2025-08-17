@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+# Script to install Concourse Fly.  Accepts optional argument to specify
+# version.  (Circa 2022-01-31)
+
+if [ ! "$(command -v curl)" ]; then
+    echo >&2 "Curl is required to install Fly."
+    exit 1
+fi
+
+[ -z "$1" ] && version="2.9.6" || version="$1"
+version="$(echo "$version" | sed -e 's,^[vV],,')"
+
+case "$(uname -s)"
+    Darwin) kernel="darwin" ;;
+    Linux) kernel="linux" ;;
+    *) echo "Unsupported system"; exit 1;;
+esac
+
+bin="$HOME/.local/bin/fly"
+version_file="$(dirname "$bin")/VERSION"
+url="https://github.com/concourse/concourse/releases/download/v$version/fly-$version-$kernel-amd64.tgz"
+
+if [ -x "$bin" ] && [ -s "$version_file" ]; then
+    current_version="$(cat "$version_file")"
+    if [ ! "$current_version" = "$version" ]; then
+        echo "Upgrading Concourse Fly v$current_version -> v$version"
+        curl --fail --location "$url" > "$bin"
+        echo "$version" > "$version_file"
+    else
+        echo "Concourse Fly v$version is already installed"
+    fi
+else
+    echo "Installing Concourse Fly v$version"
+    mkdir -p "$(dirname "$bin")"
+    touch "$bin"
+    chmod +x "$bin"
+    curl --fail --location "$url" > "$bin"
+    echo "$version" > "$version_file"
+fi
+
+# TODO: extract executable

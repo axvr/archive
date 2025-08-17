@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+# Script to install Leiningen.  Accepts optional argument to specify version.
+# (Circa 2022-01-31)
+
+if [ ! "$(command -v curl)" ]; then
+    echo >&2 "Curl is required to install Leiningen."
+    exit 1
+fi
+
+[ -z "$1" ] && version="2.9.6" || version="$1"
+version="$(echo "$version" | sed -e 's,^[vV],,')"
+
+bin="$HOME/.local/bin/lein"
+version_file="$(dirname "$bin")/VERSION"
+url="https://raw.githubusercontent.com/technomancy/leiningen/$version/bin/lein"
+
+if [ -x "$bin" ] && [ -s "$version_file" ]; then
+    current_version="$(cat "$version_file")"
+    if [ ! "$current_version" = "$version" ]; then
+        echo "Upgrading Leiningen v$current_version -> v$version"
+        curl --silent --show-error --fail --location "$url" > "$bin"
+        echo "$version" > "$version_file"
+    else
+        echo "Leiningen v$version is already installed"
+    fi
+else
+    echo "Installing Leiningen v$version"
+    mkdir -p "$(dirname "$bin")"
+    touch "$bin"
+    chmod +x "$bin"
+    curl --fail --location "$url" > "$bin"
+    echo "$version" > "$version_file"
+fi
