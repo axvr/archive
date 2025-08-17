@@ -11,6 +11,7 @@ ranging from experiments to fully functioning programs.
 - My favourite bits of code/ideas in this repo:
   - [Adding non-determinism to Clojure](2025/nondeterm-try).
   - [Epoxy: composable reverse proxies](2022/epoxy).
+  - [`do` scripts: who needs task runners?](2022/do-scripts).
   - [En-rule: extending O'Doyle rules engine](2024/en-rule).
   - [NANDC: esoteric logic gate simulation language](2019/nandc) and [Gait](2022/gait).
   - [CLI tool to open the Common Lisp Hyperspec for a given symbol](2022/clhs-lookup).
