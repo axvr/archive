@@ -1,8 +1,9 @@
-# STAMP and Depict experiments as Clojure eDSLs
+# STAMP and Depict + PASTA experiments as Clojure eDSLs
 
-_2025-01-16_
+_2025-01-16 – 2025-01-26_
 
-Experiment with STAMP analyses and <https://github.com/mstone/depict> as
+Experiment with STAMP analyses, <https://github.com/mstone/depict> and
+[PASTA](https://github.com/kieler/pasta/blob/master/extension/README.md) as
 Clojure eDSLs.
 
 Attempted to utilise D2 as a backend for a Depict clone, but D2 isn't suitable
