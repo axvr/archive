@@ -73,14 +73,6 @@ _2019-03-23 – 2021-08-16_
 An elegant pair of Vim colour schemes with minimal syntax highlighting.
 
 
-### [txtdb](https://github.com/axvr/txtdb)
-
-_2018-11-09 – 2019-03-03_
-
-An experimental RDBMS and DB engine using CSV text files to store
-tables. Mostly a learning project.
-
-
 ### [axvr.io](https://github.com/axvr/axvr.io)
 
 _2017-09-09 – 2021-06-04_
