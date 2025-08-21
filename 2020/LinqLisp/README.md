@@ -2,6 +2,8 @@
 
 Extension methods for Linq to make it more Lisp-like.
 
+_2020-07-09 – 2021-04-24_
+
 
 ## Example
 
@@ -10,7 +12,7 @@ example of the `.When()` extension method.
 
 ```cs
 // Before
-public IEumerable<string> NewFooWithoutLinqLisp(IEnumerable<int> foo, bool filterOutNegative = false, Func<int, bool> optionalFilter = null, bool sort = true)
+public IEumerable<string> WithoutLinqLisp(IEnumerable<int> foo, bool filterOutNegative = false, Func<int, bool> optionalFilter = null, bool sort = true)
 {
     var nums = foo;
 
@@ -35,9 +37,9 @@ public IEumerable<string> NewFooWithoutLinqLisp(IEnumerable<int> foo, bool filte
 
 
 // After
-public IEnumerable<string> NewFooWithLinqLisp(IEnumerable<int> foo, bool filterOutNegative = false, Func<int, bool> optionalFilter = null, bool sort = true)
+public IEnumerable<string> WithLinqLisp(IEnumerable<int> foo, bool filterOutNegative = false, Func<int, bool> optionalFilter = null, bool sort = true)
 {
-    return foo.When(incldeNegative, x => x.Where(y => y > 0))
+    return foo.When(filterOutNegative, x => x.Where(y => y > 0))
               .When(optionalFilter != null, x => x.Where(optionalFilter))
               .When(sort, x => x.OrderBy(y => y))
               .Select(x => x.ToString())
@@ -48,8 +50,4 @@ public IEnumerable<string> NewFooWithLinqLisp(IEnumerable<int> foo, bool filterO
 
 ## Legal
 
-Copyright © 2020–2021, [Alex Vear](https://www.alexvear.com).
-
-This package and source code have been made publicly available under the terms
-of the Expat (MIT) licence.  A full copy of the licence text may be found in
-the LICENCE file provided.
+_Public domain.  No rights reserved._
