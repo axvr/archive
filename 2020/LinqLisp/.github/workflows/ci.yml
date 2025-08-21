@@ -1,0 +1,20 @@
+name: LinqLisp CI
+
+on: [push, pull_request]
+
+jobs:
+
+  package:
+    name: LinqLisp
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.103
+
+    - name: Build
+      run: dotnet build LinqLisp.sln --configuration Release

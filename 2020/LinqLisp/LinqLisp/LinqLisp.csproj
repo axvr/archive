@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>Alex Vear</Authors>
+    <PackageId>LinqLisp</PackageId>
+    <PackageIconUrl></PackageIconUrl>
+    <Title>LinqLisp</Title>
+    <Summary></Summary>
+    <Description></Description>
+    <Copyright>Copyright © 2020–2021 Alex Vear</Copyright>
+    <IsPackable>true</IsPackable>
+    <RepositoryUrl>https://github.com/axvr/LinqLisp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <PackageTage>.NET;Lisp;Linq;Expression;Conditional;Tree</PackageTage>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+- Add more useful Lisp functions/special forms.
+  - Let?
+  - IfLet?
+  - WhenLet?
+  - Except? (opposite of Where)
+  - Bind?
+  - Fold/ForEach?
+  - Not?  E.g. `.Where(Not(string.IsNullOrEmpty))`
+  - While/Until looping?
+  - Batch?
+  - ForEach?
+  - Merge
+  - MergeWith
+  - Reduce (simpler version of .Aggregate)
+  - Macro (expressions?)
+  - Curry
+  - Partial
+  - Amb? (is this even possible?)
+  - Join (.Merge which can update multiple properties on an object.)
+  - ...
+
+- Unit tests.
+- Documentation.
+- XML comments.
+- Add documentation comments.
+- Release first version.
+
+- Make all work on EF Core?
