@@ -15,6 +15,7 @@ ranging from experiments to fully functioning programs.
   - [En-rule: extending O'Doyle rules engine](2024/en-rule).
   - [NANDC: esoteric logic gate simulation language](2019/nandc) and [Gait](2022/gait).
   - [CLI tool to open the Common Lisp Hyperspec for a given symbol](2022/clhs-lookup).
+  - [LinqLisp: Lisp-inspired extension methods for C\# Linq](2020/LinqLisp).
   - [Turing machine simulator](2021/turing).
   - [OmniSharp-Roslyn installation script](2018/omnisharp).
   - Explore to find even more!

@@ -38,13 +38,6 @@ _2020-09-20 – 2023-04-08_
 My first Clojure project. A Clojure music streaming server experiment.
 
 
-### [LinqLisp](https://github.com/axvr/LinqLisp)
-
-_2020-07-09 – 2021-09-25_
-
-Extension methods for Linq to make it more Lisp-like.
-
-
 ### [Zepl.vim](https://github.com/axvr/zepl.vim)
 
 _2020-02-23 – 2022-09-02_
