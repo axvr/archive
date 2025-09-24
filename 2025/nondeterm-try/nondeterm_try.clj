@@ -180,3 +180,12 @@
           (fail))))))
 
 (find-boxes)
+
+(require '[clojure.math :as m])
+
+(let [r (range -100 100)]
+  (amb-let [?x r, ?y r]
+           (amb-assert (= 12 (+ ?x ?y)))
+           (amb-assert (== 160 (+ (m/pow 2 ?x)
+                                  (m/pow 2 ?y))))
+           [?x ?y]))

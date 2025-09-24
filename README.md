@@ -1,7 +1,7 @@
 # Code archive 🗄️
 
 An archive packed full of old code, programming notes and project assets I have
-created, ranging from, ideas and experiments to fully functioning programs.
+created, ranging from ideas and experiments to fully functioning programs.
 _Since you're here, why not take a look around?_
 
 
