@@ -3,11 +3,11 @@
 " Last Updated: 2020-10-24  (created: 2018-07-19)
 " Legal:        Public domain.  No rights reserved.
 
-sign define QfWarning text=> texthl=WarningMsg
-sign define QfError text=> texthl=ErrorMsg
-sign define QfOther text=>
+sign define QfWarning text=? texthl=WarningMsg
+sign define QfError   text=! texthl=ErrorMsg
+sign define QfOther   text=>
 
-augroup qfsign
+augroup axvr/qfsign
     autocmd!
     autocmd BufEnter,QuickFixCmdPost * call s:update_signs()
 augroup END
@@ -21,9 +21,7 @@ function! s:update_signs()
     endif
 
     for i in getqflist()
-        if i.lnum == ''
-            continue
-        endif
+        if i.lnum == '' | continue | endif
 
         if i.bufnr == bufnr
             if i.type ==? 'e'
@@ -34,7 +32,7 @@ function! s:update_signs()
                 let type = 'QfOther'
             endif
 
-            exec 'sign place '.b:qfsign_next_id.' line='.i.lnum.' name='.type.' buffer='.bufnr
+            exec 'sign place '..b:qfsign_next_id..' line='..i.lnum..' name='..type..' buffer='..bufnr
 
             call insert(signs, b:qfsign_next_id)
             let b:qfsign_next_id += 1
@@ -45,7 +43,7 @@ function! s:update_signs()
     " closing and reopening instantly, causing a screen flash.
     if exists('b:qfsigns')
         for i in b:qfsigns
-            exec 'sign unplace '.i.' buffer='.bufnr
+            exec 'sign unplace '..i..' buffer='..bufnr
         endfor
     endif
 
