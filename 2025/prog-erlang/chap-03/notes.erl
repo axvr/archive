@@ -62,7 +62,7 @@ X = 456.  % Error
 
 % Lexically scoped.
 
-% `=` is not assignment, it is binding through pattern matching.
+% `=` is not assignment, it is unification through pattern matching like in Prolog.
 % Similar to logic programming.  Setting a constraint on the
 % value of `X`.  Makes sense considering Erlang's Prolog
 % history.
