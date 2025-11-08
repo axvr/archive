@@ -1,8 +1,9 @@
-# Cella
+# Atria
 
-Cella is a "batteries included" ___programming language and environment___
+Atria is a "batteries included" ___programming language and environment___
 specialised for the rapid construction and easy maintenance of __simple__,
-__safe__ and __dynamic__ server systems by both individuals and teams.
+__safe__, __dynamic__ and __secure__ server systems by both individuals and
+teams.
 
 
 ## Legal

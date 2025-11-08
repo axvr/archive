@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [compile])
   (:require [clojure.tools.build.api :as b]))
 
-(def lib 'uk.axvr/cella)
+(def lib 'uk.axvr/atria)
 (def version "local")
 (def basis (b/create-basis {:project "deps.edn"}))
 (def class-dir "target/classes")

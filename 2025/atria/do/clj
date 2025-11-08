@@ -5,6 +5,6 @@
 envfile java.env
 foreground { mkdir -p target/classes }  # Required for jmh-clojure.
 
-backtick -E has_rlwrap { command -v rlwrap }
+backtick -E has_rlwrap { which -s rlwrap }
 elgetpositionals
 ifte { clj $@ } { clojure $@ } test -n $has_rlwrap

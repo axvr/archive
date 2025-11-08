@@ -1,6 +1,6 @@
 # Rationale: why host on an existing platform?
 
-Like Clojure, Cella is intended to run on an existing platform.  With hosting,
+Like Clojure, Atria is intended to run on an existing platform.  With hosting,
 I can utilise the platform's powerful VM, JIT compiler, garbage collector and
 libraries/tooling.  Many existing platforms have had huge amounts of work put
 into them by experts for free!  It would be foolish to believe that I could
@@ -9,7 +9,7 @@ language would become popular enough to attract those who could.
 
 With this freed time, I can focus language development on what I consider to be
 the more critical parts.  While each platform will have design choices counter
-to Cella's, I believe the trade-off will be worth it.  Remember that not every
+to Atria's, I believe the trade-off will be worth it.  Remember that not every
 programming language needs to completely reinvent the wheel.
 
 
@@ -17,7 +17,7 @@ programming language needs to completely reinvent the wheel.
 
 There are a decent number of pre-built host platforms available for building
 programming languages and programming environments upon.  The top options for
-Cella are:
+Atria are:
 
 | Target | VM | JIT | GC | Runtime | Tooling\* | Dynamic | Performant |
 |--------|----|-----|----|---------|-----------|---------|------------|
@@ -30,7 +30,7 @@ Cella are:
 
 \* Tooling = effective profilers, decompilers, micro-benchmarking tools, etc.
 
-Of these, the JVM and CLR are likely the best suited for Cella, but let's
+Of these, the JVM and CLR are likely the best suited for Atria, but let's
 explore the available options further...
 
 
@@ -227,18 +227,18 @@ whereas OpenJDK can't.  .NET would be better suited for local machines,
 containerisation and multi-user/application systems.
 
 More competition among JVM languages than .NET languages.  Might be less
-expectation that .NET libs would work on a .NET hosted Cella, than Java libs on
-a JVM hosted Cella?
+expectation that .NET libs would work on a .NET hosted Atria, than Java libs on
+a JVM hosted Atria?
 
 `invokedynamic` isn't even used by Clojure, so perhaps the more static CLR isn't
 an issue?  Need to investigate the DLR vs. `invokedynamic` further.  (I
 probably wouldn't even use the DLR anyway.)  Similar to how Julia optimises for
 static LLVM.
 
-Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Cella
+Clojure-like vars limit the JVM JIT's ability to inline.  This may hit Atria
 too, whether it is on the JVM or CLR.  On the JVM one solution is
 `invokedynamic` or "safe points".  How can this be worked around in .NET?
-Perhaps something akin to Smalltalk's `become:`?  For the most part since Cella
+Perhaps something akin to Smalltalk's `become:`?  For the most part since Atria
 will wrap basically everything, `invokedynamic` may not actually be all that
 useful?
 
@@ -293,7 +293,8 @@ coffin for targeting MoarVM is the lack of stable bytecode for it.
 
 ### SBCL
 
-Condition system would make things easier.
+Condition system would make things easier with resumable exceptions and
+controllable stack unwinding.
 
 Decent low-level performance.
 
@@ -307,6 +308,13 @@ Has a new parallel garbage collector.
 ### Verdict
 
 HotSpot or .NET.
+
+.NET is great, but I want to avoid Microsoft.
+
+Hopefully the Java continuations API will become public soon.
+<https://cr.openjdk.org/~rpressler/loom/Loom-Proposal.html>
+
+Java `SecurityManager` is being deprecated.  What will take its place?
 
 
 [Graal JIT]: https://www.graalvm.org/latest/reference-manual/compiler/operations/
