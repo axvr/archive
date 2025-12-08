@@ -70,7 +70,7 @@ An elegant pair of Vim colour schemes with minimal syntax highlighting.
 
 _2017-09-09 – 2021-06-04_
 
-My original personal website.  Since replaced by [www.alexvear.com](https://github.com/axvr/axvr.github.io).
+My original personal website.  Since replaced by [www.alexvear.com](https://codeberg.org/axvr/website).
 
 
 ### [Vivid.vim](https://github.com/axvr/vivid.vim)

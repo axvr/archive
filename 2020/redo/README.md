@@ -22,6 +22,6 @@ Based on redo.
 Can we beat Ninja in speed?
 ```
 
-Plan can be found in [`plan.org`](https://github.com/axvr/codedump/blob/master/2020/redo/plan.org).
+Plan can be found in [`plan.org`](https://codeberg.org/axvr/archive/src/branch/master/2020/redo/plan.org).
 
 _Public domain.  No rights reserved._
