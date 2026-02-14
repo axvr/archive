@@ -1,0 +1,25 @@
+Software project management in Markdown files.
+
+Set `tabstop` to allow for longer usernames?
+
+Fold the groups.
+
+Allow mini multi-line descriptions on summaries?
+
+=== NEXT
+TODO	@mark	Update /Clojure/ version.
+DOING	@axvr	[Figure out TODO system.](IDEA.md)
+TODO	@bob	Do something!  #blocked
+
+=== FUTURE
+
+=== MAYBE
+TODO		Something else.
+
+=== ARCHIVE
+DONE	@axvr	...
+
+=== OWNER MAP
+@axvr	Alex Vear <alex@vear.uk>
+@bob	Bob <bob@example.com>
+@mark	Mark <mark@example.com>
