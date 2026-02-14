@@ -13,6 +13,7 @@ _Since you're here, why not take a look around?_
 - [`do` scripts: who needs task runners?](2022/do-scripts)
 - [En-rule: extending O'Doyle rules engine](2024/en-rule).
 - [Entities: put some life into your systems](2024/entities).
+- [An idea for a data-driven workflow orchestrator](2023/workflow-orchestrator).
 - [NANDC: esoteric logic gate simulation language](2019/nandc) and [Gait](2022/gait).
 - [CLI tool to open the Common Lisp Hyperspec for a given symbol](2022/clhs-lookup).
 - [LinqLisp: Lisp-inspired extension methods for C\# Linq](2020/LinqLisp).

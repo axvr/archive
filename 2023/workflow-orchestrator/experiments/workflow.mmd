@@ -1,0 +1,35 @@
+---
+title: "Personal loan application submission (stage 1)."
+workflow-id: ":uk.axvr.examples.personal-loans/submit-application"
+---
+flowchart LR
+
+classDef interface stroke-dasharray: 5 5;
+classDef stage none;
+classDef queue none;
+classDef fork  none;
+classDef join  none;
+classDef cond  none;
+
+subgraph uk.axvr.examples.personal-loans.application
+uk.axvr.examples.personal-loans.application/start(["start!"])
+class uk.axvr.examples.personal-loans.application/start interface
+
+uk.axvr.examples.personal-loans.application/pre-eligibility-rules["pre-eligibility-rules"]
+class uk.axvr.examples.personal-loans.application/pre-eligibility-rules stage
+
+uk.axvr.examples.personal-loans.application/record-decision["record-decision"]
+class uk.axvr.examples.personal-loans.application/record-decision stage
+
+uk.axvr.examples.personal-loans.application/decline(["decline"])
+class uk.axvr.examples.personal-loans.application/decline interface
+end
+
+subgraph uk.axvr.catalyst
+uk.axvr.catalyst/halt(["halt!"])
+class uk.axvr.catalyst/halt interface
+end
+
+uk.axvr.examples.personal-loans.application/start --> uk.axvr.examples.personal-loans.application/pre-eligibility-rules
+uk.axvr.examples.personal-loans.application/pre-eligibility-rules --> uk.axvr.catalyst/halt
+uk.axvr.examples.personal-loans.application/decline --> uk.axvr.examples.personal-loans.application/record-decision
