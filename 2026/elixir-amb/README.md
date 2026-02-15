@@ -5,7 +5,7 @@ _2026-01-20_
 A quick implementation of the `amb` operator in Elixir.
 
 Following on from the success of using [JVM exceptions from Clojure to implement
-this][nondeterm-try], I figured I'd give it a quick go in Elixir too.
+this][clj-amb], I figured I'd give it a quick go in Elixir too.
 
 It's not quite as nice to use as you need to pass it a function as the body
 rather than being entirely macros.  The main difference is that this one does
@@ -14,4 +14,4 @@ a short-circuiting implementation should be fairly easy to achieve.
 
 _Public domain.  No rights reserved._
 
-[nondeterm-try]: ../../2025/nondeterm-try/
+[clj-amb]: ../../2025/clj-amb/
