@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NqRT", "NqRT\NqRT.fsproj", "{0D755EF2-749D-4C19-8CE7-D9E37F8BE514}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NqSys", "NqSys\NqSys.fsproj", "{E0EDA588-8209-46F6-8E05-E1799A0C3793}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NqK", "NqK\NqK.fsproj", "{35D15402-6C51-4F20-A42A-29CEC0689083}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D755EF2-749D-4C19-8CE7-D9E37F8BE514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D755EF2-749D-4C19-8CE7-D9E37F8BE514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D755EF2-749D-4C19-8CE7-D9E37F8BE514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D755EF2-749D-4C19-8CE7-D9E37F8BE514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0EDA588-8209-46F6-8E05-E1799A0C3793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EDA588-8209-46F6-8E05-E1799A0C3793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0EDA588-8209-46F6-8E05-E1799A0C3793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0EDA588-8209-46F6-8E05-E1799A0C3793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D15402-6C51-4F20-A42A-29CEC0689083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D15402-6C51-4F20-A42A-29CEC0689083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D15402-6C51-4F20-A42A-29CEC0689083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D15402-6C51-4F20-A42A-29CEC0689083}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

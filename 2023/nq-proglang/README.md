@@ -1,8 +1,13 @@
 # Programming language experiments (Nq)
 
-_2023-08 – 2024-04_
+_2023-08 – 2024-07_
 
-Experimenting with programming language ideas.
+_Public domain.  No rights reserved._
+
+> [!NOTE]
+> Another early programming language design experiment.  See also the
+> [precursor](../../2020/porcelina) to this and the intermeidate language
+> [Vila](../../2024/vila).
 
 An interactive, programming language designed for constructing and maintaining large distributed systems.
 
@@ -91,5 +96,3 @@ reimplement a lot, especially the various networking stacks.  Potentially an
 "[Epoxy](../../2022/epoxy)" like solution may work?
 
 Maybe .NET based?
-
-_Public domain.  No rights reserved._
