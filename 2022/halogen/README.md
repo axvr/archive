@@ -1,9 +1,18 @@
 # Halogen
 
 > [!NOTE]
-> An experiment to replace the [Halboy](https://github.com/jimmythompson/halboy) library (allowing interacting with APIs that expose HAL resources).  Ultimately, I would go on to supersede this project by embracing the data aspect of HAL resources by [creating a single, ~10 line function](../misc/hal.clj) that would resolve HAL links from a response and directly use standard Clojure HTTP client libraries.
+> An experiment to replace the
+> [Halboy](https://github.com/jimmythompson/halboy) library (allowing
+> interacting with APIs that expose HAL resources).  Ultimately, I would go on
+> to supersede this project by embracing the data aspect of HAL resources by
+> [creating a single, ~10 line function](../../2023/misc/hal.clj) that would
+> resolve HAL links from a response and directly use standard Clojure HTTP
+> client libraries.
 >
-> This doesn't mean this project was a total waste of time though as the `types.clj` file would later inspire future work of mine on providing consistent interfaces for encoding and decoding across HTTP clients and servers.
+> This doesn't mean this project was a total waste of time though as the
+> `types.clj` file would later inspire future work of mine on providing
+> consistent interfaces for encoding and decoding across HTTP clients and
+> servers.
 
 A compliant and reliable HAL library for Clojure.
 
