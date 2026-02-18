@@ -1,0 +1,68 @@
+#+TITLE: Assignment
+
+Two models for purely object oriented assignment.
+
+1. Reference objects.
+2. Nothing object.
+
+
+* Reference objects
+
+Every variable name is mapped to a "reference object" (like numbers are
+automatically mapped to the an object of the correct numerical value when
+used).
+
+These "reference objects" store an object internally, when sent the assignment
+message ~:=~.
+
+#+BEGIN_SRC
+> foo
+nothing
+> foo :nothing?  ; or :unassigned?
+true
+> foo := 5
+> foo
+5
+> foo :nothing?
+false
+> foo :integer?
+true
+> foo := 3.1
+> foo
+3.1
+> foo :integer?
+false
+#+END_SRC
+
+When the =foo= reference object gets invoked, it pushes the message through to
+the object it is storing in itself
+
+#+BEGIN_SRC
+> foo
+nothing
+> foo := 5
+> foo
+5
+> bar := foo
+> bar
+foo  ; BEWARE!  Clojure atoms handle this problem with the @ syntax.  (e.g. bar := @foo )
+> foo := 4
+> foo
+4
+> bar
+foo
+> bar := (foo :@)
+> bar
+4
+> bar := 3
+> bar
+3
+> foo
+4
+#+END_SRC
+
+
+* Nothing object ~:become~
+
+
+* TODO How to handle scope?
