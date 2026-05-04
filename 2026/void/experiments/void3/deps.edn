@@ -1,0 +1,10 @@
+{:paths ["src" "target/classes"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.4"}}
+ :deps/prep-lib {:alias :build
+                 :fn compile
+                 :ensure "target/classes"}
+ :aliases
+ {;; clj -T:build ...
+  :build {:extra-paths ["build"]
+          :deps {io.github.clojure/tools.build {:git/tag "v0.10.13" :git/sha "ae52edf"}}
+          :ns-default build}}}
