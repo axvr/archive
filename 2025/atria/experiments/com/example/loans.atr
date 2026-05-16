@@ -1,0 +1,83 @@
+(mod com.example.loans, :access :lock
+  {::http http, ::cache cache})
+
+(spec ::http :atria.io.net/http)
+
+(def something
+  (dep {:src {:git/srcs [#path [:USER "Projects" "something"],
+                         "https://codeberg.org/axvr/something.git",
+                         "https://github.com/axvr/something.git"]
+              :git/hash "0702b54c1ce5fc6a19a0c7b4ef0ed85dcbdeb3e5"}
+        :req {:uk.axvr.something/http (scope http {:urls [{:port #{443}, :host #{"example.com"}}]
+                                                   :conf {:headers   {"User-Agent" ...}
+                                                          :insecure? false}})}}))
+
+#_ {::atria.core.deps dep}
+#_ "Structural comments as values."
+#_ "Capability injection.  Dependencies are capabilities.  Capabilities are values."
+
+;; System wiring step before code execution?
+
+;; Scoping adds before/after control layers around capabilities which
+;; **cannot** be removed (creating new capabilities).
+
+;; Can also reference local sources.
+;; If wanting private versions of dependencies, fork them and host on your own Git server.
+
+;; atria.sysdef.
+;;   - dep
+;;   - cache
+;;   - secret
+;;   - ...
+;;   - io
+;;     - net
+;;   - arena
+;;   - conf
+;;   - env
+;;   - base  <- core functions and macros.  (i.e. clojure.core, Elixir.Kernel, etc.)
+;; ^ capabilities
+
+;; Can access modules only one level below?
+
+;; Actually need to be real-OO?  All modules are live and message pass?  No,
+;; should not all be alive, need to create multiple instances in some cases
+;; (e.g. catalyst).
+
+;; Separate protocol from methods.
+
+;; In a good OO system, you shouldn't be able to tell what machine an object is running on.
+
+;; Data tagging.  ^:void  ^:secret  ^:pii
+
+;; (spec ::http :./http)
+
+;; Cache flush on fault = true (default)
+
+;; Scope a capability.
+
+;; Zooming into layers.
+
+
+;; VM config repo which tracks a branch.
+;; TODO: environments, DNS, etc.
+;; config.sys.atr
+{:systems {:com.example/loans {:git/srcs  ["https://codeberg.org/axvr/loans.git"]
+                               :git/auth  {}
+                               :git/track "production"
+                               :ttl       30}}
+ :server {:self-update true}
+ :priority [:com.example/loans]
+ :ttl    120}
+
+
+;; Protocols with implementation plugs/callbacks.  To avoid whole
+;; implementation needing to be created and guaranteeing conformance.  Kay
+;; gives the example of enforcing that the "print" method will always print in
+;; his OOP seminar.  Examples of STAMP-like controls.  Can you enforce that
+;; that method will not do IO?  Capabilities?  Stronger than types as we are
+;; enforcing behaviour.  Tests can be embedded into these protocols?
+
+;; Configuration language defining schemas and wiring.
+
+
+;; vim: ft=clojure :

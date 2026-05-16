@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <name>atria</name>
+  <description>Atria is a "batteries included" programming language and environment specialised for the rapid construction and easy maintenance of simple, safe and dynamic server systems by both individuals and teams.</description>
+  <url>https://atria.axvr.uk</url>
+  <licenses>
+    <license>
+      <name>MPL-2.0</name>
+      <url>https://github.com/axvr/atria/blob/master/LICENCE</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Alex Vear</name>
+    </developer>
+  </developers>
+  <scm>
+    <url>https://github.com/axvr/atria</url>
+    <connection>scm:git:git://github.com/axvr/atria.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/axvr/atria.git</developerConnection>
+  </scm>
+</project>

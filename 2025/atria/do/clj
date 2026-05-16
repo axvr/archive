@@ -1,0 +1,10 @@
+#!/usr/bin/env -S execlineb -W
+
+# Run `clj` command with extra environment variables.
+
+envfile java.env
+foreground { mkdir -p target/classes }  # Required for jmh-clojure.
+
+backtick -E has_rlwrap { which -s rlwrap }
+elgetpositionals
+ifte { clj $@ } { clojure $@ } test -n $has_rlwrap
