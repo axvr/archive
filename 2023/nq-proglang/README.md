@@ -6,8 +6,9 @@ _Public domain.  No rights reserved._
 
 > [!NOTE]
 > Another early programming language design experiment.  See also the
-> [precursor](../../2020/porcelina) to this and the intermeidate language
-> [Vila](../../2024/vila).
+> [precursor](../../2020/porcelina) to this and the intermediate language
+> [Vila](../../2024/vila).  There was also a [successor](../../2025/atria) to
+> it.
 
 An interactive, programming language designed for constructing and maintaining large distributed systems.
 

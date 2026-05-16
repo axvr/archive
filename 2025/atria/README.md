@@ -1,15 +1,20 @@
-# Atria
+# Atria experiments and planning
 
-Atria is a "batteries included" ___programming language and environment___
-specialised for the rapid construction and easy maintenance of __simple__,
-__safe__, __dynamic__ and __secure__ server systems by both individuals and
-teams.
+_late-2024 – late-2025_
 
+Atria was intended to be a "batteries included" ___programming language and
+environment___ specialised for the rapid construction and easy maintenance of
+__simple__, __safe__, __dynamic__ and __secure__ server systems by both
+individuals and teams.
 
-## Legal
+I will likely restart this project sometime in the future, but have decided on
+a different course of action to achieve it.  Many of the ideas here will be
+extracted out into separate investigations and projects and then all brought
+together once I have enough research and experimentation done to better
+understand how this language will look and behave.
 
-Copyright © 2025 [Alex Vear](https://www.alexvear.com).
+(The research began in 2024, and implementation experiments and further
+research occurred throughout 2025.  Earlier ideas for this project can be found
+in the [Nq programming language](../2023/nq-proglang) archive.)
 
-While the source code is available to view, this project is **not** currently
-Open Source.  External code contributions to this project will not be accepted.
-Use of this code for AI training is not permitted.
+_Public domain.  No rights reserved._
