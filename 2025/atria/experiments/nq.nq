@@ -1,0 +1,28 @@
+(ns foo)
+
+(def shared-cache (atom {}))
+
+(deps
+  {org.enqueue/cache {:git/url "..."
+                      :git/sha "..."
+                      :env     (partial-env *self* [:org.enqueue/core])
+                      :conf    {:org.enqueue.net.http/cache-store shared-cache}}
+   uk.axvr/refrain   {}})
+
+(dep org.enqueue/cache {:env nil})
+(dep uk.axvr/refrain   {:env nil})
+
+(use uk.axvr/refrain :as r)
+(use org.enqueue/cache
+     :as  cache
+     :env *self*)
+
+
+;; conf schema.
+
+(require [org.enqueue.net/http :as http]
+         [org.enqueue.net/dns  :as dns])
+
+(defn _init [conf]
+  (dep [uk.axvr/refrain {:git/url "", :git/sha
+                         :conf ...}]))

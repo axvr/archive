@@ -1,0 +1,18 @@
+- Data structures
+  - Benchmark various persistent data structure libs with JMH instead of Criterium.
+    - <https://github.com/lacuna/bifurcan/blob/master/doc/comparison.md#the-libraries-and-versions>
+    - Ham-fisted
+  - Fork of Bifurcan?
+    - Queue data structures.
+    - Tombstoning.
+
+- Message passing library.
+  - Split into 3 parts:
+    - Metadata
+      - Sender
+      - Receipient
+      - Method
+    - Payload
+    - Signature?
+
+- Optional case insensitive values and keys.

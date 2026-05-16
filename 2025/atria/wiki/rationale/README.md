@@ -13,3 +13,15 @@ Inspired by: [Clojure][], [Smalltalk-72][Smalltalk], [Erlang/OTP][Erlang], [Comm
 [Bass]: https://github.com/vito/bass
 
 1. [Why host on an existing platform?](hosted.md)
+
+
+* * *
+
+
+## Goals
+
+- **Simplicity** across the whole software development and maintenance life cycle.
+  - Batteries included.  (Logging, tracing, testing, deployments, etc.)
+- **System safety**
+  - Language security.
+  - Dependency security
