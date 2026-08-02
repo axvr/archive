@@ -3,9 +3,9 @@
 (defn- voidable' [coll]
   (let [void (keyword (str *ns*) (str `void#))]
     `(into ~(empty coll)
-           ~(if (map? coll)
-              `(remove (fn [[_k# v#]] (identical? ~void v#)))
-              `(remove (fn [x#] (identical? ~void x#))))
+           (remove ~(if (map? coll)
+                      `(fn [[_k# v#]] (identical? ~void v#))
+                      `(fn [x#] (identical? ~void x#))))
            (let [~'void ~void]
              ~(if (seq? coll) `(reverse ~coll) coll)))))
 

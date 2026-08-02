@@ -1,2 +1,2 @@
-{voidable uk.axvr.void/voidable'
+{voidable      uk.axvr.void/voidable'
  supervoidable uk.axvr.void/supervoidable'}
