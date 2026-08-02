@@ -2,7 +2,9 @@
 
 - _Initial concept: 2026-01-18,_
 - _Implementation: 2026-05-01 – 2026-04-25,_
-- _Experimentation: 2026-01-18 – Present._
+- _Enhancements: 2026-08-02,_
+- _Experimentation: 2026-01-18 – 2026-08-02._
+
 
 I will write blog post about this, coming soon...
 

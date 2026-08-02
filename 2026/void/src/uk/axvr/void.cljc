@@ -1,13 +1,19 @@
 (ns uk.axvr.void)
 
+(def +void+
+  "The `VOID` value.  Not recommended to reference this directly unless you are
+  sure you won't accidentally leak it."
+  (symbol (str *ns*) (str `void#)))
+
+(defn void? [val] (identical? +void+ val))
+
 (defn- voidable' [coll]
-  (let [void (keyword (str *ns*) (str `void#))]
-    `(into ~(empty coll)
-           (remove ~(if (map? coll)
-                      `(fn [[_k# v#]] (identical? ~void v#))
-                      `(fn [x#] (identical? ~void x#))))
-           (let [~'void ~void]
-             ~(if (seq? coll) `(reverse ~coll) coll)))))
+  `(into ~(empty coll)
+         (remove ~(if (map? coll)
+                    `(fn [[_k# v#]] (void? v#))
+                    `(fn [x#] (void? x#))))
+         (let [~'void +void+]
+           ~(if (seq? coll) `(reverse ~coll) coll))))
 
 (defmacro voidable
   "Wrap a data structure literal in this to make it voidable.  If the element
