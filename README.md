@@ -23,7 +23,7 @@ _Since you're here, why not take a look around?_
 
 ### Externally archived projects
 
-- [**Rollbots**](https://github.com/axvr/rollbots) (`2022-07-15` – `2022-07-17`)
+- [**Rollbots**](2022/rollbots) (`2022-07-15` – `2022-07-17`)
   - A 2-player game built in 48 hours for the [GMTK Game Jam 2022](https://itch.io/jam/gmtk-jam-2022).  My first game.
 - [**Refrain**](https://github.com/axvr/refrain) (`2022-06-18` – `2024-03-17`)
   - Collection of Clojure utility functions I frequently replicate across programs.
