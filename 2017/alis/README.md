@@ -1,8 +1,18 @@
+# ALIS / Archaic
+
+_2017-01-22 – 2017-10-30_
+
+_Public domain.  No rights reserved._
+
+My first hobby programming project. An attempt at building an Arch Linux
+installer.
+
+---
+
 # Archaic - The Primitive Arch Linux Installer
 
-> [!WARNING]
-> Archaic (formerly ALIS -- Arch Linux Installation Script) has been
-> depreciated, this is due to several factors which I explain below.**
+Archaic (formerly ALIS -- Arch Linux Installation Script) has been depreciated,
+this is due to several factors which I explain below.**
 
 * ALIS was in dire need of yet a second rewrite/full refactor. I wrote ALIS when
   I was learning Perl (and programming in general), and didn't know enough about
@@ -40,7 +50,7 @@ Things that were going to be implemented next:
 
 <!-- Badges made using https://shields.io/ -->
 [![Version Badge](https://img.shields.io/badge/Version-v0.3.1-brightgreen.svg)](https://github.com/axvr/archaic/releases)
-[![Licence Badge](https://img.shields.io/badge/Licence-GNU_GPL_v3.0-blue.svg)](https://github.com/axvr/archaic/blob/master/LICENCE)
+<!-- [![Licence Badge](https://img.shields.io/badge/Licence-GNU_GPL_v3.0-blue.svg)](https://github.com/axvr/archaic/blob/master/LICENCE) -->
 
 This is Archaic - The Primitive Arch Linux Installer. Archaic has been built from the ground up (including a new and custom Newt Whiptail control framework), using the Perl scripting language and Bash. Archaic contains many advanced configuration options, this makes Archaic very well suited for use by both advanced users, and beginners of Arch Linux. Archaic will create a base plain and simple Arch system, with zero bloat.
 
@@ -48,7 +58,7 @@ The inspiration for this project was Architect Linux, which sadly ceased develop
 
 This is the `README.md` file for [Archaic](https://github.com/axvr/archaic). Created by [Alex Vear - axvr](https://github.com/axvr).
 
-This project is licenced under the [GNU GPL v3.0](https://github.com/axvr/archaic/blob/master/LICENCE).
+<!-- This project is licenced under the [GNU GPL v3.0](https://github.com/axvr/archaic/blob/master/LICENCE). -->
 
 If you find any bugs or errors, please feel free to submit an issue as I cannot test Archaic on every possible system for problems. I would like help with the translations for Archaic, if you can the help would be greatly appreciated, especially since Google Translate is not entirely accurate most of the time. For more information on contributing to Archaic see the [contributing document](https://github.com/axvr/archaic/blob/master/docs/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/archaic/blob/master/docs/CODE_OF_CONDUCT.md).
 
