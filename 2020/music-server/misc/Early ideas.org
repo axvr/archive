@@ -1,0 +1,424 @@
+* Enqueue
+
+Recommendation system?
+
+Identify high quality pre-filled tags.
+
+Store to reduce piracy by making it easier to get music.  Pay more for higher quality.
+
+MVP:  WAV upload.
+
+Support WAV, FLAC and MP3.
+
+Upload ISOs?
+
+Add and grey out missing albums from collection.
+
+Federated store?
+
+Set alternate track names for an album (e.g. original name for original track listing.)
+
+£10/month or £100/year?
+
+Mark remastered albums.
+
+Auto-detect albums modified as part of the loudness war.
+
+[[https://news.ycombinator.com/item?id=19937499]]
+
+*** Enqueue expand into podcasts
+
+Allow hosting and subscribing to podcasts.
+
+*** Enqueue apps can rip CDs and auto-upload to an enqueue instance
+
+Rip WAV files.  Add to a "requires indexing" section.  Allow user to enter tag details while ripping.
+
+*** Modernise your music collection
+
+Spotify, Google Play Music, Amazon Music and Apple Music could all disappear within your lifetime.  Where would your music collection be then?
+
+Enqueue modernises your music collection.  It doesn't try to replace it.
+
+*** No shuffle?
+
+Shuffle can be added later?
+
+*** Share with limited number of accounts
+
+If shared, no download is available for the receiver.
+
+*** Podcasts as separate app/website?
+*** What's the difference between an album and a playlist?
+
+Nothing.  A playlist with the same tags as an album is both.  Just mark the playlist as a compilation, studio album, bootleg, etc.
+
+Set art and years for playlists.
+
+*** Optional button to format titles in correct capitalisation style
+*** Mark which albums you have physical copies of
+
+And specify vinyl, CD, cassette, etc.
+
+*** Writing credits
+*** Music label
+*** Performance credits
+*** Search by person
+
+E.g. Jeff Ament to get all songs he performed in and songs he wrote.
+
+*** Mark covers and original performers
+*** Auto-detect mono or stereo tracks
+*** Mark binaural
+*** Separate/identify EPs and singles
+*** Set delay between playlists in a play queue of multiple playlists
+
+Sometimes you may want a few extra seconds of silence between albums.
+
+*** Hover over track title to expand it to full title if it is abbreviated
+
+E.g. Pearl Jam's MFC, WMA and "the color red"
+
+*** Web site react to browser dark/light theme
+*** Colours based on Photon?
+*** Base Android app on Shuttle+ source code
+
+Shuttle+ is the best open source music app I've found.
+
+[[https://github.com/timusus/Shuttle][Source code]]
+
+Changes:
+- Fetch data from an Enqueue server (default enqueue.org)
+- Maybe also support local playback.
+- download for offline listening.
+- Redesign widget to be more similar to Eleven's.
+- No widget customisation.
+- Remove equaliser.
+- Better default sort and grid preferences.
+- Fewer view and sort options
+- Less shuffle options (album should have play button not shuffle button)
+- Remove folder option.
+- Remove sleep timer.
+- Remove heart button from notification.
+- Don't re-theme app on playing album (just now playing)
+- Only 3 default themes (dark, light, black) no theme customisation.
+- Better default themes (similar to website style)
+- More clearly highlight playing item in play queue
+- Redesign navigation drawer. (Is it even needed?)
+- Make navigation bar buttons same colour as background
+- Store
+- Tapping the tab button you're already on will take back to top of list.
+- Better play now screen.
+- Nicer looking search bar.
+- New name
+- New icon
+- Remove blacklist/whitelist.
+- Nicer "now playing" bar.  Bigger album art, song title and artist on separate lines.
+- Library tabs should be slightly higher up when scrolled up.
+- Use f-droid branch to remove all trackers (crashlytics, firebase and play services)
+- Don't forget widget content.
+
+*** Copyleft licenced
+
+AGPLv3 or GPLv3 or MPL 2.0
+
+_Why?_
+
+The philosophy of Enqueue  is that as a user you should have complete control over the music you payed for.  We wish to ensure you have those same freedoms with the software used to play, store and organise your music.
+
+Never implement DRM.
+
+*** Option to pay by posting cash to me?
+*** Solution to app distribution
+
+Android app: GPLv3 (based on Shuttle+)
+iOS app: MPL 2.0 (written from scratch — Apple has a GPL ban).
+
+Opening a new install of the app presents the user with a screen with 2 buttons: "log in" and "sign up".
+
+Clicking "sign up" will create a new account on Enqueue.org and payment is accepted through in-app purchases.  Clicking "log in" will default to Enqueue.org, but there will be an "advanced options" button to change the server.
+
+Allow using the app for local music playback?
+
+API and websites AGPLv3?
+
+*** Handling all of the SP collection will be the ultimate challenge for Enqueue.
+*** Track name variants
+
+Select preferred name.
+
+Searching will use all names.
+
+*** Store extra files with albums?
+*** Store alternative album art.
+*** Upload artist art?
+*** Automatically detect if Single, EP or LP (with override)
+*** Add version info to track
+
+Shown in light grey next to the title, rather than being part of the track title.
+
+*** Collections of albums?
+*** Mark B-sides/rarities compilations
+*** Mark greatest hits
+*** Groups
+
+- Studio albums (LPs)
+- Extended plays (EPs)
+- Live albums
+- Singles
+- Compilations
+- Reconstructions
+- Playlists
+
+*** Handling reissues?
+
+E.g. Machina reissue (combination of Machina 1 and 2) and already having the original.
+
+*** Mobile app auto-detect driving (and other loud transport) and use minimum quality.
+
+Save data and handle periods of lost network connection.
+
+*** Another API for sharing track/album info between users.
+
+discography.enqueue.org
+
+*** Give discs their own album art?
+
+Solves the deluxe problem?
+
+*** Playlists of playlists
+
+Some can be marked as albums.
+
+*** Everything is a playlist.
+*** Tag concept albums
+*** Hightlight albums part of the same series
+
+E.g. Shiny, Machina, Teargarden, etc.
+
+Colour coded outlines around albums.
+
+*** Individual tracks?
+*** Enqueue is like the digital audio version of Zotero
+*** Tokens
+**** Infinite lifetime tokens
+**** How to keep a user logged in indefinitely
+**** Should you store tokens in db?
+**** =.well-known/openids-.../=
+**** Refresh tokens
+***** Allow users to revoke device access like on GitHub
+**** Secret vs asymmetric signatures
+**** Open ID stuff for JWT?
+*** Enqueue store: buy as guest?
+
+Get download link, give delivery information.
+
+If user has an account add to their collection.
+
+**** Replace bandcamp, soundcloud and Spotify, Amazon Music, and more, all at once.
+**** Store could be integrated into other websites
+
+E.g. band's own site.
+
+*** Enqueue last.fm support
+*** APIs
+
+api.store.enqueue.org
+api.enqueue.org
+
+*** Similar to Enqueue
+**** [[https://github.com/agersant/polaris][Polaris]]
+
+No hosted instance.
+
+Open source.  (Expat)
+
+Written in Rust.
+
+**** [[http://www.subsonic.org/pages/index.jsp][Subsonic]]
+
+Closed source?
+
+**** MPD
+*** Enqueue store gift cards/vouchers
+*** Soundtracks
+*** Enqueue roadmap/phases
+
+1. Initial (build and release initial working version with minimal feature set.  Web-only with MPD support.)
+2. Extend (add missing features, create official mobile apps.)
+3. Store.
+
+**** Development mailing list to inform about important API changes
+*** Enqueue don't pay, account becomes locked
+
+A locked account cannot upload, edit or stream content.  It has a few options available.
+- Delete account.
+- Sign out.
+- Pay.
+- Download uploaded media (max 5 downloads)
+
+Locked accounts will not be automatically removed.  (Or maybe delete account or just media after a year?)
+
+**** App install
+
+Ask user to log in or register.  Have "advanced" options" button underneath.  Advanced options allows you to connect to a self-hosted Enqueue instance instead.  When user signs-up, prompt payment (via. platform native payment method) failing that redirect to web, to pay through Stripe?  If user signs-in, but their account is locked, inform user and prompt for payment.  If they have media, allow up to 5 downloads.
+
+*** Enqueue handle terms updates
+*** Enqueue tabs?
+
+Will likely change a lot.
+
+**** Library
+***** Search
+***** Playlists
+***** Albums
+***** Artists
+**** Store
+**** Podcasts
+**** Settings
+*** Enqueue support GIFs as album art
+*** Enqueue podcasts allow listening and favourite episodes without having to subscribe to podcast.
+
+Favourite episodes get archived?
+
+*** Enqueue store get news about new releases from artists.
+*** Enqueue payments
+**** Stripe Checkout
+**** GNU Taler
+**** Bitcoin
+**** Cash?
+*** Enqueue statistics
+
+- Num albums
+- Num artists
+- Num tracks
+- Num playlists
+- Total time to play all tracks
+- Total play time per artist
+- Most played albums
+
+*** Enqueue recently added
+*** Enqueue seamless playback
+*** Enqueue get notified of new releases
+*** Advanced recommendation engine using multiple hierarchical genre tagging
+
+By tracking listens and tagging albums with lots of sophisticated hierarchical genre tags it should be possible to build a sophisticated (and highly accurate) album recommendation engine with minimal statistics (no ML).
+
+*** Enqueue artist tracking
+
+View all bands and albums an artist was involved in, independent of band?
+
+*** Enqueue radio
+
+E.g. alternative radio.
+
+Pay for?  Included in subscription.  Cannot download.
+
+Interviews.
+
+*** Enqueue switch to postgresql
+
+Future?
+
+*** Enqueue add header to opt-out of Google's FLoC
+
+=Permissions-Policy: interest-cohort=()=
+
+*** Enqueue discography
+
+https://discography.enqueue.org
+https://discog.enqueue.org
+https://api.discog.enqueue.org
+
+Integrate with third-parties?
+
+https://en.m.wikipedia.org/wiki/List_of_online_music_databases
+
+**** Enqueue integrate with Discogs API
+
+https://www.discogs.com/developers
+
+Open Source Clojure client libraries.  Add to Discog's official list.
+
+EDN <-> Wrapper <-> JSON <-> Discogs
+
+=(require
+  '[org.enqueue.discogs.client :as discogs])=
+
+Maybe can earn referral money before store creation?
+
+*** Buy misspellings of enqueue.org?
+
+
+
+
+
+# Original (rejected) concept
+
+** Music streaming service
+
+Create a digital replacement for the classic record stores, this
+concept is similar to Spotify, Apple Music and Google Play Music, but
+with several major differences.
+
+A major goal of the service would be ensuring that artists get payed
+an extremely high cut; far more than any other competitors in the same
+space would ever dare to do.
+
+The service would be 100% free software, with no advertisements or
+tracking (ever). The service will collect as little data about the
+user as possible.
+
+The service would allow users to download the tracks (from a selection
+of open formats), all of which would all be correctly tagged, and
+include album art.
+
+Expand to have a music label which encourages loose copyright practices (like those in free software).  Copyright held by artist, not label.  No DRM.
+
+There may possibly be a membership fee (and/or pay per album).
+
+Focused more on albums, than individual tracks, which would reduce the
+amount "one-hit wonders", and generally increase the quality of music
+on the platform.
+
+_Possible extra features_
+
+- Recommendations.
+- Radio (auto-playlists).
+- Give option for user to buy CDs and Vinyls.
+- Specify conditions/licences for their music (e.g. sharing permissions - creative commons).
+- Allow artists to give users rewards.
+- Upload your own music collection.
+- Identify covers and reference original.
+
+# Would there would be a membership fee for users?
+
+Music with fewer IP restrictions.  Try to make the industry more profitable.
+
+Written in Clojure under the AGPLv3?
+
+_Useful links_
+
+- [[https://www.theguardian.com/commentisfree/2018/jan/29/spotify-subscriber-playlists-finances-low-pay-music-fans][Artist pay by service]].
+- [[https://www.forbes.com/sites/bobbyowsinski/2018/06/09/spotify-strategy/#e0db3a3f38a5][Spotify strategy]].
+- [[https://www.digitalmusicnews.com/2018/05/09/elon-musk-blasts-spotify-crazy-low-payments-artists/][Elon Musk on streaming services]].
+
+*** Similar services
+
+https://www.gearslutz.com/board/so-much-gear-so-little-time/566629-bandcamp-vs-soundcloud-vs.html
+
+**** Bandcamp
+**** SoundCloud
+**** Spotify
+**** Apple Music
+**** Google Play Music
+**** Deezer
+**** Amazon Music
+*** Link artists to a band
+*** Music streaming and storage for your own collection?
+**** Give more information about your music collection.
+
+E.g.
+- Name discs
+- Identify singles, EPs, etc.
+

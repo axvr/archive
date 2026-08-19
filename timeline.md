@@ -31,7 +31,7 @@ _2021-07-11 – 2022-01-31_
 Clojure library for serial port communication.
 
 
-### [Music server](https://github.com/axvr/music-server)
+### [Music server](2020/music)
 
 _2020-09-20 – 2023-04-08_
 

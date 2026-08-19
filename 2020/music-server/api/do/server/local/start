@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Start an instance of the local development server.
+
+set -ex
+
+do/database/local/start
+sleep 2
+clojure -X:local:migrate
+# clj-socket -X:axvr:local:run "$@"
+clj -X:nrepl:local:run "$@"

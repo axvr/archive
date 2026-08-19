@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Script to start the local development DB for Enqueue.
+
+volume="$(docker volume ls -qf name=enqueue-db-local-data)"
+
+if [ -n "$volume" ]; then
+    echo "Volume already exists.  Name: $volume"
+else
+    echo "Creating Docker volume."
+    docker volume create enqueue-db-local-data
+fi
+
+process="$(docker ps -qf name=enqueue-db-local)"
+
+if [ -n "$process" ]; then
+    echo "Container already running.  ID: $process"
+else
+    docker pull postgres
+
+    docker run -d --rm \
+        --name enqueue-db-local \
+        -p 5455:5432 \
+        -e POSTGRES_USER=postgres \
+        -e POSTGRES_PASSWORD=postgres \
+        -e POSTGRES_DB=enqueue \
+        -e POSTGRES_INITDB_ARGS='--encoding=UTF-8' \
+        -v enqueue-db-local-data:/var/lib/postgresql/data \
+        postgres
+fi

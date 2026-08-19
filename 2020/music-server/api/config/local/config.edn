@@ -1,0 +1,12 @@
+{:env :local
+ :eat {:signing-key "YgD5sNrVH+JbCyPeih21gZQkk1c/qFBeLtkn0T+BenY="}
+ :db  {:dbtype   "postgresql"
+       :dbname   "enqueue"
+       :host     "localhost"
+       :port     5455
+       :user     "postgres"
+       :password "postgres"}
+ :server {:join?   false
+          :port    7881
+          :origins {:cors #{"https://localhost:6881"}
+                    :xss  #{}}}}

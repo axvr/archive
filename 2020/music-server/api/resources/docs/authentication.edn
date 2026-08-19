@@ -1,0 +1,28 @@
+{:title "Authentication"
+ :content
+ [:div
+  [:section
+   [:h1 "Authentication"]
+   [:p "Account management, authentication and clients."]]
+  [:section
+   [:h2 {:id "users"} "User accounts"]
+   [:p "Security and support email addresses."]
+   [:h3 {:id "register"} "Register"]
+   [:p ""]
+   [:aside
+    [:pre
+     "(require '[clj-http.client :as http])
+
+(http/post \"" (str org.enqueue.api.docs/*root-url* "/user/register") "\"
+  {:body {:email-address \"example@example.com\"
+          :password      \"xxxxxx\"}})
+
+;; {:status 204
+;;  :body   \"Account created\"}
+"]]]
+  [:section
+   [:h2 {:id "clients"} "Clients"]
+   [:p "Clients."]]
+  [:section
+   [:h2 {:id "eat"} "EAT (Enqueue Authentication Tokens)"]
+   [:p "EAT."]]]}

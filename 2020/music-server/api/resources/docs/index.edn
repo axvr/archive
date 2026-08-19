@@ -1,0 +1,28 @@
+{:content
+ [:div
+  [:section
+   [:h1 "Docs"]
+   [:p
+    "This is the developer documentation for Enqueue.  Here you will find all
+    the information you need to build compatible "
+    [:a {:href "https://en.wikipedia.org/wiki/Client_%28computing%29"} "clients"]
+    "."]
+   [:ul
+    [:li [:a {:href "/docs/prerequisites"} "Prerequisites"]]
+    [:ul
+     [:li [:a {:href "/docs/prerequisites#charset"} "Character encoding"]]
+     [:li [:a {:href "/docs/prerequisites#transit"} "Transit"]]
+     [:li [:a {:href "/docs/prerequisites#compression"} "Compression"]]
+     [:li [:a {:href "/docs/prerequisites#idempotency"} "Idempotency"]]]
+    [:li [:a {:href "/docs/authentication"} "Authentication"]]
+    [:ul
+     [:li [:a {:href "/docs/authentication#users"} "User accounts"]]
+     [:li [:a {:href "/docs/authentication#clients"} "Clients"]]
+     [:li [:a {:href "/docs/authentication#eat"} "EAT (Enqueue Authentication Tokens)"]]
+     [:li "Password reset"]
+     [:li "Change account details"]]
+    [:li "Payments"]
+    [:li "Library"]
+    [:li "Streaming"]
+    [:li "MPD"]
+    [:li "Store"]]]]}

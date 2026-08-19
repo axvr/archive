@@ -1,0 +1,80 @@
+name: CI
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup clj-kondo
+        uses: DeLaGuardo/setup-clojure@9.5
+        with:
+          clj-kondo: latest
+
+      - name: Run clj-kondo
+        run: clj-kondo --lint src
+
+  unit-test:
+    name: Unit test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install libsodium
+        run: sudo apt install libsodium-dev
+
+      - name: Install Clojure
+        uses: DeLaGuardo/setup-clojure@9.5
+        with:
+          cli: 1.11.1.1165
+
+      - name: Run tests
+        run: clojure -X:test:unit
+
+  integration-test:
+    name: Integration test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install libsodium
+        run: sudo apt install libsodium-dev
+
+      - name: Install Clojure
+        uses: DeLaGuardo/setup-clojure@9.5
+        with:
+          cli: 1.11.1.1165
+
+      - name: Run tests
+        run: |
+          do/database/test/start
+          clojure -X:test:integration
+          docker stop enqueue-db-test
+
+  system-test:
+    name: System test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install libsodium
+        run: sudo apt install libsodium-dev
+
+      - name: Install Clojure
+        uses: DeLaGuardo/setup-clojure@9.5
+        with:
+          cli: 1.11.1.1165
+
+      - name: Run tests
+        run: |
+          do/database/test/start
+          clojure -X:test:system
+          docker stop enqueue-db-test
