@@ -2,7 +2,7 @@
 
 This is the `CONTRIBUTING.md` file for [Archaic](https://github.com/axvr/archaic). Created by [Alex Vear - axvr](https://github.com/axvr).
 
-This project is licenced under the [MIT Licence](https://github.com/axvr/archaic/blob/master/LICENCE).
+<!-- This project is licenced under the [MIT Licence](https://github.com/axvr/archaic/blob/master/LICENCE). -->
 
 **All contributors must follow the [Code of Conduct](https://github.com/axvr/archaic/blob/master/CODE_OF_CONDUCT.md).**
 

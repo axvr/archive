@@ -12,7 +12,7 @@ installer.
 # Archaic - The Primitive Arch Linux Installer
 
 Archaic (formerly ALIS -- Arch Linux Installation Script) has been depreciated,
-this is due to several factors which I explain below.**
+this is due to several factors which I explain below.
 
 * ALIS was in dire need of yet a second rewrite/full refactor. I wrote ALIS when
   I was learning Perl (and programming in general), and didn't know enough about
@@ -64,15 +64,21 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 
 ---
 
-## Screenshots
+## Archaic screenshots
 
-![Archaic Main Menu (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-main-menu-default-colours.png)
+![Archaic Main Menu (default colour scheme)](docs/screenshots/archaic-main-menu-default-colours.png)
 
-![Archaic Pre-install Menu (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-pre-install-menu-default-colours.png)
+![Archaic Pre-install Menu (default colour scheme)](docs/screenshots/archaic-pre-install-menu-default-colours.png)
 
-![Archaic Partition Map (default colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-partition-map-default-colours.png)
+![Archaic Partition Map (default colour scheme)](docs/screenshots/archaic-partition-map-default-colours.png)
 
-![Archaic Main Menu (hacker colour scheme)](https://github.com/axvr/codedump/raw/master/project-assets/archaic/archaic-main-menu-hacker-colours.png)
+![Archaic Main Menu (hacker colour scheme)](docs/screenshots/archaic-main-menu-hacker-colours.png)
+
+## ALIS screenshots
+
+![ALIS Welcome Screen](docs/screenshots/001-alis-welcome-screen.png)
+
+![ALIS Network Check](docs/screenshots/003-alis-network-check.png)
 
 ---
 
