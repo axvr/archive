@@ -1,8 +1,8 @@
 # Archaic - The Primitive Arch Linux Installer
 
-
-**NOTE: ALIS (what was going to become Archaic) has been depreciated, this is
-due to several factors which I explain below.**
+> [!WARNING]
+> Archaic (formerly ALIS -- Arch Linux Installation Script) has been
+> depreciated, this is due to several factors which I explain below.**
 
 * ALIS was in dire need of yet a second rewrite/full refactor. I wrote ALIS when
   I was learning Perl (and programming in general), and didn't know enough about
@@ -25,7 +25,7 @@ due to several factors which I explain below.**
   [simplicity](https://www.youtube.com/watch?v=rI8tNMsozo0) and
   [minimalism](http://minifesto.org/) in an effort to minimise complexity. ALIS
   had become a complexity nightmare, and an example of what not to do (it even
-  had colour theme support!  Seriously, who needs that?). 
+  had colour theme support!  Seriously, who needs that?).
 
 Things that were going to be implemented next:
 
