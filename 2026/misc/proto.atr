@@ -1,0 +1,21 @@
+(mod com.example.loans
+  {})
+
+(defm [:find id]
+  ...)
+
+(proto [:find id] {}
+  ...)
+
+; slice up protocols into small chunks.
+; define compositions of protocols (composites)
+
+(mod com.example.loans)
+
+(proto ::term #(<= 6 % 60))
+
+(proto ::application [::term])
+
+(only ::application [::term])
+
+;; vim: ft=clojure :
