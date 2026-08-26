@@ -35,7 +35,7 @@
      (if href
        (.resolve
         (->uri base)
-        (URI. (if (or (and (boolean? templated) templated)
+        (URI. (if (or (true? templated)
                       (and (string? templated) (parse-boolean templated)))
                 (let [expansion (uri-template/expand href variables)]
                   (if (map? expansion)
