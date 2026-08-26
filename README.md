@@ -41,7 +41,7 @@ _Since you're here, why not take a look around?_
   - A simpler alternative to [EditorConfig](https://editorconfig.org/).
 - [**Photon.vim**](https://github.com/axvr/photon.vim) (`2019-03-23` – `2021-08-16`)
   - An elegant pair of Vim colour schemes with minimal syntax highlighting.
-- [**axvr.io**](https://github.com/axvr/axvr.io) (`2017-09-09` – `2021-06-04`)
+- [**axvr.io**](2017/axvr.io) (`2017-09-09` – `2021-06-04`)
   - My original personal website.  Since replaced by [www.alexvear.com](https://codeberg.org/axvr/website).
 - [**Vivid.vim**](https://github.com/axvr/vivid.vim) (`2017-08-13` – `2018-11-07`)
   - A rewrite of my earlier project Vivid-Legacy.vim, designed to be much smaller and faster.

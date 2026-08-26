@@ -1,0 +1,12 @@
+*       text=auto
+
+*.ico   binary
+*.svg   binary
+*.gif   binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+
+*.css   -expand-tab
+*.html  -expand-tab
