@@ -1,0 +1,17 @@
+var prevAns = new HashSet<Guid>(question
+    .PreviousAnswers
+    .Select(x => Guid.TryParse(x, out var id) ? (Guid?)id : null)
+    .Where(x => x.HasValue)
+    .Select(x => x.Value));
+
+
+
+var prevAns = question
+    .PreviousAnswers
+    .Keep(x => Guid.TryParse(x, out var id) ? (Guid?)id : null)
+    .Then(x => new HashSet<Guid>(x));
+
+var prevAns = question
+    .PreviousAnswers
+    .Keep(x => Guid.TryParse(x, out var id) ? (Guid?)id : null)
+    .Do(x => new HashSet<Guid>(x));
