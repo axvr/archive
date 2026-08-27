@@ -22,7 +22,7 @@ _Since you're here, why not take a look around?_
 - [A list of some of my open source contributions](contributions.md).
 - Explore to discover even more!
 
-### Archived projects
+### Externally archived projects
 
 - [**Refrain**](https://github.com/axvr/refrain) (`2022-06-18` – `2024-03-17`)
   - Collection of Clojure utility functions I frequently replicate across programs.
@@ -42,10 +42,8 @@ _Since you're here, why not take a look around?_
   - A rewrite of my earlier project Vivid-Legacy.vim, designed to be much smaller and faster.
 - [**Vivid-Legacy.vim**](https://github.com/axvr/Vivid-Legacy.vim) (`2017-04-06` – `2017-09-14`)
   - My second programming project. After a couple of failed attempts to build a Vim plugin manager myself, I forked [Vundle](https://github.com/VundleVim/Vundle.vim) and began making minor tweaks.
-- [**ALIS (Arch Linux Installation Script)**](2017/alis) (`2017-01-22` – `2017-10-30`)
-  - My first programming project. An attempt at building an [Arch Linux](https://archlinux.org/) installer.
 - [**Thermoelectric generator**](https://www.alexvear.com/projects/teg/) (`2015-11-08` – `2016-02-XX`)
-  - I thought it would be interesting to see if it was possible to efficiently generate electricity on a tiny budget. The end result was capable of charging a mobile phone.
+  - I thought it would be interesting to see if it was possible to generate electricity on a tiny budget. The end result was capable of charging a mobile phone.
 
 
 ## Legal

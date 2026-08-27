@@ -11,7 +11,6 @@ IIRC, there was supposed to be a more in-depth document covering the purpose
 and implementation, but it seems that has been forever lost.
 
 After completing this, I ended up getting really into programming; starting my
-first personal programming project [ALIS](https://github.com/axvr/ALIS) just
-one month later.
+first personal programming project [ALIS](../../2017/alis) just one month later.
 
 _Public domain.  No rights reserved._
