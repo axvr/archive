@@ -30,8 +30,6 @@ _Since you're here, why not take a look around?_
   - Collection of simple utilities for mocking Clojure functions.
 - [**Cereal**](https://github.com/axvr/cereal) (`2021-07-11` – `2022-01-31`)
   - Clojure library for serial port communication.
-- [**Zepl.vim**](https://github.com/axvr/zepl.vim) (`2020-02-23` – `2022-09-02`)
-  - Simple and minimal REPL integration plugin for Vim and Neovim.
 - [**MdView**](https://github.com/axvr/MdView) (`2020-01-08` – `2021-04-27`)
   - A highly customisable Markdown control for [Xamarin.Forms](https://www.xamarin.com/).
 - [**Ascribe**](https://www.alexvear.com/projects/ascribe/) (`2019-04-21` – `2021-12-10`)
