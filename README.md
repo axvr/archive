@@ -6,7 +6,7 @@ _Since you're here, why not take a look around?_
 
 (This Git repository is mirrored to
 [Codeberg](https://codeberg.org/axvr/archive),
-[Sourcehut](https://git.sr.ht/~axvr/archive) and
+[SourceHut](https://git.sr.ht/~axvr/archive) and
 [GitHub](https://github.com/axvr/archive).)
 
 
@@ -37,8 +37,6 @@ _Since you're here, why not take a look around?_
   - Clojure library for serial port communication.
 - [**MdView**](https://github.com/axvr/MdView) (`2020-01-08` – `2021-04-27`)
   - A highly customisable Markdown control for [Xamarin.Forms](https://www.xamarin.com/).
-- [**Ascribe**](https://www.alexvear.com/projects/ascribe/) (`2019-04-21` – `2021-12-10`)
-  - A simpler alternative to [EditorConfig](https://editorconfig.org/).
 - [**Photon.vim**](https://github.com/axvr/photon.vim) (`2019-03-23` – `2021-08-16`)
   - An elegant pair of Vim colour schemes with minimal syntax highlighting.
 - [**Vivid.vim**](https://github.com/axvr/vivid.vim) (`2017-08-13` – `2018-11-07`)
