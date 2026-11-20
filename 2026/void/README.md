@@ -5,6 +5,9 @@
 - _Enhancements: 2026-08-02,_
 - _Experimentation: 2026-01-18 – 2026-08-02._
 
+> [!NOTE]
+> This is now included in my Clojure utility library:
+> <https://codeberg.org/axvr/utensils>
 
 I will write blog post about this, coming soon...
 

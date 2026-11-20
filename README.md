@@ -29,8 +29,6 @@ _Since you're here, why not take a look around?_
 
 ### Externally archived projects
 
-- [**Refrain**](https://github.com/axvr/refrain) (`2022-06-18` – `2024-03-17`)
-  - Collection of Clojure utility functions I frequently replicate across programs.
 - [**Dynamock**](https://github.com/axvr/dynamock) (`2022-03-30` – `2023-07-26`)
   - Collection of simple utilities for mocking Clojure functions.
 - [**Cereal**](https://github.com/axvr/cereal) (`2021-07-11` – `2022-01-31`)

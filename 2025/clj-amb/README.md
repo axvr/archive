@@ -2,6 +2,10 @@
 
 _2025-01-06 – 2025-01-08_
 
+> [!NOTE]
+> This is now included in my Clojure utility library:
+> <https://codeberg.org/axvr/utensils>
+
 This is an implementation of the non-determinism found in the book _On Lisp_ in
 Clojure that uses exceptions in place of continuations to achieve the desired
 behaviour with excellent performance.
